@@ -1,0 +1,48 @@
+This is BibTeX, Version 0.99d (TeX Live 2015/Debian)
+Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
+The top-level auxiliary file: Thesis.aux
+The style file: ieeetr.bst
+Database file #1: Bibliography.bib
+Warning--empty journal in compression
+You've used 22 entries,
+            1876 wiz_defined-function locations,
+            596 strings with 7072 characters,
+and the built_in function-call counts, 4370 in all, are:
+= -- 439
+> -- 145
+< -- 0
++ -- 60
+- -- 38
+* -- 244
+:= -- 622
+add.period$ -- 35
+call.type$ -- 22
+change.case$ -- 20
+chr.to.int$ -- 0
+cite$ -- 23
+duplicate$ -- 197
+empty$ -- 484
+format.name$ -- 38
+if$ -- 1087
+int.to.chr$ -- 0
+int.to.str$ -- 22
+missing$ -- 13
+newline$ -- 82
+num.names$ -- 22
+pop$ -- 115
+preamble$ -- 1
+purify$ -- 0
+quote$ -- 0
+skip$ -- 131
+stack$ -- 0
+substring$ -- 195
+swap$ -- 58
+text.length$ -- 0
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 0
+warning$ -- 1
+while$ -- 43
+width$ -- 24
+write$ -- 209
+(There was 1 warning)

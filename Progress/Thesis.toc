@@ -1,0 +1,22 @@
+\contentsline {chapter}{\numberline {1}Introduction}{1}{chapter.3}
+\contentsline {chapter}{\numberline {2}Background}{3}{chapter.4}
+\contentsline {section}{\numberline {2.1}Data Abstraction}{3}{section.5}
+\contentsline {section}{\numberline {2.2}Sobol Sequences}{4}{section.7}
+\contentsline {section}{\numberline {2.3}Computer Vision}{5}{section.10}
+\contentsline {subsection}{\numberline {2.3.1}Edge Detection}{5}{subsection.11}
+\contentsline {subsection}{\numberline {2.3.2}Flood Fill}{6}{subsection.17}
+\contentsline {chapter}{\numberline {3}Progress in Data Abstraction}{9}{chapter.19}
+\contentsline {section}{\numberline {3.1}Edge Detection}{10}{section.24}
+\contentsline {section}{\numberline {3.2}Flood filling}{11}{section.26}
+\contentsline {subsection}{\numberline {3.2.1}Seed Point}{11}{subsection.27}
+\contentsline {subsection}{\numberline {3.2.2}Fill Colour}{12}{subsection.29}
+\contentsline {chapter}{\numberline {4}Plan for Remaining Work}{15}{chapter.31}
+\vspace {2em}
+\contentsline {chapter}{\numberline {A}Sobol Sequence Implementation}{17}{appendix.32}
+\contentsline {chapter}{\numberline {B}Edge Detection Experimentation}{21}{appendix.133}
+\contentsline {chapter}{\numberline {C}Contour Based Seed Point Location}{25}{appendix.136}
+\contentsline {chapter}{\numberline {D}Demonstrations of Full Data Abstraction}{27}{appendix.138}
+\contentsline {chapter}{\numberline {E}Gantt Chart}{29}{appendix.141}
+\contentsline {chapter}{\numberline {F}Costing and Risk Assessment}{31}{appendix.143}
+\vspace {2em}
+\contentsline {chapter}{Bibliography}{33}{dummy.146}

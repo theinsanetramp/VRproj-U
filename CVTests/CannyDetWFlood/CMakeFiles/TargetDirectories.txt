@@ -1,0 +1,3 @@
+/home/adam/Documents/CVTests/CannyDetector2/CMakeFiles/edit_cache.dir
+/home/adam/Documents/CVTests/CannyDetector2/CMakeFiles/rebuild_cache.dir
+/home/adam/Documents/CVTests/CannyDetector2/CMakeFiles/CannyDetector_demo.dir

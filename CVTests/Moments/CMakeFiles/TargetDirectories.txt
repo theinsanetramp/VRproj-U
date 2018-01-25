@@ -1,0 +1,3 @@
+/home/adam/Documents/CVTests/Moments/CMakeFiles/edit_cache.dir
+/home/adam/Documents/CVTests/Moments/CMakeFiles/rebuild_cache.dir
+/home/adam/Documents/CVTests/Moments/CMakeFiles/moments.dir

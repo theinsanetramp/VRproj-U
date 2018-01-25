@@ -1,0 +1,3 @@
+/home/adam/Documents/CVTests/CannyDetWCircleAverage/CMakeFiles/edit_cache.dir
+/home/adam/Documents/CVTests/CannyDetWCircleAverage/CMakeFiles/rebuild_cache.dir
+/home/adam/Documents/CVTests/CannyDetWCircleAverage/CMakeFiles/CannyDetector_demo.dir

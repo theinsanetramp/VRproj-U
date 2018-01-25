@@ -1,0 +1,3 @@
+/home/adam/Documents/CVTests/ReportTests/BlurChange/CMakeFiles/edit_cache.dir
+/home/adam/Documents/CVTests/ReportTests/BlurChange/CMakeFiles/rebuild_cache.dir
+/home/adam/Documents/CVTests/ReportTests/BlurChange/CMakeFiles/CannyDetector_demo.dir

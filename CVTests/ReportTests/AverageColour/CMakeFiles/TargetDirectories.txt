@@ -1,0 +1,3 @@
+/home/adam/Documents/CVTests/ReportTests/AverageColour/CMakeFiles/edit_cache.dir
+/home/adam/Documents/CVTests/ReportTests/AverageColour/CMakeFiles/rebuild_cache.dir
+/home/adam/Documents/CVTests/ReportTests/AverageColour/CMakeFiles/CannyDetector_demo.dir
