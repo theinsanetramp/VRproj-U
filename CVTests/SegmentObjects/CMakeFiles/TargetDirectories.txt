@@ -1,3 +1,0 @@
-/home/adam/Documents/CVTests/SegmentObjects/CMakeFiles/rebuild_cache.dir
-/home/adam/Documents/CVTests/SegmentObjects/CMakeFiles/edit_cache.dir
-/home/adam/Documents/CVTests/SegmentObjects/CMakeFiles/segment_objects.dir

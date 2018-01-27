@@ -1,3 +1,0 @@
-/home/adam/Documents/CVTests/findContours/CMakeFiles/edit_cache.dir
-/home/adam/Documents/CVTests/findContours/CMakeFiles/rebuild_cache.dir
-/home/adam/Documents/CVTests/findContours/CMakeFiles/findContours_demo.dir
