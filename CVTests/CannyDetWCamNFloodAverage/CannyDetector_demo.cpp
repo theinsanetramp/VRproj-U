@@ -108,7 +108,7 @@ void CannyThreshold(int, void*)
 
 int main( int argc, char** argv )
 {
-  cap.open(1);
+  cap.open(0);
   if( !cap.isOpened() )
   {
       printf("\nCan not open camera 1\n");
