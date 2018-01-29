@@ -43,10 +43,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/pi/VRproj-pi/VRproj-U/CVTests/CannyDetWCamNFloodAverage
+CMAKE_SOURCE_DIR = /home/pi/VRproj-U/CVTests/CannyDetWCamNFloodAverage
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/pi/VRproj-pi/VRproj-U/CVTests/CannyDetWCamNFloodAverage
+CMAKE_BINARY_DIR = /home/pi/VRproj-U/CVTests/CannyDetWCamNFloodAverage
 
 # Include any dependencies generated for this target.
 include CMakeFiles/CannyDetector_demo.dir/depend.make
@@ -59,16 +59,16 @@ include CMakeFiles/CannyDetector_demo.dir/flags.make
 
 CMakeFiles/CannyDetector_demo.dir/CannyDetector_demo.cpp.o: CMakeFiles/CannyDetector_demo.dir/flags.make
 CMakeFiles/CannyDetector_demo.dir/CannyDetector_demo.cpp.o: CannyDetector_demo.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/pi/VRproj-pi/VRproj-U/CVTests/CannyDetWCamNFloodAverage/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/CannyDetector_demo.dir/CannyDetector_demo.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/CannyDetector_demo.dir/CannyDetector_demo.cpp.o -c /home/pi/VRproj-pi/VRproj-U/CVTests/CannyDetWCamNFloodAverage/CannyDetector_demo.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/pi/VRproj-U/CVTests/CannyDetWCamNFloodAverage/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/CannyDetector_demo.dir/CannyDetector_demo.cpp.o"
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/CannyDetector_demo.dir/CannyDetector_demo.cpp.o -c /home/pi/VRproj-U/CVTests/CannyDetWCamNFloodAverage/CannyDetector_demo.cpp
 
 CMakeFiles/CannyDetector_demo.dir/CannyDetector_demo.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/CannyDetector_demo.dir/CannyDetector_demo.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/pi/VRproj-pi/VRproj-U/CVTests/CannyDetWCamNFloodAverage/CannyDetector_demo.cpp > CMakeFiles/CannyDetector_demo.dir/CannyDetector_demo.cpp.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/pi/VRproj-U/CVTests/CannyDetWCamNFloodAverage/CannyDetector_demo.cpp > CMakeFiles/CannyDetector_demo.dir/CannyDetector_demo.cpp.i
 
 CMakeFiles/CannyDetector_demo.dir/CannyDetector_demo.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/CannyDetector_demo.dir/CannyDetector_demo.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/pi/VRproj-pi/VRproj-U/CVTests/CannyDetWCamNFloodAverage/CannyDetector_demo.cpp -o CMakeFiles/CannyDetector_demo.dir/CannyDetector_demo.cpp.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/pi/VRproj-U/CVTests/CannyDetWCamNFloodAverage/CannyDetector_demo.cpp -o CMakeFiles/CannyDetector_demo.dir/CannyDetector_demo.cpp.s
 
 CMakeFiles/CannyDetector_demo.dir/CannyDetector_demo.cpp.o.requires:
 
@@ -83,16 +83,16 @@ CMakeFiles/CannyDetector_demo.dir/CannyDetector_demo.cpp.o.provides.build: CMake
 
 CMakeFiles/CannyDetector_demo.dir/sobol.cpp.o: CMakeFiles/CannyDetector_demo.dir/flags.make
 CMakeFiles/CannyDetector_demo.dir/sobol.cpp.o: sobol.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/pi/VRproj-pi/VRproj-U/CVTests/CannyDetWCamNFloodAverage/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/CannyDetector_demo.dir/sobol.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/CannyDetector_demo.dir/sobol.cpp.o -c /home/pi/VRproj-pi/VRproj-U/CVTests/CannyDetWCamNFloodAverage/sobol.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/pi/VRproj-U/CVTests/CannyDetWCamNFloodAverage/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/CannyDetector_demo.dir/sobol.cpp.o"
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/CannyDetector_demo.dir/sobol.cpp.o -c /home/pi/VRproj-U/CVTests/CannyDetWCamNFloodAverage/sobol.cpp
 
 CMakeFiles/CannyDetector_demo.dir/sobol.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/CannyDetector_demo.dir/sobol.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/pi/VRproj-pi/VRproj-U/CVTests/CannyDetWCamNFloodAverage/sobol.cpp > CMakeFiles/CannyDetector_demo.dir/sobol.cpp.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/pi/VRproj-U/CVTests/CannyDetWCamNFloodAverage/sobol.cpp > CMakeFiles/CannyDetector_demo.dir/sobol.cpp.i
 
 CMakeFiles/CannyDetector_demo.dir/sobol.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/CannyDetector_demo.dir/sobol.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/pi/VRproj-pi/VRproj-U/CVTests/CannyDetWCamNFloodAverage/sobol.cpp -o CMakeFiles/CannyDetector_demo.dir/sobol.cpp.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/pi/VRproj-U/CVTests/CannyDetWCamNFloodAverage/sobol.cpp -o CMakeFiles/CannyDetector_demo.dir/sobol.cpp.s
 
 CMakeFiles/CannyDetector_demo.dir/sobol.cpp.o.requires:
 
@@ -124,6 +124,7 @@ CannyDetector_demo: /usr/local/lib/libopencv_bgsegm.so.3.2.0
 CannyDetector_demo: /usr/local/lib/libopencv_bioinspired.so.3.2.0
 CannyDetector_demo: /usr/local/lib/libopencv_ccalib.so.3.2.0
 CannyDetector_demo: /usr/local/lib/libopencv_dpm.so.3.2.0
+CannyDetector_demo: /usr/local/lib/libopencv_freetype.so.3.2.0
 CannyDetector_demo: /usr/local/lib/libopencv_fuzzy.so.3.2.0
 CannyDetector_demo: /usr/local/lib/libopencv_line_descriptor.so.3.2.0
 CannyDetector_demo: /usr/local/lib/libopencv_optflow.so.3.2.0
@@ -158,7 +159,7 @@ CannyDetector_demo: /usr/local/lib/libopencv_imgcodecs.so.3.2.0
 CannyDetector_demo: /usr/local/lib/libopencv_imgproc.so.3.2.0
 CannyDetector_demo: /usr/local/lib/libopencv_core.so.3.2.0
 CannyDetector_demo: CMakeFiles/CannyDetector_demo.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/pi/VRproj-pi/VRproj-U/CVTests/CannyDetWCamNFloodAverage/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Linking CXX executable CannyDetector_demo"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/pi/VRproj-U/CVTests/CannyDetWCamNFloodAverage/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Linking CXX executable CannyDetector_demo"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/CannyDetector_demo.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -176,6 +177,6 @@ CMakeFiles/CannyDetector_demo.dir/clean:
 .PHONY : CMakeFiles/CannyDetector_demo.dir/clean
 
 CMakeFiles/CannyDetector_demo.dir/depend:
-	cd /home/pi/VRproj-pi/VRproj-U/CVTests/CannyDetWCamNFloodAverage && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/pi/VRproj-pi/VRproj-U/CVTests/CannyDetWCamNFloodAverage /home/pi/VRproj-pi/VRproj-U/CVTests/CannyDetWCamNFloodAverage /home/pi/VRproj-pi/VRproj-U/CVTests/CannyDetWCamNFloodAverage /home/pi/VRproj-pi/VRproj-U/CVTests/CannyDetWCamNFloodAverage /home/pi/VRproj-pi/VRproj-U/CVTests/CannyDetWCamNFloodAverage/CMakeFiles/CannyDetector_demo.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/pi/VRproj-U/CVTests/CannyDetWCamNFloodAverage && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/pi/VRproj-U/CVTests/CannyDetWCamNFloodAverage /home/pi/VRproj-U/CVTests/CannyDetWCamNFloodAverage /home/pi/VRproj-U/CVTests/CannyDetWCamNFloodAverage /home/pi/VRproj-U/CVTests/CannyDetWCamNFloodAverage /home/pi/VRproj-U/CVTests/CannyDetWCamNFloodAverage/CMakeFiles/CannyDetector_demo.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/CannyDetector_demo.dir/depend
 
