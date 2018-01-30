@@ -13,9 +13,8 @@ using namespace std;
 
 #define SOBOL
 
-Mat tmp_frame, src_gray;
-Mat dst, detected_edges;
-Mat flood_mask;
+Mat tmp_frame;
+Mat dst, flood_mask;
 
 VideoCapture cap;
 //Canny variables
@@ -29,9 +28,14 @@ int connectivity = 4;
 int newMaskVal = 255;
 int flags = connectivity + (newMaskVal << 8) +
                 FLOODFILL_FIXED_RANGE;
+Rect ccomp;
+Point seed;
 //dilation variables
 int dilation_type = MORPH_RECT;
 int dilation_size = 1;
+Mat element = getStructuringElement( dilation_type,
+                                   Size( 2*dilation_size + 1, 2*dilation_size+1 ),
+                                   Point( dilation_size, dilation_size ) );
 //blur variables
 int blur_kernel = 5;
 int max_blur_kernel = 10;
@@ -41,15 +45,13 @@ int alpha = 1.2;
 void CannyThreshold(int, void*)
 {
   /// Reduce noise with kernel defined by blur_kernel
-  blur( src_gray, detected_edges, Size(blur_kernel,blur_kernel) );
+  blur( dst, dst, Size(blur_kernel,blur_kernel) );
 
   /// Canny detector
-  Canny( detected_edges, detected_edges, lowThreshold, lowThreshold*ratio, kernel_size );
-  Mat element = getStructuringElement( dilation_type,
-                                       Size( 2*dilation_size + 1, 2*dilation_size+1 ),
-                                       Point( dilation_size, dilation_size ) );
+  Canny( dst, dst, lowThreshold, lowThreshold*ratio, kernel_size );
+
   /// Apply the dilation operation
-  dilate( detected_edges, dst, element );
+  dilate( dst, dst, element );
   cvtColor(dst, dst, CV_GRAY2RGB); 
 
   #ifdef SOBOL
@@ -58,24 +60,15 @@ void CannyThreshold(int, void*)
   {
       int x = tmp_frame.cols * sobol::sample(i, 0);
       int y = tmp_frame.rows * sobol::sample(i, 1);
-      Point seed = Point(x, y);
+      seed = Point(x,y);
       if(dst.at<Vec3b>(seed)[0] == 0 && dst.at<Vec3b>(seed)[1] == 0 && dst.at<Vec3b>(seed)[2] == 0)
       {
         flood_mask = 0;
-        Rect ccomp;
         floodFill(dst, flood_mask, seed, (255,255,255), &ccomp, Scalar(loDiff, loDiff, loDiff),
                 Scalar(upDiff, upDiff, upDiff), 4 + (255 << 8) + FLOODFILL_MASK_ONLY);
-        Scalar newVal = mean(tmp_frame,flood_mask);
+        Scalar newVal = alpha*mean(tmp_frame,flood_mask);
         floodFill(dst, /*circle_mask,*/ seed, newVal, &ccomp, Scalar(loDiff, loDiff, loDiff),
                 Scalar(upDiff, upDiff, upDiff), flags);
-      }
-  }
-  for( int y = 0; y < dst.rows; y++ ) {
-      for( int x = 0; x < dst.cols; x++ ) {
-          for( int c = 0; c < 3; c++ ) {
-              dst.at<Vec3b>(y,x)[c] =
-                saturate_cast<uchar>( alpha*( dst.at<Vec3b>(y,x)[c] ));
-          }
       }
   }
   #else
@@ -88,16 +81,11 @@ void CannyThreshold(int, void*)
       if(dst.at<Vec3b>(seed)[0] == 0 && dst.at<Vec3b>(seed)[1] == 0 && dst.at<Vec3b>(seed)[2] == 0)
       {
         flood_mask = 0;
-        Rect ccomp;
         floodFill(dst, flood_mask, seed, (255,255,255), &ccomp, Scalar(loDiff, loDiff, loDiff),
                 Scalar(upDiff, upDiff, upDiff), 4 + (255 << 8) + FLOODFILL_MASK_ONLY);
-        Scalar newVal = mean(tmp_frame,flood_mask);
+        Scalar newVal = alpha*mean(tmp_frame,flood_mask);
         floodFill(dst, /*circle_mask,*/ seed, newVal, &ccomp, Scalar(loDiff, loDiff, loDiff),
                 Scalar(upDiff, upDiff, upDiff), flags);
-      }
-      for( int c = 0; c < 3; c++ ) {
-          dst.at<Vec3b>(j,i)[c] =
-            saturate_cast<uchar>( alpha*( dst.at<Vec3b>(j,i)[c] ));
       }
     }
   }
@@ -119,9 +107,9 @@ int main( int argc, char** argv )
         return -1;
       }
   }
-  cap.set(CV_CAP_PROP_FRAME_WIDTH,494);
-  cap.set(CV_CAP_PROP_FRAME_HEIGHT,768);
-  //cap.set(CV_CAP_PROP_FPS, 25);
+  //cap.set(CV_CAP_PROP_FRAME_WIDTH,494);
+  //cap.set(CV_CAP_PROP_FRAME_HEIGHT,768);
+  cap.set(CV_CAP_PROP_FPS, 40);
   int FPS = cap.get(CV_CAP_PROP_FPS);
   cout << FPS << endl;
   cap >> tmp_frame;
@@ -147,7 +135,7 @@ int main( int argc, char** argv )
     flood_mask.create(tmp_frame.rows+2, tmp_frame.cols+2, CV_8UC1);
 
     /// Convert the image to grayscale
-    cvtColor( tmp_frame, src_gray, CV_BGR2GRAY );
+    cvtColor( tmp_frame, dst, CV_BGR2GRAY );
 
     /// Show the image
     CannyThreshold(0, 0);

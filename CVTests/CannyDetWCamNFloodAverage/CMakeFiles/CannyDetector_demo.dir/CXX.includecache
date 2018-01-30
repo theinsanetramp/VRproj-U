@@ -6,19 +6,19 @@
 
 #IncludeRegexTransform: 
 
-/home/adam/Documents/VRProject/CVTests/CannyDetWCamNFloodAverage/CannyDetector_demo.cpp
+/home/adam/Documents/VRproj/VRproj-U/CVTests/CannyDetWCamNFloodAverage/CannyDetector_demo.cpp
 opencv2/imgproc/imgproc.hpp
-/home/adam/Documents/VRProject/CVTests/CannyDetWCamNFloodAverage/opencv2/imgproc/imgproc.hpp
+/home/adam/Documents/VRproj/VRproj-U/CVTests/CannyDetWCamNFloodAverage/opencv2/imgproc/imgproc.hpp
 opencv2/highgui/highgui.hpp
-/home/adam/Documents/VRProject/CVTests/CannyDetWCamNFloodAverage/opencv2/highgui/highgui.hpp
+/home/adam/Documents/VRproj/VRproj-U/CVTests/CannyDetWCamNFloodAverage/opencv2/highgui/highgui.hpp
 opencv2/imgcodecs.hpp
-/home/adam/Documents/VRProject/CVTests/CannyDetWCamNFloodAverage/opencv2/imgcodecs.hpp
+/home/adam/Documents/VRproj/VRproj-U/CVTests/CannyDetWCamNFloodAverage/opencv2/imgcodecs.hpp
 opencv2/videoio.hpp
-/home/adam/Documents/VRProject/CVTests/CannyDetWCamNFloodAverage/opencv2/videoio.hpp
+/home/adam/Documents/VRproj/VRproj-U/CVTests/CannyDetWCamNFloodAverage/opencv2/videoio.hpp
 opencv2/video/background_segm.hpp
-/home/adam/Documents/VRProject/CVTests/CannyDetWCamNFloodAverage/opencv2/video/background_segm.hpp
+/home/adam/Documents/VRproj/VRproj-U/CVTests/CannyDetWCamNFloodAverage/opencv2/video/background_segm.hpp
 sobol.h
-/home/adam/Documents/VRProject/CVTests/CannyDetWCamNFloodAverage/sobol.h
+/home/adam/Documents/VRproj/VRproj-U/CVTests/CannyDetWCamNFloodAverage/sobol.h
 stdlib.h
 -
 stdio.h
@@ -26,11 +26,11 @@ stdio.h
 iostream
 -
 
-/home/adam/Documents/VRProject/CVTests/CannyDetWCamNFloodAverage/sobol.cpp
+/home/adam/Documents/VRproj/VRproj-U/CVTests/CannyDetWCamNFloodAverage/sobol.cpp
 sobol.h
-/home/adam/Documents/VRProject/CVTests/CannyDetWCamNFloodAverage/sobol.h
+/home/adam/Documents/VRproj/VRproj-U/CVTests/CannyDetWCamNFloodAverage/sobol.h
 
-/home/adam/Documents/VRProject/CVTests/CannyDetWCamNFloodAverage/sobol.h
+/home/adam/Documents/VRproj/VRproj-U/CVTests/CannyDetWCamNFloodAverage/sobol.h
 cassert
 -
 
