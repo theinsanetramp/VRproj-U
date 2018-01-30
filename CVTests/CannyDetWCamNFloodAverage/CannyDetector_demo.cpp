@@ -13,7 +13,7 @@ using namespace std;
 
 #define SOBOL
 
-Mat tmp_frame, dst;
+Mat tmp_frame, edge_detection, dst;
 Mat flood_mask, mean_mask;
 
 VideoCapture cap;
@@ -53,6 +53,7 @@ void CannyThreshold(int, void*)
   /// Apply the dilation operation
   dilate( dst, dst, element ); 
   //cvtColor(dst, dst, CV_GRAY2RGB); 
+  edge_detection = dst.clone();
   
   #ifdef SOBOL
   //Floodfill from quasi-random points
@@ -64,7 +65,7 @@ void CannyThreshold(int, void*)
       {
 	flood_mask = 0;
         floodFill(dst, flood_mask, seed, (255,255,255), &ccomp, Scalar(loDiff, loDiff, loDiff),
-                Scalar(upDiff, upDiff, upDiff), 4 + (255 << 8) + FLOODFILL_MASK_ONLY);
+                Scalar(upDiff, upDiff, upDiff), 4 + (255 << 8));
 	for(i=0;i<mean_mask.rows;i++)
 	{
 		for(j=0;j<mean_mask.cols;j++)
@@ -93,7 +94,7 @@ void CannyThreshold(int, void*)
   }
   #endif
   
-  imshow( "Edge Map", dst );
+  imshow( "Edge Map", edge_detection );
  }
 
 int main( int argc, char** argv )
@@ -134,6 +135,7 @@ int main( int argc, char** argv )
         break;
     /// Create a matrix of the same type and size as src (for dst)
     dst.create( tmp_frame.size(), tmp_frame.type() );
+    edge_detection.create(tmp_frame.size(), CV_8UC1);
     flood_mask.create(tmp_frame.rows+2, tmp_frame.cols+2, CV_8UC1);
     mean_mask.create(tmp_frame.rows, tmp_frame.cols, CV_8UC1);
 
