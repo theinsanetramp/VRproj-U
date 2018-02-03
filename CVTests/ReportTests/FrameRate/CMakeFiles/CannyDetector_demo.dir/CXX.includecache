@@ -6,19 +6,19 @@
 
 #IncludeRegexTransform: 
 
-/home/adam/Documents/CVTests/ReportTests/FrameRate/CannyDetector_demo.cpp
+/home/adam/Documents/VRproj/VRproj-U/CVTests/ReportTests/FrameRate/CannyDetector_demo.cpp
 opencv2/imgproc/imgproc.hpp
-/home/adam/Documents/CVTests/ReportTests/FrameRate/opencv2/imgproc/imgproc.hpp
+/home/adam/Documents/VRproj/VRproj-U/CVTests/ReportTests/FrameRate/opencv2/imgproc/imgproc.hpp
 opencv2/highgui/highgui.hpp
-/home/adam/Documents/CVTests/ReportTests/FrameRate/opencv2/highgui/highgui.hpp
+/home/adam/Documents/VRproj/VRproj-U/CVTests/ReportTests/FrameRate/opencv2/highgui/highgui.hpp
 opencv2/imgcodecs.hpp
-/home/adam/Documents/CVTests/ReportTests/FrameRate/opencv2/imgcodecs.hpp
+/home/adam/Documents/VRproj/VRproj-U/CVTests/ReportTests/FrameRate/opencv2/imgcodecs.hpp
 opencv2/videoio.hpp
-/home/adam/Documents/CVTests/ReportTests/FrameRate/opencv2/videoio.hpp
+/home/adam/Documents/VRproj/VRproj-U/CVTests/ReportTests/FrameRate/opencv2/videoio.hpp
 opencv2/video/background_segm.hpp
-/home/adam/Documents/CVTests/ReportTests/FrameRate/opencv2/video/background_segm.hpp
+/home/adam/Documents/VRproj/VRproj-U/CVTests/ReportTests/FrameRate/opencv2/video/background_segm.hpp
 sobol.h
-/home/adam/Documents/CVTests/ReportTests/FrameRate/sobol.h
+/home/adam/Documents/VRproj/VRproj-U/CVTests/ReportTests/FrameRate/sobol.h
 stdlib.h
 -
 stdio.h
@@ -28,11 +28,11 @@ iostream
 time.h
 -
 
-/home/adam/Documents/CVTests/ReportTests/FrameRate/sobol.cpp
+/home/adam/Documents/VRproj/VRproj-U/CVTests/ReportTests/FrameRate/sobol.cpp
 sobol.h
-/home/adam/Documents/CVTests/ReportTests/FrameRate/sobol.h
+/home/adam/Documents/VRproj/VRproj-U/CVTests/ReportTests/FrameRate/sobol.h
 
-/home/adam/Documents/CVTests/ReportTests/FrameRate/sobol.h
+/home/adam/Documents/VRproj/VRproj-U/CVTests/ReportTests/FrameRate/sobol.h
 cassert
 -
 

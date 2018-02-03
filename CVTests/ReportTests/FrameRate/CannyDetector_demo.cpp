@@ -12,7 +12,7 @@
 using namespace cv;
 using namespace std;
 
-//#define SOBOL
+#define SOBOL
 
 Mat tmp_frame, src_gray;
 Mat dst, detected_edges;
@@ -120,7 +120,7 @@ int main( int argc, char** argv )
         return -1;
       }
   }
-  cap.set(CV_CAP_PROP_FPS, 10);
+  //cap.set(CV_CAP_PROP_FPS, 10);
   cap >> tmp_frame;
   if(tmp_frame.empty())
   {

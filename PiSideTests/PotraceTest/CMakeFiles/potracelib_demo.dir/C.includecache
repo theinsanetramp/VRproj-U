@@ -6,9 +6,9 @@
 
 #IncludeRegexTransform: 
 
-/home/adam/Documents/VRProject/PiSideTests/PotraceTest/potracelib.h
+/home/adam/Documents/VRproj/VRproj-U/PiSideTests/PotraceTest/potracelib.h
 
-/home/adam/Documents/VRProject/PiSideTests/PotraceTest/potracelib_demo.c
+/home/adam/Documents/VRproj/VRproj-U/PiSideTests/PotraceTest/potracelib_demo.c
 config.h
 -
 stdio.h
@@ -20,5 +20,5 @@ errno.h
 stdlib.h
 -
 potracelib.h
-/home/adam/Documents/VRProject/PiSideTests/PotraceTest/potracelib.h
+/home/adam/Documents/VRproj/VRproj-U/PiSideTests/PotraceTest/potracelib.h
 

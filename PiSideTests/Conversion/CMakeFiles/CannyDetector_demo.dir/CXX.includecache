@@ -6,17 +6,17 @@
 
 #IncludeRegexTransform: 
 
-/home/adam/Documents/VRProject/PiSideTests/Conversion/CannyDetector_demo.cpp
+/home/adam/Documents/VRproj/VRproj-U/PiSideTests/Conversion/CannyDetector_demo.cpp
 opencv2/imgproc/imgproc.hpp
-/home/adam/Documents/VRProject/PiSideTests/Conversion/opencv2/imgproc/imgproc.hpp
+/home/adam/Documents/VRproj/VRproj-U/PiSideTests/Conversion/opencv2/imgproc/imgproc.hpp
 opencv2/highgui/highgui.hpp
-/home/adam/Documents/VRProject/PiSideTests/Conversion/opencv2/highgui/highgui.hpp
+/home/adam/Documents/VRproj/VRproj-U/PiSideTests/Conversion/opencv2/highgui/highgui.hpp
 opencv2/imgcodecs.hpp
-/home/adam/Documents/VRProject/PiSideTests/Conversion/opencv2/imgcodecs.hpp
+/home/adam/Documents/VRproj/VRproj-U/PiSideTests/Conversion/opencv2/imgcodecs.hpp
 opencv2/videoio.hpp
-/home/adam/Documents/VRProject/PiSideTests/Conversion/opencv2/videoio.hpp
+/home/adam/Documents/VRproj/VRproj-U/PiSideTests/Conversion/opencv2/videoio.hpp
 sobol.h
-/home/adam/Documents/VRProject/PiSideTests/Conversion/sobol.h
+/home/adam/Documents/VRproj/VRproj-U/PiSideTests/Conversion/sobol.h
 stdlib.h
 -
 stdio.h
@@ -24,13 +24,13 @@ stdio.h
 iostream
 -
 potracelib.h
-/home/adam/Documents/VRProject/PiSideTests/Conversion/potracelib.h
+/home/adam/Documents/VRproj/VRproj-U/PiSideTests/Conversion/potracelib.h
 
-/home/adam/Documents/VRProject/PiSideTests/Conversion/sobol.cpp
+/home/adam/Documents/VRproj/VRproj-U/PiSideTests/Conversion/sobol.cpp
 sobol.h
-/home/adam/Documents/VRProject/PiSideTests/Conversion/sobol.h
+/home/adam/Documents/VRproj/VRproj-U/PiSideTests/Conversion/sobol.h
 
-/home/adam/Documents/VRProject/PiSideTests/Conversion/sobol.h
+/home/adam/Documents/VRproj/VRproj-U/PiSideTests/Conversion/sobol.h
 cassert
 -
 

@@ -109,7 +109,7 @@ int main( int argc, char** argv )
   }
   //cap.set(CV_CAP_PROP_FRAME_WIDTH,494);
   //cap.set(CV_CAP_PROP_FRAME_HEIGHT,768);
-  cap.set(CV_CAP_PROP_FPS, 40);
+  //cap.set(CV_CAP_PROP_FPS, 40);
   int FPS = cap.get(CV_CAP_PROP_FPS);
   cout << FPS << endl;
   cap >> tmp_frame;

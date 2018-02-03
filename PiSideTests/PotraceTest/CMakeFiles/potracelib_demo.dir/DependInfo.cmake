@@ -4,7 +4,7 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_C
-  "/home/adam/Documents/VRProject/PiSideTests/PotraceTest/potracelib_demo.c" "/home/adam/Documents/VRProject/PiSideTests/PotraceTest/CMakeFiles/potracelib_demo.dir/potracelib_demo.c.o"
+  "/home/adam/Documents/VRproj/VRproj-U/PiSideTests/PotraceTest/potracelib_demo.c" "/home/adam/Documents/VRproj/VRproj-U/PiSideTests/PotraceTest/CMakeFiles/potracelib_demo.dir/potracelib_demo.c.o"
   )
 set(CMAKE_C_COMPILER_ID "GNU")
 

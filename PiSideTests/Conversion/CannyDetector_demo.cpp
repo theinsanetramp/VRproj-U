@@ -100,6 +100,7 @@ int main( int argc, char** argv )
   	 k = waitKey(0);
   }
   while(k != 27);
-  imwrite("Final.png",dst);
+  resize(dst, dst, Size(), 0.5, 0.5, CV_INTER_AREA);
+  imwrite("Final.bmp",dst);
   return 0;
   }
