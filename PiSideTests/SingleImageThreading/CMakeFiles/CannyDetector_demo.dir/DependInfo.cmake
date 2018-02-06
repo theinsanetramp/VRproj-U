@@ -4,8 +4,8 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/home/adam/Documents/VRproj/VRproj-U/PiSideTests/SingleImageThreading/CannyDetector_demo.cpp" "/home/adam/Documents/VRproj/VRproj-U/PiSideTests/SingleImageThreading/CMakeFiles/CannyDetector_demo.dir/CannyDetector_demo.cpp.o"
-  "/home/adam/Documents/VRproj/VRproj-U/PiSideTests/SingleImageThreading/sobol.cpp" "/home/adam/Documents/VRproj/VRproj-U/PiSideTests/SingleImageThreading/CMakeFiles/CannyDetector_demo.dir/sobol.cpp.o"
+  "/home/pi/VRproj-U/PiSideTests/SingleImageThreading/CannyDetector_demo.cpp" "/home/pi/VRproj-U/PiSideTests/SingleImageThreading/CMakeFiles/CannyDetector_demo.dir/CannyDetector_demo.cpp.o"
+  "/home/pi/VRproj-U/PiSideTests/SingleImageThreading/sobol.cpp" "/home/pi/VRproj-U/PiSideTests/SingleImageThreading/CMakeFiles/CannyDetector_demo.dir/sobol.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 

@@ -13,7 +13,7 @@ using namespace cv;
 using namespace std;
 
 Mat src;
-Mat dst, flood_mask[4];
+Mat dst, flood_mask[4], mean_mask[4];
 Mat sub_dst[4];
 
 thread t[3];
@@ -92,7 +92,12 @@ void FindColours(int corner, int sobolPoints)
       flood_mask[corner] = 0;
       floodFill(sub_dst[corner], flood_mask[corner], seed, (255,255,255), &ccomp, Scalar(loDiff, loDiff, loDiff),
               Scalar(upDiff, upDiff, upDiff), 4 + (255 << 8));
-      Scalar newVal = mean(src,flood_mask[corner]);
+      for(int i=0;i<mean_mask[corner].rows;i++) {
+        for(int j=0;j<mean_mask[corner].cols;j++) {
+          mean_mask[corner].at<int>(i,j) = flood_mask[corner].at<int>(i+1,j+1);
+        }
+      }
+      Scalar newVal = mean(src,mean_mask[corner]);
       seedLists[corner].push_back(MakeSeedData(seed, newVal));
     }
   }

@@ -15,7 +15,7 @@ using namespace cv;
 using namespace std;
 
 Mat tmp_frame;
-Mat dst, flood_mask[4];
+Mat dst, flood_mask[4], mean_mask[4];
 Mat sub_dst[4];
 
 thread t[3];
@@ -75,14 +75,19 @@ void FindColours(int corner, int offset_cols, int offset_rows, int sobolPoints)
     int x = offset_cols + sub_dst[corner].cols/2 * sobol::sample(i, 0);
     int y = offset_rows + sub_dst[corner].rows/2 * sobol::sample(i, 1);
     Point seed = Point(x, y);
-    if(sub_dst[corner].at<Vec3b>(seed)[0] == 0 && 
-      sub_dst[corner].at<Vec3b>(seed)[1] == 0 && 
-      sub_dst[corner].at<Vec3b>(seed)[2] == 0)
+    if(sub_dst[corner].at<Vec3b>(seed)[0] == 0)
     {
       flood_mask[corner] = 0;
       floodFill(sub_dst[corner], flood_mask[corner], seed, (255,255,255), &ccomp, Scalar(loDiff, loDiff, loDiff),
               Scalar(upDiff, upDiff, upDiff), 4 + (255 << 8));
-      Scalar newVal = alpha*mean(tmp_frame,flood_mask[corner]);
+      for(int i=0;i<mean_mask[corner].rows;i++)
+      {
+        for(int j=0;j<mean_mask[corner].cols;j++)
+        {
+          mean_mask[corner].at<int>(i,j) = flood_mask[corner].at<int>(i+1,j+1);
+        }
+      }
+      Scalar newVal = alpha*mean(tmp_frame,mean_mask[corner]);
       if(corner == 0) seedList0.push_back(MakeSeedData(seed, newVal));
       else if(corner == 1) seedList1.push_back(MakeSeedData(seed, newVal));
       else if(corner == 2) seedList2.push_back(MakeSeedData(seed, newVal));
@@ -143,9 +148,10 @@ void CannyThreshold(int, void*)
 
   //seedLists.resize(4);
   for(int i=0;i<3;i++) imageReady[i] = 1;
-  FindColours(3, sub_dst[3].cols/2, sub_dst[3].rows/2, 50);
+  FindColours(3, sub_dst[3].cols/2, sub_dst[3].rows/2, 10);
   
   while(imageReady[0] == 1 && imageReady[1] == 1 && imageReady[2] == 1);
+  /*
   for(int j=0;j<seedList0.size();j++)
   {
     if(dst.at<Vec3b>(seedList0[j].seed)[0] == 0 && 
@@ -186,7 +192,9 @@ void CannyThreshold(int, void*)
           Scalar(upDiff, upDiff, upDiff), flags);
     }
   }
-  //cout << seedLists[0][0].seed << endl;
+  */
+  //cout << seedList0[0].colour << endl;
+  //cout << seedList0[1].colour << endl;
   seedList0.clear();
   seedList1.clear();
   seedList2.clear();
@@ -196,7 +204,7 @@ void CannyThreshold(int, void*)
 
 int main( int argc, char** argv )
 {
-  cap.open(1);
+  cap.open(0);
   if( !cap.isOpened() )
   {
       printf("\nCan not open camera 1\n");
@@ -209,7 +217,7 @@ int main( int argc, char** argv )
   }
   //cap.set(CV_CAP_PROP_FRAME_WIDTH,494);
   //cap.set(CV_CAP_PROP_FRAME_HEIGHT,768);
-  cap.set(CV_CAP_PROP_FPS, 60);
+  cap.set(CV_CAP_PROP_FPS, 10);
   int FPS = cap.get(CV_CAP_PROP_FPS);
   cout << FPS << endl;
   cap >> tmp_frame;
@@ -226,7 +234,7 @@ int main( int argc, char** argv )
   createTrackbar( "Min Threshold:", "Edge Map", &lowThreshold, max_lowThreshold, CannyThreshold );
   createTrackbar( "Blur Kernel Size:", "Edge Map", &blur_kernel, max_blur_kernel, 0 );
 
-  for(int i=0;i<3;i++) t[i] = thread(FindColoursThread, i, 50);
+  for(int i=0;i<3;i++) t[i] = thread(FindColoursThread, i, 10);
 
   for(;;)
   {
@@ -234,8 +242,8 @@ int main( int argc, char** argv )
     if( tmp_frame.empty() )
         break;
     /// Create a matrix of the same type and size as src (for dst)
-    sub_dst[3].create( tmp_frame.size(), tmp_frame.type() );
     for(int i=0;i<4;i++) flood_mask[i].create(tmp_frame.rows+2, tmp_frame.cols+2, CV_8UC1);
+    for(int i=0;i<4;i++) mean_mask[i].create(tmp_frame.size(), CV_8UC1);
 
     /// Convert the image to grayscale
     cvtColor( tmp_frame, dst, CV_BGR2GRAY );
