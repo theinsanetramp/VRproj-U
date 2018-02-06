@@ -12,12 +12,11 @@ using namespace std;
 
 #define SOBOL
 
-Mat src, src_gray;
-Mat dst, detected_edges;
-Mat flood_mask;
+Mat src;
+Mat dst, flood_mask;
 
 //Canny variables
-int lowThreshold = 14;
+int lowThreshold = 25;
 int const max_lowThreshold = 100;
 int ratio = 3;
 int kernel_size = 3;
@@ -27,25 +26,24 @@ int connectivity = 4;
 int newMaskVal = 255;
 int flags = connectivity + (newMaskVal << 8) +
                 FLOODFILL_FIXED_RANGE;
+Rect ccomp;
 //dilation variables
 int dilation_type = MORPH_RECT;
 int dilation_size = 1;
+Mat element = getStructuringElement( dilation_type,
+	                           Size( 2*dilation_size + 1, 2*dilation_size+1 ),
+	                           Point( dilation_size, dilation_size ) );
 
 void CannyThreshold(int, void*)
 {
   /// Reduce noise with a kernel 5x5
-  blur( src_gray, detected_edges, Size(3,3) );
+  blur( dst, dst, Size(5,5) );
   //imwrite("buildBlur.jpg",detected_edges);
   /// Canny detector
-  Canny( detected_edges, detected_edges, lowThreshold, lowThreshold*ratio, kernel_size );
+  Canny( dst, dst, lowThreshold, lowThreshold*ratio, kernel_size );
   //imwrite("buildCanny.jpg",detected_edges);
-  /// Using Canny's output as a mask, we display our result
-  dst = Scalar::all(0);
-  Mat element = getStructuringElement( dilation_type,
-                                       Size( 2*dilation_size + 1, 2*dilation_size+1 ),
-                                       Point( dilation_size, dilation_size ) );
   /// Apply the dilation operation
-  dilate( detected_edges, dst, element );
+  dilate( dst, dst, element );
   //imwrite("buildDilated.jpg",dst);
   cvtColor(dst, dst, CV_GRAY2RGB); 
 
@@ -59,11 +57,10 @@ void CannyThreshold(int, void*)
         if(dst.at<Vec3b>(seed)[0] == 0 && dst.at<Vec3b>(seed)[1] == 0 && dst.at<Vec3b>(seed)[2] == 0)
         {
           flood_mask = 0;
-          Rect ccomp;
           floodFill(dst, flood_mask, seed, (255,255,255), &ccomp, Scalar(loDiff, loDiff, loDiff),
                   Scalar(upDiff, upDiff, upDiff), 4 + (255 << 8) + FLOODFILL_MASK_ONLY);
           Scalar newVal = mean(src,flood_mask);
-          floodFill(dst, /*circle_mask,*/ seed, newVal, &ccomp, Scalar(loDiff, loDiff, loDiff),
+          floodFill(dst, seed, newVal, &ccomp, Scalar(loDiff, loDiff, loDiff),
                   Scalar(upDiff, upDiff, upDiff), flags);
         }
     }
@@ -77,11 +74,10 @@ void CannyThreshold(int, void*)
       if(dst.at<Vec3b>(seed)[0] == 0 && dst.at<Vec3b>(seed)[1] == 0 && dst.at<Vec3b>(seed)[2] == 0)
       {
         flood_mask = 0;
-        Rect ccomp;
         floodFill(dst, flood_mask, seed, (255,255,255), &ccomp, Scalar(loDiff, loDiff, loDiff),
                 Scalar(upDiff, upDiff, upDiff), 4 + (255 << 8) + FLOODFILL_MASK_ONLY);
         Scalar newVal = mean(src,flood_mask);
-        floodFill(dst, /*circle_mask,*/ seed, newVal, &ccomp, Scalar(loDiff, loDiff, loDiff),
+        floodFill(dst, seed, newVal, &ccomp, Scalar(loDiff, loDiff, loDiff),
                 Scalar(upDiff, upDiff, upDiff), flags);
       }
     }
@@ -105,7 +101,7 @@ int main( int argc, char** argv )
   flood_mask.create(src.rows+2, src.cols+2, CV_8UC1);
 
   /// Convert the image to grayscale
-  cvtColor( src, src_gray, CV_BGR2GRAY );
+  cvtColor( src, dst, CV_BGR2GRAY );
   //imwrite("buildGray.jpg",src_gray);
   namedWindow( "Edge Map", CV_WINDOW_AUTOSIZE );
 

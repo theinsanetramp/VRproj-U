@@ -6,17 +6,17 @@
 
 #IncludeRegexTransform: 
 
-/home/adam/Documents/CVTests/CannyDetWFloodAverage/CannyDetector_demo.cpp
+/home/adam/Documents/VRproj/VRproj-U/CVTests/CannyDetWFloodAverage/CannyDetector_demo.cpp
 opencv2/imgproc/imgproc.hpp
-/home/adam/Documents/CVTests/CannyDetWFloodAverage/opencv2/imgproc/imgproc.hpp
+/home/adam/Documents/VRproj/VRproj-U/CVTests/CannyDetWFloodAverage/opencv2/imgproc/imgproc.hpp
 opencv2/highgui/highgui.hpp
-/home/adam/Documents/CVTests/CannyDetWFloodAverage/opencv2/highgui/highgui.hpp
+/home/adam/Documents/VRproj/VRproj-U/CVTests/CannyDetWFloodAverage/opencv2/highgui/highgui.hpp
 opencv2/imgcodecs.hpp
-/home/adam/Documents/CVTests/CannyDetWFloodAverage/opencv2/imgcodecs.hpp
+/home/adam/Documents/VRproj/VRproj-U/CVTests/CannyDetWFloodAverage/opencv2/imgcodecs.hpp
 opencv2/videoio.hpp
-/home/adam/Documents/CVTests/CannyDetWFloodAverage/opencv2/videoio.hpp
+/home/adam/Documents/VRproj/VRproj-U/CVTests/CannyDetWFloodAverage/opencv2/videoio.hpp
 sobol.h
-/home/adam/Documents/CVTests/CannyDetWFloodAverage/sobol.h
+/home/adam/Documents/VRproj/VRproj-U/CVTests/CannyDetWFloodAverage/sobol.h
 stdlib.h
 -
 stdio.h
@@ -24,11 +24,11 @@ stdio.h
 iostream
 -
 
-/home/adam/Documents/CVTests/CannyDetWFloodAverage/sobol.cpp
+/home/adam/Documents/VRproj/VRproj-U/CVTests/CannyDetWFloodAverage/sobol.cpp
 sobol.h
-/home/adam/Documents/CVTests/CannyDetWFloodAverage/sobol.h
+/home/adam/Documents/VRproj/VRproj-U/CVTests/CannyDetWFloodAverage/sobol.h
 
-/home/adam/Documents/CVTests/CannyDetWFloodAverage/sobol.h
+/home/adam/Documents/VRproj/VRproj-U/CVTests/CannyDetWFloodAverage/sobol.h
 cassert
 -
 

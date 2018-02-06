@@ -1,0 +1,24 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/adam/Documents/VRproj/VRproj-U/PiSideTests/Potracedemo/potracelib_demo.c
+config.h
+-
+stdio.h
+-
+string.h
+-
+errno.h
+-
+stdlib.h
+-
+potracelib.h
+/home/adam/Documents/VRproj/VRproj-U/PiSideTests/Potracedemo/potracelib.h
+
+/usr/local/include/potracelib.h
+
