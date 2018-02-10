@@ -6,17 +6,17 @@
 
 #IncludeRegexTransform: 
 
-/home/adam/Documents/VRProject/UDPTests/ImageReceive/CannyDetector_demo.cpp
+/home/adam/Documents/VRproj/VRproj-U/UDPTests/ImageReceive/CannyDetector_demo.cpp
 opencv2/imgproc/imgproc.hpp
-/home/adam/Documents/VRProject/UDPTests/ImageReceive/opencv2/imgproc/imgproc.hpp
+/home/adam/Documents/VRproj/VRproj-U/UDPTests/ImageReceive/opencv2/imgproc/imgproc.hpp
 opencv2/highgui/highgui.hpp
-/home/adam/Documents/VRProject/UDPTests/ImageReceive/opencv2/highgui/highgui.hpp
+/home/adam/Documents/VRproj/VRproj-U/UDPTests/ImageReceive/opencv2/highgui/highgui.hpp
 opencv2/imgcodecs.hpp
-/home/adam/Documents/VRProject/UDPTests/ImageReceive/opencv2/imgcodecs.hpp
+/home/adam/Documents/VRproj/VRproj-U/UDPTests/ImageReceive/opencv2/imgcodecs.hpp
 opencv2/videoio.hpp
-/home/adam/Documents/VRProject/UDPTests/ImageReceive/opencv2/videoio.hpp
+/home/adam/Documents/VRproj/VRproj-U/UDPTests/ImageReceive/opencv2/videoio.hpp
 sobol.h
-/home/adam/Documents/VRProject/UDPTests/ImageReceive/sobol.h
+/home/adam/Documents/VRproj/VRproj-U/UDPTests/ImageReceive/sobol.h
 stdlib.h
 -
 stdio.h
@@ -30,11 +30,11 @@ netdb.h
 sys/socket.h
 -
 
-/home/adam/Documents/VRProject/UDPTests/ImageReceive/sobol.cpp
+/home/adam/Documents/VRproj/VRproj-U/UDPTests/ImageReceive/sobol.cpp
 sobol.h
-/home/adam/Documents/VRProject/UDPTests/ImageReceive/sobol.h
+/home/adam/Documents/VRproj/VRproj-U/UDPTests/ImageReceive/sobol.h
 
-/home/adam/Documents/VRProject/UDPTests/ImageReceive/sobol.h
+/home/adam/Documents/VRproj/VRproj-U/UDPTests/ImageReceive/sobol.h
 cassert
 -
 

@@ -51,30 +51,30 @@ void CannyThreshold(int, void*)
   /// Canny detector
   Canny( detected_edges, detected_edges, lowThreshold, lowThreshold*ratio, kernel_size );
   //imwrite("buildCanny.jpg",detected_edges);
-  findContours( detected_edges, contours, hierarchy, RETR_TREE, CHAIN_APPROX_SIMPLE, Point(0, 0) );
+  //findContours( detected_edges, contours, hierarchy, RETR_TREE, CHAIN_APPROX_SIMPLE, Point(0, 0) );
   /// Using Canny's output as a mask, we display our result
   // dst = Scalar::all(0);
-  // Mat element = getStructuringElement( dilation_type,
-  //                                      Size( 2*dilation_size + 1, 2*dilation_size+1 ),
-  //                                      Point( dilation_size, dilation_size ) );
+  Mat element = getStructuringElement( dilation_type,
+                                       Size( 2*dilation_size + 1, 2*dilation_size+1 ),
+                                       Point( dilation_size, dilation_size ) );
 
-  // /// Apply the dilation operation
-  // dilate( detected_edges, dst, element );
+  /// Apply the dilation operation
+  dilate( detected_edges, dst, element );
   // //imwrite("buildDilated.jpg",dst);
-  // cvtColor(dst, dst, CV_GRAY2RGB);
+  cvtColor(dst, dst, CV_GRAY2RGB);
 
-  Mat dst = Mat::zeros( detected_edges.size(), CV_8UC3 );
-  Scalar color = Scalar(255,255,255);
-  for( size_t i = 0; i< contours.size(); i++ )
-     {
-       drawContours( dst, contours, (int)i, color, 2, 8, hierarchy, 0, Point() );
-     }
-  int contoursSize = 0;
-  for(int i = 0; i < contours.size(); i++)
-  {
-    contoursSize += contours[i].size();
-  }
-  cout << contoursSize << endl;
+  // Mat dst = Mat::zeros( detected_edges.size(), CV_8UC3 );
+  // Scalar color = Scalar(255,255,255);
+  // for( size_t i = 0; i< contours.size(); i++ )
+  //    {
+  //      drawContours( dst, contours, (int)i, color, 2, 8, hierarchy, 0, Point() );
+  //    }
+  // int contoursSize = 0;
+  // for(int i = 0; i < contours.size(); i++)
+  // {
+  //   contoursSize += contours[i].size();
+  // }
+  // cout << contoursSize << endl;
 
   //Floodfill from quasi-random points
   j = 0;

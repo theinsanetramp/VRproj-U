@@ -67,7 +67,6 @@ static void bm_free(potrace_bitmap_t *bm) {
 /* demo */
 
 int main() {
-  int x, y, i;
   potrace_bitmap_t *bm;
   potrace_param_t *param;
   potrace_path_t *p;
@@ -83,12 +82,12 @@ int main() {
   }
 
   /* fill the bitmap with some pattern */
-  for (y=0; y<HEIGHT; y++) {
-    for (x=0; x<WIDTH; x++) {
-      BM_PUT(bm, x, y, ((x*x + y*y*y) % 10000 < 5000) ? 1 : 0);
+  for (int y=0; y<HEIGHT; y++) {
+    for (int x=0; x<WIDTH; x++) {
+      BM_PUT(bm, x, y, (x == y) ? 1 : 0);
     }
   }
-
+  //((x*x + y*y*y) % 10000 < 5000)
   /* set tracing parameters, starting from defaults */
   param = potrace_param_default();
   if (!param) {
@@ -117,18 +116,18 @@ int main() {
     tag = p->curve.tag;
     c = p->curve.c;
     printf("%f %f moveto\n", c[n-1][2].x, c[n-1][2].y);
-    for (i=0; i<n; i++) {
+    for (int i=0; i<n; i++) {
       switch (tag[i]) {
       case POTRACE_CORNER:
-	printf("%f %f lineto\n", c[i][1].x, c[i][1].y);
-	printf("%f %f lineto\n", c[i][2].x, c[i][2].y);
-	break;
+      	printf("%f %f lineto\n", c[i][1].x, c[i][1].y);
+      	printf("%f %f lineto\n", c[i][2].x, c[i][2].y);
+      	break;
       case POTRACE_CURVETO:
-	printf("%f %f %f %f %f %f curveto\n", 
-	       c[i][0].x, c[i][0].y,
-	       c[i][1].x, c[i][1].y,
-	       c[i][2].x, c[i][2].y);
-	break;
+      	printf("%f %f %f %f %f %f curveto\n", 
+      	       c[i][0].x, c[i][0].y,
+      	       c[i][1].x, c[i][1].y,
+      	       c[i][2].x, c[i][2].y);
+        break;
       }
     }
     /* at the end of a group of a positive path and its negative

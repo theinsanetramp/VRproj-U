@@ -101,6 +101,6 @@ int main( int argc, char** argv )
   }
   while(k != 27);
   resize(dst, dst, Size(), 0.5, 0.5, CV_INTER_AREA);
-  imwrite("Final.bmp",dst);
+  imwrite("Final.png",dst);
   return 0;
   }

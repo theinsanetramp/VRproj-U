@@ -1,0 +1,3 @@
+/home/adam/Documents/VRproj/VRproj-U/PiSideTests/Compression/CMakeFiles/edit_cache.dir
+/home/adam/Documents/VRproj/VRproj-U/PiSideTests/Compression/CMakeFiles/rebuild_cache.dir
+/home/adam/Documents/VRproj/VRproj-U/PiSideTests/Compression/CMakeFiles/CannyDetector_demo.dir
