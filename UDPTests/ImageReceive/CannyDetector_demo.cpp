@@ -14,14 +14,20 @@ using namespace cv;
 using namespace std;
 
 #define SERVICE_PORT  21234
-#define BUFSIZE 4096
+#define BUFSIZE 40960
 
-Mat src, src_gray;
-Mat dst, detected_edges;
-Mat flood_mask;
+Mat receivedImage;
+
+struct SeedData
+{
+  Point seed;
+  Scalar colour;
+};
+
+vector<SeedData> seedList;
 
 //Canny variables
-int lowThreshold = 50;
+int lowThreshold = 25;
 int const max_lowThreshold = 100;
 int ratio = 3;
 int kernel_size = 3;
@@ -31,49 +37,79 @@ int connectivity = 4;
 int newMaskVal = 255;
 int flags = connectivity + (newMaskVal << 8) +
                 FLOODFILL_FIXED_RANGE;
+Rect ccomp;
 //dilation variables
 int dilation_type = MORPH_RECT;
 int dilation_size = 1;
+Mat element = getStructuringElement( dilation_type,
+                                     Size( 2*dilation_size + 1, 2*dilation_size+1 ),
+                                     Point( dilation_size, dilation_size ) );
 
 struct sockaddr_in myaddr;  /* our address */
 struct sockaddr_in remaddr; /* remote address */
 socklen_t addrlen = sizeof(remaddr);    /* length of addresses */
 int recvlen;      /* # bytes received */
 int fd;       /* our socket */
-int buf[BUFSIZE]; /* receive buffer */
+uchar buf[BUFSIZE]; /* receive buffer */
 
-void CannyThreshold(int, void*)
+vector<uchar> imageBuf;
+
+SeedData MakeSeedData(Point seed, Scalar colour)
 {
-  /// Reduce noise with a kernel 5x5
-  blur( src_gray, detected_edges, Size(3,3) );
-  //imwrite("buildBlur.jpg",detected_edges);
-  /// Canny detector
-  Canny( detected_edges, detected_edges, lowThreshold, lowThreshold*ratio, kernel_size );
-  //imwrite("buildCanny.jpg",detected_edges);
-  /// Using Canny's output as a mask, we display our result
-  dst = Scalar::all(0);
-  Mat element = getStructuringElement( dilation_type,
-                                       Size( 2*dilation_size + 1, 2*dilation_size+1 ),
-                                       Point( dilation_size, dilation_size ) );
-  /// Apply the dilation operation
-  dilate( detected_edges, dst, element );
-  //imwrite("buildDilated.jpg",dst);
-  cvtColor(dst, dst, CV_GRAY2RGB); 
- }
+  SeedData s;
+  s.seed = seed;
+  s.colour = colour;
+  return s;
+}
+
+// void CannyThreshold(int, void*)
+// {
+//   /// Reduce noise with a kernel 5x5
+//   blur( dst, dst, Size(5,5) );
+//   /// Canny detector
+//   Canny( dst, dst, lowThreshold, lowThreshold*ratio, kernel_size );
+//   /// Apply the dilation operation
+//   dilate( dst, dst, element );
+//   //imwrite("buildDilated.jpg",dst);
+//   cvtColor(dst, dst, CV_GRAY2RGB); 
+//  }
 
 void ReceivePoints()
 {
   //Floodfill from quasi-random points
-  for (unsigned long long i = 0; i < recvlen/20; ++i)
-    {
-        int x = buf[i*5];
-        int y = buf[i*5+1];
-        Point seed = Point(x, y);
-        Rect ccomp;
-        Scalar newVal = Scalar(buf[i*5+2], buf[i*5+3], buf[i*5+4]);
-        floodFill(dst, /*circle_mask,*/ seed, newVal, &ccomp, Scalar(loDiff, loDiff, loDiff),
-                Scalar(upDiff, upDiff, upDiff), flags);
+  int i = 0;
+  do
+  {
+    int x = (buf[i*7] << 8) + buf[i*7+1];
+    int y = (buf[i*7+2] << 8) + buf[i*7+3];
+    Point seed = Point(x, y);
+    Scalar newVal = Scalar(buf[i*7+4], buf[i*7+5], buf[i*7+6]);
+    cout << seed << "  " << newVal << endl;
+    seedList.push_back(MakeSeedData(seed, newVal));
+    i++;
+  } 
+  while(!(buf[i*7] == 0 && buf[i*7+2] == 0 && buf[i*7+4] == 0 && buf[i*7+5] == 0 && buf[i*7+6] == 0));
+  i++;
+  for(int j=i*7;j<recvlen;j++) imageBuf.push_back(buf[j]);
+  receivedImage = imdecode(imageBuf, IMREAD_COLOR);
+  resize(receivedImage, receivedImage, Size(), 2, 2, CV_INTER_CUBIC);
+  for(int i=0;i<receivedImage.rows;i++) {
+    for(int j=0;j<receivedImage.cols;j++) {
+      if(receivedImage.at<Vec3b>(i,j)[0] < 170) receivedImage.at<Vec3b>(i,j) = Vec3b(0,0,0);
+      else receivedImage.at<Vec3b>(i,j) = Vec3b(255,255,255);
     }
+  }
+  for(int j=0;j<seedList.size();j++)
+  {
+    if(receivedImage.at<Vec3b>(seedList[j].seed)[0] == 0 && 
+      receivedImage.at<Vec3b>(seedList[j].seed)[1] == 0 && 
+      receivedImage.at<Vec3b>(seedList[j].seed)[2] == 0)
+    { 
+      floodFill(receivedImage, seedList[j].seed, seedList[j].colour, &ccomp, Scalar(loDiff, loDiff, loDiff),
+          Scalar(upDiff, upDiff, upDiff), flags);
+    }
+    //else circle(receivedImage, seedList[j].seed, 5, 255, -1);
+  }
 }
 
 /** @function main */
@@ -99,25 +135,24 @@ int main( int argc, char** argv )
   }
 
   /// Load an image
-  src = imread( argv[1] );
+  // src = imread( argv[1] );
 
-  if( !src.data )
-  { return -1; }
+  // if( !src.data )
+  // { return -1; }
 
   /// Create a matrix of the same type and size as src (for dst)
-  dst.create( src.size(), src.type() );
-  flood_mask.create(src.rows+2, src.cols+2, CV_8UC1);
+  // dst.create( src.size(), src.type() );
+  // flood_mask.create(src.rows+2, src.cols+2, CV_8UC1);
 
   /// Convert the image to grayscale
-  cvtColor( src, src_gray, CV_BGR2GRAY );
+  // cvtColor( src, dst, CV_BGR2GRAY );
   //imwrite("buildGray.jpg",src_gray);
 
   /// Create a Trackbar for user to enter threshold
   //createTrackbar( "Min Threshold:", "Edge Map", &lowThreshold, max_lowThreshold, CannyThreshold );
 
-  CannyThreshold(0, 0);
+  // CannyThreshold(0, 0);
 
-  
   printf("waiting on port %d\n", SERVICE_PORT);
   recvlen = recvfrom(fd, buf, BUFSIZE, 0, (struct sockaddr *)&remaddr, &addrlen);
   printf("received %d bytes\n", recvlen);
@@ -128,7 +163,8 @@ int main( int argc, char** argv )
   }
 
   namedWindow( "Edge Map", CV_WINDOW_AUTOSIZE );
-  imshow( "Edge Map", dst );
+  cvMoveWindow( "Edge Map", 0, 40 );
+  imshow( "Edge Map", receivedImage );  
 
   /// Wait until user exit program by pressing a key
   int k;
