@@ -58,7 +58,7 @@ int alpha = 1.2;
 
 struct sockaddr_in myaddr, remaddr;
 int fd, bufSize, k, slen=sizeof(remaddr);
-char server[] = "10.42.0.1"; /* change this to use a different server */
+//char server[] = "10.42.0.1";
 uchar buf[BUFLEN];
 uchar buf1[1024];
 int bufLength;
@@ -199,7 +199,6 @@ void CannyThreshold(int, void*)
 int main( int argc, char** argv )
 {
   /* create a socket */
-
   if ((fd=socket(AF_INET, SOCK_DGRAM, 0))==-1)
     printf("socket created\n");
 
@@ -222,7 +221,7 @@ int main( int argc, char** argv )
   memset((char *) &remaddr, 0, sizeof(remaddr));
   remaddr.sin_family = AF_INET;
   remaddr.sin_port = htons(SERVICE_PORT);
-  if (inet_aton(server, &remaddr.sin_addr)==0) {
+  if (inet_aton(argv[1], &remaddr.sin_addr)==0) {
     fprintf(stderr, "inet_aton() failed\n");
     exit(1);
   }
