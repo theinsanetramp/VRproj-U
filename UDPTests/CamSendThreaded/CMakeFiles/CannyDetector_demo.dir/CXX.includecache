@@ -6,19 +6,19 @@
 
 #IncludeRegexTransform: 
 
-/home/adam/Documents/VRproj/VRproj-U/UDPTests/CamSendThreaded/CannyDetector_demo.cpp
+/home/pi/VRproj-U/UDPTests/CamSendThreaded/CannyDetector_demo.cpp
 opencv2/imgproc/imgproc.hpp
-/home/adam/Documents/VRproj/VRproj-U/UDPTests/CamSendThreaded/opencv2/imgproc/imgproc.hpp
+/home/pi/VRproj-U/UDPTests/CamSendThreaded/opencv2/imgproc/imgproc.hpp
 opencv2/highgui/highgui.hpp
-/home/adam/Documents/VRproj/VRproj-U/UDPTests/CamSendThreaded/opencv2/highgui/highgui.hpp
+/home/pi/VRproj-U/UDPTests/CamSendThreaded/opencv2/highgui/highgui.hpp
 opencv2/imgcodecs.hpp
-/home/adam/Documents/VRproj/VRproj-U/UDPTests/CamSendThreaded/opencv2/imgcodecs.hpp
+/home/pi/VRproj-U/UDPTests/CamSendThreaded/opencv2/imgcodecs.hpp
 opencv2/videoio.hpp
-/home/adam/Documents/VRproj/VRproj-U/UDPTests/CamSendThreaded/opencv2/videoio.hpp
+/home/pi/VRproj-U/UDPTests/CamSendThreaded/opencv2/videoio.hpp
 opencv2/video/background_segm.hpp
-/home/adam/Documents/VRproj/VRproj-U/UDPTests/CamSendThreaded/opencv2/video/background_segm.hpp
+/home/pi/VRproj-U/UDPTests/CamSendThreaded/opencv2/video/background_segm.hpp
 sobol.h
-/home/adam/Documents/VRproj/VRproj-U/UDPTests/CamSendThreaded/sobol.h
+/home/pi/VRproj-U/UDPTests/CamSendThreaded/sobol.h
 stdlib.h
 -
 stdio.h
@@ -40,11 +40,11 @@ sys/socket.h
 arpa/inet.h
 -
 
-/home/adam/Documents/VRproj/VRproj-U/UDPTests/CamSendThreaded/sobol.cpp
+/home/pi/VRproj-U/UDPTests/CamSendThreaded/sobol.cpp
 sobol.h
-/home/adam/Documents/VRproj/VRproj-U/UDPTests/CamSendThreaded/sobol.h
+/home/pi/VRproj-U/UDPTests/CamSendThreaded/sobol.h
 
-/home/adam/Documents/VRproj/VRproj-U/UDPTests/CamSendThreaded/sobol.h
+/home/pi/VRproj-U/UDPTests/CamSendThreaded/sobol.h
 cassert
 -
 
@@ -143,52 +143,6 @@ opencv2/core/cuda.hpp
 /usr/local/include/opencv2/core/opencv2/core/cuda.hpp
 
 /usr/local/include/opencv2/core/cuda_types.hpp
-
-/usr/local/include/opencv2/core/cv_cpu_dispatch.h
-cv_cpu_config.h
-/usr/local/include/opencv2/core/cv_cpu_config.h
-cv_cpu_helper.h
-/usr/local/include/opencv2/core/cv_cpu_helper.h
-emmintrin.h
--
-pmmintrin.h
--
-tmmintrin.h
--
-smmintrin.h
--
-nmmintrin.h
--
-nmmintrin.h
--
-popcntintrin.h
--
-immintrin.h
--
-arm_neon.h
--
-immintrin.h
--
-immintrin.h
--
-Intrin.h
--
-arm_neon.h
--
-arm_neon.h
--
-arm_neon.h
--
-emmintrin.h
--
-Intrin.h
--
-arm_neon.h
--
-arm_neon.h
--
-
-/usr/local/include/opencv2/core/cv_cpu_helper.h
 
 /usr/local/include/opencv2/core/cvdef.h
 cvconfig.h
@@ -1302,41 +1256,17 @@ opencv2/videostab/global_motion.hpp
 opencv2/videostab/log.hpp
 /usr/local/include/opencv2/videostab/opencv2/videostab/log.hpp
 
-/usr/local/include/opencv2/viz.hpp
-opencv2/viz/types.hpp
--
-opencv2/viz/widgets.hpp
--
-opencv2/viz/viz3d.hpp
--
-opencv2/viz/vizcore.hpp
--
+/usr/local/include/opencv2/xfeatures2d.hpp
+opencv2/features2d.hpp
+/usr/local/include/opencv2/opencv2/features2d.hpp
+opencv2/xfeatures2d/nonfree.hpp
+/usr/local/include/opencv2/opencv2/xfeatures2d/nonfree.hpp
 
-/usr/local/include/opencv2/viz/types.hpp
-string
--
-opencv2/core.hpp
--
-opencv2/core/affine.hpp
--
+/usr/local/include/opencv2/xfeatures2d/cuda.hpp
+opencv2/core/cuda.hpp
+/usr/local/include/opencv2/xfeatures2d/opencv2/core/cuda.hpp
 
-/usr/local/include/opencv2/viz/viz3d.hpp
-opencv2/core.hpp
--
-opencv2/viz/types.hpp
--
-opencv2/viz/widgets.hpp
--
-
-/usr/local/include/opencv2/viz/vizcore.hpp
-opencv2/viz/types.hpp
--
-opencv2/viz/widgets.hpp
--
-opencv2/viz/viz3d.hpp
--
-
-/usr/local/include/opencv2/viz/widgets.hpp
-opencv2/viz/types.hpp
--
+/usr/local/include/opencv2/xfeatures2d/nonfree.hpp
+opencv2/features2d.hpp
+/usr/local/include/opencv2/xfeatures2d/opencv2/features2d.hpp
 

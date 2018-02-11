@@ -31,20 +31,9 @@ int imageReady[3] = {0,0,0};
 mutex m;
 condition_variable conVar;
 
-struct SeedData
-{
-  Point seed;
-  Scalar colour;
-};
-
-SeedData seedList0[25];
-SeedData seedList1[25];
-SeedData seedList2[25];
-SeedData seedList3[25];
-
 VideoCapture cap;
 //Canny variables
-int lowThreshold = 20;
+int lowThreshold = 30;
 int const max_lowThreshold = 100;
 int thresh_ratio = 3;
 int kernel_size = 3;
@@ -62,27 +51,19 @@ Mat element = getStructuringElement( dilation_type,
                                    Size( 2*dilation_size + 1, 2*dilation_size+1 ),
                                    Point( dilation_size, dilation_size ) );
 //blur variables
-int blur_kernel = 5;
+int blur_kernel = 3;
 int max_blur_kernel = 10;
 //Final image saturation
 int alpha = 1.2;
 
 struct sockaddr_in myaddr, remaddr;
 int fd, bufSize, k, slen=sizeof(remaddr);
-char server[] = "10.9.177.131"; /* change this to use a different server */
+char server[] = "10.42.0.1"; /* change this to use a different server */
 uchar buf[BUFLEN];
 uchar buf1[1024];
 int bufLength;
 int buf1Length;
 vector<uchar> dstBuf;
-
-SeedData MakeSeedData(Point seed, Scalar colour)
-{
-  SeedData s;
-  s.seed = seed;
-  s.colour = colour;
-  return s;
-}
 
 void FindColours(int corner, int offset_cols, int offset_rows, int sobolPoints)
 {
@@ -108,8 +89,9 @@ void FindColours(int corner, int offset_cols, int offset_rows, int sobolPoints)
         }
       }
       Scalar newVal = alpha*mean(tmp_frame,mean_mask[corner]);
-      //cout << corner << endl;
+      
       if(corner == 0) {
+        //cout << seed << "  " << newVal <<  endl;
         buf1[j*7] = (x >> 8) & 0xFF;
         buf1[j*7+1] = x & 0xFF;
         buf1[j*7+2] = (y >> 8) & 0xFF;
@@ -187,14 +169,14 @@ void CannyThreshold(int, void*)
   /// Apply the dilation operation
   dilate( dst, dst, element );
   //erode( dst, dst, element );
-  cvtColor(dst, dst, CV_GRAY2RGB);
+  //cvtColor(dst, dst, CV_GRAY2RGB);
   dst_out = dst.clone(); 
   {
     lock_guard<mutex> lk(m);
     for(int i=0;i<3;i++) imageReady[i] = 1;
   }
   conVar.notify_one();
-  FindColours(3, dst.cols/2, 0, 20);
+  FindColours(3, dst.cols/2, 0, 10);
   //cout << "0\n";
   { 
     unique_lock<mutex> lk(m);
@@ -205,10 +187,13 @@ void CannyThreshold(int, void*)
   for(int i=0;i<7;i++) buf[bufLength*7 + buf1Length*7 + i] = 0;
   resize(dst_out, dst_out, Size(), 0.5, 0.5, CV_INTER_AREA);
   imencode(".png", dst_out, dstBuf);
-  cout << "2\n";
-  for(int i=0;i<dstBuf.size();i++) buf[bufLength*7 + buf1Length*7 + i] = dstBuf[i];
-
-  imshow( "Edge Map", dst );
+  //cout << bufLength*7 << "  " << buf1Length*7 << "  " << dstBuf.size() << endl;
+  //cout << "2\n";
+  for(int i=0;i<dstBuf.size();i++) buf[bufLength*7 + buf1Length*7 + 7 + i] = dstBuf[i];
+  //for(int i=0;i<buf1Length*7+bufLength*7+14;i++) cout << (int)buf[i] << endl;
+  //cout << "done\n";
+  bufSize = bufLength*7 + buf1Length*7 + 7 + dstBuf.size();
+  //imshow( "Edge Map", dst );
  }
 
 int main( int argc, char** argv )
@@ -265,15 +250,15 @@ int main( int argc, char** argv )
       return -1;
   }
 
-  namedWindow( "Edge Map", 1 );
-  cvMoveWindow( "Edge Map", 0, 40 );
-  namedWindow("Camera", 1);
-  cvMoveWindow( "Camera", tmp_frame.cols + 20, 40 );
+  //namedWindow( "Edge Map", 1 );
+  //cvMoveWindow( "Edge Map", 0, 40 );
+  //namedWindow("Camera", 1);
+  //cvMoveWindow( "Camera", tmp_frame.cols + 20, 40 );
   //createTrackbar( "Min Threshold:", "Edge Map", &lowThreshold, max_lowThreshold, CannyThreshold );
   //createTrackbar( "Blur Kernel Size:", "Edge Map", &blur_kernel, max_blur_kernel, 0 );
 
   //for(int i=0;i<1;i++) t[i] = thread(FindColoursThread, i, 20);
-  t = thread(FindColoursThread, 0, 20);
+  t = thread(FindColoursThread, 0, 10);
 
   for(;;)
   {
@@ -289,7 +274,7 @@ int main( int argc, char** argv )
 
     /// Show the image
     CannyThreshold(0, 0);
-    imshow("Camera", tmp_frame);
+    //imshow("Camera", tmp_frame);
 
     if (sendto(fd, buf, bufSize, 0, (struct sockaddr *)&remaddr, slen)==-1)
       perror("sendto");
