@@ -100,9 +100,9 @@ void UDPReceive()
 {
   while(!finished)
   {
-    printf("waiting on port %d\n", SERVICE_PORT);
+    //printf("waiting on port %d\n", SERVICE_PORT);
     recvlen = recvfrom(fd, buf, BUFSIZE, 0, (struct sockaddr *)&remaddr, &addrlen);
-    printf("received %d bytes\n", recvlen);
+    //printf("received %d bytes\n", recvlen);
     if (recvlen > 0) {
       //buf[recvlen] = 0;
       //for(int i=0;i<10;i++) printf("%i\n", buf[i]);
