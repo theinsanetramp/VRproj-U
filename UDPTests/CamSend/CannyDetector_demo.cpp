@@ -9,6 +9,7 @@
 #include <string>
 #include <netdb.h>
 #include <sys/socket.h>
+#include <arpa/inet.h>
 
 using namespace cv;
 using namespace std;
@@ -18,6 +19,7 @@ using namespace std;
 
 Mat tmp_frame, dst_out;
 Mat dst, flood_mask;
+Mat mean_mask;
 
 VideoCapture cap;
 //Canny variables
@@ -42,7 +44,7 @@ int alpha = 1.2;
 
 struct sockaddr_in myaddr, remaddr;
 int fd, bufSize, k, slen=sizeof(remaddr);
-string server = "127.0.0.1"; /* change this to use a different server */
+char server[] = "10.9.177.131"; /* change this to use a different server */
 uchar buf[BUFLEN];
 
 void CannyThreshold(int, void*)
@@ -58,17 +60,24 @@ void CannyThreshold(int, void*)
 
   //Floodfill from quasi-random points
   int j = 0;
-  for (unsigned long long i = 0; i < 600; ++i)
+  for (unsigned long long i = 0; i < 10; ++i)
   {
     int x = tmp_frame.cols * sobol::sample(i, 0);
     int y = tmp_frame.rows * sobol::sample(i, 1);
     Point seed = Point(x, y);
-    if(dst.at<Vec3b>(seed)[0] == 0 && dst.at<Vec3b>(seed)[1] == 0 && dst.at<Vec3b>(seed)[2] == 0)
+    if(dst.at<Vec3b>(seed)[0] == 0)
     {
       flood_mask = 0;
       floodFill(dst, flood_mask, seed, (255,255,255), &ccomp, Scalar(loDiff, loDiff, loDiff),
               Scalar(upDiff, upDiff, upDiff), 4 + (255 << 8));
-      Scalar newVal = mean(tmp_frame,flood_mask);
+      for(int i=0;i<mean_mask.rows;i++)
+      {
+        for(int a=0;a<mean_mask.cols;a++)
+        {
+          mean_mask.at<int>(i,a) = flood_mask.at<int>(i+1,a+1);
+        }
+      }
+      Scalar newVal = mean(tmp_frame,mean_mask);
       buf[j*7] = (x >> 8) & 0xFF;
       buf[j*7+1] = x & 0xFF;
       buf[j*7+2] = (y >> 8) & 0xFF;
@@ -77,8 +86,8 @@ void CannyThreshold(int, void*)
       buf[j*7+5] = newVal[1];
       buf[j*7+6] = newVal[2];
       //cout << seed << "  " << newVal << endl;
-      floodFill(dst, seed, newVal, &ccomp, Scalar(loDiff, loDiff, loDiff),
-              Scalar(upDiff, upDiff, upDiff), flags);
+      //floodFill(dst, seed, newVal, &ccomp, Scalar(loDiff, loDiff, loDiff),
+      //        Scalar(upDiff, upDiff, upDiff), flags);
       j++;
     }
   }
@@ -92,7 +101,7 @@ void CannyThreshold(int, void*)
   bufSize = j*7 + dstBuf.size();
   for(int i=0;i<dstBuf.size();i++) buf[j*7 + i] = dstBuf[i];
 
-  imshow( "Edge Map", dst );
+  //imshow( "Edge Map", dst );
  }
 
 
@@ -123,12 +132,12 @@ int main( int argc, char** argv )
   memset((char *) &remaddr, 0, sizeof(remaddr));
   remaddr.sin_family = AF_INET;
   remaddr.sin_port = htons(SERVICE_PORT);
-  //if (inet_aton(server, &remaddr.sin_addr)==0) {
-  //  fprintf(stderr, "inet_aton() failed\n");
-  //  exit(1);
-  //}
+  if (inet_aton(server, &remaddr.sin_addr)==0) {
+    fprintf(stderr, "inet_aton() failed\n");
+    exit(1);
+  }
 
-  cap.open(1);
+  cap.open(0);
   if( !cap.isOpened() )
   {
       printf("\nCan not open camera 1\n");
@@ -141,7 +150,7 @@ int main( int argc, char** argv )
   }
   //cap.set(CV_CAP_PROP_FRAME_WIDTH,494);
   //cap.set(CV_CAP_PROP_FRAME_HEIGHT,768);
-  //cap.set(CV_CAP_PROP_FPS, 40);
+  cap.set(CV_CAP_PROP_FPS, 10);
   int FPS = cap.get(CV_CAP_PROP_FPS);
   cout << FPS << endl;
   cap >> tmp_frame;
@@ -151,9 +160,9 @@ int main( int argc, char** argv )
       return -1;
   }
 
-  namedWindow( "Edge Map", 1 );
+  //namedWindow( "Edge Map", 1 );
   namedWindow("Camera", 1);
-  cvMoveWindow( "Camera", tmp_frame.cols, 0 );
+  //cvMoveWindow( "Camera", tmp_frame.cols, 0 );
 
   for(;;)
   {
@@ -163,6 +172,7 @@ int main( int argc, char** argv )
     /// Create a matrix of the same type and size as src (for dst)
     dst.create( tmp_frame.size(), tmp_frame.type() );
     flood_mask.create(tmp_frame.rows+2, tmp_frame.cols+2, CV_8UC1);
+    mean_mask.create(tmp_frame.size(), CV_8UC1);
 
     /// Convert the image to grayscale
     cvtColor( tmp_frame, dst, CV_BGR2GRAY );
@@ -175,7 +185,7 @@ int main( int argc, char** argv )
     // for(int j=0;j<10;j++) {
     //   cout << buf[j] << endl;
     // }
-    cout << bufSize << endl;
+    //cout << bufSize << endl;
     if (sendto(fd, buf, bufSize, 0, (struct sockaddr *)&remaddr, slen)==-1)
       perror("sendto");
 

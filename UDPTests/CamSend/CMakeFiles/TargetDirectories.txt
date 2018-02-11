@@ -1,3 +1,3 @@
-/home/adam/Documents/VRproj/VRproj-U/UDPTests/CamSend/CMakeFiles/edit_cache.dir
-/home/adam/Documents/VRproj/VRproj-U/UDPTests/CamSend/CMakeFiles/rebuild_cache.dir
-/home/adam/Documents/VRproj/VRproj-U/UDPTests/CamSend/CMakeFiles/CannyDetector_demo.dir
+/home/pi/VRproj-U/UDPTests/CamSend/CMakeFiles/rebuild_cache.dir
+/home/pi/VRproj-U/UDPTests/CamSend/CMakeFiles/edit_cache.dir
+/home/pi/VRproj-U/UDPTests/CamSend/CMakeFiles/CannyDetector_demo.dir

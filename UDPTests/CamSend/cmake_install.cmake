@@ -1,4 +1,4 @@
-# Install script for directory: /home/adam/Documents/VRproj/VRproj-U/UDPTests/CamSend
+# Install script for directory: /home/pi/VRproj-U/UDPTests/CamSend
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -40,5 +40,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/home/adam/Documents/VRproj/VRproj-U/UDPTests/CamSend/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/home/pi/VRproj-U/UDPTests/CamSend/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

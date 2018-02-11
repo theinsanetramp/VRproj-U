@@ -9,6 +9,7 @@
 #include <string>
 #include <netdb.h>
 #include <sys/socket.h>
+#include <arpa/inet.h>
 
 using namespace cv;
 using namespace std;
@@ -18,6 +19,7 @@ using namespace std;
 
 Mat src, dst_out;
 Mat dst, flood_mask;
+Mat mean_mask;
 
 //Canny variables
 int lowThreshold = 25;
@@ -40,7 +42,7 @@ Mat element = getStructuringElement( dilation_type,
 
 struct sockaddr_in myaddr, remaddr;
 int fd, bufSize, k, slen=sizeof(remaddr);
-string server = "127.0.0.1"; /* change this to use a different server */
+char server[] = "10.9.177.131"; /* change this to use a different server */
 uchar buf[BUFLEN];
 
 void CannyThreshold(int, void*)
@@ -53,7 +55,6 @@ void CannyThreshold(int, void*)
   dilate( dst, dst, element );
   dst_out = dst.clone();
   cvtColor(dst, dst, CV_GRAY2RGB);
-
   //Floodfill from quasi-random points
   int j = 0;
   for (unsigned long long i = 0; i < 600; ++i)
@@ -61,12 +62,21 @@ void CannyThreshold(int, void*)
     int x = src.cols * sobol::sample(i, 0);
     int y = src.rows * sobol::sample(i, 1);
     Point seed = Point(x, y);
-    if(dst.at<Vec3b>(seed)[0] == 0 && dst.at<Vec3b>(seed)[1] == 0 && dst.at<Vec3b>(seed)[2] == 0)
+    if(dst.at<Vec3b>(seed)[0] == 0)
     {
       flood_mask = 0;
       floodFill(dst, flood_mask, seed, (255,255,255), &ccomp, Scalar(loDiff, loDiff, loDiff),
               Scalar(upDiff, upDiff, upDiff), 4 + (255 << 8));
-      Scalar newVal = mean(src,flood_mask);
+      //cout << "before\n";
+      for(int i=0;i<mean_mask.rows-2;i++)
+      {
+        for(int a=0;a<mean_mask.cols;a++)
+        {
+          mean_mask.at<int>(i,a) = flood_mask.at<int>(i+1,a+1);
+        }
+      }
+      //cout << "aadf\n";
+      Scalar newVal = mean(src,mean_mask);
       buf[j*7] = (x >> 8) & 0xFF;
       buf[j*7+1] = x & 0xFF;
       buf[j*7+2] = (y >> 8) & 0xFF;
@@ -74,19 +84,19 @@ void CannyThreshold(int, void*)
       buf[j*7+4] = newVal[0];
       buf[j*7+5] = newVal[1];
       buf[j*7+6] = newVal[2];
-      cout << seed << "  " << newVal << endl;
-      floodFill(dst, seed, newVal, &ccomp, Scalar(loDiff, loDiff, loDiff),
-              Scalar(upDiff, upDiff, upDiff), flags);
+      //cout << seed << "  " << newVal << endl;
+      //floodFill(dst, seed, newVal, &ccomp, Scalar(loDiff, loDiff, loDiff),
+      //        Scalar(upDiff, upDiff, upDiff), flags);
       j++;
     }
   }
   for(int i=0;i<7;i++) buf[j*7+i] = 0;
-  cout << j*7 << endl;
+  //cout << j*7 << endl;
   j++;
   vector<uchar> dstBuf;
   resize(dst_out, dst_out, Size(), 0.5, 0.5, CV_INTER_AREA);
   imencode(".png", dst_out, dstBuf);
-  cout << dstBuf.size() << endl;
+  //cout << dstBuf.size() << endl;
   bufSize = j*7 + dstBuf.size();
   for(int i=0;i<dstBuf.size();i++) buf[j*7 + i] = dstBuf[i];
 
@@ -112,7 +122,7 @@ int main( int argc, char** argv )
   if (bind(fd, (struct sockaddr *)&myaddr, sizeof(myaddr)) < 0) {
     perror("bind failed");
     return 0;
-  }       
+  }
 
   /* now define remaddr, the address to whom we want to send messages */
   /* For convenience, the host address is expressed as a numeric IP address */
@@ -121,10 +131,10 @@ int main( int argc, char** argv )
   memset((char *) &remaddr, 0, sizeof(remaddr));
   remaddr.sin_family = AF_INET;
   remaddr.sin_port = htons(SERVICE_PORT);
-  //if (inet_aton(server, &remaddr.sin_addr)==0) {
-  //  fprintf(stderr, "inet_aton() failed\n");
-  //  exit(1);
-  //}
+  if (inet_aton(server, &remaddr.sin_addr)==0) {
+    fprintf(stderr, "inet_aton() failed\n");
+    exit(1);
+  }
 
   /// Load an image
   src = imread( argv[1] );
@@ -135,6 +145,7 @@ int main( int argc, char** argv )
   /// Create a matrix of the same type and size as src (for dst)
   dst.create( src.size(), src.type() );
   flood_mask.create(src.rows+2, src.cols+2, CV_8UC1);
+  mean_mask.create(src.size(), CV_8UC1);
 
   /// Convert the image to grayscale
   cvtColor( src, dst, CV_BGR2GRAY );
@@ -142,7 +153,7 @@ int main( int argc, char** argv )
   namedWindow( "Edge Map", CV_WINDOW_AUTOSIZE );
 
   /// Create a Trackbar for user to enter threshold
-  createTrackbar( "Min Threshold:", "Edge Map", &lowThreshold, max_lowThreshold, CannyThreshold );
+  //createTrackbar( "Min Threshold:", "Edge Map", &lowThreshold, max_lowThreshold, CannyThreshold );
 
   /// Show the image
   CannyThreshold(0, 0);
