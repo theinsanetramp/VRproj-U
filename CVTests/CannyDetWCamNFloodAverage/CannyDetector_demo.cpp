@@ -11,8 +11,6 @@
 using namespace cv;
 using namespace std;
 
-#define SOBOL
-
 Mat tmp_frame, edge_detection, dst;
 Mat flood_mask, mean_mask;
 
@@ -55,15 +53,16 @@ void CannyThreshold(int, void*)
   //cvtColor(dst, dst, CV_GRAY2RGB); 
   edge_detection = dst.clone();
   
-  #ifdef SOBOL
   //Floodfill from quasi-random points
-  for (unsigned long long i = 0; i < 50; ++i)
+  for (unsigned long long i = 0; i < 400; ++i)
   {
       x = tmp_frame.cols * sobol::sample(i, 0);
       y = tmp_frame.rows * sobol::sample(i, 1);
-      if(dst.at<int>(y,x) == 0)
+      Point seed = Point(x,y);
+      if(dst.at<Vec3b>(seed)[0] == 0)
       {
-	flood_mask = 0;
+	cout << "filling" << endl;
+        flood_mask = 0;
         floodFill(dst, flood_mask, seed, (255,255,255), &ccomp, Scalar(loDiff, loDiff, loDiff),
                 Scalar(upDiff, upDiff, upDiff), 4 + (255 << 8));
 	for(i=0;i<mean_mask.rows;i++)
@@ -76,25 +75,8 @@ void CannyThreshold(int, void*)
         avg_colour = mean(tmp_frame,mean_mask);
       }
   } 
-  #else
-  //Floodfill every empty area
-  for(int i=0;i<dst.cols;i++)
-  {
-    for(int j=0;j<dst.rows;j++)
-    {
-      Point seed = Point(i,j);
-      if(dst.at<Vec3b>(seed)[0] == 0 && dst.at<Vec3b>(seed)[1] == 0 && dst.at<Vec3b>(seed)[2] == 0)
-      {
-        Rect ccomp;
-        floodFill(dst, flood_mask, seed, (255,255,255), &ccomp, Scalar(loDiff, loDiff, loDiff),
-                Scalar(upDiff, upDiff, upDiff), 4 + (255 << 8) + FLOODFILL_MASK_ONLY);
-        Scalar newVal = mean(tmp_frame,resize(flood_mask,flood_mask);
-      }
-    }
-  }
-  #endif
   
-  imshow( "Edge Map", edge_detection );
+  imshow( "Edge Map", dst );
  }
 
 int main( int argc, char** argv )
@@ -112,7 +94,7 @@ int main( int argc, char** argv )
   }
   //cap.set(CV_CAP_PROP_FRAME_WIDTH,494);
   //cap.set(CV_CAP_PROP_FRAME_HEIGHT,768);
-  //cap.set(CV_CAP_PROP_FPS, 10);
+  cap.set(CV_CAP_PROP_FPS, 10);
   //int FPS = cap.get(CV_CAP_PROP_FRAME_WIDTH);
   //cout << FPS << endl;
   cap >> tmp_frame;

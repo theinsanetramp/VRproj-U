@@ -9,18 +9,21 @@
 #include <iostream>
 #include <thread>
 #include <vector>
-
+#include <mutex>
+#include <condition_variable>
 
 using namespace cv;
 using namespace std;
 
-Mat tmp_frame;
+Mat tmp_frame, edge_detection;
 Mat dst, flood_mask[4], mean_mask[4];
-Mat sub_dst[4];
+//Mat sub_dst[4];
 
 thread t[3];
 int finished = 0;
 int imageReady[3] = {0,0,0};
+mutex m;
+condition_variable conVar;
 
 struct SeedData
 {
@@ -28,10 +31,10 @@ struct SeedData
   Scalar colour;
 };
 
-vector<SeedData> seedList0;
-vector<SeedData> seedList1;
-vector<SeedData> seedList2;
-vector<SeedData> seedList3;
+SeedData seedList0[25];
+SeedData seedList1[25];
+SeedData seedList2[25];
+SeedData seedList3[25];
 
 VideoCapture cap;
 //Canny variables
@@ -69,16 +72,17 @@ SeedData MakeSeedData(Point seed, Scalar colour)
 void FindColours(int corner, int offset_cols, int offset_rows, int sobolPoints)
 {
   //Floodfill from quasi-random points
-  sub_dst[corner] = dst.clone();
+  //sub_dst[corner] = dst.clone();
+  int k = 0;
   for (unsigned long long i = 0; i < sobolPoints; ++i)
   {
-    int x = offset_cols + sub_dst[corner].cols/2 * sobol::sample(i, 0);
-    int y = offset_rows + sub_dst[corner].rows/2 * sobol::sample(i, 1);
+    int x = offset_cols + dst.cols/2 * sobol::sample(i, 0);
+    int y = offset_rows + dst.rows * sobol::sample(i, 1);
     Point seed = Point(x, y);
-    if(sub_dst[corner].at<Vec3b>(seed)[0] == 0)
+    if(dst.at<Vec3b>(seed)[0] == 0)
     {
       flood_mask[corner] = 0;
-      floodFill(sub_dst[corner], flood_mask[corner], seed, (255,255,255), &ccomp, Scalar(loDiff, loDiff, loDiff),
+      floodFill(dst, flood_mask[corner], seed, (255,255,255), &ccomp, Scalar(loDiff, loDiff, loDiff),
               Scalar(upDiff, upDiff, upDiff), 4 + (255 << 8));
       for(int i=0;i<mean_mask[corner].rows;i++)
       {
@@ -88,15 +92,29 @@ void FindColours(int corner, int offset_cols, int offset_rows, int sobolPoints)
         }
       }
       Scalar newVal = alpha*mean(tmp_frame,mean_mask[corner]);
-      if(corner == 0) seedList0.push_back(MakeSeedData(seed, newVal));
-      else if(corner == 1) seedList1.push_back(MakeSeedData(seed, newVal));
-      else if(corner == 2) seedList2.push_back(MakeSeedData(seed, newVal));
-      else if(corner == 3) seedList3.push_back(MakeSeedData(seed, newVal));
-      // floodFill(sub_dst[corner], seed, newVal, &ccomp, Scalar(loDiff, loDiff, loDiff),
-      //       Scalar(upDiff, upDiff, upDiff), flags);
+      if(corner == 0) {
+        //cout << seed << endl;
+        seedList0[k] = MakeSeedData(seed, newVal);
+        k++;
+      }
+      else if(corner == 1) {
+        seedList1[k] = MakeSeedData(seed, newVal);
+        k++;
+        seedList1[k] = MakeSeedData(Point(0,0), Scalar(0,0,0));
+      }
+      else if(corner == 2) {
+        seedList2[k] = MakeSeedData(seed, newVal);
+        k++;
+        seedList2[k] = MakeSeedData(Point(0,0), Scalar(0,0,0));
+      }
+      else if(corner == 3) {
+        seedList3[k] = MakeSeedData(seed, newVal);
+        k++;
+      }
     }
   }
-
+  if(corner == 0) seedList0[k] = MakeSeedData(Point(0,0), Scalar(0,0,0));
+  else if(corner == 3) seedList3[k] = MakeSeedData(Point(0,0), Scalar(0,0,0));
 }
 
 void FindColoursThread(int corner, int sobolPoints)
@@ -125,10 +143,13 @@ void FindColoursThread(int corner, int sobolPoints)
   }
   while(!finished)
   {
-    if(imageReady[corner]) {
-      FindColours(corner, offset_cols, offset_rows, sobolPoints);
-      imageReady[corner] = 0;
-    }
+    unique_lock<mutex> lk(m);
+    conVar.wait(lk, []{return imageReady[0];});
+    //cout << "running" << endl;
+    FindColours(corner, offset_cols, offset_rows, sobolPoints);
+    imageReady[0] = 0;
+    lk.unlock();
+    conVar.notify_one();
   }
 }
   
@@ -144,24 +165,32 @@ void CannyThreshold(int, void*)
   /// Apply the dilation operation
   dilate( dst, dst, element );
   //erode( dst, dst, element );
-  cvtColor(dst, dst, CV_GRAY2RGB); 
-
-  //seedLists.resize(4);
-  for(int i=0;i<3;i++) imageReady[i] = 1;
-  FindColours(3, sub_dst[3].cols/2, sub_dst[3].rows/2, 10);
-  
-  while(imageReady[0] == 1 && imageReady[1] == 1 && imageReady[2] == 1);
-  /*
-  for(int j=0;j<seedList0.size();j++)
+  cvtColor(dst, dst, CV_GRAY2RGB);
+  edge_detection = dst.clone(); 
   {
-    if(dst.at<Vec3b>(seedList0[j].seed)[0] == 0 && 
-      dst.at<Vec3b>(seedList0[j].seed)[1] == 0 && 
-      dst.at<Vec3b>(seedList0[j].seed)[2] == 0)
-    { 
-      floodFill(dst, seedList0[j].seed, seedList0[j].colour, &ccomp, Scalar(loDiff, loDiff, loDiff),
+    lock_guard<mutex> lk(m);
+    for(int i=0;i<3;i++) imageReady[i] = 1;
+  }
+  conVar.notify_one();
+  FindColours(3, dst.cols/2, 0, 20);
+  { 
+    unique_lock<mutex> lk(m);
+    conVar.wait(lk, []{return !imageReady[0];});
+  }
+  /*int j = 0;
+  do
+  {
+    //cout << "filling" << endl;
+    if(edge_detection.at<Vec3b>(seedList0[j].seed)[0] == 0 &&
+      edge_detection.at<Vec3b>(seedList0[j].seed)[1] == 0 &&
+      edge_detection.at<Vec3b>(seedList0[j].seed)[2] == 0)
+    {
+      floodFill(edge_detection, seedList0[j].seed, seedList0[j].colour, &ccomp, Scalar(loDiff, loDiff, loDiff),
           Scalar(upDiff, upDiff, upDiff), flags);
     }
-  }
+    j++;
+  }while(seedList0[j].seed != Point(0,0));
+  
   for(int j=0;j<seedList1.size();j++)
   {
     if(dst.at<Vec3b>(seedList1[j].seed)[0] == 0 && 
@@ -182,23 +211,21 @@ void CannyThreshold(int, void*)
           Scalar(upDiff, upDiff, upDiff), flags);
     }
   }
-  for(int j=0;j<seedList3.size();j++)
+  j = 0;
+  while(seedList3[j].seed != Point(0,0))
   {
-    if(dst.at<Vec3b>(seedList3[j].seed)[0] == 0 && 
-      dst.at<Vec3b>(seedList3[j].seed)[1] == 0 && 
-      dst.at<Vec3b>(seedList3[j].seed)[2] == 0)
+    //cout << "filling3" << endl;
+    if(edge_detection.at<Vec3b>(seedList3[j].seed)[0] == 0 && 
+      edge_detection.at<Vec3b>(seedList3[j].seed)[1] == 0 && 
+      edge_detection.at<Vec3b>(seedList3[j].seed)[2] == 0)
     { 
-      floodFill(dst, seedList3[j].seed, seedList3[j].colour, &ccomp, Scalar(loDiff, loDiff, loDiff),
+      floodFill(edge_detection, seedList3[j].seed, seedList3[j].colour, &ccomp, Scalar(loDiff, loDiff, loDiff),
           Scalar(upDiff, upDiff, upDiff), flags);
     }
-  }
-  */
+    j++;
+  }*/
   //cout << seedList0[0].colour << endl;
   //cout << seedList0[1].colour << endl;
-  seedList0.clear();
-  seedList1.clear();
-  seedList2.clear();
-  seedList3.clear();
   imshow( "Edge Map", dst );
  }
 
@@ -234,7 +261,7 @@ int main( int argc, char** argv )
   createTrackbar( "Min Threshold:", "Edge Map", &lowThreshold, max_lowThreshold, CannyThreshold );
   createTrackbar( "Blur Kernel Size:", "Edge Map", &blur_kernel, max_blur_kernel, 0 );
 
-  for(int i=0;i<3;i++) t[i] = thread(FindColoursThread, i, 10);
+  for(int i=0;i<1;i++) t[i] = thread(FindColoursThread, i, 20);
 
   for(;;)
   {
