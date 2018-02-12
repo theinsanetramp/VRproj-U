@@ -21,6 +21,9 @@ using namespace std;
 #define SERVICE_PORT  21234
 #define BUFLEN 40960
 
+#define FRAMERATE 10
+#define POINTSPERTHREAD 10
+
 Mat tmp_frame, dst_out;
 Mat dst, flood_mask[4], mean_mask[4];
 //Mat sub_dst[4];
@@ -33,7 +36,7 @@ condition_variable conVar;
 
 VideoCapture cap;
 //Canny variables
-int lowThreshold = 30;
+int lowThreshold = 15;
 int const max_lowThreshold = 100;
 int thresh_ratio = 3;
 int kernel_size = 3;
@@ -176,7 +179,7 @@ void CannyThreshold(int, void*)
     for(int i=0;i<3;i++) imageReady[i] = 1;
   }
   conVar.notify_one();
-  FindColours(3, dst.cols/2, 0, 10);
+  FindColours(3, dst.cols/2, 0, POINTSPERTHREAD);
   //cout << "0\n";
   { 
     unique_lock<mutex> lk(m);
@@ -239,9 +242,11 @@ int main( int argc, char** argv )
   }
   //cap.set(CV_CAP_PROP_FRAME_WIDTH,494);
   //cap.set(CV_CAP_PROP_FRAME_HEIGHT,768);
-  cap.set(CV_CAP_PROP_FPS, 10);
+  cap.set(CV_CAP_PROP_FPS, FRAMERATE);
   int FPS = cap.get(CV_CAP_PROP_FPS);
-  cout << FPS << endl;
+  cout << "FPS Limit: " << FPS << endl;
+  cout << "Low Threshold: " << lowThreshold << endl;
+  cout << "Points per thread: " << POINTSPERTHREAD << endl;
   cap >> tmp_frame;
   if(tmp_frame.empty())
   {
@@ -257,7 +262,7 @@ int main( int argc, char** argv )
   //createTrackbar( "Blur Kernel Size:", "Edge Map", &blur_kernel, max_blur_kernel, 0 );
 
   //for(int i=0;i<1;i++) t[i] = thread(FindColoursThread, i, 20);
-  t = thread(FindColoursThread, 0, 10);
+  t = thread(FindColoursThread, 0, POINTSPERTHREAD);
 
   for(;;)
   {
