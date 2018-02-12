@@ -76,7 +76,7 @@ void FindColours(int corner, int offset_cols, int offset_rows, int sobolPoints)
   for (unsigned long long i = 0; i < sobolPoints; ++i)
   {
     int x = offset_cols + dst.cols/2 * sobol::sample(i, 0);
-    int y = offset_rows + dst.rows * sobol::sample(i, 1);
+    int y = offset_rows + dst.rows/2 * sobol::sample(i, 1);
     //cout << corner << "1\n";
     Point seed = Point(x, y);
     if(dst.at<Vec3b>(seed)[0] == 0)
@@ -124,30 +124,10 @@ void FindColours(int corner, int offset_cols, int offset_rows, int sobolPoints)
   }
 }
 
-void FindColoursThread(int corner, int sobolPoints)
+void FindColoursThread0(int corner, int sobolPoints)
 {
-  int offset_cols;
-  int offset_rows;
-  switch(corner) {
-    case 0:
-      offset_cols = 0;
-      offset_rows = 0;
-      break;
-    case 1:
-      offset_cols = tmp_frame.cols/2;
-      offset_rows = 0;
-      break;
-    case 2:
-      offset_cols = 0;
-      offset_rows = tmp_frame.rows/2;
-      break;
-    case 3:
-      offset_cols = tmp_frame.cols/2;
-      offset_rows = tmp_frame.rows/2;
-      break;
-    default:
-      cout << "FindColours: Unknown corner" << endl;
-  }
+  int offset_cols = 0;
+  int offset_rows = 0;
   while(!finished)
   {
     unique_lock<mutex> lk(m);
@@ -160,6 +140,32 @@ void FindColoursThread(int corner, int sobolPoints)
   }
 }
   
+void FindColoursThreadGeneral(int corner, int sobolPoints)
+{
+  int offset_cols;
+  int offset_rows;
+  switch(corner) {
+    case 1:
+      offset_cols = tmp_frame.cols/2;
+      offset_rows = 0;
+      break;
+    case 2:
+      offset_cols = 0;
+      offset_rows = tmp_frame.rows/2;
+      break;
+    default:
+      cout << "FindColours: Unknown corner" << endl;
+  }
+  while(!finished)
+  {
+    unique_lock<mutex> lk(m);
+    conVar.wait(lk, []{return imageReady[0];});
+    //cout << "running" << endl;
+    FindColours(corner, offset_cols, offset_rows, sobolPoints);
+    imageReady[corner] = 0;
+    lk.unlock();
+  }
+}
 
 void CannyThreshold(int, void*)
 {
@@ -179,12 +185,13 @@ void CannyThreshold(int, void*)
     for(int i=0;i<3;i++) imageReady[i] = 1;
   }
   conVar.notify_one();
-  FindColours(3, dst.cols/2, 0, POINTSPERTHREAD);
+  FindColours(3, dst.cols/2, tmp_frame.rows/2, POINTSPERTHREAD);
   //cout << "0\n";
   { 
     unique_lock<mutex> lk(m);
     conVar.wait(lk, []{return !imageReady[0];});
   }
+  while(imageReady[1] == 1 && imageReady[2] == 1);
   //cout << "1\n";
   for(int i=0;i<buf1Length*7;i++) buf[bufLength*7 + i] = buf1[i];
   for(int i=0;i<7;i++) buf[bufLength*7 + buf1Length*7 + i] = 0;
