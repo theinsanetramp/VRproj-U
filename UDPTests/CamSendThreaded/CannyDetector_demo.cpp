@@ -22,7 +22,7 @@ using namespace std;
 #define BUFLEN 40960
 
 #define FRAMERATE 10
-#define POINTSPERTHREAD 2
+#define POINTSPERTHREAD 20
 
 Mat tmp_frame, dst_out;
 Mat dst, flood_mask[4], mean_mask[4];
