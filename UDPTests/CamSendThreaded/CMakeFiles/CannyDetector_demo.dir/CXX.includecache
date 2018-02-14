@@ -39,6 +39,8 @@ sys/socket.h
 -
 arpa/inet.h
 -
+unistd.h
+-
 
 /home/pi/VRproj-U/UDPTests/CamSendThreaded/sobol.cpp
 sobol.h

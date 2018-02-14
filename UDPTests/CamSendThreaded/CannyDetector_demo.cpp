@@ -14,17 +14,19 @@
 #include <netdb.h>
 #include <sys/socket.h>
 #include <arpa/inet.h>
+#include <unistd.h>
 
 using namespace cv;
 using namespace std;
 
 #define SERVICE_PORT  21234
 #define BUFLEN 40960
+#define RECEIVEBUFLEN 16
 
 #define FRAMERATE 10
-#define POINTSPERTHREAD 20
+#define POINTSPERTHREAD 5
 
-Mat tmp_frame, dst_out;
+Mat tmp_frame, reduced_tmp_frame, dst_out;
 Mat dst, flood_mask[4], mean_mask[4];
 //Mat sub_dst[4];
 
@@ -37,9 +39,11 @@ mutex m;
 condition_variable conVar;
 condition_variable conVar1;
 condition_variable conVar2;
+thread control;
 
 VideoCapture cap;
 //Canny variables
+int nextLowThreshold = 20;
 int lowThreshold = 20;
 int const max_lowThreshold = 100;
 int thresh_ratio = 3;
@@ -64,7 +68,8 @@ int max_blur_kernel = 10;
 int alpha = 1.2;
 
 struct sockaddr_in myaddr, remaddr;
-int fd, bufSize, k, slen=sizeof(remaddr);
+int fd, bufSize, k, recvlen;
+socklen_t slen=sizeof(remaddr);
 //char server[] = "10.42.0.1";
 uchar buf[BUFLEN];
 uchar buf0[1024];
@@ -75,8 +80,26 @@ int buf0Length;
 int buf1Length;
 int buf2Length;
 vector<uchar> dstBuf;
+uchar receiveBuf[RECEIVEBUFLEN];
 
-void FindColours(int corner, int offset_cols, int offset_rows, int sobolPoints)
+void ReceiveUDP()
+{
+  signed char XSign, YSign;
+  while(!finished)
+  {
+    recvlen = recvfrom(fd, receiveBuf, RECEIVEBUFLEN, 0, (struct sockaddr *)&remaddr, &slen);
+    if(recvlen > 0) {
+      XSign = receiveBuf[0];
+      YSign = receiveBuf[1];
+      if((int)receiveBuf[2] != nextLowThreshold) {
+        nextLowThreshold = receiveBuf[2];
+        cout << "Next low threshold: " << nextLowThreshold << endl;
+      }
+    }
+  }
+}
+
+void FindColours(int corner, int sobolPoints)
 {
   //Floodfill from quasi-random points
   //sub_dst[corner] = dst.clone();
@@ -92,6 +115,7 @@ void FindColours(int corner, int offset_cols, int offset_rows, int sobolPoints)
       flood_mask[corner] = 0;
       floodFill(dst, flood_mask[corner], seed, (255,255,255), &ccomp, Scalar(loDiff, loDiff, loDiff),
               Scalar(upDiff, upDiff, upDiff), 4 + (255 << 8));
+      cout << corner << "filled\n";
       for(int i=0;i<mean_mask[corner].rows;i++)
       {
         for(int a=0;a<mean_mask[corner].cols;a++)
@@ -99,8 +123,9 @@ void FindColours(int corner, int offset_cols, int offset_rows, int sobolPoints)
           mean_mask[corner].at<int>(i,a) = flood_mask[corner].at<int>(i+1,a+1);
         }
       }
-      Scalar newVal = alpha*mean(tmp_frame,mean_mask[corner]);
-      for(int i=0;i<3;i++) if(newVal[i] < 1) newVal[i] = 1;
+      Scalar newVal = alpha*mean(reduced_tmp_frame,mean_mask[corner]);
+      cout << "asdf\n";
+      //for(int i=0;i<3;i++) if(newVal[i] < 1) newVal[i] = 1;
       if(corner == 0) {
         //cout << seed << "  " << newVal <<  endl;
         buf0[j*7] = (x >> 8) & 0xFF;
@@ -164,30 +189,27 @@ void FindColours(int corner, int offset_cols, int offset_rows, int sobolPoints)
 
 void FindColoursThread0(int corner, int sobolPoints)
 {
-  int offset_cols = 0;
-  int offset_rows = 0;
   while(!finished)
   {
     unique_lock<mutex> lk(m);
     conVar.wait(lk, []{return imageReady0;});
     //cout << "running" << corner << endl;
-    FindColours(corner, offset_cols, offset_rows, sobolPoints);
+    FindColours(corner, sobolPoints);
     imageReady0 = 0;
     lk.unlock();
     conVar.notify_one();
+    
   }
 }
   
 void FindColoursThread1(int corner, int sobolPoints)
 {
-  int offset_cols = tmp_frame.cols/2;
-  int offset_rows = 0;
   while(!finished)
   {
     unique_lock<mutex> lk(m);
     conVar1.wait(lk, []{return imageReady1;});
     //cout << "running" << corner <<  endl;
-    FindColours(corner, offset_cols, offset_rows, sobolPoints);
+    FindColours(corner, sobolPoints);
     imageReady1 = 0;
     lk.unlock();
     conVar1.notify_one();
@@ -196,14 +218,12 @@ void FindColoursThread1(int corner, int sobolPoints)
 
 void FindColoursThread2(int corner, int sobolPoints)
 {
-  int offset_cols = 0;
-  int offset_rows = tmp_frame.rows/2;
   while(!finished)
   {
     unique_lock<mutex> lk(m);
     conVar2.wait(lk, []{return imageReady2;});
     //cout << "running" << corner <<  endl;
-    FindColours(corner, offset_cols, offset_rows, sobolPoints);
+    FindColours(corner, sobolPoints);
     imageReady2 = 0;
     lk.unlock();
     conVar2.notify_one();
@@ -216,14 +236,14 @@ void CannyThreshold(int, void*)
   blur( dst, dst, Size(blur_kernel,blur_kernel) );
 
   /// Canny detector
+  lowThreshold = nextLowThreshold;
   Canny( dst, dst, lowThreshold, lowThreshold*thresh_ratio, kernel_size );
 
   /// Apply the dilation operation
   dilate( dst, dst, element );
-  //erode( dst, dst, element );
   //cvtColor(dst, dst, CV_GRAY2RGB);
   dst_out = dst.clone(); 
-  //cout << "edges\n";
+  cout << "edges\n";
   {
     lock_guard<mutex> lk(m);
     imageReady0 = 1;
@@ -239,8 +259,8 @@ void CannyThreshold(int, void*)
     imageReady2 = 1;
   }
   conVar2.notify_one();
-  FindColours(3, dst.cols/2, dst.rows/2, POINTSPERTHREAD);
-  //cout << "running3\n";
+  FindColours(3, POINTSPERTHREAD);
+  cout << "running3\n";
   {
     unique_lock<mutex> lk(m);
     conVar.wait(lk, []{return !imageReady0;});
@@ -253,16 +273,14 @@ void CannyThreshold(int, void*)
     unique_lock<mutex> lk(m);
     conVar2.wait(lk, []{return !imageReady2;});
   }
-  //cout << "sending\n";
+  cout << "sending\n";
   for(int i=0;i<buf0Length*7;i++) buf[bufLength*7 + i] = buf0[i];
   for(int i=0;i<buf1Length*7;i++) buf[bufLength*7 + buf0Length*7 + i] = buf1[i];
-  //for(int i=0;i<buf0Length*7+bufLength*7+buf1Length*7+14;i++) cout << (int)buf[i] << " ";
   for(int i=0;i<buf2Length*7;i++) buf[bufLength*7 + buf0Length*7 + buf1Length*7 + i] = buf2[i];
   for(int i=0;i<7;i++) buf[bufLength*7 + buf0Length*7 + buf1Length*7 + buf2Length*7 + i] = 0;
-  resize(dst_out, dst_out, Size(), 0.5, 0.5, CV_INTER_AREA);
+  cout << "compressing\n";
   imencode(".png", dst_out, dstBuf);
-  //cout << bufLength*7 << "  " << buf1Length*7 << "  " << dstBuf.size() << endl;
-  //cout << "2\n";
+  cout << bufLength*7 << "  " << buf1Length*7 << "  " << dstBuf.size() << endl;
   for(int i=0;i<dstBuf.size();i++) buf[bufLength*7 + buf0Length*7 + buf1Length*7 + buf2Length*7 + 7 + i] = dstBuf[i];
   //for(int i=0;i<(buf1Length+bufLength+buf0Length+buf2Length+2);i++) {
   //   for(int a=0;a<7;a++) cout << (int)buf[i*7+a] << " ";
@@ -338,26 +356,32 @@ int main( int argc, char** argv )
   t[0] = thread(FindColoursThread0, 0, POINTSPERTHREAD);
   t[1] = thread(FindColoursThread1, 1, POINTSPERTHREAD);
   t[2] = thread(FindColoursThread2, 2, POINTSPERTHREAD);
+  control = thread(ReceiveUDP);
 
+  for(int i=0;i<4;i++) flood_mask[i].create(tmp_frame.rows/2+2, tmp_frame.cols/2+2, CV_8UC1);
+  for(int i=0;i<4;i++) mean_mask[i].create(tmp_frame.rows/2, tmp_frame.cols/2, CV_8UC1);
+  reduced_tmp_frame.create(tmp_frame.rows/2, tmp_frame.cols/2, tmp_frame.type());
+    
   for(;;)
   {
+	cout << "start\n";
     cap >> tmp_frame;
     if( tmp_frame.empty() )
-        break;
-    /// Create a matrix of the same type and size as src (for dst)
-    for(int i=0;i<4;i++) flood_mask[i].create(tmp_frame.rows+2, tmp_frame.cols+2, CV_8UC1);
-    for(int i=0;i<4;i++) mean_mask[i].create(tmp_frame.size(), CV_8UC1);
-
+        break; 
+	cout << "1\n";
     /// Convert the image to grayscale
-    cvtColor( tmp_frame, dst, CV_BGR2GRAY );
-
+    resize(tmp_frame, reduced_tmp_frame, reduced_tmp_frame.size(), 0, 0, CV_INTER_AREA);
+    cout << "2\n";
+    cvtColor( reduced_tmp_frame, dst, CV_BGR2GRAY );
+	cout << "greyscaled\n";
     /// Show the image
     CannyThreshold(0, 0);
+    cout << "done\n";
     imshow("Camera", tmp_frame);
 
     if (sendto(fd, buf, bufSize, 0, (struct sockaddr *)&remaddr, slen)==-1)
       perror("sendto");
-
+	cout << "sent\n";
     char keycode = (char)waitKey(30);
       if( keycode == 27 ){
           //imwrite("frame.jpg", dst);
@@ -365,6 +389,24 @@ int main( int argc, char** argv )
         }
   }
   finished = 1;
+  shutdown(fd, SHUT_RDWR);
+  close(fd);
+  control.join();
+  {
+    lock_guard<mutex> lk(m);
+    imageReady0 = 1;
+  }
+  conVar.notify_one();
+  {
+    lock_guard<mutex> lk(m);
+    imageReady1 = 1;
+  }
+  conVar1.notify_one();
+  {
+    lock_guard<mutex> lk(m);
+    imageReady2 = 1;
+  }
+  conVar2.notify_one();
   for(int i=0;i<3;i++) t[i].join();
   //t.join();
   return 0;
