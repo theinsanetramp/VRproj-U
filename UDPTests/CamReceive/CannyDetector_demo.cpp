@@ -10,6 +10,9 @@
 #include <netdb.h>
 #include <sys/socket.h>
 #include <thread>
+#include <chrono>
+#include <unistd.h>
+#include "gamepad.h"
 
 using namespace cv;
 using namespace std;
@@ -20,7 +23,9 @@ using namespace std;
 Mat receivedImage;
 
 thread t;
+thread control;
 int finished = 0;
+int addressReceived = 0;
 
 struct SeedData
 {
@@ -44,8 +49,62 @@ socklen_t addrlen = sizeof(remaddr);    /* length of addresses */
 int recvlen;      /* # bytes received */
 int fd;       /* our socket */
 uchar buf[BUFSIZE]; /* receive buffer */
+uchar controlBuf[3];
 
 vector<uchar> imageBuf;
+
+void SendControl()
+{
+  int j;
+  int X[2], Y[2];
+  int threshUp = 0;
+  int threshDown = 0;
+  uchar lowThreshold = 20;
+  while(!addressReceived);
+  while(!finished)
+  {
+    GamepadUpdate();
+    if (GamepadIsConnected(GAMEPAD_0)) {
+      for (j = 0; j != BUTTON_COUNT; ++j) {
+        if (GamepadButtonTriggered(GAMEPAD_0, (GAMEPAD_BUTTON)j)) {
+          //cout << j << " pressed\n";
+          if(j == 8) threshDown = 1;
+          if(j == 9) threshUp = 1;
+        } 
+        else if (GamepadButtonReleased(GAMEPAD_0, (GAMEPAD_BUTTON)j)) {
+          if(j == 8) threshDown = 0;
+          if(j == 9) threshUp = 0;
+        }
+      }
+      for (j = 0; j != TRIGGER_COUNT; ++j) {
+        if (GamepadTriggerTriggered(GAMEPAD_0, (GAMEPAD_TRIGGER)j)) {
+          //cout << j << " trigger pressed\n";
+        }
+      }
+      for (j = 0; j != STICK_COUNT; ++j) {
+        GamepadStickXY(GAMEPAD_0, (GAMEPAD_STICK)j, &X[j], &Y[j]);
+        if(j == 0) {
+          //cout << j << " stick with coords: " << X[j] << " " << Y[j] << endl;
+          controlBuf[0] = X[j]/258;
+          controlBuf[1] = Y[j]/258;
+        }
+      }
+    }
+    if(threshDown && !threshUp) {
+      lowThreshold--;
+      cout << "Next low threshold: " << (int)lowThreshold << endl;
+    }
+    if(threshUp && !threshDown) {
+      lowThreshold++;
+      cout << "Next low threshold: " << (int)lowThreshold << endl;
+    }
+    controlBuf[2] = lowThreshold;
+    //for(int i=0;i<4;i++) cout << (int)controlBuf[i] << " ";
+    //cout << endl;
+    sendto(fd, controlBuf, 3, 0, (struct sockaddr *)&remaddr, addrlen);
+    this_thread::sleep_for(chrono::milliseconds(50));
+  }
+}
 
 SeedData MakeSeedData(Point seed, Scalar colour)
 {
@@ -71,7 +130,7 @@ void ReceivePoints()
   } 
   while(!(buf[i*7] == 0 && buf[i*7+2] == 0 && buf[i*7+4] == 0 && buf[i*7+5] == 0 && buf[i*7+6] == 0));
   i++;
-  for(int j=i*7;j<recvlen;j++) imageBuf.push_back(buf[j]);
+  for(int j=i*7;j<recvlen;j++) imageBuf.push_back(buf[j]); 
   receivedImage = imdecode(imageBuf, IMREAD_COLOR);
   resize(receivedImage, receivedImage, Size(), 2, 2, CV_INTER_CUBIC);
   for(int i=0;i<receivedImage.rows;i++) {
@@ -98,10 +157,15 @@ void ReceivePoints()
 
 void UDPReceive()
 {
+  this_thread::sleep_for(chrono::milliseconds(500));
+  recvlen = recvfrom(fd, buf, BUFSIZE, 0, (struct sockaddr *)&remaddr, &addrlen);
+  addressReceived = 1;
+  if (recvlen > 0) ReceivePoints();
   while(!finished)
   {
     //printf("waiting on port %d\n", SERVICE_PORT);
     recvlen = recvfrom(fd, buf, BUFSIZE, 0, (struct sockaddr *)&remaddr, &addrlen);
+
     //printf("received %d bytes\n", recvlen);
     if (recvlen > 0) {
       //buf[recvlen] = 0;
@@ -133,7 +197,10 @@ int main( int argc, char** argv )
     return 0;
   }
 
+  GamepadInit();
+
   t = thread(UDPReceive);
+  control = thread(SendControl);
 
   namedWindow( "Edge Map", CV_WINDOW_AUTOSIZE );
   cvMoveWindow( "Edge Map", 0, 40 ); 
@@ -146,6 +213,9 @@ int main( int argc, char** argv )
   }
   while(k != 27);
   finished = 1;
+  shutdown(fd, SHUT_RDWR);
+  close(fd);
   t.join();
+  control.join();
   return 0;
-  }
+}

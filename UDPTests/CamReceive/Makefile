@@ -150,6 +150,33 @@ CannyDetector_demo.cpp.s:
 	$(MAKE) -f CMakeFiles/CannyDetector_demo.dir/build.make CMakeFiles/CannyDetector_demo.dir/CannyDetector_demo.cpp.s
 .PHONY : CannyDetector_demo.cpp.s
 
+gamepad.o: gamepad.c.o
+
+.PHONY : gamepad.o
+
+# target to build an object file
+gamepad.c.o:
+	$(MAKE) -f CMakeFiles/CannyDetector_demo.dir/build.make CMakeFiles/CannyDetector_demo.dir/gamepad.c.o
+.PHONY : gamepad.c.o
+
+gamepad.i: gamepad.c.i
+
+.PHONY : gamepad.i
+
+# target to preprocess a source file
+gamepad.c.i:
+	$(MAKE) -f CMakeFiles/CannyDetector_demo.dir/build.make CMakeFiles/CannyDetector_demo.dir/gamepad.c.i
+.PHONY : gamepad.c.i
+
+gamepad.s: gamepad.c.s
+
+.PHONY : gamepad.s
+
+# target to generate assembly for a file
+gamepad.c.s:
+	$(MAKE) -f CMakeFiles/CannyDetector_demo.dir/build.make CMakeFiles/CannyDetector_demo.dir/gamepad.c.s
+.PHONY : gamepad.c.s
+
 sobol.o: sobol.cpp.o
 
 .PHONY : sobol.o
@@ -189,6 +216,9 @@ help:
 	@echo "... CannyDetector_demo.o"
 	@echo "... CannyDetector_demo.i"
 	@echo "... CannyDetector_demo.s"
+	@echo "... gamepad.o"
+	@echo "... gamepad.i"
+	@echo "... gamepad.s"
 	@echo "... sobol.o"
 	@echo "... sobol.i"
 	@echo "... sobol.s"
