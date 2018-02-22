@@ -10,7 +10,7 @@
 using namespace cv;
 using namespace std;
 
-Mat src, dst_out;
+Mat src, src_reduced, dst_out;
 Mat dst, flood_mask;
 Mat receivedImage;
 
@@ -59,6 +59,7 @@ void CannyThreshold(int, void*)
   //imwrite("buildCanny.jpg",detected_edges);
   /// Apply the dilation operation
   dilate( dst, dst, element );
+  //resize(dst, dst, Size(), 0.5, 0.5, CV_INTER_AREA);
   dst_out = dst.clone();
   //imwrite("buildDilated.jpg",dst);
   cvtColor(dst, dst, CV_GRAY2RGB); 
@@ -66,26 +67,27 @@ void CannyThreshold(int, void*)
   //Floodfill from quasi-random points
   for (unsigned long long i = 0; i < 600; ++i)
   {
-    int x = src.cols * sobol::sample(i, 0);
-    int y = src.rows * sobol::sample(i, 1);
+    int x = dst.cols * sobol::sample(i, 0);
+    int y = dst.rows * sobol::sample(i, 1);
     Point seed = Point(x, y);
     if(dst.at<Vec3b>(seed)[0] == 0 && dst.at<Vec3b>(seed)[1] == 0 && dst.at<Vec3b>(seed)[2] == 0)
     {
       flood_mask = 0;
       floodFill(dst, flood_mask, seed, (255,255,255), &ccomp, Scalar(loDiff, loDiff, loDiff),
               Scalar(upDiff, upDiff, upDiff), 4 + (255 << 8));
-      Scalar newVal = mean(src,flood_mask);
+      Scalar newVal = mean(src_reduced,flood_mask);
       seedList.push_back(MakeSeedData(seed, newVal));
       floodFill(dst, seed, newVal, &ccomp, Scalar(loDiff, loDiff, loDiff),
               Scalar(upDiff, upDiff, upDiff), flags);
     }
   }
   vector<uchar> dstBuf;
-  resize(dst_out, dst_out, Size(), 0.5, 0.5, CV_INTER_AREA);
+  
   imencode(".png", dst_out, dstBuf);
-  //for(int i=0;i<dstBuf.size();i++) cout << dstBuf[i];
+  cout << dstBuf.size() << endl;
   receivedImage = imdecode(dstBuf, IMREAD_COLOR);
   resize(receivedImage, receivedImage, Size(), 2, 2, CV_INTER_CUBIC);
+  //erode(receivedImage, receivedImage, element);
   for(int i=0;i<receivedImage.rows;i++) {
     for(int j=0;j<receivedImage.cols;j++) {
       if(receivedImage.at<Vec3b>(i,j)[0] < 170) receivedImage.at<Vec3b>(i,j) = Vec3b(0,0,0);
@@ -94,6 +96,8 @@ void CannyThreshold(int, void*)
   }
   for(int j=0;j<seedList.size();j++)
   {
+    seedList[j].seed.x = seedList[j].seed.x*2;
+    seedList[j].seed.y = seedList[j].seed.y*2;
     if(receivedImage.at<Vec3b>(seedList[j].seed)[0] == 0 && 
       receivedImage.at<Vec3b>(seedList[j].seed)[1] == 0 && 
       receivedImage.at<Vec3b>(seedList[j].seed)[2] == 0)
@@ -118,11 +122,11 @@ int main( int argc, char** argv )
   { return -1; }
 
   /// Create a matrix of the same type and size as src (for dst)
-  dst.create( src.size(), src.type() );
-  flood_mask.create(src.rows+2, src.cols+2, CV_8UC1);
+  flood_mask.create(src.rows/2+2, src.cols/2+2, CV_8UC1);
 
   /// Convert the image to grayscale
-  cvtColor( src, dst, CV_BGR2GRAY );
+  resize(src, src_reduced, Size(), 0.5, 0.5, CV_INTER_AREA);
+  cvtColor( src_reduced, dst, CV_BGR2GRAY );
   //imwrite("buildGray.jpg",src_gray);
   namedWindow( "Edge Map", CV_WINDOW_AUTOSIZE );
   cvMoveWindow( "Edge Map", 0, 40 );
