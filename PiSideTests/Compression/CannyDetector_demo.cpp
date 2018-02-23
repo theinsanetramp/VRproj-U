@@ -6,6 +6,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <iostream>
+#include "libimagequant.h"
 
 using namespace cv;
 using namespace std;

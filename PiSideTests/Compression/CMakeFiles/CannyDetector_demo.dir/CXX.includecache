@@ -23,6 +23,8 @@ stdio.h
 -
 iostream
 -
+libimagequant.h
+/home/adam/Documents/VRproj/VRproj-U/PiSideTests/Compression/libimagequant.h
 
 /home/adam/Documents/VRproj/VRproj-U/PiSideTests/Compression/sobol.cpp
 sobol.h

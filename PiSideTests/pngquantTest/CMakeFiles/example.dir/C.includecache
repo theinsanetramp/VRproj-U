@@ -1,0 +1,44 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/adam/Documents/VRproj/VRproj-U/PiSideTests/pngquantTest/example.c
+lodepng.h
+/home/adam/Documents/VRproj/VRproj-U/PiSideTests/pngquantTest/lodepng.h
+lodepng.c
+/home/adam/Documents/VRproj/VRproj-U/PiSideTests/pngquantTest/lodepng.c
+stdio.h
+-
+stdlib.h
+-
+libimagequant.h
+/home/adam/Documents/VRproj/VRproj-U/PiSideTests/pngquantTest/libimagequant.h
+
+/home/adam/Documents/VRproj/VRproj-U/PiSideTests/pngquantTest/lodepng.c
+lodepng.h
+/home/adam/Documents/VRproj/VRproj-U/PiSideTests/pngquantTest/lodepng.h
+limits.h
+-
+stdio.h
+-
+stdlib.h
+-
+
+/home/adam/Documents/VRproj/VRproj-U/PiSideTests/pngquantTest/lodepng.h
+string.h
+-
+vector
+-
+string
+-
+lodepng.h
+/home/adam/Documents/VRproj/VRproj-U/PiSideTests/pngquantTest/lodepng.h
+iostream
+-
+lodepng.h
+/home/adam/Documents/VRproj/VRproj-U/PiSideTests/pngquantTest/lodepng.h
+

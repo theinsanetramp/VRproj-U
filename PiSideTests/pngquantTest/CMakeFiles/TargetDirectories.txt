@@ -1,0 +1,3 @@
+/home/adam/Documents/VRproj/VRproj-U/PiSideTests/pngquantTest/CMakeFiles/rebuild_cache.dir
+/home/adam/Documents/VRproj/VRproj-U/PiSideTests/pngquantTest/CMakeFiles/edit_cache.dir
+/home/adam/Documents/VRproj/VRproj-U/PiSideTests/pngquantTest/CMakeFiles/example.dir
