@@ -3,6 +3,9 @@
 
 CMakeFiles/CannyDetector_demo.dir/CannyDetector_demo.cpp.o
  /home/adam/Documents/VRproj/VRproj-U/PiSideTests/Compression/CannyDetector_demo.cpp
+ /home/adam/Documents/VRproj/VRproj-U/PiSideTests/Compression/libimagequant.h
+ /home/adam/Documents/VRproj/VRproj-U/PiSideTests/Compression/lodepng.c
+ /home/adam/Documents/VRproj/VRproj-U/PiSideTests/Compression/lodepng.h
  /home/adam/Documents/VRproj/VRproj-U/PiSideTests/Compression/sobol.h
  /usr/local/include/opencv/cxcore.h
  /usr/local/include/opencv2/calib3d.hpp

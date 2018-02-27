@@ -1,0 +1,32 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/adam/Documents/VRproj/VRproj-U/PiSideTests/Compression/lodepng.c
+lodepng.h
+/home/adam/Documents/VRproj/VRproj-U/PiSideTests/Compression/lodepng.h
+limits.h
+-
+stdio.h
+-
+stdlib.h
+-
+
+/home/adam/Documents/VRproj/VRproj-U/PiSideTests/Compression/lodepng.h
+string.h
+-
+vector
+-
+string
+-
+lodepng.h
+/home/adam/Documents/VRproj/VRproj-U/PiSideTests/Compression/lodepng.h
+iostream
+-
+lodepng.h
+/home/adam/Documents/VRproj/VRproj-U/PiSideTests/Compression/lodepng.h
+

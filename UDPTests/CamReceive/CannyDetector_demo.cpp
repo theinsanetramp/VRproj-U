@@ -32,7 +32,6 @@ struct SeedData
   Point seed;
   Scalar colour;
 };
-
 //floodFill variables
 int loDiff = 0, upDiff = 0;
 int connectivity = 4;
@@ -40,6 +39,12 @@ int newMaskVal = 255;
 int flags = connectivity + (newMaskVal << 8) +
                 FLOODFILL_FIXED_RANGE;
 Rect ccomp;
+//dilation variables
+int dilation_type = MORPH_RECT;
+int dilation_size = 1;
+Mat element = getStructuringElement( dilation_type,
+                                   Size( 2*dilation_size + 1, 2*dilation_size+1 ),
+                                   Point( dilation_size, dilation_size ) );
 
 vector<SeedData> seedList;
 
@@ -128,7 +133,10 @@ void ReceivePoints()
     seedList.push_back(MakeSeedData(seed, newVal));
     i++;
   } 
-  while(!(buf[i*7] == 0 && buf[i*7+2] == 0 && buf[i*7+4] == 0 && buf[i*7+5] == 0 && buf[i*7+6] == 0));
+  while(!(buf[i*7+0] == 0 && buf[i*7+1] == 0 
+    && buf[i*7+2] == 0 && buf[i*7+3] == 0 
+    && buf[i*7+4] == 0 && buf[i*7+5] == 0
+    && buf[i*7+6] == 0));
   i++;
   for(int j=i*7;j<recvlen;j++) imageBuf.push_back(buf[j]); 
   receivedImage = imdecode(imageBuf, IMREAD_COLOR);
@@ -139,8 +147,12 @@ void ReceivePoints()
       else receivedImage.at<Vec3b>(i,j) = Vec3b(255,255,255);
     }
   }
+  erode( receivedImage, receivedImage, element );
+  //cout << seedList.size() << endl;
   for(int j=0;j<seedList.size();j++)
   {
+    seedList[j].seed.x = seedList[j].seed.x*2;
+    seedList[j].seed.y = seedList[j].seed.y*2;
     if(receivedImage.at<Vec3b>(seedList[j].seed)[0] == 0 && 
       receivedImage.at<Vec3b>(seedList[j].seed)[1] == 0 && 
       receivedImage.at<Vec3b>(seedList[j].seed)[2] == 0)
@@ -148,7 +160,12 @@ void ReceivePoints()
       floodFill(receivedImage, seedList[j].seed, seedList[j].colour, &ccomp, Scalar(loDiff, loDiff, loDiff),
           Scalar(upDiff, upDiff, upDiff), flags);
     }
-    //else circle(receivedImage, seedList[j].seed, 5, 255, -1);
+    //circle(receivedImage, seedList[j].seed, 5, 255, -1);
+  }
+  for(int i=0;i<receivedImage.rows;i++) {
+    for(int j=0;j<receivedImage.cols;j++) {
+      if(receivedImage.at<Vec3b>(i,j)[0] == 0) receivedImage.at<Vec3b>(i,j) = Vec3b(255,0,255);
+    }
   }
   seedList.clear();
   imageBuf.clear();
@@ -166,7 +183,7 @@ void UDPReceive()
     //printf("waiting on port %d\n", SERVICE_PORT);
     recvlen = recvfrom(fd, buf, BUFSIZE, 0, (struct sockaddr *)&remaddr, &addrlen);
 
-    //printf("received %d bytes\n", recvlen);
+    printf("received %d bytes\n", recvlen);
     if (recvlen > 0) {
       //buf[recvlen] = 0;
       //for(int i=0;i<10;i++) printf("%i\n", buf[i]);

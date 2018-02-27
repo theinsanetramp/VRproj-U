@@ -124,6 +124,7 @@ CannyDetector_demo: /usr/local/lib/libopencv_stitching.so.3.3.0
 CannyDetector_demo: /usr/local/lib/libopencv_superres.so.3.3.0
 CannyDetector_demo: /usr/local/lib/libopencv_videostab.so.3.3.0
 CannyDetector_demo: /usr/local/lib/libopencv_viz.so.3.3.0
+CannyDetector_demo: libimagequant.a
 CannyDetector_demo: /usr/local/lib/libopencv_calib3d.so.3.3.0
 CannyDetector_demo: /usr/local/lib/libopencv_features2d.so.3.3.0
 CannyDetector_demo: /usr/local/lib/libopencv_flann.so.3.3.0

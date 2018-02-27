@@ -14,6 +14,9 @@
 #include <netdb.h>
 #include <sys/socket.h>
 #include <arpa/inet.h>
+#include "libimagequant.h"
+#include "lodepng.h"
+#include "lodepng.c"
 
 using namespace cv;
 using namespace std;
@@ -21,24 +24,36 @@ using namespace std;
 #define SERVICE_PORT  21234
 #define BUFLEN 40960
 
-#define FRAMERATE 10
+#define FRAMERATE 60
 #define POINTSPERTHREAD 10
 
-Mat tmp_frame, dst_out;
-Mat dst, flood_mask[4], mean_mask[4];
+Mat tmp_frame, reduced_frame, dst_out;
+Mat tmp_frame2, reduced_frame2, dst_out2;
+Mat dst, dst2, flood_mask[4], mean_mask[4];
 //Mat sub_dst[4];
 
-thread t;
+thread t[4];
+thread capturet;
+thread process2t;
 int finished = 0;
-int imageReady[3] = {0,0,0};
-mutex m;
+int threadProcessing[4] = {0,0,0,0};
+int capReady = 1;
+int proc2Ready = 1;
+mutex waitm;
+mutex capwaitm;
+mutex proc2waitm;
 condition_variable conVar;
+condition_variable conVar1;
+condition_variable capVar;
+condition_variable proc2Var;
+mutex bufm;
 
 VideoCapture cap;
+VideoCapture cap2;
 //Canny variables
-int lowThreshold = 15;
+int lowThreshold = 30;
 int const max_lowThreshold = 100;
-int thresh_ratio = 3;
+int thresh_ratio = 3.5;
 int kernel_size = 3;
 //floodFill variables
 int loDiff = 0, upDiff = 0;
@@ -54,7 +69,7 @@ Mat element = getStructuringElement( dilation_type,
                                    Size( 2*dilation_size + 1, 2*dilation_size+1 ),
                                    Point( dilation_size, dilation_size ) );
 //blur variables
-int blur_kernel = 3;
+int blur_kernel = 5;
 int max_blur_kernel = 10;
 //Final image saturation
 int alpha = 1.2;
@@ -63,107 +78,161 @@ struct sockaddr_in myaddr, remaddr;
 int fd, bufSize, k, slen=sizeof(remaddr);
 //char server[] = "10.42.0.1";
 uchar buf[BUFLEN];
-uchar buf1[1024];
 int bufLength;
-int buf1Length;
-vector<uchar> dstBuf;
+vector<unsigned char> dstBuf;
 
-void FindColours(int corner, int offset_cols, int offset_rows, int sobolPoints)
+void FindColours(int corner, int sobolPoints)
 {
   //Floodfill from quasi-random points
-  //sub_dst[corner] = dst.clone();
-  int j = 0;
-  for (unsigned long long i = 0; i < sobolPoints; ++i)
+  for (unsigned long long i = 100 + sobolPoints*corner; i < (100 + sobolPoints*(corner+1)); i++)
   {
-    int x = offset_cols + dst.cols/2 * sobol::sample(i, 0);
-    int y = offset_rows + dst.rows/2 * sobol::sample(i, 1);
-    //cout << corner << "1\n";
+    int x = dst.cols * sobol::sample(i, 0);
+    int y = dst.rows * sobol::sample(i, 1);
     Point seed = Point(x, y);
     if(dst.at<Vec3b>(seed)[0] == 0)
     {
       flood_mask[corner] = 0;
       floodFill(dst, flood_mask[corner], seed, (255,255,255), &ccomp, Scalar(loDiff, loDiff, loDiff),
               Scalar(upDiff, upDiff, upDiff), 4 + (255 << 8));
-      for(int i=0;i<mean_mask[corner].rows;i++)
-      {
-        for(int a=0;a<mean_mask[corner].cols;a++)
-        {
-          mean_mask[corner].at<int>(i,a) = flood_mask[corner].at<int>(i+1,a+1);
-        }
-      }
-      Scalar newVal = alpha*mean(tmp_frame,mean_mask[corner]);
-      
-      if(corner == 0) {
-        //cout << seed << "  " << newVal <<  endl;
-        buf1[j*7] = (x >> 8) & 0xFF;
-        buf1[j*7+1] = x & 0xFF;
-        buf1[j*7+2] = (y >> 8) & 0xFF;
-        buf1[j*7+3] = y & 0xFF;
-        buf1[j*7+4] = newVal[0];
-        buf1[j*7+5] = newVal[1];
-        buf1[j*7+6] = newVal[2];
-        j++;
-      }
-      else if(corner == 3) {
-        buf[j*7] = (x >> 8) & 0xFF;
-        buf[j*7+1] = x & 0xFF;
-        buf[j*7+2] = (y >> 8) & 0xFF;
-        buf[j*7+3] = y & 0xFF;
-        buf[j*7+4] = newVal[0];
-        buf[j*7+5] = newVal[1];
-        buf[j*7+6] = newVal[2];
-        j++;
-      }
+      flood_mask[corner](Rect(1,1,flood_mask[corner].cols-1,flood_mask[corner].rows-1)).copyTo(mean_mask[corner]);
+      Scalar newVal = alpha*mean(reduced_frame,mean_mask[corner]);
+      if(newVal == Scalar(0,0,0)) newVal = Scalar(1,1,1);
+      //cout << "processed" << corner << endl;
+      bufm.lock();
+      buf[bufLength*7] = (x >> 8) & 0xFF;
+      buf[bufLength*7+1] = x & 0xFF;
+      buf[bufLength*7+2] = (y >> 8) & 0xFF;
+      buf[bufLength*7+3] = y & 0xFF;
+      buf[bufLength*7+4] = newVal[0];
+      buf[bufLength*7+5] = newVal[1];
+      buf[bufLength*7+6] = newVal[2];
+      bufLength++;
+      bufm.unlock();
     }
-  }
-  if(corner == 0) {
-    buf1Length = j;
-  }
-  else if(corner == 3) {
-    bufLength = j;
   }
 }
 
-void FindColoursThread0(int corner, int sobolPoints)
+void FindColoursThread(int corner, int sobolPoints)
 {
-  int offset_cols = 0;
-  int offset_rows = 0;
   while(!finished)
   {
-    unique_lock<mutex> lk(m);
-    conVar.wait(lk, []{return imageReady[0];});
-    //cout << "running" << endl;
-    FindColours(corner, offset_cols, offset_rows, sobolPoints);
-    imageReady[0] = 0;
-    lk.unlock();
-    conVar.notify_one();
+    {
+      unique_lock<mutex> lk(waitm);
+      while(threadProcessing[corner] != 1) conVar.wait(lk);
+      //cout << "running" << corner << endl;
+      lk.unlock();
+    }
+    if(finished) break;
+    FindColours(corner, sobolPoints);
+    {
+      lock_guard<mutex> lk(waitm);
+      threadProcessing[corner] = 0;
+      //cout << "notified" << corner << endl;
+    }
+    conVar1.notify_one();
   }
 }
-  
-void FindColoursThreadGeneral(int corner, int sobolPoints)
+
+void CaptureThread()
 {
-  int offset_cols;
-  int offset_rows;
-  switch(corner) {
-    case 1:
-      offset_cols = tmp_frame.cols/2;
-      offset_rows = 0;
-      break;
-    case 2:
-      offset_cols = 0;
-      offset_rows = tmp_frame.rows/2;
-      break;
-    default:
-      cout << "FindColours: Unknown corner" << endl;
-  }
   while(!finished)
   {
-    unique_lock<mutex> lk(m);
-    conVar.wait(lk, []{return imageReady[0];});
-    //cout << "running" << endl;
-    FindColours(corner, offset_cols, offset_rows, sobolPoints);
-    imageReady[corner] = 0;
-    lk.unlock();
+    {
+      unique_lock<mutex> lk(capwaitm);
+      while(capReady) capVar.wait(lk);
+      //cout << "notified cap\n";
+      capReady = 1;
+      lk.unlock();
+    }
+    cap.grab();
+    cap2.grab();
+    cap.retrieve(tmp_frame);
+    cap2.retrieve(tmp_frame2);
+    if( tmp_frame.empty() || tmp_frame2.empty())
+        break;
+  }
+}
+
+vector<unsigned char> CompressImage(Mat image)
+{
+  liq_attr *handle = liq_attr_create();
+  liq_image *input_image;
+  liq_result *quantization_result;
+  size_t pixels_size;
+  unsigned char *raw_8bit_pixels;
+  const liq_palette *palette;
+  LodePNGState state;
+  unsigned char *output_file_data;
+  size_t output_file_size;
+  liq_set_dithering_level(quantization_result, 1.0);
+
+  uchar* raw_rgba_pixels = new uchar[dst_out.total()*4];
+  Mat continuousRGBA(dst_out.size(), CV_8UC4, raw_rgba_pixels);
+  cvtColor(dst_out, continuousRGBA, CV_GRAY2RGBA, 4);
+
+  input_image = liq_image_create_rgba(handle, raw_rgba_pixels, dst_out.cols, dst_out.rows, 0);
+  // You could set more options here, like liq_set_quality
+  if (liq_image_quantize(input_image, handle, &quantization_result) != LIQ_OK) {
+      fprintf(stderr, "Quantization failed\n");
+  }
+
+  pixels_size = dst_out.cols * dst_out.rows;
+  raw_8bit_pixels = (unsigned char*)malloc(pixels_size);
+
+  liq_write_remapped_image(quantization_result, input_image, raw_8bit_pixels, pixels_size);
+  palette = liq_get_palette(quantization_result);
+
+  lodepng_state_init(&state);
+  state.info_raw.colortype = LCT_PALETTE;
+  state.info_raw.bitdepth = 8;
+  state.info_png.color.colortype = LCT_PALETTE;
+  state.info_png.color.bitdepth = 8;
+
+  for(int i=0; i < palette->count; i++) {
+     lodepng_palette_add(&state.info_png.color, palette->entries[i].r, palette->entries[i].g, palette->entries[i].b, palette->entries[i].a);
+     lodepng_palette_add(&state.info_raw, palette->entries[i].r, palette->entries[i].g, palette->entries[i].b, palette->entries[i].a);
+  }
+
+  unsigned int out_status = lodepng_encode(&output_file_data, &output_file_size, raw_8bit_pixels, dst_out.cols, dst_out.rows, &state);
+  if (out_status) {
+      fprintf(stderr, "Can't encode image: %s\n", lodepng_error_text(out_status));
+  }
+
+  liq_result_destroy(quantization_result); // Must be freed only after you're done using the palette
+  liq_image_destroy(input_image);
+  liq_attr_destroy(handle);
+
+  free(raw_8bit_pixels);
+  lodepng_state_cleanup(&state);
+
+  vector<unsigned char> tmpBuf(output_file_data, output_file_data + output_file_size);
+  return tmpBuf;
+}
+
+void Process2Thread()
+{
+  while(!finished)
+  {
+    {
+      unique_lock<mutex> lk(proc2waitm);
+      while(proc2Ready) proc2Var.wait(lk);
+      //cout << "notified cap\n";
+      proc2Ready = 1;
+      lk.unlock();
+    }
+
+    resize(tmp_frame2, reduced_frame2, Size(), 0.5, 0.5, CV_INTER_AREA);
+    cvtColor( reduced_frame2, dst2, CV_BGR2GRAY );
+    // Reduce noise with kernel defined by blur_kernel
+    blur( dst2, dst2, Size(blur_kernel,blur_kernel) );
+
+    /// Canny detector
+    Canny( dst2, dst2, lowThreshold, lowThreshold*thresh_ratio, kernel_size );
+
+    /// Apply the dilation operation
+    dilate( dst2, dst2, element );
+    //cvtColor(dst, dst, CV_GRAY2RGB);
+    dst_out2 = dst2.clone(); 
   }
 }
 
@@ -177,33 +246,33 @@ void CannyThreshold(int, void*)
 
   /// Apply the dilation operation
   dilate( dst, dst, element );
-  //erode( dst, dst, element );
   //cvtColor(dst, dst, CV_GRAY2RGB);
   dst_out = dst.clone(); 
   {
-    lock_guard<mutex> lk(m);
-    for(int i=0;i<3;i++) imageReady[i] = 1;
+    lock_guard<mutex> lk(waitm);
+    for(int i=0;i<4;i++) threadProcessing[i] = 1;
+    //cout << "notified main" << endl;
   }
-  conVar.notify_one();
-  FindColours(3, dst.cols/2, tmp_frame.rows/2, POINTSPERTHREAD);
-  //cout << "0\n";
+  conVar.notify_all();
+  //imencode(".png", dst_out, dstBuf);
+  dstBuf = CompressImage(dst_out);
+  //cout << output_file_size << endl;
   { 
-    unique_lock<mutex> lk(m);
-    conVar.wait(lk, []{return !imageReady[0];});
+    unique_lock<mutex> lk(waitm);
+    while(threadProcessing[0] == 1 || threadProcessing[1] == 1 
+      || threadProcessing[2] == 1 || threadProcessing[3] == 1) 
+      conVar1.wait(lk);
+    //cout << "main receieved " << endl;
+    lk.unlock();
   }
-  while(imageReady[1] == 1 && imageReady[2] == 1);
-  //cout << "1\n";
-  for(int i=0;i<buf1Length*7;i++) buf[bufLength*7 + i] = buf1[i];
-  for(int i=0;i<7;i++) buf[bufLength*7 + buf1Length*7 + i] = 0;
-  resize(dst_out, dst_out, Size(), 0.5, 0.5, CV_INTER_AREA);
-  imencode(".png", dst_out, dstBuf);
-  //cout << bufLength*7 << "  " << buf1Length*7 << "  " << dstBuf.size() << endl;
-  //cout << "2\n";
-  for(int i=0;i<dstBuf.size();i++) buf[bufLength*7 + buf1Length*7 + 7 + i] = dstBuf[i];
-  //for(int i=0;i<buf1Length*7+bufLength*7+14;i++) cout << (int)buf[i] << endl;
-  //cout << "done\n";
-  bufSize = bufLength*7 + buf1Length*7 + 7 + dstBuf.size();
-  //imshow( "Edge Map", dst );
+
+  for(int i=0;i<7;i++) buf[bufLength*7 + i] = 0;
+  for(int i=0;i<dstBuf.size();i++) buf[bufLength*7 + 7 + i] = dstBuf[i];
+  bufSize = bufLength*7 + 7 + dstBuf.size();
+  cout << bufLength << endl;
+  bufLength = 0;
+  imshow( "Edge Map", dst_out2 );
+  imshow( "Camera", dst_out );
  }
 
 int main( int argc, char** argv )
@@ -236,7 +305,19 @@ int main( int argc, char** argv )
     exit(1);
   }
 
-  cap.open(0);
+  cap2.open(2);
+  if( !cap2.isOpened() )
+  {
+      printf("\nCan not open camera 2\n");
+      cap2.open(1);
+      if( !cap.isOpened() )
+      {
+        printf("Can not open camera 1\n");
+        return -1;
+      }
+  }
+  cap2.set(CV_CAP_PROP_FPS, FRAMERATE);
+  cap.open(1);
   if( !cap.isOpened() )
   {
       printf("\nCan not open camera 1\n");
@@ -247,8 +328,6 @@ int main( int argc, char** argv )
         return -1;
       }
   }
-  //cap.set(CV_CAP_PROP_FRAME_WIDTH,494);
-  //cap.set(CV_CAP_PROP_FRAME_HEIGHT,768);
   cap.set(CV_CAP_PROP_FPS, FRAMERATE);
   int FPS = cap.get(CV_CAP_PROP_FPS);
   cout << "FPS Limit: " << FPS << endl;
@@ -257,35 +336,56 @@ int main( int argc, char** argv )
   cap >> tmp_frame;
   if(tmp_frame.empty())
   {
-      printf("can not read data from the video source\n");
+      printf("can not read data from the video source 1\n");
+      return -1;
+  }
+  cap2 >> tmp_frame2;
+  if(tmp_frame2.empty())
+  {
+      printf("can not read data from the video source 2\n");
       return -1;
   }
 
-  //namedWindow( "Edge Map", 1 );
-  //cvMoveWindow( "Edge Map", 0, 40 );
-  //namedWindow("Camera", 1);
-  //cvMoveWindow( "Camera", tmp_frame.cols + 20, 40 );
+  namedWindow( "Edge Map", 1 );
+  cvMoveWindow( "Edge Map", 0, 40 );
+  namedWindow("Camera", 1);
+  cvMoveWindow( "Camera", tmp_frame.cols + 20, 40 );
+  namedWindow("Camera2", 1);
+  cvMoveWindow( "Camera2", 20, tmp_frame.rows + 40 );
   //createTrackbar( "Min Threshold:", "Edge Map", &lowThreshold, max_lowThreshold, CannyThreshold );
   //createTrackbar( "Blur Kernel Size:", "Edge Map", &blur_kernel, max_blur_kernel, 0 );
 
-  //for(int i=0;i<1;i++) t[i] = thread(FindColoursThread, i, 20);
-  t = thread(FindColoursThread, 0, POINTSPERTHREAD);
+  capturet = thread(CaptureThread);
+  process2t = thread(Process2Thread);
+  for(int i=0;i<4;i++) t[i] = thread(FindColoursThread, i, POINTSPERTHREAD);
 
   for(;;)
   {
-    cap >> tmp_frame;
-    if( tmp_frame.empty() )
-        break;
     /// Create a matrix of the same type and size as src (for dst)
-    for(int i=0;i<4;i++) flood_mask[i].create(tmp_frame.rows+2, tmp_frame.cols+2, CV_8UC1);
-    for(int i=0;i<4;i++) mean_mask[i].create(tmp_frame.size(), CV_8UC1);
+    for(int i=0;i<4;i++) flood_mask[i].create(tmp_frame.rows/2+2, tmp_frame.cols/2+2, CV_8UC1);
+    for(int i=0;i<4;i++) mean_mask[i].create(tmp_frame.rows/2, tmp_frame.cols/2, CV_8UC1);
 
+    {
+      lock_guard<mutex> lk(proc2waitm);
+      proc2Ready = 0;
+      //cout << "notified main\n";
+    }
+    proc2Var.notify_one();
+
+    //imshow("Camera", tmp_frame);
+    imshow("Camera2", tmp_frame2);
     /// Convert the image to grayscale
-    cvtColor( tmp_frame, dst, CV_BGR2GRAY );
+    resize(tmp_frame, reduced_frame, Size(), 0.5, 0.5, CV_INTER_AREA);
+    {
+      lock_guard<mutex> lk(capwaitm);
+      capReady = 0;
+      //cout << "notified main\n";
+    }
+    capVar.notify_one();
+    cvtColor( reduced_frame, dst, CV_BGR2GRAY );
 
     /// Show the image
     CannyThreshold(0, 0);
-    //imshow("Camera", tmp_frame);
 
     if (sendto(fd, buf, bufSize, 0, (struct sockaddr *)&remaddr, slen)==-1)
       perror("sendto");
@@ -297,7 +397,24 @@ int main( int argc, char** argv )
         }
   }
   finished = 1;
-  //for(int i=0;i<3;i++) t[i].join();
-  t.join();
+  {
+    lock_guard<mutex> lk(waitm);
+    for(int i=0;i<4;i++) threadProcessing[i] = 1;
+  }
+  conVar.notify_all();
+  for(int i=0;i<4;i++) t[i].join();
+  {
+    lock_guard<mutex> lk(capwaitm);
+    capReady = 0;
+  }
+  capVar.notify_one();
+  capturet.join();
+  {
+    lock_guard<mutex> lk(proc2waitm);
+    proc2Ready = 0;
+  }
+  proc2Var.notify_one();
+  process2t.join();
+  //t.join();
   return 0;
   }
