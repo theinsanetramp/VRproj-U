@@ -150,6 +150,87 @@ CannyDetector_demo.cpp.s:
 	$(MAKE) -f CMakeFiles/CannyDetector_demo.dir/build.make CMakeFiles/CannyDetector_demo.dir/CannyDetector_demo.cpp.s
 .PHONY : CannyDetector_demo.cpp.s
 
+FloodFill.o: FloodFill.cpp.o
+
+.PHONY : FloodFill.o
+
+# target to build an object file
+FloodFill.cpp.o:
+	$(MAKE) -f CMakeFiles/CannyDetector_demo.dir/build.make CMakeFiles/CannyDetector_demo.dir/FloodFill.cpp.o
+.PHONY : FloodFill.cpp.o
+
+FloodFill.i: FloodFill.cpp.i
+
+.PHONY : FloodFill.i
+
+# target to preprocess a source file
+FloodFill.cpp.i:
+	$(MAKE) -f CMakeFiles/CannyDetector_demo.dir/build.make CMakeFiles/CannyDetector_demo.dir/FloodFill.cpp.i
+.PHONY : FloodFill.cpp.i
+
+FloodFill.s: FloodFill.cpp.s
+
+.PHONY : FloodFill.s
+
+# target to generate assembly for a file
+FloodFill.cpp.s:
+	$(MAKE) -f CMakeFiles/CannyDetector_demo.dir/build.make CMakeFiles/CannyDetector_demo.dir/FloodFill.cpp.s
+.PHONY : FloodFill.cpp.s
+
+compressor.o: compressor.cpp.o
+
+.PHONY : compressor.o
+
+# target to build an object file
+compressor.cpp.o:
+	$(MAKE) -f CMakeFiles/CannyDetector_demo.dir/build.make CMakeFiles/CannyDetector_demo.dir/compressor.cpp.o
+.PHONY : compressor.cpp.o
+
+compressor.i: compressor.cpp.i
+
+.PHONY : compressor.i
+
+# target to preprocess a source file
+compressor.cpp.i:
+	$(MAKE) -f CMakeFiles/CannyDetector_demo.dir/build.make CMakeFiles/CannyDetector_demo.dir/compressor.cpp.i
+.PHONY : compressor.cpp.i
+
+compressor.s: compressor.cpp.s
+
+.PHONY : compressor.s
+
+# target to generate assembly for a file
+compressor.cpp.s:
+	$(MAKE) -f CMakeFiles/CannyDetector_demo.dir/build.make CMakeFiles/CannyDetector_demo.dir/compressor.cpp.s
+.PHONY : compressor.cpp.s
+
+lodepng.o: lodepng.cpp.o
+
+.PHONY : lodepng.o
+
+# target to build an object file
+lodepng.cpp.o:
+	$(MAKE) -f CMakeFiles/CannyDetector_demo.dir/build.make CMakeFiles/CannyDetector_demo.dir/lodepng.cpp.o
+.PHONY : lodepng.cpp.o
+
+lodepng.i: lodepng.cpp.i
+
+.PHONY : lodepng.i
+
+# target to preprocess a source file
+lodepng.cpp.i:
+	$(MAKE) -f CMakeFiles/CannyDetector_demo.dir/build.make CMakeFiles/CannyDetector_demo.dir/lodepng.cpp.i
+.PHONY : lodepng.cpp.i
+
+lodepng.s: lodepng.cpp.s
+
+.PHONY : lodepng.s
+
+# target to generate assembly for a file
+lodepng.cpp.s:
+	$(MAKE) -f CMakeFiles/CannyDetector_demo.dir/build.make CMakeFiles/CannyDetector_demo.dir/lodepng.cpp.s
+.PHONY : lodepng.cpp.s
+
 sobol.o: sobol.cpp.o
 
 .PHONY : sobol.o
@@ -189,6 +270,15 @@ help:
 	@echo "... CannyDetector_demo.o"
 	@echo "... CannyDetector_demo.i"
 	@echo "... CannyDetector_demo.s"
+	@echo "... FloodFill.o"
+	@echo "... FloodFill.i"
+	@echo "... FloodFill.s"
+	@echo "... compressor.o"
+	@echo "... compressor.i"
+	@echo "... compressor.s"
+	@echo "... lodepng.o"
+	@echo "... lodepng.i"
+	@echo "... lodepng.s"
 	@echo "... sobol.o"
 	@echo "... sobol.i"
 	@echo "... sobol.s"

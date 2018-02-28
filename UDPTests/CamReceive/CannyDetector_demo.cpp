@@ -169,7 +169,7 @@ void ReceivePoints()
   }
   seedList.clear();
   imageBuf.clear();
-  imshow( "Edge Map", receivedImage ); 
+  if(!finished) imshow( "Edge Map", receivedImage ); 
 }
 
 void UDPReceive()
@@ -181,6 +181,7 @@ void UDPReceive()
   while(!finished)
   {
     //printf("waiting on port %d\n", SERVICE_PORT);
+    //if(finished) return;
     recvlen = recvfrom(fd, buf, BUFSIZE, 0, (struct sockaddr *)&remaddr, &addrlen);
 
     printf("received %d bytes\n", recvlen);
