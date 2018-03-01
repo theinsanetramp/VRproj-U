@@ -28,7 +28,7 @@ void FloodFill::FindColours(Mat dst, Mat reduced_frame)
       flood_mask = 0;
       floodFill(dst, flood_mask, seed, (255,255,255), &ccomp, Scalar(loDiff, loDiff, loDiff),
               Scalar(upDiff, upDiff, upDiff), 4 + (255 << 8));
-      flood_mask(Rect(1,1,flood_mask.cols-1,flood_mask.rows-1)).copyTo(mean_mask);
+      flood_mask(Rect(1,1,flood_mask.cols-2,flood_mask.rows-2)).copyTo(mean_mask);
       Scalar newVal = alpha*mean(reduced_frame,mean_mask);
       if(newVal == Scalar(0,0,0)) newVal = Scalar(1,1,1);
       //cout << "processed" << index << endl;
