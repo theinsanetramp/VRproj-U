@@ -3,7 +3,6 @@
 #include "opencv2/imgcodecs.hpp"
 #include "opencv2/videoio.hpp"
 #include "opencv2/video/background_segm.hpp"
-#include "sobol.h"
 #include <stdlib.h>
 #include <stdio.h>
 #include <iostream>
@@ -15,6 +14,8 @@
 #include <sys/socket.h>
 #include <arpa/inet.h>
 #include <unistd.h>
+#include "compressor.h"
+#include "FloodFill.h"
 
 using namespace cv;
 using namespace std;
@@ -23,64 +24,51 @@ using namespace std;
 #define BUFLEN 40960
 #define RECEIVEBUFLEN 16
 
-#define FRAMERATE 10
-#define POINTSPERTHREAD 5
+#define FRAMERATE 60
+#define POINTSPERTHREAD 10
 
-Mat tmp_frame, reduced_tmp_frame, dst_out;
-Mat dst, flood_mask[4], mean_mask[4];
-//Mat sub_dst[4];
+Mat tmp_frame, reduced_frame, dst_out;
+Mat tmp_frame2, reduced_frame2;
+Mat dst, dst2;
 
-thread t[3];
+thread t[4];
+thread capturet;
+thread process2t;
+thread out;
+thread control;
 int finished = 0;
-int imageReady0 = 0;
-int imageReady1 = 0;
-int imageReady2 = 0;
-mutex m;
+int threadProcessing[4] = {0,0,0,0};
+mutex waitm;
+mutex bufm;
+mutex capwaitm;
+mutex proc2waitm;
+mutex outwaitm;
 condition_variable conVar;
 condition_variable conVar1;
-condition_variable conVar2;
-thread control;
+condition_variable capVar;
+condition_variable proc2Var;
+condition_variable outVar;
+
+vector<Mat> cap2mainBuf;
+vector<Mat> cap2proc2Buf;
+vector<vector<unsigned char> > proc2outBuf;
+vector<vector<unsigned char> > main2outBuf;
 
 VideoCapture cap;
-//Canny variables
-int nextLowThreshold = 20;
-int lowThreshold = 20;
-int const max_lowThreshold = 100;
-int thresh_ratio = 3;
-int kernel_size = 3;
-//floodFill variables
-int loDiff = 0, upDiff = 0;
-int connectivity = 4;
-int newMaskVal = 255;
-int flags = connectivity + (newMaskVal << 8) +
-                FLOODFILL_FIXED_RANGE;
-Rect ccomp;
-//dilation variables
-int dilation_type = MORPH_RECT;
-int dilation_size = 1;
-Mat element = getStructuringElement( dilation_type,
-                                   Size( 2*dilation_size + 1, 2*dilation_size+1 ),
-                                   Point( dilation_size, dilation_size ) );
-//blur variables
-int blur_kernel = 3;
-int max_blur_kernel = 10;
-//Final image saturation
-int alpha = 1.2;
+VideoCapture cap2;
+
+Compressor compressor1;
 
 struct sockaddr_in myaddr, remaddr;
 int fd, bufSize, k, recvlen;
 socklen_t slen=sizeof(remaddr);
 //char server[] = "10.42.0.1";
 uchar buf[BUFLEN];
-uchar buf0[1024];
-uchar buf1[1024];
-uchar buf2[1024];
 int bufLength;
-int buf0Length;
-int buf1Length;
-int buf2Length;
-vector<uchar> dstBuf;
+vector<unsigned char> dstBuf;
 uchar receiveBuf[RECEIVEBUFLEN];
+
+int nextLowThreshold = 30;
 
 void ReceiveUDP()
 {
@@ -99,196 +87,170 @@ void ReceiveUDP()
   }
 }
 
-void FindColours(int corner, int sobolPoints)
+void FindColoursThread(int corner, int sobolPoints)
 {
-  //Floodfill from quasi-random points
-  //sub_dst[corner] = dst.clone();
-  int j = 0;
-  for (unsigned long long i = sobolPoints*corner; i < sobolPoints*(corner+1); ++i)
+  FloodFill filler = FloodFill(corner, sobolPoints, tmp_frame);
+  while(!finished)
   {
-    int x = dst.cols * sobol::sample(i, 0);
-    int y = dst.rows * sobol::sample(i, 1);
-    Point seed = Point(x, y);
-    //circle(dst, seed, 5, 255, -1);
-    if(dst.at<Vec3b>(seed)[0] == 0)
     {
-      flood_mask[corner] = 0;
-      floodFill(dst, flood_mask[corner], seed, (255,255,255), &ccomp, Scalar(loDiff, loDiff, loDiff),
-              Scalar(upDiff, upDiff, upDiff), 4 + (255 << 8));
-      cout << corner << "filled\n";
-      for(int i=0;i<mean_mask[corner].rows;i++)
-      {
-        for(int a=0;a<mean_mask[corner].cols;a++)
-        {
-          mean_mask[corner].at<int>(i,a) = flood_mask[corner].at<int>(i+1,a+1);
-        }
-      }
-      Scalar newVal = alpha*mean(reduced_tmp_frame,mean_mask[corner]);
-      cout << "asdf\n";
-      //for(int i=0;i<3;i++) if(newVal[i] < 1) newVal[i] = 1;
-      if(corner == 0) {
-        //cout << seed << "  " << newVal <<  endl;
-        buf0[j*7] = (x >> 8) & 0xFF;
-        buf0[j*7+1] = x & 0xFF;
-        buf0[j*7+2] = (y >> 8) & 0xFF;
-        buf0[j*7+3] = y & 0xFF;
-        buf0[j*7+4] = newVal[0];
-        buf0[j*7+5] = newVal[1];
-        buf0[j*7+6] = newVal[2];
-        j++;
-      }
-      if(corner == 1) {
-        //cout << seed << "  " << newVal <<  endl;
-        buf1[j*7] = (x >> 8) & 0xFF;
-        buf1[j*7+1] = x & 0xFF;
-        buf1[j*7+2] = (y >> 8) & 0xFF;
-        buf1[j*7+3] = y & 0xFF;
-        buf1[j*7+4] = newVal[0];
-        buf1[j*7+5] = newVal[1];
-        buf1[j*7+6] = newVal[2];
-        j++;
-      }
-      if(corner == 2) {
-        //cout << seed << "  " << newVal <<  endl;
-        buf2[j*7] = (x >> 8) & 0xFF;
-        buf2[j*7+1] = x & 0xFF;
-        buf2[j*7+2] = (y >> 8) & 0xFF;
-        buf2[j*7+3] = y & 0xFF;
-        buf2[j*7+4] = newVal[0];
-        buf2[j*7+5] = newVal[1];
-        buf2[j*7+6] = newVal[2];
-        j++;
-      }
-      else if(corner == 3) {
-        //cout << seed << "  " << newVal <<  endl;
-        buf[j*7] = (x >> 8) & 0xFF;
-        buf[j*7+1] = x & 0xFF;
-        buf[j*7+2] = (y >> 8) & 0xFF;
-        buf[j*7+3] = y & 0xFF;
-        buf[j*7+4] = newVal[0];
-        buf[j*7+5] = newVal[1];
-        buf[j*7+6] = newVal[2];
-        j++;
-      }
+      unique_lock<mutex> lk(waitm);
+      while(threadProcessing[corner] != 1) conVar.wait(lk);
+      //cout << "running" << corner << endl;
+      lk.unlock();
     }
-  }
-  if(corner == 0) {
-    buf0Length = j;
-  }
-  if(corner == 1) {
-    buf1Length = j;
-  }
-  if(corner == 2) {
-    buf2Length = j;
-    //for(int i=0;i<buf2Length*7+7;i++) cout << (int)buf2[i] << " ";
-  }
-  else if(corner == 3) {
-    bufLength = j;
-  }
-}
-
-void FindColoursThread0(int corner, int sobolPoints)
-{
-  while(!finished)
-  {
-    unique_lock<mutex> lk(m);
-    conVar.wait(lk, []{return imageReady0;});
-    //cout << "running" << corner << endl;
-    FindColours(corner, sobolPoints);
-    imageReady0 = 0;
-    lk.unlock();
-    conVar.notify_one();
-    
-  }
-}
-  
-void FindColoursThread1(int corner, int sobolPoints)
-{
-  while(!finished)
-  {
-    unique_lock<mutex> lk(m);
-    conVar1.wait(lk, []{return imageReady1;});
-    //cout << "running" << corner <<  endl;
-    FindColours(corner, sobolPoints);
-    imageReady1 = 0;
-    lk.unlock();
+    if(finished) break;
+    filler.FindColours(dst, reduced_frame);
+    {
+      lock_guard<mutex> lk(waitm);
+      threadProcessing[corner] = 0;
+      //cout << "notified" << corner << endl;
+    }
     conVar1.notify_one();
   }
 }
 
-void FindColoursThread2(int corner, int sobolPoints)
+void CaptureThread()
 {
+  Mat capture, capture2;
   while(!finished)
   {
-    unique_lock<mutex> lk(m);
-    conVar2.wait(lk, []{return imageReady2;});
-    //cout << "running" << corner <<  endl;
-    FindColours(corner, sobolPoints);
-    imageReady2 = 0;
-    lk.unlock();
-    conVar2.notify_one();
+    {
+      unique_lock<mutex> lk(capwaitm);
+      while(cap2mainBuf.size() == 1 || cap2proc2Buf.size() == 1) capVar.wait(lk);
+      //cout << "notified cap\n";
+      lk.unlock();
+    }
+    cap.grab();
+    cap2.grab();
+    cap.retrieve(capture);
+    cap2.retrieve(capture2);
+    if( capture.empty() || capture2.empty())
+        break;
+    {
+      lock_guard<mutex> lk(capwaitm);
+      cap2mainBuf.push_back(capture);
+      //cout << "notified main\n";
+    }
+    capVar.notify_one();
+    {
+      lock_guard<mutex> lk(proc2waitm);
+      cap2proc2Buf.push_back(capture2);
+      //cout << "notified main\n";
+    }
+    proc2Var.notify_one();
   }
 }
 
-void CannyThreshold(int, void*)
+void Process2Thread()
 {
-  /// Reduce noise with kernel defined by blur_kernel
-  blur( dst, dst, Size(blur_kernel,blur_kernel) );
+  Compressor compressor2;
+  vector<unsigned char> tmpBuf;
+  while(!finished)
+  {
+    {
+      unique_lock<mutex> lk(proc2waitm);
+      while(cap2proc2Buf.size() == 0 || proc2outBuf.size() > 0) proc2Var.wait(lk);
+      //cout << "notified proc2\n";
+      tmp_frame2 = cap2proc2Buf.back();
+      cap2proc2Buf.pop_back();
+      lk.unlock();
+    }
+    capVar.notify_one();
 
-  /// Canny detector
-  lowThreshold = nextLowThreshold;
-  Canny( dst, dst, lowThreshold, lowThreshold*thresh_ratio, kernel_size );
+    resize(tmp_frame2, reduced_frame2, Size(), 0.5, 0.5, CV_INTER_AREA);
+    cvtColor( reduced_frame2, dst2, CV_BGR2GRAY );
+    //cout << "Canny2\n";
+    compressor2.SetLowThreshold(nextLowThreshold);
+    compressor2.CannyThreshold(dst2);
+    //dst2Buf = compressor2.CompressImage(dst2);
+    imencode(".png", dst2, tmpBuf);
+    //cout << "Compressed2\n";
+    {
+      lock_guard<mutex> lk(outwaitm);
+      proc2outBuf.push_back(tmpBuf);
+      //cout << "notified proc2\n";
+    }
+    outVar.notify_one();
+  }
+}
 
-  /// Apply the dilation operation
-  dilate( dst, dst, element );
-  //cvtColor(dst, dst, CV_GRAY2RGB);
+void OutThread()
+{
+  vector<unsigned char> dst_outBuf;
+  vector<unsigned char> dst2Buf;
+  while(!finished)
+  {
+    {
+      unique_lock<mutex> lk(outwaitm);
+      while(proc2outBuf.size() == 0 || main2outBuf.size() == 0) outVar.wait(lk);
+      //cout << "notified out\n";
+      dst2Buf = proc2outBuf.back();
+      proc2outBuf.pop_back();
+      dst_outBuf = main2outBuf.back();
+      main2outBuf.pop_back();
+      lk.unlock();
+    }
+    proc2Var.notify_one();
+    capVar.notify_one();
+    
+    for(int i=0;i<7;i++) buf[bufLength*7 + i] = 0;
+    for(int i=0;i<dstBuf.size();i++) buf[bufLength*7 + 7 + i] = dstBuf[i];
+    bufSize = bufLength*7 + 7 + dstBuf.size();
+    //cout << bufLength << endl;
+    bufLength = 0;
+
+    if (sendto(fd, buf, bufSize, 0, (struct sockaddr *)&remaddr, slen)==-1)
+      perror("sendto");
+    //cout << "sent\n";
+  }
+}
+
+void MainProcess(int, void*)
+{
+  {
+    unique_lock<mutex> lk(capwaitm);
+    while(cap2mainBuf.size() == 0 || main2outBuf.size() > 0) capVar.wait(lk);
+    //cout << "notified main\n";
+    tmp_frame = cap2mainBuf.back();
+    cap2mainBuf.pop_back();
+    lk.unlock();
+  }
+  capVar.notify_one();
+
+  /// Convert the image to grayscale
+  resize(tmp_frame, reduced_frame, Size(), 0.5, 0.5, CV_INTER_AREA);
+  cvtColor( reduced_frame, dst, CV_BGR2GRAY );
+
+  //cout << "Canny\n";
+  compressor1.SetLowThreshold(nextLowThreshold);
+  compressor1.CannyThreshold(dst);
   dst_out = dst.clone(); 
-  cout << "edges\n";
+  //imshow( "Edge Map", dst_out );
+  imshow( "Camera", tmp_frame );
   {
-    lock_guard<mutex> lk(m);
-    imageReady0 = 1;
+    lock_guard<mutex> lk(waitm);
+    for(int i=0;i<4;i++) threadProcessing[i] = 1;
+    //cout << "notified main" << endl;
   }
-  conVar.notify_one();
-  {
-    lock_guard<mutex> lk(m);
-    imageReady1 = 1;
-  }
-  conVar1.notify_one();
-  {
-    lock_guard<mutex> lk(m);
-    imageReady2 = 1;
-  }
-  conVar2.notify_one();
-  FindColours(3, POINTSPERTHREAD);
-  cout << "running3\n";
-  {
-    unique_lock<mutex> lk(m);
-    conVar.wait(lk, []{return !imageReady0;});
-  }
-  {
-    unique_lock<mutex> lk(m);
-    conVar1.wait(lk, []{return !imageReady1;});
-  }
-  {
-    unique_lock<mutex> lk(m);
-    conVar2.wait(lk, []{return !imageReady2;});
-  }
-  cout << "sending\n";
-  for(int i=0;i<buf0Length*7;i++) buf[bufLength*7 + i] = buf0[i];
-  for(int i=0;i<buf1Length*7;i++) buf[bufLength*7 + buf0Length*7 + i] = buf1[i];
-  for(int i=0;i<buf2Length*7;i++) buf[bufLength*7 + buf0Length*7 + buf1Length*7 + i] = buf2[i];
-  for(int i=0;i<7;i++) buf[bufLength*7 + buf0Length*7 + buf1Length*7 + buf2Length*7 + i] = 0;
-  cout << "compressing\n";
+  conVar.notify_all();
+  //cout << dst_out.size() << endl;
   imencode(".png", dst_out, dstBuf);
-  cout << bufLength*7 << "  " << buf1Length*7 << "  " << dstBuf.size() << endl;
-  for(int i=0;i<dstBuf.size();i++) buf[bufLength*7 + buf0Length*7 + buf1Length*7 + buf2Length*7 + 7 + i] = dstBuf[i];
-  //for(int i=0;i<(buf1Length+bufLength+buf0Length+buf2Length+2);i++) {
-  //   for(int a=0;a<7;a++) cout << (int)buf[i*7+a] << " ";
-  //   cout << endl;
-  //}
-  //cout << "done\n";
-  bufSize = bufLength*7 + buf0Length*7 + buf1Length*7 + buf2Length*7 + 7 + dstBuf.size();
-  //imshow( "Edge Map", dst );
+  //dstBuf = compressor1.CompressImage(dst_out);
+  //cout << "Compressed\n";
+  { 
+    unique_lock<mutex> lk(waitm);
+    while(threadProcessing[0] == 1 || threadProcessing[1] == 1 
+      || threadProcessing[2] == 1 || threadProcessing[3] == 1) 
+      conVar1.wait(lk);
+    //cout << "main receieved " << endl;
+    lk.unlock();
+  }
+  {
+    lock_guard<mutex> lk(outwaitm);
+    main2outBuf.push_back(dstBuf);
+    //cout << "notified main\n";
+  }
+  outVar.notify_one();
  }
 
 int main( int argc, char** argv )
@@ -321,67 +283,55 @@ int main( int argc, char** argv )
     exit(1);
   }
 
+  cap2.open(1);
+  if( !cap2.isOpened() )
+  {
+      printf("\nCan not open camera 2\n");
+      return -1;
+  }
   cap.open(0);
   if( !cap.isOpened() )
   {
       printf("\nCan not open camera 1\n");
-      cap.open(0);
-      if( !cap.isOpened() )
-      {
-        printf("Can not open camera 0\n");
-        return -1;
-      }
+      return -1;
   }
-  //cap.set(CV_CAP_PROP_FRAME_WIDTH,494);
-  //cap.set(CV_CAP_PROP_FRAME_HEIGHT,768);
+  cap2.set(CV_CAP_PROP_FPS, FRAMERATE);
   cap.set(CV_CAP_PROP_FPS, FRAMERATE);
   int FPS = cap.get(CV_CAP_PROP_FPS);
   cout << "FPS Limit: " << FPS << endl;
-  cout << "Low Threshold: " << lowThreshold << endl;
+  cout << "Low Threshold: " << compressor1.GetLowThreshold() << endl;
   cout << "Points per thread: " << POINTSPERTHREAD << endl;
   cap >> tmp_frame;
   if(tmp_frame.empty())
   {
-      printf("can not read data from the video source\n");
+      printf("can not read data from the video source 1\n");
+      return -1;
+  }
+  cap2 >> tmp_frame2;
+  if(tmp_frame2.empty())
+  {
+      printf("can not read data from the video source 2\n");
       return -1;
   }
 
   //namedWindow( "Edge Map", 1 );
   //cvMoveWindow( "Edge Map", 0, 40 );
   namedWindow("Camera", 1);
-  //cvMoveWindow( "Camera", tmp_frame.cols + 20, 40 );
-  //createTrackbar( "Min Threshold:", "Edge Map", &lowThreshold, max_lowThreshold, CannyThreshold );
-  //createTrackbar( "Blur Kernel Size:", "Edge Map", &blur_kernel, max_blur_kernel, 0 );
+  cvMoveWindow( "Camera", tmp_frame.cols + 20, 40 );
+  //namedWindow("Camera2", 1);
+  //cvMoveWindow( "Camera2", 20, tmp_frame.rows + 40 );
 
-  t[0] = thread(FindColoursThread0, 0, POINTSPERTHREAD);
-  t[1] = thread(FindColoursThread1, 1, POINTSPERTHREAD);
-  t[2] = thread(FindColoursThread2, 2, POINTSPERTHREAD);
+  capturet = thread(CaptureThread);
+  process2t = thread(Process2Thread);
+  out = thread(OutThread);
   control = thread(ReceiveUDP);
+  for(int i=0;i<4;i++) t[i] = thread(FindColoursThread, i, POINTSPERTHREAD);
+  cout << "Starting processing\n";
 
-  for(int i=0;i<4;i++) flood_mask[i].create(tmp_frame.rows/2+2, tmp_frame.cols/2+2, CV_8UC1);
-  for(int i=0;i<4;i++) mean_mask[i].create(tmp_frame.rows/2, tmp_frame.cols/2, CV_8UC1);
-  reduced_tmp_frame.create(tmp_frame.rows/2, tmp_frame.cols/2, tmp_frame.type());
-    
   for(;;)
   {
-	cout << "start\n";
-    cap >> tmp_frame;
-    if( tmp_frame.empty() )
-        break; 
-	cout << "1\n";
-    /// Convert the image to grayscale
-    resize(tmp_frame, reduced_tmp_frame, reduced_tmp_frame.size(), 0, 0, CV_INTER_AREA);
-    cout << "2\n";
-    cvtColor( reduced_tmp_frame, dst, CV_BGR2GRAY );
-	cout << "greyscaled\n";
-    /// Show the image
-    CannyThreshold(0, 0);
-    cout << "done\n";
-    imshow("Camera", tmp_frame);
+    MainProcess(0, 0);
 
-    if (sendto(fd, buf, bufSize, 0, (struct sockaddr *)&remaddr, slen)==-1)
-      perror("sendto");
-	cout << "sent\n";
     char keycode = (char)waitKey(30);
       if( keycode == 27 ){
           //imwrite("frame.jpg", dst);
@@ -389,25 +339,40 @@ int main( int argc, char** argv )
         }
   }
   finished = 1;
+  {
+    lock_guard<mutex> lk(waitm);
+    for(int i=0;i<4;i++) threadProcessing[i] = 1;
+  }
+  conVar.notify_all();
+  for(int i=0;i<4;i++) t[i].join();
+  cout << "Fill threads joined\n";
+  {
+    lock_guard<mutex> lk(capwaitm);
+    cap2mainBuf.pop_back();
+  }
+  capVar.notify_one();
+  capturet.join();
+  cout << "Capture thread joined\n";
+  {
+    lock_guard<mutex> lk(proc2waitm);
+    cap2proc2Buf.push_back(tmp_frame2);
+    proc2outBuf.pop_back();
+  }
+  proc2Var.notify_one();
+  process2t.join();
+  cout << "Proc2 thread joined\n";
+  {
+    lock_guard<mutex> lk(outwaitm);
+    vector<unsigned char> empt;
+    main2outBuf.push_back(empt);
+    proc2outBuf.push_back(empt);
+  }
+  outVar.notify_one();
+  out.join();
+  cout << "out thread joined\n";
   shutdown(fd, SHUT_RDWR);
   close(fd);
   control.join();
-  {
-    lock_guard<mutex> lk(m);
-    imageReady0 = 1;
-  }
-  conVar.notify_one();
-  {
-    lock_guard<mutex> lk(m);
-    imageReady1 = 1;
-  }
-  conVar1.notify_one();
-  {
-    lock_guard<mutex> lk(m);
-    imageReady2 = 1;
-  }
-  conVar2.notify_one();
-  for(int i=0;i<3;i++) t[i].join();
-  //t.join();
+  cout << "control thread joined\n";
   return 0;
   }

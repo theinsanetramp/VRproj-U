@@ -105,16 +105,94 @@ CMakeFiles/CannyDetector_demo.dir/sobol.cpp.o.provides: CMakeFiles/CannyDetector
 CMakeFiles/CannyDetector_demo.dir/sobol.cpp.o.provides.build: CMakeFiles/CannyDetector_demo.dir/sobol.cpp.o
 
 
+CMakeFiles/CannyDetector_demo.dir/lodepng.cpp.o: CMakeFiles/CannyDetector_demo.dir/flags.make
+CMakeFiles/CannyDetector_demo.dir/lodepng.cpp.o: lodepng.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/pi/VRproj-U/UDPTests/CamSendThreaded/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/CannyDetector_demo.dir/lodepng.cpp.o"
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/CannyDetector_demo.dir/lodepng.cpp.o -c /home/pi/VRproj-U/UDPTests/CamSendThreaded/lodepng.cpp
+
+CMakeFiles/CannyDetector_demo.dir/lodepng.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/CannyDetector_demo.dir/lodepng.cpp.i"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/pi/VRproj-U/UDPTests/CamSendThreaded/lodepng.cpp > CMakeFiles/CannyDetector_demo.dir/lodepng.cpp.i
+
+CMakeFiles/CannyDetector_demo.dir/lodepng.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/CannyDetector_demo.dir/lodepng.cpp.s"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/pi/VRproj-U/UDPTests/CamSendThreaded/lodepng.cpp -o CMakeFiles/CannyDetector_demo.dir/lodepng.cpp.s
+
+CMakeFiles/CannyDetector_demo.dir/lodepng.cpp.o.requires:
+
+.PHONY : CMakeFiles/CannyDetector_demo.dir/lodepng.cpp.o.requires
+
+CMakeFiles/CannyDetector_demo.dir/lodepng.cpp.o.provides: CMakeFiles/CannyDetector_demo.dir/lodepng.cpp.o.requires
+	$(MAKE) -f CMakeFiles/CannyDetector_demo.dir/build.make CMakeFiles/CannyDetector_demo.dir/lodepng.cpp.o.provides.build
+.PHONY : CMakeFiles/CannyDetector_demo.dir/lodepng.cpp.o.provides
+
+CMakeFiles/CannyDetector_demo.dir/lodepng.cpp.o.provides.build: CMakeFiles/CannyDetector_demo.dir/lodepng.cpp.o
+
+
+CMakeFiles/CannyDetector_demo.dir/compressor.cpp.o: CMakeFiles/CannyDetector_demo.dir/flags.make
+CMakeFiles/CannyDetector_demo.dir/compressor.cpp.o: compressor.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/pi/VRproj-U/UDPTests/CamSendThreaded/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/CannyDetector_demo.dir/compressor.cpp.o"
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/CannyDetector_demo.dir/compressor.cpp.o -c /home/pi/VRproj-U/UDPTests/CamSendThreaded/compressor.cpp
+
+CMakeFiles/CannyDetector_demo.dir/compressor.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/CannyDetector_demo.dir/compressor.cpp.i"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/pi/VRproj-U/UDPTests/CamSendThreaded/compressor.cpp > CMakeFiles/CannyDetector_demo.dir/compressor.cpp.i
+
+CMakeFiles/CannyDetector_demo.dir/compressor.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/CannyDetector_demo.dir/compressor.cpp.s"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/pi/VRproj-U/UDPTests/CamSendThreaded/compressor.cpp -o CMakeFiles/CannyDetector_demo.dir/compressor.cpp.s
+
+CMakeFiles/CannyDetector_demo.dir/compressor.cpp.o.requires:
+
+.PHONY : CMakeFiles/CannyDetector_demo.dir/compressor.cpp.o.requires
+
+CMakeFiles/CannyDetector_demo.dir/compressor.cpp.o.provides: CMakeFiles/CannyDetector_demo.dir/compressor.cpp.o.requires
+	$(MAKE) -f CMakeFiles/CannyDetector_demo.dir/build.make CMakeFiles/CannyDetector_demo.dir/compressor.cpp.o.provides.build
+.PHONY : CMakeFiles/CannyDetector_demo.dir/compressor.cpp.o.provides
+
+CMakeFiles/CannyDetector_demo.dir/compressor.cpp.o.provides.build: CMakeFiles/CannyDetector_demo.dir/compressor.cpp.o
+
+
+CMakeFiles/CannyDetector_demo.dir/FloodFill.cpp.o: CMakeFiles/CannyDetector_demo.dir/flags.make
+CMakeFiles/CannyDetector_demo.dir/FloodFill.cpp.o: FloodFill.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/pi/VRproj-U/UDPTests/CamSendThreaded/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/CannyDetector_demo.dir/FloodFill.cpp.o"
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/CannyDetector_demo.dir/FloodFill.cpp.o -c /home/pi/VRproj-U/UDPTests/CamSendThreaded/FloodFill.cpp
+
+CMakeFiles/CannyDetector_demo.dir/FloodFill.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/CannyDetector_demo.dir/FloodFill.cpp.i"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/pi/VRproj-U/UDPTests/CamSendThreaded/FloodFill.cpp > CMakeFiles/CannyDetector_demo.dir/FloodFill.cpp.i
+
+CMakeFiles/CannyDetector_demo.dir/FloodFill.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/CannyDetector_demo.dir/FloodFill.cpp.s"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/pi/VRproj-U/UDPTests/CamSendThreaded/FloodFill.cpp -o CMakeFiles/CannyDetector_demo.dir/FloodFill.cpp.s
+
+CMakeFiles/CannyDetector_demo.dir/FloodFill.cpp.o.requires:
+
+.PHONY : CMakeFiles/CannyDetector_demo.dir/FloodFill.cpp.o.requires
+
+CMakeFiles/CannyDetector_demo.dir/FloodFill.cpp.o.provides: CMakeFiles/CannyDetector_demo.dir/FloodFill.cpp.o.requires
+	$(MAKE) -f CMakeFiles/CannyDetector_demo.dir/build.make CMakeFiles/CannyDetector_demo.dir/FloodFill.cpp.o.provides.build
+.PHONY : CMakeFiles/CannyDetector_demo.dir/FloodFill.cpp.o.provides
+
+CMakeFiles/CannyDetector_demo.dir/FloodFill.cpp.o.provides.build: CMakeFiles/CannyDetector_demo.dir/FloodFill.cpp.o
+
+
 # Object files for target CannyDetector_demo
 CannyDetector_demo_OBJECTS = \
 "CMakeFiles/CannyDetector_demo.dir/CannyDetector_demo.cpp.o" \
-"CMakeFiles/CannyDetector_demo.dir/sobol.cpp.o"
+"CMakeFiles/CannyDetector_demo.dir/sobol.cpp.o" \
+"CMakeFiles/CannyDetector_demo.dir/lodepng.cpp.o" \
+"CMakeFiles/CannyDetector_demo.dir/compressor.cpp.o" \
+"CMakeFiles/CannyDetector_demo.dir/FloodFill.cpp.o"
 
 # External object files for target CannyDetector_demo
 CannyDetector_demo_EXTERNAL_OBJECTS =
 
 CannyDetector_demo: CMakeFiles/CannyDetector_demo.dir/CannyDetector_demo.cpp.o
 CannyDetector_demo: CMakeFiles/CannyDetector_demo.dir/sobol.cpp.o
+CannyDetector_demo: CMakeFiles/CannyDetector_demo.dir/lodepng.cpp.o
+CannyDetector_demo: CMakeFiles/CannyDetector_demo.dir/compressor.cpp.o
+CannyDetector_demo: CMakeFiles/CannyDetector_demo.dir/FloodFill.cpp.o
 CannyDetector_demo: CMakeFiles/CannyDetector_demo.dir/build.make
 CannyDetector_demo: /usr/local/lib/libopencv_stitching.so.3.2.0
 CannyDetector_demo: /usr/local/lib/libopencv_superres.so.3.2.0
@@ -138,6 +216,7 @@ CannyDetector_demo: /usr/local/lib/libopencv_xfeatures2d.so.3.2.0
 CannyDetector_demo: /usr/local/lib/libopencv_ximgproc.so.3.2.0
 CannyDetector_demo: /usr/local/lib/libopencv_xobjdetect.so.3.2.0
 CannyDetector_demo: /usr/local/lib/libopencv_xphoto.so.3.2.0
+CannyDetector_demo: libimagequant.a
 CannyDetector_demo: /usr/local/lib/libopencv_shape.so.3.2.0
 CannyDetector_demo: /usr/local/lib/libopencv_phase_unwrapping.so.3.2.0
 CannyDetector_demo: /usr/local/lib/libopencv_rgbd.so.3.2.0
@@ -159,7 +238,7 @@ CannyDetector_demo: /usr/local/lib/libopencv_imgcodecs.so.3.2.0
 CannyDetector_demo: /usr/local/lib/libopencv_imgproc.so.3.2.0
 CannyDetector_demo: /usr/local/lib/libopencv_core.so.3.2.0
 CannyDetector_demo: CMakeFiles/CannyDetector_demo.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/pi/VRproj-U/UDPTests/CamSendThreaded/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Linking CXX executable CannyDetector_demo"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/pi/VRproj-U/UDPTests/CamSendThreaded/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Linking CXX executable CannyDetector_demo"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/CannyDetector_demo.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -169,6 +248,9 @@ CMakeFiles/CannyDetector_demo.dir/build: CannyDetector_demo
 
 CMakeFiles/CannyDetector_demo.dir/requires: CMakeFiles/CannyDetector_demo.dir/CannyDetector_demo.cpp.o.requires
 CMakeFiles/CannyDetector_demo.dir/requires: CMakeFiles/CannyDetector_demo.dir/sobol.cpp.o.requires
+CMakeFiles/CannyDetector_demo.dir/requires: CMakeFiles/CannyDetector_demo.dir/lodepng.cpp.o.requires
+CMakeFiles/CannyDetector_demo.dir/requires: CMakeFiles/CannyDetector_demo.dir/compressor.cpp.o.requires
+CMakeFiles/CannyDetector_demo.dir/requires: CMakeFiles/CannyDetector_demo.dir/FloodFill.cpp.o.requires
 
 .PHONY : CMakeFiles/CannyDetector_demo.dir/requires
 

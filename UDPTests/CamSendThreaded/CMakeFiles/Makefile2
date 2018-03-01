@@ -66,7 +66,7 @@ CMAKE_BINARY_DIR = /home/pi/VRproj-U/UDPTests/CamSendThreaded
 CMakeFiles/CannyDetector_demo.dir/all:
 	$(MAKE) -f CMakeFiles/CannyDetector_demo.dir/build.make CMakeFiles/CannyDetector_demo.dir/depend
 	$(MAKE) -f CMakeFiles/CannyDetector_demo.dir/build.make CMakeFiles/CannyDetector_demo.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/pi/VRproj-U/UDPTests/CamSendThreaded/CMakeFiles --progress-num=1,2,3 "Built target CannyDetector_demo"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/pi/VRproj-U/UDPTests/CamSendThreaded/CMakeFiles --progress-num=1,2,3,4,5,6 "Built target CannyDetector_demo"
 .PHONY : CMakeFiles/CannyDetector_demo.dir/all
 
 # Include target in all.
@@ -76,7 +76,7 @@ all: CMakeFiles/CannyDetector_demo.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/CannyDetector_demo.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/pi/VRproj-U/UDPTests/CamSendThreaded/CMakeFiles 3
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/pi/VRproj-U/UDPTests/CamSendThreaded/CMakeFiles 6
 	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/CannyDetector_demo.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/pi/VRproj-U/UDPTests/CamSendThreaded/CMakeFiles 0
 .PHONY : CMakeFiles/CannyDetector_demo.dir/rule
