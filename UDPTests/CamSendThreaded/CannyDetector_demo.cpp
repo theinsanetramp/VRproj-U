@@ -13,6 +13,7 @@
 #include <netdb.h>
 #include <sys/socket.h>
 #include <arpa/inet.h>
+#include <unistd.h>
 #include "compressor.h"
 #include "FloodFill.h"
 
@@ -21,6 +22,7 @@ using namespace std;
 
 #define SERVICE_PORT  21234
 #define BUFLEN 40960
+#define RECEIVEBUFLEN 16
 
 #define FRAMERATE 30
 #define POINTSPERTHREAD 10
@@ -33,6 +35,7 @@ thread t[4];
 thread capturet;
 thread process2t;
 thread out;
+thread control;
 int finished = 0;
 int threadProcessing[4] = {0,0,0,0};
 mutex waitm;
@@ -57,11 +60,32 @@ VideoCapture cap2;
 Compressor compressor1;
 
 struct sockaddr_in myaddr, remaddr;
-int fd, bufSize, k, slen=sizeof(remaddr);
+int fd, bufSize, k, recvlen;
+socklen_t slen=sizeof(remaddr);
 //char server[] = "10.42.0.1";
 uchar buf[BUFLEN];
 int bufLength;
 vector<unsigned char> dstBuf;
+uchar receiveBuf[RECEIVEBUFLEN];
+
+int nextLowThreshold = 30;
+
+void ReceiveUDP()
+{
+  signed char XSign, YSign;
+  while(!finished)
+  {
+    recvlen = recvfrom(fd, receiveBuf, RECEIVEBUFLEN, 0, (struct sockaddr *)&remaddr, &slen);
+    if(recvlen > 0) {
+      XSign = receiveBuf[0];
+      YSign = receiveBuf[1];
+      if((int)receiveBuf[2] != nextLowThreshold) {
+        nextLowThreshold = receiveBuf[2];
+        cout << "Next low threshold: " << nextLowThreshold << endl;
+      }
+    }
+  }
+}
 
 void FindColoursThread(int corner, int sobolPoints)
 {
@@ -136,6 +160,7 @@ void Process2Thread()
     resize(tmp_frame2, reduced_frame2, Size(), 0.5, 0.5, CV_INTER_AREA);
     cvtColor( reduced_frame2, dst2, CV_BGR2GRAY );
     
+    compressor2.SetLowThreshold(nextLowThreshold);
     compressor2.CannyThreshold(dst2);
     //dst2Buf = compressor2.CompressImage(dst2);
     imencode(".png", dst2, tmpBuf);
@@ -195,6 +220,7 @@ void MainProcess(int, void*)
   resize(tmp_frame, reduced_frame, Size(), 0.5, 0.5, CV_INTER_AREA);
   cvtColor( reduced_frame, dst, CV_BGR2GRAY );
 
+  compressor1.SetLowThreshold(nextLowThreshold);
   compressor1.CannyThreshold(dst);
   dst_out = dst.clone(); 
   imshow( "Edge Map", dst_out );
@@ -296,6 +322,7 @@ int main( int argc, char** argv )
   capturet = thread(CaptureThread);
   process2t = thread(Process2Thread);
   out = thread(OutThread);
+  control = thread(ReceiveUDP);
   for(int i=0;i<4;i++) t[i] = thread(FindColoursThread, i, POINTSPERTHREAD);
 
   for(;;)
@@ -340,6 +367,9 @@ int main( int argc, char** argv )
   outVar.notify_one();
   out.join();
   cout << "out thread joined\n";
-  //t.join();
+  shutdown(fd, SHUT_RDWR);
+  close(fd);
+  control.join();
+  cout << "control thread joined\n";
   return 0;
   }
