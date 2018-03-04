@@ -25,7 +25,7 @@ using namespace std;
 #define RECEIVEBUFLEN 16
 
 #define FRAMERATE 30
-#define POINTSPERTHREAD 30
+#define POINTSPERTHREAD 10
 
 Mat tmp_frame, reduced_frame, dst_out;
 Mat tmp_frame2, reduced_frame2;
@@ -73,12 +73,18 @@ int nextLowThreshold = 30;
 void ReceiveUDP()
 {
   signed char XSign, YSign;
+  int RSpeed = 0;
+  int LSpeed = 0;
   while(!finished)
   {
     recvlen = recvfrom(fd, receiveBuf, RECEIVEBUFLEN, 0, (struct sockaddr *)&remaddr, &slen);
     if(recvlen > 0) {
       XSign = receiveBuf[0];
       YSign = receiveBuf[1];
+      RSpeed = (int)YSign + min(0,(int)XSign);
+      LSpeed = (int)YSign - max(0,(int)XSign);
+      cout << LSpeed << " " << RSpeed << endl;
+      
       if((int)receiveBuf[2] != nextLowThreshold) {
         nextLowThreshold = receiveBuf[2];
         cout << "Next low threshold: " << nextLowThreshold << endl;
@@ -159,12 +165,11 @@ void Process2Thread()
 
     resize(tmp_frame2, reduced_frame2, Size(), 0.5, 0.5, CV_INTER_AREA);
     cvtColor( reduced_frame2, dst2, CV_BGR2GRAY );
-    //cout << "Canny2\n";
+    
     compressor2.SetLowThreshold(nextLowThreshold);
     compressor2.CannyThreshold(dst2);
     //dst2Buf = compressor2.CompressImage(dst2);
     imencode(".png", dst2, tmpBuf);
-    //cout << "Compressed2\n";
     {
       lock_guard<mutex> lk(outwaitm);
       proc2outBuf.push_back(tmpBuf);
@@ -195,8 +200,11 @@ void OutThread()
     
     for(int i=0;i<7;i++) buf[bufLength*7 + i] = 0;
     for(int i=0;i<dstBuf.size();i++) buf[bufLength*7 + 7 + i] = dstBuf[i];
-    bufSize = bufLength*7 + 7 + dstBuf.size();
-    //cout << bufLength << endl;
+    for(int i=0;i<7;i++) buf[bufLength*7 + 7 + dstBuf.size() + i] = 0;
+    for(int i=0;i<dst2Buf.size();i++) buf[bufLength*7 + 14 + dstBuf.size() + i] = dst2Buf[i];
+    //for(int i=0;i<14;i++) cout << (int)buf[bufLength*7 + 7 + dstBuf.size() + i] << endl;
+    bufSize = bufLength*7 + 14 + dstBuf.size() + dst2Buf.size();
+    //cout << bufSize << endl;
     bufLength = 0;
 
     if (sendto(fd, buf, bufSize, 0, (struct sockaddr *)&remaddr, slen)==-1)
@@ -221,22 +229,20 @@ void MainProcess(int, void*)
   resize(tmp_frame, reduced_frame, Size(), 0.5, 0.5, CV_INTER_AREA);
   cvtColor( reduced_frame, dst, CV_BGR2GRAY );
 
-  //cout << "Canny\n";
   compressor1.SetLowThreshold(nextLowThreshold);
   compressor1.CannyThreshold(dst);
   dst_out = dst.clone(); 
   //imshow( "Edge Map", dst_out );
-  imshow( "Camera", tmp_frame );
+  //imshow( "Camera", tmp_frame );
   {
     lock_guard<mutex> lk(waitm);
     for(int i=0;i<4;i++) threadProcessing[i] = 1;
     //cout << "notified main" << endl;
   }
   conVar.notify_all();
-  //cout << dst_out.size() << endl;
   imencode(".png", dst_out, dstBuf);
   //dstBuf = compressor1.CompressImage(dst_out);
-  //cout << "Compressed\n";
+  //cout << output_file_size << endl;
   { 
     unique_lock<mutex> lk(waitm);
     while(threadProcessing[0] == 1 || threadProcessing[1] == 1 
@@ -283,18 +289,19 @@ int main( int argc, char** argv )
     exit(1);
   }
 
-  cap2.open(1);
+  cap2.open(2);
   if( !cap2.isOpened() )
   {
       printf("\nCan not open camera 2\n");
-      return -1;
+      cap2.open(1);
+      cap.open(0);
+      if( !cap2.isOpened() || !cap.isOpened())
+      {
+        printf("Can not open cameras\n");
+        return -1;
+      }
   }
-  cap.open(0);
-  if( !cap.isOpened() )
-  {
-      printf("\nCan not open camera 1\n");
-      return -1;
-  }
+  else cap.open(1);
   cap2.set(CV_CAP_PROP_FPS, FRAMERATE);
   cap.set(CV_CAP_PROP_FPS, FRAMERATE);
   int FPS = cap.get(CV_CAP_PROP_FPS);
@@ -326,7 +333,6 @@ int main( int argc, char** argv )
   out = thread(OutThread);
   control = thread(ReceiveUDP);
   for(int i=0;i<4;i++) t[i] = thread(FindColoursThread, i, POINTSPERTHREAD);
-  cout << "Starting processing\n";
 
   for(;;)
   {
