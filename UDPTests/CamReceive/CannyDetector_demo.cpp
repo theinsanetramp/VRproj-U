@@ -227,7 +227,7 @@ void UDPReceive()
 {
   this_thread::sleep_for(chrono::milliseconds(500));
   recvlen = recvfrom(fd, buf, BUFSIZE, 0, (struct sockaddr *)&remaddr, &addrlen);
-  printf("received %d bytes\n", recvlen);
+  //printf("received %d bytes\n", recvlen);
   addressReceived = 1;
   if (recvlen > 0) ReceivePoints();
   while(!finished)
@@ -236,7 +236,7 @@ void UDPReceive()
     //if(finished) return;
     recvlen = recvfrom(fd, buf, BUFSIZE, 0, (struct sockaddr *)&remaddr, &addrlen);
 
-    printf("received %d bytes\n", recvlen);
+    //printf("received %d bytes\n", recvlen);
     if (recvlen > 0) {
       //buf[recvlen] = 0;
       //for(int i=0;i<10;i++) printf("%i\n", buf[i]);
