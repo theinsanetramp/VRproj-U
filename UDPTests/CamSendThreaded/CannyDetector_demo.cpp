@@ -24,8 +24,8 @@ using namespace std;
 #define BUFLEN 40960
 #define RECEIVEBUFLEN 16
 
-#define FRAMERATE 60
-#define POINTSPERTHREAD 10
+#define FRAMERATE 30
+#define POINTSPERTHREAD 30
 
 Mat tmp_frame, reduced_frame, dst_out;
 Mat tmp_frame2, reduced_frame2;
