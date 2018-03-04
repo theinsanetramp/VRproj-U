@@ -194,8 +194,11 @@ void OutThread()
     
     for(int i=0;i<7;i++) buf[bufLength*7 + i] = 0;
     for(int i=0;i<dstBuf.size();i++) buf[bufLength*7 + 7 + i] = dstBuf[i];
-    bufSize = bufLength*7 + 7 + dstBuf.size();
-    //cout << bufLength << endl;
+    for(int i=0;i<7;i++) buf[bufLength*7 + 7 + dstBuf.size() + i] = 0;
+    for(int i=0;i<dst2Buf.size();i++) buf[bufLength*7 + 14 + dstBuf.size() + i] = dst2Buf[i];
+    //for(int i=0;i<14;i++) cout << (int)buf[bufLength*7 + 7 + dstBuf.size() + i] << endl;
+    bufSize = bufLength*7 + 14 + dstBuf.size() + dst2Buf.size();
+    //cout << bufSize << endl;
     bufLength = 0;
 
     if (sendto(fd, buf, bufSize, 0, (struct sockaddr *)&remaddr, slen)==-1)

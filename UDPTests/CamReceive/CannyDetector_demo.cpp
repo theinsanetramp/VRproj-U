@@ -21,6 +21,7 @@ using namespace std;
 #define BUFSIZE 40960
 
 Mat receivedImage;
+Mat receivedImage2;
 
 thread t;
 thread control;
@@ -57,6 +58,7 @@ uchar buf[BUFSIZE]; /* receive buffer */
 uchar controlBuf[3];
 
 vector<uchar> imageBuf;
+vector<uchar> image2Buf;
 
 void SendControl()
 {
@@ -138,8 +140,37 @@ void ReceivePoints()
     && buf[i*7+4] == 0 && buf[i*7+5] == 0
     && buf[i*7+6] == 0));
   i++;
-  for(int j=i*7;j<recvlen;j++) imageBuf.push_back(buf[j]); 
+  //for(int j=i*7;j<recvlen;j++) imageBuf.push_back(buf[j]); 
+  i = i*7;
+  do
+  {
+    imageBuf.push_back(buf[i]); 
+    i++;
+  } 
+  while(!(buf[i] == 0 && buf[i+1] == 0 
+    && buf[i+2] == 0 && buf[i+3] == 0 
+    && buf[i+4] == 0 && buf[i+5] == 0
+    && buf[i+6] == 0));
+  //for(int j=i-7;j<i+14;j++) cout << (int)buf[j] << endl;
+  i += 7;
+  do
+  {
+    image2Buf.push_back(buf[i]); 
+    i++;
+  } 
+  while(!(buf[i] == 0 && buf[i+1] == 0 
+    && buf[i+2] == 0 && buf[i+3] == 0 
+    && buf[i+4] == 0 && buf[i+5] == 0
+    && buf[i+6] == 0));
   receivedImage = imdecode(imageBuf, IMREAD_COLOR);
+  //cout << imageBuf.size() << endl;
+  if(imageBuf.size() < 10) {
+    cout << "Images not received\n";
+    seedList.clear();
+    imageBuf.clear();
+    image2Buf.clear();
+    return;
+  }
   resize(receivedImage, receivedImage, Size(), 2, 2, CV_INTER_CUBIC);
   for(int i=0;i<receivedImage.rows;i++) {
     for(int j=0;j<receivedImage.cols;j++) {
@@ -167,15 +198,36 @@ void ReceivePoints()
       if(receivedImage.at<Vec3b>(i,j)[0] == 0) receivedImage.at<Vec3b>(i,j) = Vec3b(255,0,255);
     }
   }
+  receivedImage2 = imdecode(image2Buf, IMREAD_COLOR);
+  if(image2Buf.size() < 10) {
+    cout << "Only one image received\n";
+    seedList.clear();
+    imageBuf.clear();
+    image2Buf.clear();
+    return;
+  }
+  resize(receivedImage2, receivedImage2, Size(), 2, 2, CV_INTER_CUBIC);
+  for(int i=0;i<receivedImage2.rows;i++) {
+    for(int j=0;j<receivedImage2.cols;j++) {
+      if(receivedImage2.at<Vec3b>(i,j)[0] < 170) receivedImage2.at<Vec3b>(i,j) = Vec3b(0,0,0);
+      else receivedImage2.at<Vec3b>(i,j) = Vec3b(255,255,255);
+    }
+  }
+  erode( receivedImage2, receivedImage2, element );
   seedList.clear();
   imageBuf.clear();
-  if(!finished) imshow( "Edge Map", receivedImage ); 
+  image2Buf.clear();
+  if(!finished) {
+    imshow( "Edge Map", receivedImage ); 
+    imshow( "Edge Map 2", receivedImage2 ); 
+  }
 }
 
 void UDPReceive()
 {
   this_thread::sleep_for(chrono::milliseconds(500));
   recvlen = recvfrom(fd, buf, BUFSIZE, 0, (struct sockaddr *)&remaddr, &addrlen);
+  printf("received %d bytes\n", recvlen);
   addressReceived = 1;
   if (recvlen > 0) ReceivePoints();
   while(!finished)
@@ -222,6 +274,8 @@ int main( int argc, char** argv )
 
   namedWindow( "Edge Map", CV_WINDOW_AUTOSIZE );
   cvMoveWindow( "Edge Map", 0, 40 ); 
+  namedWindow("Edge Map 2", 1);
+  cvMoveWindow( "Edge Map 2",  500, 40 );
 
   /// Wait until user exit program by pressing a key
   int k;
