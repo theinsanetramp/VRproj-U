@@ -14,8 +14,17 @@
 #include <sys/socket.h>
 #include <arpa/inet.h>
 #include <unistd.h>
+#include <wiringPi.h>
+#include <pigpio.h>
+
 #include "compressor.h"
 #include "FloodFill.h"
+
+#define GPIO_DIR_L 8
+#define GPIO_PWM_L 13
+#define GPIO_DIR_R 23
+#define GPIO_PWM_R 18 
+#define DUTY_CYCLE 500000
 
 using namespace cv;
 using namespace std;
@@ -75,15 +84,35 @@ void ReceiveUDP()
   signed char XSign, YSign;
   int RSpeed = 0;
   int LSpeed = 0;
+  if (gpioInitialise() < 0) {
+	cout << "gpioInitialise() failed\n";
+    exit(1);
+  }
   while(!finished)
   {
     recvlen = recvfrom(fd, receiveBuf, RECEIVEBUFLEN, 0, (struct sockaddr *)&remaddr, &slen);
     if(recvlen > 0) {
       XSign = receiveBuf[0];
       YSign = receiveBuf[1];
-      RSpeed = (int)YSign + min(0,(int)XSign);
-      LSpeed = (int)YSign - max(0,(int)XSign);
-      cout << LSpeed << " " << RSpeed << endl;
+      if((int)XSign > 80) {
+		  RSpeed = 127;
+		  LSpeed = -127;
+	  }
+	  else if((int)XSign < -80) {
+		  RSpeed = -127;
+		  LSpeed = 127;
+	  }
+	  else {
+		  RSpeed = (int)YSign;
+		  LSpeed = (int)YSign;
+	  }
+      //cout << LSpeed << " " << RSpeed << endl;
+      if(RSpeed >= 0) gpioWrite(GPIO_DIR_R, 1);
+      else gpioWrite(GPIO_DIR_R, 0);
+      if(LSpeed >= 0) gpioWrite(GPIO_DIR_L, 1);
+      else gpioWrite(GPIO_DIR_L, 0);
+      gpioHardwarePWM(GPIO_PWM_R, 100, (DUTY_CYCLE*abs(RSpeed))/127);
+      gpioHardwarePWM(GPIO_PWM_L, 100, (DUTY_CYCLE*abs(LSpeed))/127);
       
       if((int)receiveBuf[2] != nextLowThreshold) {
         nextLowThreshold = receiveBuf[2];
@@ -233,7 +262,7 @@ void MainProcess(int, void*)
   compressor1.CannyThreshold(dst);
   dst_out = dst.clone(); 
   //imshow( "Edge Map", dst_out );
-  //imshow( "Camera", tmp_frame );
+  imshow( "Camera", tmp_frame );
   {
     lock_guard<mutex> lk(waitm);
     for(int i=0;i<4;i++) threadProcessing[i] = 1;
@@ -379,6 +408,7 @@ int main( int argc, char** argv )
   shutdown(fd, SHUT_RDWR);
   close(fd);
   control.join();
+  gpioTerminate();
   cout << "control thread joined\n";
   return 0;
   }
