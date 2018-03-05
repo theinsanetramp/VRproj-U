@@ -6,6 +6,7 @@ CMakeFiles/CannyDetector_demo.dir/CannyDetector_demo.cpp.o: FloodFill.h
 CMakeFiles/CannyDetector_demo.dir/CannyDetector_demo.cpp.o: compressor.h
 CMakeFiles/CannyDetector_demo.dir/CannyDetector_demo.cpp.o: libimagequant.h
 CMakeFiles/CannyDetector_demo.dir/CannyDetector_demo.cpp.o: lodepng.h
+CMakeFiles/CannyDetector_demo.dir/CannyDetector_demo.cpp.o: sensor.h
 CMakeFiles/CannyDetector_demo.dir/CannyDetector_demo.cpp.o: sobol.h
 CMakeFiles/CannyDetector_demo.dir/CannyDetector_demo.cpp.o: /usr/local/include/opencv/cxcore.h
 CMakeFiles/CannyDetector_demo.dir/CannyDetector_demo.cpp.o: /usr/local/include/opencv2/calib3d.hpp
@@ -387,6 +388,9 @@ CMakeFiles/CannyDetector_demo.dir/compressor.cpp.o: /usr/local/include/opencv2/x
 
 CMakeFiles/CannyDetector_demo.dir/lodepng.cpp.o: lodepng.cpp
 CMakeFiles/CannyDetector_demo.dir/lodepng.cpp.o: lodepng.h
+
+CMakeFiles/CannyDetector_demo.dir/sensor.cpp.o: sensor.cpp
+CMakeFiles/CannyDetector_demo.dir/sensor.cpp.o: sensor.h
 
 CMakeFiles/CannyDetector_demo.dir/sobol.cpp.o: sobol.cpp
 CMakeFiles/CannyDetector_demo.dir/sobol.cpp.o: sobol.h

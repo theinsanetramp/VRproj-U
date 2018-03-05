@@ -4,6 +4,7 @@ file(REMOVE_RECURSE
   "CMakeFiles/CannyDetector_demo.dir/lodepng.cpp.o"
   "CMakeFiles/CannyDetector_demo.dir/compressor.cpp.o"
   "CMakeFiles/CannyDetector_demo.dir/FloodFill.cpp.o"
+  "CMakeFiles/CannyDetector_demo.dir/sensor.cpp.o"
   "CannyDetector_demo.pdb"
   "CannyDetector_demo"
 )

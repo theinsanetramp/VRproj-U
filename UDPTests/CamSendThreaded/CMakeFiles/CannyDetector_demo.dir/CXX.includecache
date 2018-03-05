@@ -39,10 +39,18 @@ arpa/inet.h
 -
 unistd.h
 -
+wiringPi.h
+-
+pigpio.h
+-
+wiringSerial.h
+-
 compressor.h
 /home/pi/VRproj-U/UDPTests/CamSendThreaded/compressor.h
 FloodFill.h
 /home/pi/VRproj-U/UDPTests/CamSendThreaded/FloodFill.h
+sensor.h
+/home/pi/VRproj-U/UDPTests/CamSendThreaded/sensor.h
 
 /home/pi/VRproj-U/UDPTests/CamSendThreaded/FloodFill.cpp
 FloodFill.h
@@ -111,6 +119,28 @@ iostream
 -
 lodepng.h
 /home/pi/VRproj-U/UDPTests/CamSendThreaded/lodepng.h
+
+/home/pi/VRproj-U/UDPTests/CamSendThreaded/sensor.cpp
+sensor.h
+/home/pi/VRproj-U/UDPTests/CamSendThreaded/sensor.h
+
+/home/pi/VRproj-U/UDPTests/CamSendThreaded/sensor.h
+stdint.h
+-
+stdlib.h
+-
+wiringPi.h
+-
+wiringPiI2C.h
+-
+pigpio.h
+-
+stdio.h
+-
+unistd.h
+-
+math.h
+-
 
 /home/pi/VRproj-U/UDPTests/CamSendThreaded/sobol.cpp
 sobol.h

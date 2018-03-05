@@ -231,6 +231,33 @@ lodepng.cpp.s:
 	$(MAKE) -f CMakeFiles/CannyDetector_demo.dir/build.make CMakeFiles/CannyDetector_demo.dir/lodepng.cpp.s
 .PHONY : lodepng.cpp.s
 
+sensor.o: sensor.cpp.o
+
+.PHONY : sensor.o
+
+# target to build an object file
+sensor.cpp.o:
+	$(MAKE) -f CMakeFiles/CannyDetector_demo.dir/build.make CMakeFiles/CannyDetector_demo.dir/sensor.cpp.o
+.PHONY : sensor.cpp.o
+
+sensor.i: sensor.cpp.i
+
+.PHONY : sensor.i
+
+# target to preprocess a source file
+sensor.cpp.i:
+	$(MAKE) -f CMakeFiles/CannyDetector_demo.dir/build.make CMakeFiles/CannyDetector_demo.dir/sensor.cpp.i
+.PHONY : sensor.cpp.i
+
+sensor.s: sensor.cpp.s
+
+.PHONY : sensor.s
+
+# target to generate assembly for a file
+sensor.cpp.s:
+	$(MAKE) -f CMakeFiles/CannyDetector_demo.dir/build.make CMakeFiles/CannyDetector_demo.dir/sensor.cpp.s
+.PHONY : sensor.cpp.s
+
 sobol.o: sobol.cpp.o
 
 .PHONY : sobol.o
@@ -279,6 +306,9 @@ help:
 	@echo "... lodepng.o"
 	@echo "... lodepng.i"
 	@echo "... lodepng.s"
+	@echo "... sensor.o"
+	@echo "... sensor.i"
+	@echo "... sensor.s"
 	@echo "... sobol.o"
 	@echo "... sobol.i"
 	@echo "... sobol.s"

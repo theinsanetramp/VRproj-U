@@ -8,6 +8,7 @@ set(CMAKE_DEPENDS_CHECK_CXX
   "/home/pi/VRproj-U/UDPTests/CamSendThreaded/FloodFill.cpp" "/home/pi/VRproj-U/UDPTests/CamSendThreaded/CMakeFiles/CannyDetector_demo.dir/FloodFill.cpp.o"
   "/home/pi/VRproj-U/UDPTests/CamSendThreaded/compressor.cpp" "/home/pi/VRproj-U/UDPTests/CamSendThreaded/CMakeFiles/CannyDetector_demo.dir/compressor.cpp.o"
   "/home/pi/VRproj-U/UDPTests/CamSendThreaded/lodepng.cpp" "/home/pi/VRproj-U/UDPTests/CamSendThreaded/CMakeFiles/CannyDetector_demo.dir/lodepng.cpp.o"
+  "/home/pi/VRproj-U/UDPTests/CamSendThreaded/sensor.cpp" "/home/pi/VRproj-U/UDPTests/CamSendThreaded/CMakeFiles/CannyDetector_demo.dir/sensor.cpp.o"
   "/home/pi/VRproj-U/UDPTests/CamSendThreaded/sobol.cpp" "/home/pi/VRproj-U/UDPTests/CamSendThreaded/CMakeFiles/CannyDetector_demo.dir/sobol.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
