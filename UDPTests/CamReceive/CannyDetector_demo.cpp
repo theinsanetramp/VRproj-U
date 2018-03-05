@@ -55,7 +55,7 @@ socklen_t addrlen = sizeof(remaddr);    /* length of addresses */
 int recvlen;      /* # bytes received */
 int fd;       /* our socket */
 uchar buf[BUFSIZE]; /* receive buffer */
-uchar controlBuf[3];
+uchar controlBuf[5];
 
 vector<uchar> imageBuf;
 vector<uchar> image2Buf;
@@ -95,6 +95,11 @@ void SendControl()
           controlBuf[0] = X[j]/258;
           controlBuf[1] = Y[j]/258;
         }
+        if(j == 1) {
+          //cout << j << " stick with coords: " << X[j] << " " << Y[j] << endl;
+          controlBuf[3] = X[j]/258;
+          controlBuf[4] = Y[j]/258;
+        }
       }
     }
     if(threshDown && !threshUp) {
@@ -108,7 +113,7 @@ void SendControl()
     controlBuf[2] = lowThreshold;
     //for(int i=0;i<4;i++) cout << (int)controlBuf[i] << " ";
     //cout << endl;
-    sendto(fd, controlBuf, 3, 0, (struct sockaddr *)&remaddr, addrlen);
+    sendto(fd, controlBuf, 5, 0, (struct sockaddr *)&remaddr, addrlen);
     this_thread::sleep_for(chrono::milliseconds(50));
   }
 }
