@@ -28,7 +28,7 @@
 #define GPIO_PWM_R 18 
 #define GPIO_DIR_X 27
 #define GPIO_DIR_Y 17
-#define DUTY_CYCLE 500000
+#define DUTY_CYCLE 1000000
 
 #define X_K 38.0 
 #define X_I 0.00
@@ -48,7 +48,7 @@
 #define GYRO_X_THRESHOLD 40
 #define GYRO_X_GAIN 70
 #define GYRO_Y_THRESHOLD 0
-#define GYRO_Y_GAIN 0
+#define GYRO_Y_GAIN 1
 
 using namespace cv;
 using namespace std;
@@ -117,8 +117,8 @@ void ReceiveUDP()
       printf("Couldn't open serial port, exiting.\n");
       exit(-1);
   }
-  Sensor sensor;
-  SensorData gyro;
+  //Sensor sensor;
+  //SensorData gyro;
   
   double x_integral = 0;
   double y_integral = 0;
@@ -161,7 +161,8 @@ void ReceiveUDP()
       }
       int x_control = 10*((int)GimbleX);
       int y_control = 10*((int)GimbleY);
-      /*double gyro_X = ((abs(gyro.x) < GYRO_X_THRESHOLD) ? 0 : gyro.x * GYRO_X_GAIN);
+      /*gyro = sensor.getGyroData();
+      double gyro_X = ((abs(gyro.x) < GYRO_X_THRESHOLD) ? 0 : gyro.x * GYRO_X_GAIN);
 	  double gyro_Y = ((abs(gyro.y) < GYRO_Y_THRESHOLD) ? 0 : gyro.y * GYRO_Y_GAIN);
 	  if(gyro_X > 0) printf("Using X Gyro\n");
 	  double x_P = errorhorizontal * X_K;
@@ -180,14 +181,14 @@ void ReceiveUDP()
 	  int y_dir = (y_control < 0) ? 0 : 1;
       gpioWrite(GPIO_DIR_X, x_dir);
       gpioWrite(GPIO_DIR_Y, y_dir);
-	  //cout << x_control << " " << y_control << endl;
+	  //cout << gyro_X << " " << gyro_Y << endl;
 	  
-	  if(fabs(x_control) < X_DEADZONE) {
+	  /*if(fabs(x_control) < X_DEADZONE) {
 		x_control = 0;
 	  }
 	  if(fabs(y_control) < Y_DEADZONE) {
 		y_control = 0;
-	  }
+	  }*/
 
 
 	  /*if(y_axis_sum > Y_AXIS_TOP_LIM && y_control > 0) {
