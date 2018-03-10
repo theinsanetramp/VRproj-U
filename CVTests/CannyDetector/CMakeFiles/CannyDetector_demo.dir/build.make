@@ -43,10 +43,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/adam/Documents/CVTests/CannyDetector
+CMAKE_SOURCE_DIR = /home/adam/Documents/VRproj/VRproj-U/CVTests/CannyDetector
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/adam/Documents/CVTests/CannyDetector
+CMAKE_BINARY_DIR = /home/adam/Documents/VRproj/VRproj-U/CVTests/CannyDetector
 
 # Include any dependencies generated for this target.
 include CMakeFiles/CannyDetector_demo.dir/depend.make
@@ -59,16 +59,16 @@ include CMakeFiles/CannyDetector_demo.dir/flags.make
 
 CMakeFiles/CannyDetector_demo.dir/CannyDetector_demo.cpp.o: CMakeFiles/CannyDetector_demo.dir/flags.make
 CMakeFiles/CannyDetector_demo.dir/CannyDetector_demo.cpp.o: CannyDetector_demo.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/adam/Documents/CVTests/CannyDetector/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/CannyDetector_demo.dir/CannyDetector_demo.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/CannyDetector_demo.dir/CannyDetector_demo.cpp.o -c /home/adam/Documents/CVTests/CannyDetector/CannyDetector_demo.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/adam/Documents/VRproj/VRproj-U/CVTests/CannyDetector/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/CannyDetector_demo.dir/CannyDetector_demo.cpp.o"
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/CannyDetector_demo.dir/CannyDetector_demo.cpp.o -c /home/adam/Documents/VRproj/VRproj-U/CVTests/CannyDetector/CannyDetector_demo.cpp
 
 CMakeFiles/CannyDetector_demo.dir/CannyDetector_demo.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/CannyDetector_demo.dir/CannyDetector_demo.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/adam/Documents/CVTests/CannyDetector/CannyDetector_demo.cpp > CMakeFiles/CannyDetector_demo.dir/CannyDetector_demo.cpp.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/adam/Documents/VRproj/VRproj-U/CVTests/CannyDetector/CannyDetector_demo.cpp > CMakeFiles/CannyDetector_demo.dir/CannyDetector_demo.cpp.i
 
 CMakeFiles/CannyDetector_demo.dir/CannyDetector_demo.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/CannyDetector_demo.dir/CannyDetector_demo.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/adam/Documents/CVTests/CannyDetector/CannyDetector_demo.cpp -o CMakeFiles/CannyDetector_demo.dir/CannyDetector_demo.cpp.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/adam/Documents/VRproj/VRproj-U/CVTests/CannyDetector/CannyDetector_demo.cpp -o CMakeFiles/CannyDetector_demo.dir/CannyDetector_demo.cpp.s
 
 CMakeFiles/CannyDetector_demo.dir/CannyDetector_demo.cpp.o.requires:
 
@@ -90,26 +90,54 @@ CannyDetector_demo_EXTERNAL_OBJECTS =
 
 CannyDetector_demo: CMakeFiles/CannyDetector_demo.dir/CannyDetector_demo.cpp.o
 CannyDetector_demo: CMakeFiles/CannyDetector_demo.dir/build.make
-CannyDetector_demo: /usr/local/lib/libopencv_dnn.so.3.3.0
-CannyDetector_demo: /usr/local/lib/libopencv_ml.so.3.3.0
-CannyDetector_demo: /usr/local/lib/libopencv_objdetect.so.3.3.0
-CannyDetector_demo: /usr/local/lib/libopencv_shape.so.3.3.0
-CannyDetector_demo: /usr/local/lib/libopencv_stitching.so.3.3.0
-CannyDetector_demo: /usr/local/lib/libopencv_superres.so.3.3.0
-CannyDetector_demo: /usr/local/lib/libopencv_videostab.so.3.3.0
-CannyDetector_demo: /usr/local/lib/libopencv_viz.so.3.3.0
-CannyDetector_demo: /usr/local/lib/libopencv_calib3d.so.3.3.0
-CannyDetector_demo: /usr/local/lib/libopencv_features2d.so.3.3.0
-CannyDetector_demo: /usr/local/lib/libopencv_flann.so.3.3.0
-CannyDetector_demo: /usr/local/lib/libopencv_highgui.so.3.3.0
-CannyDetector_demo: /usr/local/lib/libopencv_photo.so.3.3.0
-CannyDetector_demo: /usr/local/lib/libopencv_video.so.3.3.0
-CannyDetector_demo: /usr/local/lib/libopencv_videoio.so.3.3.0
-CannyDetector_demo: /usr/local/lib/libopencv_imgcodecs.so.3.3.0
-CannyDetector_demo: /usr/local/lib/libopencv_imgproc.so.3.3.0
-CannyDetector_demo: /usr/local/lib/libopencv_core.so.3.3.0
+CannyDetector_demo: /usr/local/lib/libopencv_stitching.so.3.4.1
+CannyDetector_demo: /usr/local/lib/libopencv_videostab.so.3.4.1
+CannyDetector_demo: /usr/local/lib/libopencv_superres.so.3.4.1
+CannyDetector_demo: /usr/local/lib/libopencv_bgsegm.so.3.4.1
+CannyDetector_demo: /usr/local/lib/libopencv_bioinspired.so.3.4.1
+CannyDetector_demo: /usr/local/lib/libopencv_img_hash.so.3.4.1
+CannyDetector_demo: /usr/local/lib/libopencv_dnn_objdetect.so.3.4.1
+CannyDetector_demo: /usr/local/lib/libopencv_fuzzy.so.3.4.1
+CannyDetector_demo: /usr/local/lib/libopencv_xfeatures2d.so.3.4.1
+CannyDetector_demo: /usr/local/lib/libopencv_ccalib.so.3.4.1
+CannyDetector_demo: /usr/local/lib/libopencv_xphoto.so.3.4.1
+CannyDetector_demo: /usr/local/lib/libopencv_aruco.so.3.4.1
+CannyDetector_demo: /usr/local/lib/libopencv_optflow.so.3.4.1
+CannyDetector_demo: /usr/local/lib/libopencv_dpm.so.3.4.1
+CannyDetector_demo: /usr/local/lib/libopencv_hdf.so.3.4.1
+CannyDetector_demo: /usr/local/lib/libopencv_stereo.so.3.4.1
+CannyDetector_demo: /usr/local/lib/libopencv_surface_matching.so.3.4.1
+CannyDetector_demo: /usr/local/lib/libopencv_structured_light.so.3.4.1
+CannyDetector_demo: /usr/local/lib/libopencv_reg.so.3.4.1
+CannyDetector_demo: /usr/local/lib/libopencv_freetype.so.3.4.1
+CannyDetector_demo: /usr/local/lib/libopencv_line_descriptor.so.3.4.1
+CannyDetector_demo: /usr/local/lib/libopencv_xobjdetect.so.3.4.1
+CannyDetector_demo: /usr/local/lib/libopencv_saliency.so.3.4.1
+CannyDetector_demo: /usr/local/lib/libopencv_hfs.so.3.4.1
+CannyDetector_demo: /usr/local/lib/libopencv_rgbd.so.3.4.1
+CannyDetector_demo: /usr/local/lib/libopencv_face.so.3.4.1
+CannyDetector_demo: /usr/local/lib/libopencv_shape.so.3.4.1
+CannyDetector_demo: /usr/local/lib/libopencv_ximgproc.so.3.4.1
+CannyDetector_demo: /usr/local/lib/libopencv_phase_unwrapping.so.3.4.1
+CannyDetector_demo: /usr/local/lib/libopencv_calib3d.so.3.4.1
+CannyDetector_demo: /usr/local/lib/libopencv_objdetect.so.3.4.1
+CannyDetector_demo: /usr/local/lib/libopencv_photo.so.3.4.1
+CannyDetector_demo: /usr/local/lib/libopencv_tracking.so.3.4.1
+CannyDetector_demo: /usr/local/lib/libopencv_video.so.3.4.1
+CannyDetector_demo: /usr/local/lib/libopencv_plot.so.3.4.1
+CannyDetector_demo: /usr/local/lib/libopencv_datasets.so.3.4.1
+CannyDetector_demo: /usr/local/lib/libopencv_text.so.3.4.1
+CannyDetector_demo: /usr/local/lib/libopencv_ml.so.3.4.1
+CannyDetector_demo: /usr/local/lib/libopencv_dnn.so.3.4.1
+CannyDetector_demo: /usr/local/lib/libopencv_features2d.so.3.4.1
+CannyDetector_demo: /usr/local/lib/libopencv_flann.so.3.4.1
+CannyDetector_demo: /usr/local/lib/libopencv_highgui.so.3.4.1
+CannyDetector_demo: /usr/local/lib/libopencv_videoio.so.3.4.1
+CannyDetector_demo: /usr/local/lib/libopencv_imgcodecs.so.3.4.1
+CannyDetector_demo: /usr/local/lib/libopencv_imgproc.so.3.4.1
+CannyDetector_demo: /usr/local/lib/libopencv_core.so.3.4.1
 CannyDetector_demo: CMakeFiles/CannyDetector_demo.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/adam/Documents/CVTests/CannyDetector/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable CannyDetector_demo"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/adam/Documents/VRproj/VRproj-U/CVTests/CannyDetector/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable CannyDetector_demo"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/CannyDetector_demo.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -126,6 +154,6 @@ CMakeFiles/CannyDetector_demo.dir/clean:
 .PHONY : CMakeFiles/CannyDetector_demo.dir/clean
 
 CMakeFiles/CannyDetector_demo.dir/depend:
-	cd /home/adam/Documents/CVTests/CannyDetector && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/adam/Documents/CVTests/CannyDetector /home/adam/Documents/CVTests/CannyDetector /home/adam/Documents/CVTests/CannyDetector /home/adam/Documents/CVTests/CannyDetector /home/adam/Documents/CVTests/CannyDetector/CMakeFiles/CannyDetector_demo.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/adam/Documents/VRproj/VRproj-U/CVTests/CannyDetector && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/adam/Documents/VRproj/VRproj-U/CVTests/CannyDetector /home/adam/Documents/VRproj/VRproj-U/CVTests/CannyDetector /home/adam/Documents/VRproj/VRproj-U/CVTests/CannyDetector /home/adam/Documents/VRproj/VRproj-U/CVTests/CannyDetector /home/adam/Documents/VRproj/VRproj-U/CVTests/CannyDetector/CMakeFiles/CannyDetector_demo.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/CannyDetector_demo.dir/depend
 

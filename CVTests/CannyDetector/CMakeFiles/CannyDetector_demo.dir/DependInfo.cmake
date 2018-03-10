@@ -4,7 +4,7 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/home/adam/Documents/CVTests/CannyDetector/CannyDetector_demo.cpp" "/home/adam/Documents/CVTests/CannyDetector/CMakeFiles/CannyDetector_demo.dir/CannyDetector_demo.cpp.o"
+  "/home/adam/Documents/VRproj/VRproj-U/CVTests/CannyDetector/CannyDetector_demo.cpp" "/home/adam/Documents/VRproj/VRproj-U/CVTests/CannyDetector/CMakeFiles/CannyDetector_demo.dir/CannyDetector_demo.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 

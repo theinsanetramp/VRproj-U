@@ -55,7 +55,7 @@ socklen_t addrlen = sizeof(remaddr);    /* length of addresses */
 int recvlen;      /* # bytes received */
 int fd;       /* our socket */
 uchar buf[BUFSIZE]; /* receive buffer */
-uchar controlBuf[5];
+uchar controlBuf[6];
 
 vector<uchar> imageBuf;
 vector<uchar> image2Buf;
@@ -67,6 +67,7 @@ void SendControl()
   int threshUp = 0;
   int threshDown = 0;
   uchar lowThreshold = 20;
+  controlBuf[5] = 0;
   while(!addressReceived);
   while(!finished)
   {
@@ -77,6 +78,10 @@ void SendControl()
           //cout << j << " pressed\n";
           if(j == 8) threshDown = 1;
           if(j == 9) threshUp = 1;
+          if(j == 12) {
+            controlBuf[5] = (1+controlBuf[5])%2;
+            cout << "Drive mode = " << (int)controlBuf[5] << endl;
+          }
         } 
         else if (GamepadButtonReleased(GAMEPAD_0, (GAMEPAD_BUTTON)j)) {
           if(j == 8) threshDown = 0;
@@ -113,7 +118,7 @@ void SendControl()
     controlBuf[2] = lowThreshold;
     //for(int i=0;i<4;i++) cout << (int)controlBuf[i] << " ";
     //cout << endl;
-    sendto(fd, controlBuf, 5, 0, (struct sockaddr *)&remaddr, addrlen);
+    sendto(fd, controlBuf, 6, 0, (struct sockaddr *)&remaddr, addrlen);
     this_thread::sleep_for(chrono::milliseconds(50));
   }
 }
@@ -139,6 +144,13 @@ void ReceivePoints()
     //cout << seed << "  " << newVal << endl;
     seedList.push_back(MakeSeedData(seed, newVal));
     i++;
+    if(i>200) {
+      cout << "Colours-Image1 splitter not found\n";
+      seedList.clear();
+      imageBuf.clear();
+      image2Buf.clear();
+      return;
+    }
   } 
   while(!(buf[i*7+0] == 0 && buf[i*7+1] == 0 
     && buf[i*7+2] == 0 && buf[i*7+3] == 0 
@@ -151,6 +163,13 @@ void ReceivePoints()
   {
     imageBuf.push_back(buf[i]); 
     i++;
+    if(i>10000) {
+      cout << "Image1-Image2 splitter not found\n";
+      seedList.clear();
+      imageBuf.clear();
+      image2Buf.clear();
+      return;
+    }
   } 
   while(!(buf[i] == 0 && buf[i+1] == 0 
     && buf[i+2] == 0 && buf[i+3] == 0 
@@ -183,7 +202,7 @@ void ReceivePoints()
       else receivedImage.at<Vec3b>(i,j) = Vec3b(255,255,255);
     }
   }
-  erode( receivedImage, receivedImage, element );
+  //erode( receivedImage, receivedImage, element );
   //cout << seedList.size() << endl;
   for(int j=0;j<seedList.size();j++)
   {
@@ -218,7 +237,7 @@ void ReceivePoints()
       else receivedImage2.at<Vec3b>(i,j) = Vec3b(255,255,255);
     }
   }
-  erode( receivedImage2, receivedImage2, element );
+  //erode( receivedImage2, receivedImage2, element );
   seedList.clear();
   imageBuf.clear();
   image2Buf.clear();
@@ -232,16 +251,17 @@ void UDPReceive()
 {
   this_thread::sleep_for(chrono::milliseconds(500));
   recvlen = recvfrom(fd, buf, BUFSIZE, 0, (struct sockaddr *)&remaddr, &addrlen);
-  //printf("received %d bytes\n", recvlen);
+  printf("received %d bytes\n", recvlen);
   addressReceived = 1;
   if (recvlen > 0) ReceivePoints();
+  cvMoveWindow( "Edge Map 2", receivedImage.cols + 70, 40 );
   while(!finished)
   {
     //printf("waiting on port %d\n", SERVICE_PORT);
     //if(finished) return;
     recvlen = recvfrom(fd, buf, BUFSIZE, 0, (struct sockaddr *)&remaddr, &addrlen);
 
-    //printf("received %d bytes\n", recvlen);
+    printf("received %d bytes\n", recvlen);
     if (recvlen > 0) {
       //buf[recvlen] = 0;
       //for(int i=0;i<10;i++) printf("%i\n", buf[i]);
@@ -294,5 +314,7 @@ int main( int argc, char** argv )
   close(fd);
   t.join();
   control.join();
+  //imwrite("LGimble.jpg", receivedImage);
+  //imwrite("RGimble.jpg", receivedImage2);
   return 0;
 }

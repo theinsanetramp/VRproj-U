@@ -47,42 +47,42 @@ void CannyThreshold(int, void*)
   //imwrite("buildDilated.jpg",dst);
   cvtColor(dst, dst, CV_GRAY2RGB); 
 
-  #ifdef SOBOL
-  //Floodfill from quasi-random points
-  for (unsigned long long i = 0; i < 600; ++i)
-    {
-        int x = src.cols * sobol::sample(i, 0);
-        int y = src.rows * sobol::sample(i, 1);
-        Point seed = Point(x, y);
-        if(dst.at<Vec3b>(seed)[0] == 0 && dst.at<Vec3b>(seed)[1] == 0 && dst.at<Vec3b>(seed)[2] == 0)
-        {
-          flood_mask = 0;
-          floodFill(dst, flood_mask, seed, (255,255,255), &ccomp, Scalar(loDiff, loDiff, loDiff),
-                  Scalar(upDiff, upDiff, upDiff), 4 + (255 << 8) + FLOODFILL_MASK_ONLY);
-          Scalar newVal = mean(src,flood_mask);
-          floodFill(dst, seed, newVal, &ccomp, Scalar(loDiff, loDiff, loDiff),
-                  Scalar(upDiff, upDiff, upDiff), flags);
-        }
-    }
-  #else
-  //Floodfill every empty area
-  for(int i=0;i<dst.cols;i++)
-  {
-    for(int j=0;j<dst.rows;j++)
-    {
-      Point seed = Point(i,j);
-      if(dst.at<Vec3b>(seed)[0] == 0 && dst.at<Vec3b>(seed)[1] == 0 && dst.at<Vec3b>(seed)[2] == 0)
-      {
-        flood_mask = 0;
-        floodFill(dst, flood_mask, seed, (255,255,255), &ccomp, Scalar(loDiff, loDiff, loDiff),
-                Scalar(upDiff, upDiff, upDiff), 4 + (255 << 8) + FLOODFILL_MASK_ONLY);
-        Scalar newVal = mean(src,flood_mask);
-        floodFill(dst, seed, newVal, &ccomp, Scalar(loDiff, loDiff, loDiff),
-                Scalar(upDiff, upDiff, upDiff), flags);
-      }
-    }
-  }
-  #endif
+  // #ifdef SOBOL
+  // //Floodfill from quasi-random points
+  // for (unsigned long long i = 0; i < 600; ++i)
+  //   {
+  //       int x = src.cols * sobol::sample(i, 0);
+  //       int y = src.rows * sobol::sample(i, 1);
+  //       Point seed = Point(x, y);
+  //       if(dst.at<Vec3b>(seed)[0] == 0 && dst.at<Vec3b>(seed)[1] == 0 && dst.at<Vec3b>(seed)[2] == 0)
+  //       {
+  //         flood_mask = 0;
+  //         floodFill(dst, flood_mask, seed, (255,255,255), &ccomp, Scalar(loDiff, loDiff, loDiff),
+  //                 Scalar(upDiff, upDiff, upDiff), 4 + (255 << 8) + FLOODFILL_MASK_ONLY);
+  //         Scalar newVal = mean(src,flood_mask);
+  //         floodFill(dst, seed, newVal, &ccomp, Scalar(loDiff, loDiff, loDiff),
+  //                 Scalar(upDiff, upDiff, upDiff), flags);
+  //       }
+  //   }
+  // #else
+  // //Floodfill every empty area
+  // for(int i=0;i<dst.cols;i++)
+  // {
+  //   for(int j=0;j<dst.rows;j++)
+  //   {
+  //     Point seed = Point(i,j);
+  //     if(dst.at<Vec3b>(seed)[0] == 0 && dst.at<Vec3b>(seed)[1] == 0 && dst.at<Vec3b>(seed)[2] == 0)
+  //     {
+  //       flood_mask = 0;
+  //       floodFill(dst, flood_mask, seed, (255,255,255), &ccomp, Scalar(loDiff, loDiff, loDiff),
+  //               Scalar(upDiff, upDiff, upDiff), 4 + (255 << 8) + FLOODFILL_MASK_ONLY);
+  //       Scalar newVal = mean(src,flood_mask);
+  //       floodFill(dst, seed, newVal, &ccomp, Scalar(loDiff, loDiff, loDiff),
+  //               Scalar(upDiff, upDiff, upDiff), flags);
+  //     }
+  //   }
+  // }
+  // #endif
   imshow( "Edge Map", dst );
  }
 
@@ -118,6 +118,6 @@ int main( int argc, char** argv )
   	 k = waitKey(0);
   }
   while(k != 27);
-  imwrite("Final.bmp",dst);
+  imwrite("Final.jpg",dst);
   return 0;
   }
