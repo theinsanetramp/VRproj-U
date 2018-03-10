@@ -28,21 +28,21 @@
 #define GPIO_PWM_R 18 
 #define GPIO_DIR_X 27
 #define GPIO_DIR_Y 17
-#define DUTY_CYCLE 1000000
+#define DUTY_CYCLE 500000
 
 #define X_K 38.0 
 #define X_I 0.00
 #define X_D 15.0
 #define X_DEADZONE 300
-#define X_AXIS_CLOCK_LIM 20000
+#define X_AXIS_CLOCK_LIM 28000
 #define X_AXIS_ANTI_LIM 28000
 #define MAX_X  50000 
 #define Y_K 18
 #define Y_I 0.0000
 #define Y_D 23
 #define Y_DEADZONE 500 
-#define Y_AXIS_TOP_LIM 16000
-#define Y_AXIS_BOT_LIM 10000
+#define Y_AXIS_TOP_LIM 18000
+#define Y_AXIS_BOT_LIM 18000
 #define MAX_Y 5000
 
 #define GYRO_X_THRESHOLD 40
@@ -57,8 +57,8 @@ using namespace std;
 #define BUFLEN 40960
 #define RECEIVEBUFLEN 16
 
-#define FRAMERATE 30
-#define POINTSPERTHREAD 10
+#define FRAMERATE 15
+#define POINTSPERTHREAD 20
 
 Mat tmp_frame, reduced_frame, dst_out;
 Mat tmp_frame2, reduced_frame2;
@@ -71,16 +71,19 @@ thread out;
 thread control;
 int finished = 0;
 int threadProcessing[4] = {0,0,0,0};
+int driving = 0;
 mutex waitm;
 mutex bufm;
 mutex capwaitm;
 mutex proc2waitm;
 mutex outwaitm;
+mutex controlm;
 condition_variable conVar;
 condition_variable conVar1;
 condition_variable capVar;
 condition_variable proc2Var;
 condition_variable outVar;
+condition_variable controlVar;
 
 vector<Mat> cap2mainBuf;
 vector<Mat> cap2proc2Buf;
@@ -102,17 +105,19 @@ vector<unsigned char> dstBuf;
 uchar receiveBuf[RECEIVEBUFLEN];
 
 int nextLowThreshold = 30;
+int serial;
 
 void ReceiveUDP()
 {
   signed char XSign, YSign, GimbleX, GimbleY;
   int RSpeed = 0;
   int LSpeed = 0;
+  int mode = 1;
   if (gpioInitialise() < 0) {
 	cout << "gpioInitialise() failed\n";
     exit(1);
   }
-  int serial = serialOpen("/dev/ttyAMA0", 115200);
+  serial = serialOpen("/dev/ttyAMA0", 115200);
   if(serial == -1) {
       printf("Couldn't open serial port, exiting.\n");
       exit(-1);
@@ -129,12 +134,24 @@ void ReceiveUDP()
   
   while(!finished)
   {
+    {
+      unique_lock<mutex> lk(controlm);
+      while(!driving) {
+		  controlVar.wait(lk);
+	  }
+      //cout << "running" << endl;
+      lk.unlock();
+    }
     recvlen = recvfrom(fd, receiveBuf, RECEIVEBUFLEN, 0, (struct sockaddr *)&remaddr, &slen);
     if(recvlen > 0) {
       XSign = receiveBuf[0];
       YSign = receiveBuf[1];
       GimbleX = receiveBuf[3];
       GimbleY = receiveBuf[4];
+      if((int)receiveBuf[5] != mode-1) {
+		cout << "Drive mode = " << mode << endl;
+	    mode = receiveBuf[5]+1;
+	  }
       if((int)XSign > 80) {
 		  RSpeed = -90;
 		  LSpeed = 90;
@@ -152,15 +169,15 @@ void ReceiveUDP()
       else gpioWrite(GPIO_DIR_R, 0);
       if(LSpeed >= 0) gpioWrite(GPIO_DIR_L, 1);
       else gpioWrite(GPIO_DIR_L, 0);
-      gpioHardwarePWM(GPIO_PWM_R, 100, (DUTY_CYCLE*abs(RSpeed))/127);
-      gpioHardwarePWM(GPIO_PWM_L, 100, (DUTY_CYCLE*abs(LSpeed))/127);
+      gpioHardwarePWM(GPIO_PWM_R, 100, (mode*DUTY_CYCLE*abs(RSpeed))/127);
+      gpioHardwarePWM(GPIO_PWM_L, 100, (mode*DUTY_CYCLE*abs(LSpeed))/127);
       
       if((int)receiveBuf[2] != nextLowThreshold) {
         nextLowThreshold = receiveBuf[2];
         cout << "Next low threshold: " << nextLowThreshold << endl;
       }
-      int x_control = 10*((int)GimbleX);
-      int y_control = 10*((int)GimbleY);
+      int x_control = 8*((int)GimbleX);
+      int y_control = 8*((int)GimbleY);
       /*gyro = sensor.getGyroData();
       double gyro_X = ((abs(gyro.x) < GYRO_X_THRESHOLD) ? 0 : gyro.x * GYRO_X_GAIN);
 	  double gyro_Y = ((abs(gyro.y) < GYRO_Y_THRESHOLD) ? 0 : gyro.y * GYRO_Y_GAIN);
@@ -181,7 +198,6 @@ void ReceiveUDP()
 	  int y_dir = (y_control < 0) ? 0 : 1;
       gpioWrite(GPIO_DIR_X, x_dir);
       gpioWrite(GPIO_DIR_Y, y_dir);
-	  //cout << gyro_X << " " << gyro_Y << endl;
 	  
 	  /*if(fabs(x_control) < X_DEADZONE) {
 		x_control = 0;
@@ -191,14 +207,15 @@ void ReceiveUDP()
 	  }*/
 
 
-	  /*if(y_axis_sum > Y_AXIS_TOP_LIM && y_control > 0) {
+	  if(y_axis_sum > Y_AXIS_TOP_LIM && y_control > 0) {
 	  	y_control = 0;
-		printf("Hit y axis error limit\n");
+		printf("Hit y axis top limit\n");
 	  } else if (y_axis_sum < -Y_AXIS_BOT_LIM && y_control < 0) {
 		y_control = 0;
-		printf("Hit y axis error limit\n");
-	  }*/
+		printf("Hit y axis bottom limit\n");
+	  }
 	  y_axis_sum += y_control;
+	  //cout << y_axis_sum << endl;
 
 	  if(x_axis_sum > X_AXIS_ANTI_LIM && x_control > 0) {
 		x_control = 0;
@@ -341,8 +358,25 @@ void OutThread()
     //cout << bufSize << endl;
     bufLength = 0;
 
-    if (sendto(fd, buf, bufSize, 0, (struct sockaddr *)&remaddr, slen)==-1)
+    if (sendto(fd, buf, bufSize, 0, (struct sockaddr *)&remaddr, slen)==-1) {
       perror("sendto");
+      {
+        lock_guard<mutex> lk(controlm);
+        driving = 0;
+        cout << "control stopped\n";
+      }
+      gpioHardwarePWM(GPIO_PWM_R, 100, 0);
+      gpioHardwarePWM(GPIO_PWM_L, 100, 0);
+      serialPrintf(serial, "%06d%06d", 0, 0);
+    }
+    else if(!driving) {
+	  {
+        lock_guard<mutex> lk(controlm);
+        driving = 1;
+        cout << "control restarted\n";
+      }
+      controlVar.notify_one();
+	}
     //cout << "sent\n";
   }
 }
@@ -382,13 +416,13 @@ void MainProcess(int, void*)
     while(threadProcessing[0] == 1 || threadProcessing[1] == 1 
       || threadProcessing[2] == 1 || threadProcessing[3] == 1) 
       conVar1.wait(lk);
-    //cout << "main receieved " << endl;
+    //cout << "proc2main receieved" << endl;
     lk.unlock();
   }
   {
     lock_guard<mutex> lk(outwaitm);
     main2outBuf.push_back(dstBuf);
-    //cout << "notified main\n";
+    //cout << "notified main2out\n";
   }
   outVar.notify_one();
  }
@@ -472,7 +506,7 @@ int main( int argc, char** argv )
   {
     MainProcess(0, 0);
 
-    char keycode = (char)waitKey(30);
+    char keycode = (char)waitKey(1);
       if( keycode == 27 ){
           //imwrite("frame.jpg", dst);
           break;
