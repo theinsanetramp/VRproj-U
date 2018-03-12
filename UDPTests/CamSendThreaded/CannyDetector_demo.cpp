@@ -113,10 +113,6 @@ void ReceiveUDP()
   int RSpeed = 0;
   int LSpeed = 0;
   int mode = 1;
-  if (gpioInitialise() < 0) {
-	cout << "gpioInitialise() failed\n";
-    exit(1);
-  }
   serial = serialOpen("/dev/ttyAMA0", 115200);
   if(serial == -1) {
       printf("Couldn't open serial port, exiting.\n");
@@ -272,6 +268,7 @@ void CaptureThread()
   while(!finished)
   {
     {
+      //cout << "waiting cap\n";
       unique_lock<mutex> lk(capwaitm);
       while(cap2mainBuf.size() == 1 || cap2proc2Buf.size() == 1) capVar.wait(lk);
       //cout << "notified cap\n";
@@ -281,20 +278,21 @@ void CaptureThread()
     cap2.grab();
     cap.retrieve(capture);
     cap2.retrieve(capture2);
-    if( capture.empty() || capture2.empty())
-        break;
-    {
-      lock_guard<mutex> lk(capwaitm);
-      cap2mainBuf.push_back(capture);
-      //cout << "notified main\n";
-    }
-    capVar.notify_one();
-    {
-      lock_guard<mutex> lk(proc2waitm);
-      cap2proc2Buf.push_back(capture2);
-      //cout << "notified main\n";
-    }
-    proc2Var.notify_one();
+    if( !(capture.empty() || capture2.empty())) {
+		{
+		  lock_guard<mutex> lk(capwaitm);
+		  cap2mainBuf.push_back(capture);
+		  //cout << "notified main\n";
+		}
+		capVar.notify_one();
+		{
+		  lock_guard<mutex> lk(proc2waitm);
+		  cap2proc2Buf.push_back(capture2);
+		  //cout << "notified main\n";
+		}
+		proc2Var.notify_one();
+	}
+    else cout << "capture empty\n";
   }
 }
 
@@ -305,8 +303,9 @@ void Process2Thread()
   while(!finished)
   {
     {
+      //cout << "waiting proc2\n";
       unique_lock<mutex> lk(proc2waitm);
-      while(cap2proc2Buf.size() == 0 || proc2outBuf.size() > 0) proc2Var.wait(lk);
+      while(cap2proc2Buf.size() == 0 || proc2outBuf.size() > 0 || main2outBuf.size() > 0) proc2Var.wait(lk);
       //cout << "notified proc2\n";
       tmp_frame2 = cap2proc2Buf.back();
       cap2proc2Buf.pop_back();
@@ -327,6 +326,7 @@ void Process2Thread()
       //cout << "notified proc2\n";
     }
     outVar.notify_one();
+    //cout << "proc2 waiting\n";
   }
 }
 
@@ -337,6 +337,7 @@ void OutThread()
   while(!finished)
   {
     {
+      //cout << "waiting out\n";
       unique_lock<mutex> lk(outwaitm);
       while(proc2outBuf.size() == 0 || main2outBuf.size() == 0) outVar.wait(lk);
       //cout << "notified out\n";
@@ -384,6 +385,7 @@ void OutThread()
 void MainProcess(int, void*)
 {
   {
+	//cout << "waiting main\n";
     unique_lock<mutex> lk(capwaitm);
     while(cap2mainBuf.size() == 0 || main2outBuf.size() > 0) capVar.wait(lk);
     //cout << "notified main\n";
@@ -405,7 +407,7 @@ void MainProcess(int, void*)
   {
     lock_guard<mutex> lk(waitm);
     for(int i=0;i<4;i++) threadProcessing[i] = 1;
-    //cout << "notified main" << endl;
+    //cout << "notified fillers" << endl;
   }
   conVar.notify_all();
   imencode(".png", dst_out, dstBuf);
@@ -416,7 +418,7 @@ void MainProcess(int, void*)
     while(threadProcessing[0] == 1 || threadProcessing[1] == 1 
       || threadProcessing[2] == 1 || threadProcessing[3] == 1) 
       conVar1.wait(lk);
-    //cout << "proc2main receieved" << endl;
+    //cout << "fillers receieved" << endl;
     lk.unlock();
   }
   {
@@ -425,6 +427,7 @@ void MainProcess(int, void*)
     //cout << "notified main2out\n";
   }
   outVar.notify_one();
+  //cout << "main waiting\n";
  }
 
 int main( int argc, char** argv )
@@ -454,6 +457,11 @@ int main( int argc, char** argv )
   remaddr.sin_port = htons(SERVICE_PORT);
   if (inet_aton(argv[1], &remaddr.sin_addr)==0) {
     fprintf(stderr, "inet_aton() failed\n");
+    exit(1);
+  }
+  
+  if (gpioInitialise() < 0) {
+	cout << "gpioInitialise() failed\n";
     exit(1);
   }
 
@@ -522,15 +530,15 @@ int main( int argc, char** argv )
   cout << "Fill threads joined\n";
   {
     lock_guard<mutex> lk(capwaitm);
-    cap2mainBuf.pop_back();
+    if(cap2mainBuf.size() > 0) cap2mainBuf.pop_back();
   }
   capVar.notify_one();
   capturet.join();
   cout << "Capture thread joined\n";
   {
     lock_guard<mutex> lk(proc2waitm);
-    cap2proc2Buf.push_back(tmp_frame2);
-    proc2outBuf.pop_back();
+    if(cap2proc2Buf.size() == 0) cap2proc2Buf.push_back(tmp_frame2);
+    if(proc2outBuf.size() > 0) proc2outBuf.pop_back();
   }
   proc2Var.notify_one();
   process2t.join();
@@ -538,8 +546,8 @@ int main( int argc, char** argv )
   {
     lock_guard<mutex> lk(outwaitm);
     vector<unsigned char> empt;
-    main2outBuf.push_back(empt);
-    proc2outBuf.push_back(empt);
+    if(main2outBuf.size() == 0) main2outBuf.push_back(empt);
+    if(proc2outBuf.size() == 0) proc2outBuf.push_back(empt);
   }
   outVar.notify_one();
   out.join();
