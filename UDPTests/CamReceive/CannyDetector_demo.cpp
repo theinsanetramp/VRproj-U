@@ -12,6 +12,7 @@
 #include <thread>
 #include <chrono>
 #include <unistd.h>
+#include <mutex>
 #include "gamepad.h"
 
 using namespace cv;
@@ -27,6 +28,8 @@ thread t;
 thread control;
 int finished = 0;
 int addressReceived = 0;
+mutex showm;
+vector<Mat> showBuf;
 
 struct SeedData
 {
@@ -67,7 +70,7 @@ void SendControl()
   int threshUp = 0;
   int threshDown = 0;
   uchar lowThreshold = 20;
-  controlBuf[5] = 0;
+  for(int i=0;i<6;i++) controlBuf[i] = 0;
   while(!addressReceived);
   while(!finished)
   {
@@ -241,10 +244,10 @@ void ReceivePoints()
   seedList.clear();
   imageBuf.clear();
   image2Buf.clear();
-  if(!finished) {
-    imshow( "Edge Map", receivedImage ); 
-    imshow( "Edge Map 2", receivedImage2 ); 
-  }
+  showm.lock();
+  showBuf.push_back(receivedImage);
+  showBuf.push_back(receivedImage2);
+  showm.unlock();
 }
 
 void UDPReceive()
@@ -301,12 +304,26 @@ int main( int argc, char** argv )
   cvMoveWindow( "Edge Map", 0, 40 ); 
   namedWindow("Edge Map 2", 1);
   cvMoveWindow( "Edge Map 2",  500, 40 );
+  receivedImage.create(200,200,CV_8UC3);
+  receivedImage2.create(200,200,CV_8UC3);
+
+  Mat leftDisplay, rightDisplay;
 
   /// Wait until user exit program by pressing a key
   int k;
   do{
-  	 /// Wait until user exit program by pressing a key
-  	 k = waitKey(0);
+    showm.lock();
+    if(showBuf.size() > 0) {
+      rightDisplay = showBuf.back();
+      showBuf.pop_back();
+      leftDisplay = showBuf.back();
+      showBuf.pop_back();
+      imshow( "Edge Map", leftDisplay ); 
+      imshow( "Edge Map 2", rightDisplay ); 
+    }
+    showm.unlock();
+  	/// Wait until user exit program by pressing a key
+  	k = waitKey(1);
   }
   while(k != 27);
   finished = 1;

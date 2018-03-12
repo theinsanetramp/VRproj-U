@@ -1,0 +1,115 @@
+\begin{thebibliography}{10}
+
+\bibitem{presence}
+K.~M. Lee, ``Presence, explicated,'' {\em Communication Theory}, vol.~14,
+  no.~1, pp.~27--50, 2004.
+
+\bibitem{loomis2016presence}
+J.~M. Loomis, ``Presence in virtual reality and everyday life: Immersion within
+  a world of representation,'' {\em PRESENCE: Teleoperators and Virtual
+  Environments}, vol.~25, no.~2, pp.~169--174, 2016.
+
+\bibitem{bounds2016integrated}
+M.~Bounds, B.~Wilson, A.~Tavakkoli, and D.~Loffredo, ``An integrated
+  cyber-physical immersive virtual reality framework with applications to
+  telerobotics,'' in {\em International Symposium on Visual Computing},
+  pp.~235--245, Springer, 2016.
+
+\bibitem{FrameRate}
+IrisVR, ``The importance of frame rates,'' 2017.
+\newblock Available:
+  \url{https://help.irisvr.com/hc/en-us/articles/215884547-The-Importance-of-Frame-Rates}.
+  [Accessed: \today].
+
+\bibitem{gimble}
+M.~Gupta, F.~Hennecker, T.~Isaacs, M.~Sharhan, and L.~Stauskis, ``Biologically
+  inspired robots: A vision system inspired by the human eye,'' 2016.
+\newblock Electronics and Computer Science, University of Southampton.
+
+\bibitem{compression}
+O.~MAHDI, M.~Alshujeary, and A.~Jasim~Mohamed, ``Implementing a novel approach
+  an convert audio compression to text coding via hybrid technique,'' 11 2013.
+
+\bibitem{abstraction3rdyear}
+A.~Barrett-Sprot, ``Data abstraction for low-bandwidth communication,'' 2017.
+\newblock BEng Project Report, Electronics and Computer Science, University of
+  Southampton, Available:
+  \url{https://secure.ecs.soton.ac.uk/notes/comp3200/e_archive/COMP3200/1617/abs1g14/pdfs/Report.pdf}.
+  [Accessed: \today].
+
+\bibitem{joe2008constructing}
+S.~Joe and F.~Y. Kuo, ``Constructing sobol sequences with better
+  two-dimensional projections,'' {\em SIAM Journal on Scientific Computing},
+  vol.~30, no.~5, pp.~2635--2654, 2008.
+
+\bibitem{CodeSource}
+L.~Gr\"unschlo\ss, ``gruenscholoss.org,'' 2017.
+\newblock Available: \url{http://gruenschloss.org/}. [Accessed: \today].
+
+\bibitem{SobolWiki}
+Wikipedia, ``Sobol sequence,'' 2017.
+\newblock Available: \url{https://en.wikipedia.org/wiki/Sobol_sequence/}.
+  [Accessed: \today].
+
+\bibitem{CVDef}
+BMVA.org, ``What is computer vision?,'' 2017.
+\newblock Available: \url{http://www.bmva.org/visionoverview}. [Accessed:
+  \today].
+
+\bibitem{ballard1982computer}
+D.~H. Ballard and C.~M. Brown, ``Computer vision,'' {\em Prenice-Hall,
+  Englewood Cliffs, NJ}, 1982.
+
+\bibitem{OpenCV}
+{OpenCV team}, ``Opencv,'' 2017.
+\newblock Available: \url{https://opencv.org/}. [Accessed: \today].
+
+\bibitem{jain1995machine}
+R.~Jain, R.~Kasturi, and B.~G. Schunck, {\em Machine vision}, vol.~5.
+\newblock McGraw-Hill New York, 1995.
+
+\bibitem{maini2009study}
+R.~Maini and H.~Aggarwal, ``Study and comparison of various image edge
+  detection techniques,'' {\em International journal of image processing
+  (IJIP)}, vol.~3, no.~1, pp.~1--11, 2009.
+
+\bibitem{canny1986computational}
+J.~Canny, ``A computational approach to edge detection,'' {\em IEEE
+  Transactions on pattern analysis and machine intelligence}, no.~6,
+  pp.~679--698, 1986.
+
+\bibitem{Canny1Source}
+A.~Mordvintsev and K.~Abid, ``Opencv canny edge detection tutorial,'' 2013.
+\newblock Available:
+  \url{http://opencv-python-tutroals.readthedocs.io/en/latest/py_tutorials/py_imgproc/py_canny/py_canny.html}.
+  [Accessed: \today].
+
+\bibitem{FloodFill}
+V.~Jaimini, ``Hackerearth.com flood fill tutorial,'' 2017.
+\newblock Available:
+  \url{https://www.hackerearth.com/practice/algorithms/graphs/flood-fill-algorithm/tutorial/}.
+  [Accessed: \today].
+
+\bibitem{nosal2008flood}
+E.-M. Nosal, ``Flood-fill algorithms used for passive acoustic detection and
+  tracking,'' in {\em New Trends for Environmental Monitoring Using Passive
+  Systems, 2008}, pp.~1--5, IEEE, 2008.
+
+\bibitem{opencvffilldemo}
+{OpenCV Documentation}, ``Opencv: ffilldemo.cpp,'' 2017.
+\newblock Available:
+  \url{https://docs.opencv.org/3.3.0/d5/d26/ffilldemo_8cpp-example.html}.
+  [Accessed: \today].
+
+\bibitem{bradski2008learning}
+G.~Bradski and A.~Kaehler, {\em Learning OpenCV: Computer vision with the
+  OpenCV library}.
+\newblock " O'Reilly Media, Inc.", 2008.
+
+\bibitem{cannyedgedetector}
+{OpenCV Documentation}, ``Canny edge detector,'' 2017.
+\newblock Available:
+  \url{https://docs.opencv.org/2.4/doc/tutorials/imgproc/imgtrans/canny_detector/canny_detector.html}.
+  [Accessed: \today].
+
+\end{thebibliography}
