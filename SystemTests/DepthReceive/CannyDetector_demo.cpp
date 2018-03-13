@@ -2,6 +2,7 @@
 #include "opencv2/highgui/highgui.hpp"
 #include "opencv2/imgcodecs.hpp"
 #include "opencv2/videoio.hpp"
+#include "opencv2/ximgproc/disparity_filter.hpp"
 #include "sobol.h"
 #include <stdlib.h>
 #include <stdio.h>
@@ -16,6 +17,7 @@
 #include "gamepad.h"
 
 using namespace cv;
+using namespace cv::ximgproc;
 using namespace std;
 
 #define SERVICE_PORT  21234
@@ -23,6 +25,10 @@ using namespace std;
 
 Mat receivedImage;
 Mat receivedImage2;
+Mat left_for_matcher, right_for_matcher;
+Mat filtered_disp_vis;
+Mat left_disp,right_disp;
+Mat filtered_disp;
 
 thread t;
 thread control;
@@ -30,27 +36,6 @@ int finished = 0;
 int addressReceived = 0;
 mutex showm;
 vector<Mat> showBuf;
-
-struct SeedData
-{
-  Point seed;
-  Scalar colour;
-};
-//floodFill variables
-int loDiff = 0, upDiff = 0;
-int connectivity = 4;
-int newMaskVal = 255;
-int flags = connectivity + (newMaskVal << 8) +
-                FLOODFILL_FIXED_RANGE;
-Rect ccomp;
-//dilation variables
-int dilation_type = MORPH_RECT;
-int dilation_size = 1;
-Mat element = getStructuringElement( dilation_type,
-                                   Size( 2*dilation_size + 1, 2*dilation_size+1 ),
-                                   Point( dilation_size, dilation_size ) );
-
-vector<SeedData> seedList;
 
 struct sockaddr_in myaddr;  /* our address */
 struct sockaddr_in remaddr; /* remote address */
@@ -62,6 +47,19 @@ uchar controlBuf[6];
 
 vector<uchar> imageBuf;
 vector<uchar> image2Buf;
+
+Mat R1, R2, P1, P2, Q;
+Mat K1, K2, R;
+Vec3d T;
+Mat D1, D2;
+Mat lmapx, lmapy, rmapx, rmapy;
+
+int wsize = 15;
+int max_disp = 64;
+double lambda = 16000;
+double sigma = 1.2;
+double vis_mult = 1;
+Ptr<DisparityWLSFilter> wls_filter;
 
 void SendControl()
 {
@@ -126,124 +124,87 @@ void SendControl()
   }
 }
 
-SeedData MakeSeedData(Point seed, Scalar colour)
-{
-  SeedData s;
-  s.seed = seed;
-  s.colour = colour;
-  return s;
-}
-
 void ReceivePoints()
 {
   //Floodfill from quasi-random points
   int i = 0;
   do
   {
-    int x = (buf[i*7] << 8) + buf[i*7+1];
-    int y = (buf[i*7+2] << 8) + buf[i*7+3];
-    Point seed = Point(x, y);
-    Scalar newVal = Scalar(buf[i*7+4], buf[i*7+5], buf[i*7+6]);
-    //cout << seed << "  " << newVal << endl;
-    seedList.push_back(MakeSeedData(seed, newVal));
-    i++;
-    if(i>200) {
-      cout << "Colours-Image1 splitter not found\n";
-      seedList.clear();
-      imageBuf.clear();
-      image2Buf.clear();
-      return;
-    }
-  } 
-  while(!(buf[i*7+0] == 0 && buf[i*7+1] == 1 
-    && buf[i*7+2] == 2 && buf[i*7+3] == 3 
-    && buf[i*7+4] == 4 && buf[i*7+5] == 5
-    && buf[i*7+6] == 6));
-  i++;
-  //for(int j=i*7;j<recvlen;j++) imageBuf.push_back(buf[j]); 
-  i = i*7;
-  do
-  {
     imageBuf.push_back(buf[i]); 
     i++;
-    if(i>10000) {
+    if(i>40000) {
       cout << "Image1-Image2 splitter not found\n";
-      seedList.clear();
       imageBuf.clear();
       image2Buf.clear();
       return;
     }
   } 
-  while(!(buf[i] == 0 && buf[i+1] == 1 
-    && buf[i+2] == 2 && buf[i+3] == 3 
-    && buf[i+4] == 4 && buf[i+5] == 5
-    && buf[i+6] == 6));
+  while(!(buf[i] == 0 && buf[i+1] == 0 
+    && buf[i+2] == 0 && buf[i+3] == 0 
+    && buf[i+4] == 0 && buf[i+5] == 0
+    && buf[i+6] == 0 && buf[i+7] == 0
+    && buf[i+8] == 0 && buf[i+9] == 0
+    && buf[i+10] == 0 && buf[i+11] == 0
+    && buf[i+12] == 0 && buf[i+13] == 0));
   //for(int j=i-7;j<i+14;j++) cout << (int)buf[j] << endl;
-  i += 7;
+  i += 14;
   do
   {
     image2Buf.push_back(buf[i]); 
     i++;
   } 
-  while(i != recvlen);
-  receivedImage = imdecode(imageBuf, IMREAD_COLOR);
-  //cout << imageBuf.size() << endl;
+  while(!(buf[i] == 0 && buf[i+1] == 0 
+    && buf[i+2] == 0 && buf[i+3] == 0 
+    && buf[i+4] == 0 && buf[i+5] == 0
+    && buf[i+6] == 0 && buf[i+7] == 0
+    && buf[i+8] == 0 && buf[i+9] == 0
+    && buf[i+10] == 0 && buf[i+11] == 0
+    && buf[i+12] == 0 && buf[i+13] == 0));
+  receivedImage = imdecode(imageBuf, CV_LOAD_IMAGE_COLOR);
+  //cout << image2Buf.size() << endl;
   if(receivedImage.empty()) {
     cout << "Images not received\n";
-    seedList.clear();
     imageBuf.clear();
     image2Buf.clear();
     return;
   }
   resize(receivedImage, receivedImage, Size(), 2, 2, CV_INTER_CUBIC);
-  for(int i=0;i<receivedImage.rows;i++) {
-    for(int j=0;j<receivedImage.cols;j++) {
-      if(receivedImage.at<Vec3b>(i,j)[0] < 170) receivedImage.at<Vec3b>(i,j) = Vec3b(0,0,0);
-      else receivedImage.at<Vec3b>(i,j) = Vec3b(255,255,255);
-    }
-  }
-  //erode( receivedImage, receivedImage, element );
-  //cout << seedList.size() << endl;
-  for(int j=0;j<seedList.size();j++)
-  {
-    seedList[j].seed.x = seedList[j].seed.x*2;
-    seedList[j].seed.y = seedList[j].seed.y*2;
-    if(receivedImage.at<Vec3b>(seedList[j].seed)[0] == 0 && 
-      receivedImage.at<Vec3b>(seedList[j].seed)[1] == 0 && 
-      receivedImage.at<Vec3b>(seedList[j].seed)[2] == 0)
-    { 
-      floodFill(receivedImage, seedList[j].seed, seedList[j].colour, &ccomp, Scalar(loDiff, loDiff, loDiff),
-          Scalar(upDiff, upDiff, upDiff), flags);
-    }
-    //circle(receivedImage, seedList[j].seed, 5, 255, -1);
-  }
-  for(int i=0;i<receivedImage.rows;i++) {
-    for(int j=0;j<receivedImage.cols;j++) {
-      if(receivedImage.at<Vec3b>(i,j)[0] == 0) receivedImage.at<Vec3b>(i,j) = Vec3b(255,0,255);
-    }
-  }
-  receivedImage2 = imdecode(image2Buf, IMREAD_COLOR);
+  receivedImage2 = imdecode(image2Buf, CV_LOAD_IMAGE_COLOR);
   if(receivedImage2.empty()) {
     cout << "Only one image received\n";
-    seedList.clear();
     imageBuf.clear();
     image2Buf.clear();
     return;
   }
   resize(receivedImage2, receivedImage2, Size(), 2, 2, CV_INTER_CUBIC);
-  for(int i=0;i<receivedImage2.rows;i++) {
-    for(int j=0;j<receivedImage2.cols;j++) {
-      if(receivedImage2.at<Vec3b>(i,j)[0] < 170) receivedImage2.at<Vec3b>(i,j) = Vec3b(0,0,0);
-      else receivedImage2.at<Vec3b>(i,j) = Vec3b(255,255,255);
-    }
-  }
-  //erode( receivedImage2, receivedImage2, element );
-  seedList.clear();
+
+  initUndistortRectifyMap(K1, D1, R1, P1, receivedImage.size(), CV_32F, lmapx, lmapy);
+  initUndistortRectifyMap(K2, D2, R2, P2, receivedImage2.size(), CV_32F, rmapx, rmapy);
+  remap(receivedImage, receivedImage, lmapx, lmapy, cv::INTER_LINEAR);
+  remap(receivedImage2, receivedImage2, rmapx, rmapy, cv::INTER_LINEAR);
+
+  left_for_matcher  = receivedImage.clone();
+  right_for_matcher = receivedImage2.clone();
+
+  Ptr<StereoBM> left_matcher = StereoBM::create(max_disp,wsize);
+  wls_filter = createDisparityWLSFilter(left_matcher);
+  Ptr<StereoMatcher> right_matcher = createRightMatcher(left_matcher);
+
+  cvtColor(left_for_matcher,  left_for_matcher,  COLOR_BGR2GRAY);
+  cvtColor(right_for_matcher, right_for_matcher, COLOR_BGR2GRAY);
+  left_matcher-> compute(left_for_matcher, right_for_matcher,left_disp);
+  right_matcher->compute(right_for_matcher,left_for_matcher, right_disp);
+  wls_filter->setLambda(lambda);
+  wls_filter->setSigmaColor(sigma);
+  wls_filter->filter(left_disp,left_for_matcher,filtered_disp,right_disp);
+  getDisparityVis(filtered_disp,filtered_disp_vis,vis_mult);
+
   imageBuf.clear();
   image2Buf.clear();
   showm.lock();
   showBuf.push_back(receivedImage);
   showBuf.push_back(receivedImage2);
+  showBuf.push_back(filtered_disp_vis);
   showm.unlock();
 }
 
@@ -255,6 +216,7 @@ void UDPReceive()
   addressReceived = 1;
   if (recvlen > 0) ReceivePoints();
   cvMoveWindow( "Edge Map 2", receivedImage.cols + 70, 40 );
+  cvMoveWindow( "Depth", 0, receivedImage.rows + 70 );
   while(!finished)
   {
     //printf("waiting on port %d\n", SERVICE_PORT);
@@ -292,6 +254,20 @@ int main( int argc, char** argv )
     return 0;
   }
 
+  FileStorage fs1("cam_stereo.yml", cv::FileStorage::READ);
+  fs1["K1"] >> K1;
+  fs1["K2"] >> K2;
+  fs1["D1"] >> D1;
+  fs1["D2"] >> D2;
+  fs1["R"] >> R;
+  fs1["T"] >> T;
+
+  fs1["R1"] >> R1;
+  fs1["R2"] >> R2;
+  fs1["P1"] >> P1;
+  fs1["P2"] >> P2;
+  fs1["Q"] >> Q;
+
   GamepadInit();
 
   t = thread(UDPReceive);
@@ -301,22 +277,27 @@ int main( int argc, char** argv )
   cvMoveWindow( "Edge Map", 0, 40 ); 
   namedWindow("Edge Map 2", 1);
   cvMoveWindow( "Edge Map 2",  500, 40 );
+  namedWindow("Depth", 1);
+  cvMoveWindow( "Depth",  40, 500 );
   receivedImage.create(200,200,CV_8UC3);
   receivedImage2.create(200,200,CV_8UC3);
 
-  Mat leftDisplay, rightDisplay;
+  Mat leftDisplay, rightDisplay, disp;
 
   /// Wait until user exit program by pressing a key
   int k;
   do{
     showm.lock();
     if(showBuf.size() > 0) {
+      disp = showBuf.back();
+      showBuf.pop_back();
       rightDisplay = showBuf.back();
       showBuf.pop_back();
       leftDisplay = showBuf.back();
       showBuf.pop_back();
       imshow( "Edge Map", leftDisplay ); 
       imshow( "Edge Map 2", rightDisplay ); 
+      imshow( "Depth", disp ); 
     }
     showm.unlock();
   	/// Wait until user exit program by pressing a key
