@@ -18,8 +18,6 @@
 #include <pigpio.h>
 #include <wiringSerial.h>
 
-#include "compressor.h"
-#include "FloodFill.h"
 #include "sensor.h"
 
 #define GPIO_DIR_L 8
@@ -45,68 +43,48 @@
 #define Y_AXIS_BOT_LIM 18000
 #define MAX_Y 5000
 
-#define GYRO_X_THRESHOLD 40
-#define GYRO_X_GAIN 70
-#define GYRO_Y_THRESHOLD 0
-#define GYRO_Y_GAIN 1
-
 using namespace cv;
 using namespace std;
 
 #define SERVICE_PORT  21234
-#define BUFLEN 40960
+#define BUFLEN 409600
 #define RECEIVEBUFLEN 16
 
-#define FRAMERATE 15
+#define FRAMERATE 30
 #define POINTSPERTHREAD 20
 
-Mat tmp_frame, reduced_frame, dst_out;
+Mat tmp_frame, reduced_frame;
 Mat tmp_frame2, reduced_frame2;
-Mat dst, dst2;
 
-thread t[4];
-thread capturet;
-thread process2t;
-thread out;
 thread control;
 int finished = 0;
-int threadProcessing[4] = {0,0,0,0};
 int driving = 0;
-mutex waitm;
-mutex bufm;
-mutex capwaitm;
-mutex proc2waitm;
-mutex outwaitm;
 mutex controlm;
-condition_variable conVar;
-condition_variable conVar1;
-condition_variable capVar;
-condition_variable proc2Var;
-condition_variable outVar;
 condition_variable controlVar;
-
-vector<Mat> cap2mainBuf;
-vector<Mat> cap2proc2Buf;
-vector<vector<unsigned char> > proc2outBuf;
-vector<vector<unsigned char> > main2outBuf;
 
 VideoCapture cap;
 VideoCapture cap2;
-
-Compressor compressor1;
-vector<int> compressionParams;
 
 struct sockaddr_in myaddr, remaddr;
 int fd, bufSize, k, recvlen;
 socklen_t slen=sizeof(remaddr);
 //char server[] = "10.42.0.1";
 uchar buf[BUFLEN];
-int bufLength;
 vector<unsigned char> dstBuf;
+vector<unsigned char> dst2Buf;
 uchar receiveBuf[RECEIVEBUFLEN];
 
 int nextLowThreshold = 30;
 int serial;
+
+vector<int> compressionParams;
+
+Mat R1, R2, P1, P2, Q;
+Mat K1, K2, R;
+Vec3d T;
+Mat D1, D2;
+Mat lmapx, lmapy, rmapx, rmapy;
+Mat imgU1, imgU2;
 
 void ReceiveUDP()
 {
@@ -241,126 +219,31 @@ void ReceiveUDP()
   }
 }
 
-void FindColoursThread(int corner, int sobolPoints)
+void MainProcess(int, void*)
 {
-  FloodFill filler = FloodFill(corner, sobolPoints, tmp_frame);
-  while(!finished)
-  {
-    {
-      unique_lock<mutex> lk(waitm);
-      while(threadProcessing[corner] != 1) conVar.wait(lk);
-      //cout << "running" << corner << endl;
-      lk.unlock();
-    }
-    if(finished) break;
-    filler.FindColours(dst, reduced_frame);
-    {
-      lock_guard<mutex> lk(waitm);
-      threadProcessing[corner] = 0;
-      //cout << "notified" << corner << endl;
-    }
-    conVar1.notify_one();
-  }
-}
+  
+  cap.grab();
+  cap2.grab();
+  cap.retrieve(tmp_frame);
+  cap2.retrieve(tmp_frame2);
+  /// Convert the image to grayscale
+  resize(tmp_frame, reduced_frame, Size(), 0.5, 0.5, CV_INTER_AREA);
+  resize(tmp_frame2, reduced_frame2, Size(), 0.5, 0.5, CV_INTER_AREA);
+  //remap(reduced_frame, reduced_frame, lmapx, lmapy, cv::INTER_LINEAR);
+  //remap(reduced_frame2, reduced_frame2, rmapx, rmapy, cv::INTER_LINEAR);
 
-void CaptureThread()
-{
-  Mat capture, capture2;
-  while(!finished)
-  {
-    {
-      //cout << "waiting cap\n";
-      unique_lock<mutex> lk(capwaitm);
-      while(cap2mainBuf.size() == 1 || cap2proc2Buf.size() == 1) capVar.wait(lk);
-      //cout << "notified cap\n";
-      lk.unlock();
-    }
-    cap.grab();
-    cap2.grab();
-    cap.retrieve(capture);
-    cap2.retrieve(capture2);
-    if( !(capture.empty() || capture2.empty())) {
-		{
-		  lock_guard<mutex> lk(capwaitm);
-		  cap2mainBuf.push_back(capture);
-		  //cout << "notified main\n";
-		}
-		capVar.notify_one();
-		{
-		  lock_guard<mutex> lk(proc2waitm);
-		  cap2proc2Buf.push_back(capture2);
-		  //cout << "notified main\n";
-		}
-		proc2Var.notify_one();
-	}
-    else cout << "capture empty\n";
-  }
-}
+  imshow( "Camera2", reduced_frame2 );
+  imshow( "Camera", reduced_frame );
 
-void Process2Thread()
-{
-  Compressor compressor2;
-  vector<unsigned char> tmpBuf;
-  while(!finished)
-  {
-    {
-      //cout << "waiting proc2\n";
-      unique_lock<mutex> lk(proc2waitm);
-      while(cap2proc2Buf.size() == 0 || proc2outBuf.size() > 0 || main2outBuf.size() > 0) proc2Var.wait(lk);
-      //cout << "notified proc2\n";
-      tmp_frame2 = cap2proc2Buf.back();
-      cap2proc2Buf.pop_back();
-      lk.unlock();
-    }
-    capVar.notify_one();
+  imencode(".jpg", reduced_frame, dstBuf, compressionParams);
+  imencode(".jpg", reduced_frame2, dst2Buf, compressionParams);
 
-    resize(tmp_frame2, reduced_frame2, Size(), 0.5, 0.5, CV_INTER_AREA);
-    cvtColor( reduced_frame2, dst2, CV_BGR2GRAY );
-    
-    compressor2.SetLowThreshold(nextLowThreshold);
-    compressor2.CannyThreshold(dst2);
-    //dst2Buf = compressor2.CompressImage(dst2);
-    imencode(".png", dst2, tmpBuf, compressionParams);
-    {
-      lock_guard<mutex> lk(outwaitm);
-      proc2outBuf.push_back(tmpBuf);
-      //cout << "notified proc2\n";
-    }
-    outVar.notify_one();
-    //cout << "proc2 waiting\n";
-  }
-}
-
-void OutThread()
-{
-  vector<unsigned char> dst_outBuf;
-  vector<unsigned char> dst2Buf;
-  while(!finished)
-  {
-    {
-      //cout << "waiting out\n";
-      unique_lock<mutex> lk(outwaitm);
-      while(proc2outBuf.size() == 0 || main2outBuf.size() == 0) outVar.wait(lk);
-      //cout << "notified out\n";
-      dst2Buf = proc2outBuf.back();
-      proc2outBuf.pop_back();
-      dst_outBuf = main2outBuf.back();
-      main2outBuf.pop_back();
-      lk.unlock();
-    }
-    proc2Var.notify_one();
-    capVar.notify_one();
-    
-    for(int i=0;i<7;i++) buf[bufLength*7 + i] = i;
-    for(int i=0;i<dstBuf.size();i++) buf[bufLength*7 + 7 + i] = dstBuf[i];
-    for(int i=0;i<7;i++) buf[bufLength*7 + 7 + dstBuf.size() + i] = i;
-    for(int i=0;i<dst2Buf.size();i++) buf[bufLength*7 + 14 + dstBuf.size() + i] = dst2Buf[i];
-    //for(int i=0;i<14;i++) cout << (int)buf[bufLength*7 + 7 + dstBuf.size() + i] << endl;
-    bufSize = bufLength*7 + 14 + dstBuf.size() + dst2Buf.size();
-    //cout << bufSize << endl;
-    bufLength = 0;
-
-    if (sendto(fd, buf, bufSize, 0, (struct sockaddr *)&remaddr, slen)==-1) {
+  for(int i=0;i<dstBuf.size();i++) buf[i] = dstBuf[i];
+  for(int i=0;i<14;i++) buf[dstBuf.size() + i] = 0;
+  for(int i=0;i<dst2Buf.size();i++) buf[14 + dstBuf.size() + i] = dst2Buf[i];
+  bufSize = 14 + dstBuf.size() + dst2Buf.size();
+  //cout << bufSize << endl;
+  if (sendto(fd, buf, bufSize, 0, (struct sockaddr *)&remaddr, slen)==-1) {
       perror("sendto");
       {
         lock_guard<mutex> lk(controlm);
@@ -379,56 +262,6 @@ void OutThread()
       }
       controlVar.notify_one();
 	}
-    //cout << "sent\n";
-  }
-}
-
-void MainProcess(int, void*)
-{
-  {
-	//cout << "waiting main\n";
-    unique_lock<mutex> lk(capwaitm);
-    while(cap2mainBuf.size() == 0 || main2outBuf.size() > 0) capVar.wait(lk);
-    //cout << "notified main\n";
-    tmp_frame = cap2mainBuf.back();
-    cap2mainBuf.pop_back();
-    lk.unlock();
-  }
-  capVar.notify_one();
-
-  /// Convert the image to grayscale
-  resize(tmp_frame, reduced_frame, Size(), 0.5, 0.5, CV_INTER_AREA);
-  cvtColor( reduced_frame, dst, CV_BGR2GRAY );
-
-  compressor1.SetLowThreshold(nextLowThreshold);
-  compressor1.CannyThreshold(dst);
-  dst_out = dst.clone(); 
-  //imshow( "Edge Map", dst_out );
-  //imshow( "Camera", tmp_frame );
-  {
-    lock_guard<mutex> lk(waitm);
-    for(int i=0;i<4;i++) threadProcessing[i] = 1;
-    //cout << "notified fillers" << endl;
-  }
-  conVar.notify_all();
-  imencode(".png", dst_out, dstBuf, compressionParams);
-  //dstBuf = compressor1.CompressImage(dst_out);
-  //cout << output_file_size << endl;
-  { 
-    unique_lock<mutex> lk(waitm);
-    while(threadProcessing[0] == 1 || threadProcessing[1] == 1 
-      || threadProcessing[2] == 1 || threadProcessing[3] == 1) 
-      conVar1.wait(lk);
-    //cout << "fillers receieved" << endl;
-    lk.unlock();
-  }
-  {
-    lock_guard<mutex> lk(outwaitm);
-    main2outBuf.push_back(dstBuf);
-    //cout << "notified main2out\n";
-  }
-  outVar.notify_one();
-  //cout << "main waiting\n";
  }
 
 int main( int argc, char** argv )
@@ -466,10 +299,8 @@ int main( int argc, char** argv )
     exit(1);
   }
   
-  compressionParams.push_back(IMWRITE_PNG_BILEVEL);
-  compressionParams.push_back(1);
-  compressionParams.push_back(IMWRITE_PNG_COMPRESSION);
-  compressionParams.push_back(5);
+  compressionParams.push_back(CV_IMWRITE_JPEG_QUALITY);
+  compressionParams.push_back(60);
 
   cap2.open(2);
   if( !cap2.isOpened() )
@@ -488,7 +319,6 @@ int main( int argc, char** argv )
   cap.set(CV_CAP_PROP_FPS, FRAMERATE);
   int FPS = cap.get(CV_CAP_PROP_FPS);
   cout << "FPS Limit: " << FPS << endl;
-  cout << "Low Threshold: " << compressor1.GetLowThreshold() << endl;
   cout << "Points per thread: " << POINTSPERTHREAD << endl;
   cap >> tmp_frame;
   if(tmp_frame.empty())
@@ -502,20 +332,32 @@ int main( int argc, char** argv )
       printf("can not read data from the video source 2\n");
       return -1;
   }
+  /*resize(tmp_frame, reduced_frame, Size(), 0.5, 0.5, CV_INTER_AREA);
+  
+  cv::FileStorage fs1("cam_stereo.yml", cv::FileStorage::READ);
+  fs1["K1"] >> K1;
+  fs1["K2"] >> K2;
+  fs1["D1"] >> D1;
+  fs1["D2"] >> D2;
+  fs1["R"] >> R;
+  fs1["T"] >> T;
+
+  fs1["R1"] >> R1;
+  fs1["R2"] >> R2;
+  fs1["P1"] >> P1;
+  fs1["P2"] >> P2;
+  fs1["Q"] >> Q;
+  initUndistortRectifyMap(K1, D1, R1, P1, reduced_frame.size(), CV_32F, lmapx, lmapy);
+  initUndistortRectifyMap(K2, D2, R2, P2, reduced_frame.size(), CV_32F, rmapx, rmapy);*/
 
   //namedWindow( "Edge Map", 1 );
   //cvMoveWindow( "Edge Map", 0, 40 );
   namedWindow("Camera", 1);
-  cvMoveWindow( "Camera", tmp_frame.cols + 20, 40 );
-  //namedWindow("Camera2", 1);
-  //cvMoveWindow( "Camera2", 20, tmp_frame.rows + 40 );
+  namedWindow("Camera2", 1);
+  cvMoveWindow( "Camera2", tmp_frame.cols/2 + 20, 40 );
 
-  capturet = thread(CaptureThread);
-  process2t = thread(Process2Thread);
-  out = thread(OutThread);
   control = thread(ReceiveUDP);
-  for(int i=0;i<4;i++) t[i] = thread(FindColoursThread, i, POINTSPERTHREAD);
-
+  cout << "starting\n";
   for(;;)
   {
     MainProcess(0, 0);
@@ -527,37 +369,6 @@ int main( int argc, char** argv )
         }
   }
   finished = 1;
-  {
-    lock_guard<mutex> lk(waitm);
-    for(int i=0;i<4;i++) threadProcessing[i] = 1;
-  }
-  conVar.notify_all();
-  for(int i=0;i<4;i++) t[i].join();
-  cout << "Fill threads joined\n";
-  {
-    lock_guard<mutex> lk(capwaitm);
-    if(cap2mainBuf.size() > 0) cap2mainBuf.pop_back();
-  }
-  capVar.notify_one();
-  capturet.join();
-  cout << "Capture thread joined\n";
-  {
-    lock_guard<mutex> lk(proc2waitm);
-    if(cap2proc2Buf.size() == 0) cap2proc2Buf.push_back(tmp_frame2);
-    if(proc2outBuf.size() > 0) proc2outBuf.pop_back();
-  }
-  proc2Var.notify_one();
-  process2t.join();
-  cout << "Proc2 thread joined\n";
-  {
-    lock_guard<mutex> lk(outwaitm);
-    vector<unsigned char> empt;
-    if(main2outBuf.size() == 0) main2outBuf.push_back(empt);
-    if(proc2outBuf.size() == 0) proc2outBuf.push_back(empt);
-  }
-  outVar.notify_one();
-  out.join();
-  cout << "out thread joined\n";
   shutdown(fd, SHUT_RDWR);
   close(fd);
   control.join();

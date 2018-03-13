@@ -1,0 +1,3 @@
+/home/pi/VRproj-U/SystemTests/AbstractSend/CMakeFiles/rebuild_cache.dir
+/home/pi/VRproj-U/SystemTests/AbstractSend/CMakeFiles/edit_cache.dir
+/home/pi/VRproj-U/SystemTests/AbstractSend/CMakeFiles/CannyDetector_demo.dir

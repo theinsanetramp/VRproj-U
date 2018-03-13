@@ -1,0 +1,32 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/adam/Documents/VRproj/VRproj-U/UDPTests/CamSendThreaded/lodepng.c
+lodepng.h
+/home/adam/Documents/VRproj/VRproj-U/UDPTests/CamSendThreaded/lodepng.h
+limits.h
+-
+stdio.h
+-
+stdlib.h
+-
+
+/home/adam/Documents/VRproj/VRproj-U/UDPTests/CamSendThreaded/lodepng.h
+string.h
+-
+vector
+-
+string
+-
+lodepng.h
+/home/adam/Documents/VRproj/VRproj-U/UDPTests/CamSendThreaded/lodepng.h
+iostream
+-
+lodepng.h
+/home/adam/Documents/VRproj/VRproj-U/UDPTests/CamSendThreaded/lodepng.h
+
