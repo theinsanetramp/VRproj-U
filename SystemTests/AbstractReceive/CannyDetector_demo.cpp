@@ -2,6 +2,7 @@
 #include "opencv2/highgui/highgui.hpp"
 #include "opencv2/imgcodecs.hpp"
 #include "opencv2/videoio.hpp"
+#include "opencv2/ximgproc/disparity_filter.hpp"
 #include "sobol.h"
 #include <stdlib.h>
 #include <stdio.h>
@@ -16,6 +17,7 @@
 #include "gamepad.h"
 
 using namespace cv;
+using namespace cv::ximgproc;
 using namespace std;
 
 #define SERVICE_PORT  21234
@@ -23,6 +25,11 @@ using namespace std;
 
 Mat receivedImage;
 Mat receivedImage2;
+Mat colouredImage;
+Mat left_for_matcher, right_for_matcher;
+Mat filtered_disp_vis;
+Mat left_disp,right_disp;
+Mat filtered_disp;
 
 thread t;
 thread control;
@@ -62,6 +69,19 @@ uchar controlBuf[6];
 
 vector<uchar> imageBuf;
 vector<uchar> image2Buf;
+
+Mat R1, R2, P1, P2, Q;
+Mat K1, K2, R;
+Vec3d T;
+Mat D1, D2;
+Mat lmapx, lmapy, rmapx, rmapy;
+
+int wsize = 15;
+int max_disp = 64;
+double lambda = 40000;
+double sigma = 1;
+double vis_mult = 1.5;
+Ptr<DisparityWLSFilter> wls_filter;
 
 void SendControl()
 {
@@ -109,14 +129,17 @@ void SendControl()
           controlBuf[4] = Y[j]/258;
         }
       }
+      if(threshDown && !threshUp) {
+        lowThreshold--;
+        cout << "Next low threshold: " << (int)lowThreshold << endl;
+      }
+      if(threshUp && !threshDown) {
+        lowThreshold++;
+        cout << "Next low threshold: " << (int)lowThreshold << endl;
+      }
     }
-    if(threshDown && !threshUp) {
-      lowThreshold--;
-      cout << "Next low threshold: " << (int)lowThreshold << endl;
-    }
-    if(threshUp && !threshDown) {
-      lowThreshold++;
-      cout << "Next low threshold: " << (int)lowThreshold << endl;
+    else {
+      for(int i=0;i<6;i++) controlBuf[i] = 0;
     }
     controlBuf[2] = lowThreshold;
     //for(int i=0;i<4;i++) cout << (int)controlBuf[i] << " ";
@@ -195,33 +218,6 @@ void ReceivePoints()
     image2Buf.clear();
     return;
   }
-  resize(receivedImage, receivedImage, Size(), 2, 2, CV_INTER_CUBIC);
-  for(int i=0;i<receivedImage.rows;i++) {
-    for(int j=0;j<receivedImage.cols;j++) {
-      if(receivedImage.at<Vec3b>(i,j)[0] < 170) receivedImage.at<Vec3b>(i,j) = Vec3b(0,0,0);
-      else receivedImage.at<Vec3b>(i,j) = Vec3b(255,255,255);
-    }
-  }
-  //erode( receivedImage, receivedImage, element );
-  //cout << seedList.size() << endl;
-  for(int j=0;j<seedList.size();j++)
-  {
-    seedList[j].seed.x = seedList[j].seed.x*2;
-    seedList[j].seed.y = seedList[j].seed.y*2;
-    if(receivedImage.at<Vec3b>(seedList[j].seed)[0] == 0 && 
-      receivedImage.at<Vec3b>(seedList[j].seed)[1] == 0 && 
-      receivedImage.at<Vec3b>(seedList[j].seed)[2] == 0)
-    { 
-      floodFill(receivedImage, seedList[j].seed, seedList[j].colour, &ccomp, Scalar(loDiff, loDiff, loDiff),
-          Scalar(upDiff, upDiff, upDiff), flags);
-    }
-    //circle(receivedImage, seedList[j].seed, 5, 255, -1);
-  }
-  for(int i=0;i<receivedImage.rows;i++) {
-    for(int j=0;j<receivedImage.cols;j++) {
-      if(receivedImage.at<Vec3b>(i,j)[0] == 0) receivedImage.at<Vec3b>(i,j) = Vec3b(255,0,255);
-    }
-  }
   receivedImage2 = imdecode(image2Buf, IMREAD_COLOR);
   if(receivedImage2.empty()) {
     cout << "Only one image received\n";
@@ -230,20 +226,74 @@ void ReceivePoints()
     image2Buf.clear();
     return;
   }
-  resize(receivedImage2, receivedImage2, Size(), 2, 2, CV_INTER_CUBIC);
-  for(int i=0;i<receivedImage2.rows;i++) {
-    for(int j=0;j<receivedImage2.cols;j++) {
-      if(receivedImage2.at<Vec3b>(i,j)[0] < 170) receivedImage2.at<Vec3b>(i,j) = Vec3b(0,0,0);
-      else receivedImage2.at<Vec3b>(i,j) = Vec3b(255,255,255);
+
+  colouredImage = receivedImage.clone();
+  dilate( colouredImage, colouredImage, element );
+  //erode( colouredImage, colouredImage, element );
+  resize(colouredImage, colouredImage, Size(), 2, 2, CV_INTER_CUBIC);
+  for(int i=0;i<colouredImage.rows;i++) {
+    for(int j=0;j<colouredImage.cols;j++) {
+      if(colouredImage.at<Vec3b>(i,j)[0] < 170) colouredImage.at<Vec3b>(i,j) = Vec3b(0,0,0);
+      else colouredImage.at<Vec3b>(i,j) = Vec3b(255,255,255);
     }
   }
-  //erode( receivedImage2, receivedImage2, element );
+  //cout << seedList.size() << endl;
+  for(int j=0;j<seedList.size();j++)
+  {
+    seedList[j].seed.x = seedList[j].seed.x*2;
+    seedList[j].seed.y = seedList[j].seed.y*2;
+    if(colouredImage.at<Vec3b>(seedList[j].seed)[0] == 0 && 
+      colouredImage.at<Vec3b>(seedList[j].seed)[1] == 0 && 
+      colouredImage.at<Vec3b>(seedList[j].seed)[2] == 0)
+    { 
+      floodFill(colouredImage, seedList[j].seed, seedList[j].colour, &ccomp, Scalar(loDiff, loDiff, loDiff),
+          Scalar(upDiff, upDiff, upDiff), flags);
+    }
+    circle(receivedImage, seedList[j].seed, 5, (0,0,255), -1);
+  }
+  for(int i=0;i<colouredImage.rows;i++) {
+    for(int j=0;j<colouredImage.cols;j++) {
+      if(colouredImage.at<Vec3b>(i,j)[0] == 0) colouredImage.at<Vec3b>(i,j) = Vec3b(255,0,255);
+    }
+  }
+
+  resize(receivedImage, receivedImage, Size(), 2, 2, CV_INTER_CUBIC);
+  resize(receivedImage2, receivedImage2, Size(), 2, 2, CV_INTER_CUBIC);
+  // for(int i=0;i<receivedImage2.rows;i++) {
+  //   for(int j=0;j<receivedImage2.cols;j++) {
+  //     if(receivedImage2.at<Vec3b>(i,j)[0] < 170) receivedImage2.at<Vec3b>(i,j) = Vec3b(0,0,0);
+  //     else receivedImage2.at<Vec3b>(i,j) = Vec3b(255,255,255);
+  //   }
+  // }
+
+  // initUndistortRectifyMap(K1, D1, R1, P1, receivedImage.size(), CV_32F, lmapx, lmapy);
+  // initUndistortRectifyMap(K2, D2, R2, P2, receivedImage2.size(), CV_32F, rmapx, rmapy);
+  // remap(receivedImage, receivedImage, lmapx, lmapy, cv::INTER_LINEAR);
+  // remap(receivedImage2, receivedImage2, rmapx, rmapy, cv::INTER_LINEAR);
+
+  // left_for_matcher  = receivedImage.clone();
+  // right_for_matcher = receivedImage2.clone();
+
+  // Ptr<StereoBM> left_matcher = StereoBM::create(max_disp,wsize);
+  // wls_filter = createDisparityWLSFilter(left_matcher);
+  // Ptr<StereoMatcher> right_matcher = createRightMatcher(left_matcher);
+
+  // cvtColor(left_for_matcher,  left_for_matcher,  COLOR_BGR2GRAY);
+  // cvtColor(right_for_matcher, right_for_matcher, COLOR_BGR2GRAY);
+  // left_matcher-> compute(left_for_matcher, right_for_matcher,left_disp);
+  // right_matcher->compute(right_for_matcher,left_for_matcher, right_disp);
+  // wls_filter->setLambda(lambda);
+  // wls_filter->setSigmaColor(sigma);
+  // wls_filter->filter(left_disp,left_for_matcher,filtered_disp,right_disp);
+  // getDisparityVis(filtered_disp,filtered_disp_vis,vis_mult);
+
   seedList.clear();
   imageBuf.clear();
   image2Buf.clear();
   showm.lock();
-  showBuf.push_back(receivedImage);
+  showBuf.push_back(colouredImage);
   showBuf.push_back(receivedImage2);
+  showBuf.push_back(filtered_disp_vis);
   showm.unlock();
 }
 
@@ -255,6 +305,7 @@ void UDPReceive()
   addressReceived = 1;
   if (recvlen > 0) ReceivePoints();
   cvMoveWindow( "Edge Map 2", receivedImage.cols + 70, 40 );
+   cvMoveWindow( "Depth", 0, receivedImage.rows + 70 );
   while(!finished)
   {
     //printf("waiting on port %d\n", SERVICE_PORT);
@@ -292,6 +343,20 @@ int main( int argc, char** argv )
     return 0;
   }
 
+  FileStorage fs1("cam_stereo.yml", cv::FileStorage::READ);
+  fs1["K1"] >> K1;
+  fs1["K2"] >> K2;
+  fs1["D1"] >> D1;
+  fs1["D2"] >> D2;
+  fs1["R"] >> R;
+  fs1["T"] >> T;
+
+  fs1["R1"] >> R1;
+  fs1["R2"] >> R2;
+  fs1["P1"] >> P1;
+  fs1["P2"] >> P2;
+  fs1["Q"] >> Q;
+
   GamepadInit();
 
   t = thread(UDPReceive);
@@ -301,22 +366,27 @@ int main( int argc, char** argv )
   cvMoveWindow( "Edge Map", 0, 40 ); 
   namedWindow("Edge Map 2", 1);
   cvMoveWindow( "Edge Map 2",  500, 40 );
+  namedWindow("Depth", 1);
+  cvMoveWindow( "Depth",  40, 500 );
   receivedImage.create(200,200,CV_8UC3);
   receivedImage2.create(200,200,CV_8UC3);
 
-  Mat leftDisplay, rightDisplay;
+  Mat leftDisplay, rightDisplay, disp;
 
   /// Wait until user exit program by pressing a key
   int k;
   do{
     showm.lock();
     if(showBuf.size() > 0) {
+      disp = showBuf.back();
+      showBuf.pop_back();
       rightDisplay = showBuf.back();
       showBuf.pop_back();
       leftDisplay = showBuf.back();
       showBuf.pop_back();
       imshow( "Edge Map", leftDisplay ); 
       imshow( "Edge Map 2", rightDisplay ); 
+      //imshow( "Depth", disp );
     }
     showm.unlock();
   	/// Wait until user exit program by pressing a key

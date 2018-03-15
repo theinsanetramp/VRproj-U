@@ -144,6 +144,7 @@ CMakeFiles/CannyDetector_demo.dir/CannyDetector_demo.cpp.o
  /usr/local/include/opencv2/viz/vizcore.hpp
  /usr/local/include/opencv2/viz/widgets.hpp
  /usr/local/include/opencv2/xfeatures2d/cuda.hpp
+ /usr/local/include/opencv2/ximgproc/disparity_filter.hpp
 CMakeFiles/CannyDetector_demo.dir/sobol.cpp.o
  /home/adam/Documents/VRproj/VRproj-U/SystemTests/AbstractReceive/sobol.cpp
  /home/adam/Documents/VRproj/VRproj-U/SystemTests/AbstractReceive/sobol.h

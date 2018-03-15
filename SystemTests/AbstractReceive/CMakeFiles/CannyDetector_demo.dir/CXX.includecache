@@ -15,6 +15,8 @@ opencv2/imgcodecs.hpp
 /home/adam/Documents/VRproj/VRproj-U/SystemTests/AbstractReceive/opencv2/imgcodecs.hpp
 opencv2/videoio.hpp
 /home/adam/Documents/VRproj/VRproj-U/SystemTests/AbstractReceive/opencv2/videoio.hpp
+opencv2/ximgproc/disparity_filter.hpp
+/home/adam/Documents/VRproj/VRproj-U/SystemTests/AbstractReceive/opencv2/ximgproc/disparity_filter.hpp
 sobol.h
 /home/adam/Documents/VRproj/VRproj-U/SystemTests/AbstractReceive/sobol.h
 stdlib.h
@@ -1407,4 +1409,10 @@ opencv2/viz/types.hpp
 /usr/local/include/opencv2/xfeatures2d/cuda.hpp
 opencv2/core/cuda.hpp
 /usr/local/include/opencv2/xfeatures2d/opencv2/core/cuda.hpp
+
+/usr/local/include/opencv2/ximgproc/disparity_filter.hpp
+opencv2/core.hpp
+-
+opencv2/calib3d.hpp
+-
 

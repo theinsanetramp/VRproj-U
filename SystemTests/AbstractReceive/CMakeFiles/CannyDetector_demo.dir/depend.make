@@ -143,6 +143,7 @@ CMakeFiles/CannyDetector_demo.dir/CannyDetector_demo.cpp.o: /usr/local/include/o
 CMakeFiles/CannyDetector_demo.dir/CannyDetector_demo.cpp.o: /usr/local/include/opencv2/viz/vizcore.hpp
 CMakeFiles/CannyDetector_demo.dir/CannyDetector_demo.cpp.o: /usr/local/include/opencv2/viz/widgets.hpp
 CMakeFiles/CannyDetector_demo.dir/CannyDetector_demo.cpp.o: /usr/local/include/opencv2/xfeatures2d/cuda.hpp
+CMakeFiles/CannyDetector_demo.dir/CannyDetector_demo.cpp.o: /usr/local/include/opencv2/ximgproc/disparity_filter.hpp
 
 CMakeFiles/CannyDetector_demo.dir/sobol.cpp.o: sobol.cpp
 CMakeFiles/CannyDetector_demo.dir/sobol.cpp.o: sobol.h
