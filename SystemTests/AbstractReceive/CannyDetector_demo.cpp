@@ -30,6 +30,7 @@ Mat left_for_matcher, right_for_matcher;
 Mat filtered_disp_vis;
 Mat left_disp,right_disp;
 Mat filtered_disp;
+Mat weighted_map, output_map;
 
 thread t;
 thread control;
@@ -77,10 +78,10 @@ Mat D1, D2;
 Mat lmapx, lmapy, rmapx, rmapy;
 
 int wsize = 15;
-int max_disp = 64;
-double lambda = 40000;
-double sigma = 1;
-double vis_mult = 1.5;
+int max_disp = 32;
+double lambda = 1000;
+double sigma = 3.5;
+double vis_mult = 3;
 Ptr<DisparityWLSFilter> wls_filter;
 
 void SendControl()
@@ -230,18 +231,17 @@ void ReceivePoints()
   colouredImage = receivedImage.clone();
   dilate( colouredImage, colouredImage, element );
   //erode( colouredImage, colouredImage, element );
-  resize(colouredImage, colouredImage, Size(), 2, 2, CV_INTER_CUBIC);
-  for(int i=0;i<colouredImage.rows;i++) {
-    for(int j=0;j<colouredImage.cols;j++) {
-      if(colouredImage.at<Vec3b>(i,j)[0] < 170) colouredImage.at<Vec3b>(i,j) = Vec3b(0,0,0);
-      else colouredImage.at<Vec3b>(i,j) = Vec3b(255,255,255);
-    }
-  }
+  // for(int i=0;i<colouredImage.rows;i++) {
+  //   for(int j=0;j<colouredImage.cols;j++) {
+  //     if(colouredImage.at<Vec3b>(i,j)[0] < 170) colouredImage.at<Vec3b>(i,j) = Vec3b(0,0,0);
+  //     else colouredImage.at<Vec3b>(i,j) = Vec3b(255,255,255);
+  //   }
+  // }
   //cout << seedList.size() << endl;
   for(int j=0;j<seedList.size();j++)
   {
-    seedList[j].seed.x = seedList[j].seed.x*2;
-    seedList[j].seed.y = seedList[j].seed.y*2;
+    //seedList[j].seed.x = seedList[j].seed.x*2;
+    //seedList[j].seed.y = seedList[j].seed.y*2;
     if(colouredImage.at<Vec3b>(seedList[j].seed)[0] == 0 && 
       colouredImage.at<Vec3b>(seedList[j].seed)[1] == 0 && 
       colouredImage.at<Vec3b>(seedList[j].seed)[2] == 0)
@@ -249,7 +249,7 @@ void ReceivePoints()
       floodFill(colouredImage, seedList[j].seed, seedList[j].colour, &ccomp, Scalar(loDiff, loDiff, loDiff),
           Scalar(upDiff, upDiff, upDiff), flags);
     }
-    circle(receivedImage, seedList[j].seed, 5, (0,0,255), -1);
+    //circle(colouredImage, seedList[j].seed, 5, (0,0,255), -1);
   }
   for(int i=0;i<colouredImage.rows;i++) {
     for(int j=0;j<colouredImage.cols;j++) {
@@ -257,35 +257,42 @@ void ReceivePoints()
     }
   }
 
-  resize(receivedImage, receivedImage, Size(), 2, 2, CV_INTER_CUBIC);
-  resize(receivedImage2, receivedImage2, Size(), 2, 2, CV_INTER_CUBIC);
+  //resize(receivedImage, receivedImage, Size(), 2, 2, CV_INTER_CUBIC);
+  //resize(receivedImage2, receivedImage2, Size(), 2, 2, CV_INTER_CUBIC);
   // for(int i=0;i<receivedImage2.rows;i++) {
   //   for(int j=0;j<receivedImage2.cols;j++) {
   //     if(receivedImage2.at<Vec3b>(i,j)[0] < 170) receivedImage2.at<Vec3b>(i,j) = Vec3b(0,0,0);
   //     else receivedImage2.at<Vec3b>(i,j) = Vec3b(255,255,255);
   //   }
   // }
+  remap(colouredImage, colouredImage, lmapx, lmapy, cv::INTER_LINEAR);
+  resize(colouredImage, colouredImage, Size(), 2, 2, CV_INTER_CUBIC);
 
-  // initUndistortRectifyMap(K1, D1, R1, P1, receivedImage.size(), CV_32F, lmapx, lmapy);
-  // initUndistortRectifyMap(K2, D2, R2, P2, receivedImage2.size(), CV_32F, rmapx, rmapy);
-  // remap(receivedImage, receivedImage, lmapx, lmapy, cv::INTER_LINEAR);
-  // remap(receivedImage2, receivedImage2, rmapx, rmapy, cv::INTER_LINEAR);
+  remap(receivedImage, receivedImage, lmapx, lmapy, cv::INTER_LINEAR);
+  remap(receivedImage2, receivedImage2, rmapx, rmapy, cv::INTER_LINEAR);
 
-  // left_for_matcher  = receivedImage.clone();
-  // right_for_matcher = receivedImage2.clone();
+  left_for_matcher  = receivedImage.clone();
+  right_for_matcher = receivedImage2.clone();
 
-  // Ptr<StereoBM> left_matcher = StereoBM::create(max_disp,wsize);
-  // wls_filter = createDisparityWLSFilter(left_matcher);
-  // Ptr<StereoMatcher> right_matcher = createRightMatcher(left_matcher);
+  Ptr<StereoBM> left_matcher = StereoBM::create(max_disp,wsize);
+  wls_filter = createDisparityWLSFilter(left_matcher);
+  Ptr<StereoMatcher> right_matcher = createRightMatcher(left_matcher);
 
-  // cvtColor(left_for_matcher,  left_for_matcher,  COLOR_BGR2GRAY);
-  // cvtColor(right_for_matcher, right_for_matcher, COLOR_BGR2GRAY);
-  // left_matcher-> compute(left_for_matcher, right_for_matcher,left_disp);
-  // right_matcher->compute(right_for_matcher,left_for_matcher, right_disp);
-  // wls_filter->setLambda(lambda);
-  // wls_filter->setSigmaColor(sigma);
-  // wls_filter->filter(left_disp,left_for_matcher,filtered_disp,right_disp);
-  // getDisparityVis(filtered_disp,filtered_disp_vis,vis_mult);
+  cvtColor(left_for_matcher,  left_for_matcher,  COLOR_BGR2GRAY);
+  cvtColor(right_for_matcher, right_for_matcher, COLOR_BGR2GRAY);
+  left_matcher-> compute(left_for_matcher, right_for_matcher,left_disp);
+  right_matcher->compute(right_for_matcher,left_for_matcher, right_disp);
+  wls_filter->setLambda(lambda);
+  wls_filter->setSigmaColor(sigma);
+  wls_filter->filter(left_disp,left_for_matcher,filtered_disp,right_disp);
+  getDisparityVis(filtered_disp,filtered_disp_vis,vis_mult);
+
+  accumulateWeighted(filtered_disp_vis, weighted_map, 0.5);
+  convertScaleAbs(weighted_map, output_map);
+
+  //resize(receivedImage, receivedImage, Size(), 2, 2, CV_INTER_CUBIC);
+  resize(receivedImage2, receivedImage2, Size(), 2, 2, CV_INTER_CUBIC);
+  resize(output_map, output_map, Size(), 2, 2, CV_INTER_CUBIC);
 
   seedList.clear();
   imageBuf.clear();
@@ -293,7 +300,7 @@ void ReceivePoints()
   showm.lock();
   showBuf.push_back(colouredImage);
   showBuf.push_back(receivedImage2);
-  showBuf.push_back(filtered_disp_vis);
+  showBuf.push_back(output_map);
   showm.unlock();
 }
 
@@ -304,8 +311,8 @@ void UDPReceive()
   printf("received %d bytes\n", recvlen);
   addressReceived = 1;
   if (recvlen > 0) ReceivePoints();
-  cvMoveWindow( "Edge Map 2", receivedImage.cols + 70, 40 );
-   cvMoveWindow( "Depth", 0, receivedImage.rows + 70 );
+  cvMoveWindow( "Edge Map 2", 2*receivedImage.cols + 70, 40 );
+  cvMoveWindow( "Depth", 0, 2*receivedImage.rows + 70 );
   while(!finished)
   {
     //printf("waiting on port %d\n", SERVICE_PORT);
@@ -368,8 +375,11 @@ int main( int argc, char** argv )
   cvMoveWindow( "Edge Map 2",  500, 40 );
   namedWindow("Depth", 1);
   cvMoveWindow( "Depth",  40, 500 );
-  receivedImage.create(200,200,CV_8UC3);
-  receivedImage2.create(200,200,CV_8UC3);
+  receivedImage.create(240,320,CV_8UC3);
+  receivedImage2.create(240,320,CV_8UC3);
+  weighted_map.create(240,320, CV_64FC1);
+  initUndistortRectifyMap(K1, D1, R1, P1, receivedImage.size(), CV_32F, lmapx, lmapy);
+  initUndistortRectifyMap(K2, D2, R2, P2, receivedImage2.size(), CV_32F, rmapx, rmapy);
 
   Mat leftDisplay, rightDisplay, disp;
 
@@ -386,7 +396,7 @@ int main( int argc, char** argv )
       showBuf.pop_back();
       imshow( "Edge Map", leftDisplay ); 
       imshow( "Edge Map 2", rightDisplay ); 
-      //imshow( "Depth", disp );
+      imshow( "Depth", disp );
     }
     showm.unlock();
   	/// Wait until user exit program by pressing a key
