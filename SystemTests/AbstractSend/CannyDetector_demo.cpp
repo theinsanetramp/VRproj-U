@@ -57,11 +57,11 @@ using namespace std;
 #define BUFLEN 40960
 #define RECEIVEBUFLEN 16
 
-#define FRAMERATE 15
-#define POINTSPERTHREAD 20
+#define FRAMERATE 60
+#define POINTSPERTHREAD 30
 
-Mat tmp_frame, reduced_frame, dst_out;
-Mat tmp_frame2, reduced_frame2;
+Mat tmp_frame, dst_out;
+Mat tmp_frame2;
 Mat dst, dst2;
 
 thread t[4];
@@ -95,6 +95,11 @@ VideoCapture cap2;
 
 Compressor compressor1;
 vector<int> compressionParams;
+int dilation_type = MORPH_RECT;
+int dilation_size = 1;
+Mat element = getStructuringElement( dilation_type,
+                                   Size( 2*dilation_size + 1, 2*dilation_size+1 ),
+                                   Point( dilation_size, dilation_size ) );
 
 struct sockaddr_in myaddr, remaddr;
 int fd, bufSize, k, recvlen;
@@ -253,7 +258,7 @@ void FindColoursThread(int corner, int sobolPoints)
       lk.unlock();
     }
     if(finished) break;
-    filler.FindColours(dst, reduced_frame);
+    filler.FindColours(dst, tmp_frame);
     {
       lock_guard<mutex> lk(waitm);
       threadProcessing[corner] = 0;
@@ -271,7 +276,7 @@ void CaptureThread()
     {
       //cout << "waiting cap\n";
       unique_lock<mutex> lk(capwaitm);
-      while(cap2mainBuf.size() == 1 || cap2proc2Buf.size() == 1) capVar.wait(lk);
+      while(cap2mainBuf.size() > 0 || cap2proc2Buf.size() > 0) capVar.wait(lk);
       //cout << "notified cap\n";
       lk.unlock();
     }
@@ -283,14 +288,14 @@ void CaptureThread()
 		{
 		  lock_guard<mutex> lk(capwaitm);
 		  cap2mainBuf.push_back(capture);
-		  //cout << "notified main\n";
+		  //cout << "cap2mainBuf = " << cap2mainBuf.size() << endl;
 		}
-		capVar.notify_one();
 		{
 		  lock_guard<mutex> lk(proc2waitm);
 		  cap2proc2Buf.push_back(capture2);
-		  //cout << "notified main\n";
+		  //cout << "cap2proc2Buf = " << cap2proc2Buf.size() << endl;
 		}
+		capVar.notify_one();
 		proc2Var.notify_one();
 	}
     else cout << "capture empty\n";
@@ -309,13 +314,13 @@ void Process2Thread()
       while(cap2proc2Buf.size() == 0 || proc2outBuf.size() > 0 || main2outBuf.size() > 0) proc2Var.wait(lk);
       //cout << "notified proc2\n";
       tmp_frame2 = cap2proc2Buf.back();
-      cap2proc2Buf.pop_back();
+      cap2proc2Buf.clear();
+      //cout << "cap2proc2Buf = " << cap2proc2Buf.size() << endl;
       lk.unlock();
     }
-    capVar.notify_one();
+    capVar.notify_all();
 
-    resize(tmp_frame2, reduced_frame2, Size(), 0.5, 0.5, CV_INTER_AREA);
-    cvtColor( reduced_frame2, dst2, CV_BGR2GRAY );
+    cvtColor( tmp_frame2, dst2, CV_BGR2GRAY );
     
     compressor2.SetLowThreshold(nextLowThreshold);
     compressor2.CannyThreshold(dst2);
@@ -324,7 +329,7 @@ void Process2Thread()
     {
       lock_guard<mutex> lk(outwaitm);
       proc2outBuf.push_back(tmpBuf);
-      //cout << "notified proc2\n";
+      //cout << "proc2outBuf = " << proc2outBuf.size() << endl;
     }
     outVar.notify_one();
     //cout << "proc2 waiting\n";
@@ -343,13 +348,15 @@ void OutThread()
       while(proc2outBuf.size() == 0 || main2outBuf.size() == 0) outVar.wait(lk);
       //cout << "notified out\n";
       dst2Buf = proc2outBuf.back();
-      proc2outBuf.pop_back();
+      proc2outBuf.clear();
       dst_outBuf = main2outBuf.back();
-      main2outBuf.pop_back();
+      main2outBuf.clear();
+      //cout << "proc2outBuf = " << proc2outBuf.size() << endl;
+      //cout << "main2outBuf = " << main2outBuf.size() << endl;
       lk.unlock();
     }
     proc2Var.notify_one();
-    capVar.notify_one();
+    capVar.notify_all();
     
     for(int i=0;i<7;i++) buf[bufLength*7 + i] = i;
     for(int i=0;i<dstBuf.size();i++) buf[bufLength*7 + 7 + i] = dstBuf[i];
@@ -391,19 +398,21 @@ void MainProcess(int, void*)
     while(cap2mainBuf.size() == 0 || main2outBuf.size() > 0) capVar.wait(lk);
     //cout << "notified main\n";
     tmp_frame = cap2mainBuf.back();
-    cap2mainBuf.pop_back();
+    cap2mainBuf.clear();
+    //cout << "cap2mainBuf = " << cap2mainBuf.size() << endl;
     lk.unlock();
   }
   capVar.notify_one();
 
   /// Convert the image to grayscale
-  resize(tmp_frame, reduced_frame, Size(), 0.5, 0.5, CV_INTER_AREA);
-  cvtColor( reduced_frame, dst, CV_BGR2GRAY );
+  cvtColor( tmp_frame, dst, CV_BGR2GRAY );
 
   compressor1.SetLowThreshold(nextLowThreshold);
   compressor1.CannyThreshold(dst);
   dst_out = dst.clone(); 
-  //imshow( "Edge Map", dst_out );
+  dilate( dst, dst, element );
+  //erode( dst, dst, element );
+  //imshow( "Camera", dst_out );
   //imshow( "Camera", tmp_frame );
   {
     lock_guard<mutex> lk(waitm);
@@ -425,7 +434,7 @@ void MainProcess(int, void*)
   {
     lock_guard<mutex> lk(outwaitm);
     main2outBuf.push_back(dstBuf);
-    //cout << "notified main2out\n";
+    //cout << "main2outBuf = " << main2outBuf.size() << endl;
   }
   outVar.notify_one();
   //cout << "main waiting\n";
@@ -484,6 +493,10 @@ int main( int argc, char** argv )
       }
   }
   else cap.open(1);
+  cap.set(CV_CAP_PROP_FRAME_WIDTH,320);
+  cap.set(CV_CAP_PROP_FRAME_HEIGHT,240);
+  cap2.set(CV_CAP_PROP_FRAME_WIDTH,320);
+  cap2.set(CV_CAP_PROP_FRAME_HEIGHT,240);
   cap2.set(CV_CAP_PROP_FPS, FRAMERATE);
   cap.set(CV_CAP_PROP_FPS, FRAMERATE);
   int FPS = cap.get(CV_CAP_PROP_FPS);
@@ -536,15 +549,16 @@ int main( int argc, char** argv )
   cout << "Fill threads joined\n";
   {
     lock_guard<mutex> lk(capwaitm);
-    if(cap2mainBuf.size() > 0) cap2mainBuf.pop_back();
+    if(cap2mainBuf.size() > 0) cap2mainBuf.clear();
+    if(cap2proc2Buf.size() > 0) cap2proc2Buf.clear();
   }
-  capVar.notify_one();
+  capVar.notify_all();
   capturet.join();
   cout << "Capture thread joined\n";
   {
     lock_guard<mutex> lk(proc2waitm);
     if(cap2proc2Buf.size() == 0) cap2proc2Buf.push_back(tmp_frame2);
-    if(proc2outBuf.size() > 0) proc2outBuf.pop_back();
+    if(proc2outBuf.size() > 0) proc2outBuf.clear();
   }
   proc2Var.notify_one();
   process2t.join();

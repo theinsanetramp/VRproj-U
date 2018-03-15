@@ -26,7 +26,8 @@ void Compressor::CannyThreshold(Mat image)
     Canny( image, image, lowThreshold, lowThreshold*thresh_ratio, kernel_size );
 
     /// Apply the dilation operation
-    dilate( image, image, element );
+    //dilate( image, image, element );
+    //erode( image, image, element );
 }
 
 vector<unsigned char> Compressor::CompressImage(Mat image)

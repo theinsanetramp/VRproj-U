@@ -11,11 +11,11 @@ FloodFill::FloodFill(int corner, int points, Mat tmp_frame)
 	flags = connectivity + (newMaskVal << 8) +
                 FLOODFILL_FIXED_RANGE;
   alpha = 1.2;
-  flood_mask.create(tmp_frame.rows/2+2, tmp_frame.cols/2+2, CV_8UC1);
-  mean_mask.create(tmp_frame.rows/2, tmp_frame.cols/2, CV_8UC1);
+  flood_mask.create(tmp_frame.rows+2, tmp_frame.cols+2, CV_8UC1);
+  mean_mask.create(tmp_frame.rows, tmp_frame.cols, CV_8UC1);
 }
 
-void FloodFill::FindColours(Mat dst, Mat reduced_frame)
+void FloodFill::FindColours(Mat dst, Mat tmp_frame)
 {
   //Floodfill from quasi-random points
   for (unsigned long long i = 100 + sobolPoints*index; i < (100 + sobolPoints*(index+1)); i++)
@@ -30,7 +30,7 @@ void FloodFill::FindColours(Mat dst, Mat reduced_frame)
               Scalar(upDiff, upDiff, upDiff), 4 + (255 << 8));
       flood_mask(Rect(1,1,flood_mask.cols-2,flood_mask.rows-2)).copyTo(mean_mask);
       //cout << flood_mask.size() << mean_mask.size() << endl;
-      Scalar newVal = alpha*mean(reduced_frame,mean_mask);
+      Scalar newVal = alpha*mean(tmp_frame,mean_mask);
       if(newVal == Scalar(0,0,0)) newVal = Scalar(1,1,1);
       //cout << "processed" << index << endl;
       bufm.lock();
