@@ -12,6 +12,7 @@
 #include <condition_variable>
 #include <netdb.h>
 #include <sys/socket.h>
+#include <sys/time.h>
 #include <arpa/inet.h>
 #include <unistd.h>
 #include <wiringPi.h>
@@ -45,11 +46,6 @@
 #define Y_AXIS_BOT_LIM 18000
 #define MAX_Y 5000
 
-#define GYRO_X_THRESHOLD 40
-#define GYRO_X_GAIN 70
-#define GYRO_Y_THRESHOLD 0
-#define GYRO_Y_GAIN 1
-
 using namespace cv;
 using namespace std;
 
@@ -57,7 +53,7 @@ using namespace std;
 #define BUFLEN 40960
 #define RECEIVEBUFLEN 16
 
-#define FRAMERATE 20
+#define FRAMERATE 30
 #define POINTSPERTHREAD 30
 
 Mat tmp_frame, dst_out;
@@ -71,19 +67,16 @@ thread out;
 thread control;
 int finished = 0;
 int threadProcessing[4] = {0,0,0,0};
-int driving = 0;
 mutex waitm;
 mutex bufm;
 mutex capwaitm;
 mutex proc2waitm;
 mutex outwaitm;
-mutex controlm;
 condition_variable conVar;
 condition_variable conVar1;
 condition_variable capVar;
 condition_variable proc2Var;
 condition_variable outVar;
-condition_variable controlVar;
 
 vector<Mat> cap2mainBuf;
 vector<Mat> cap2proc2Buf;
@@ -124,8 +117,6 @@ void ReceiveUDP()
       printf("Couldn't open serial port, exiting.\n");
       exit(-1);
   }
-  //Sensor sensor;
-  //SensorData gyro;
   
   double x_integral = 0;
   double y_integral = 0;
@@ -136,14 +127,6 @@ void ReceiveUDP()
   
   while(!finished)
   {
-    {
-      unique_lock<mutex> lk(controlm);
-      while(!driving) {
-		  controlVar.wait(lk);
-	  }
-      //cout << "running" << endl;
-      lk.unlock();
-    }
     recvlen = recvfrom(fd, receiveBuf, RECEIVEBUFLEN, 0, (struct sockaddr *)&remaddr, &slen);
     if(recvlen > 0) {
       XSign = receiveBuf[0];
@@ -167,82 +150,82 @@ void ReceiveUDP()
 		  LSpeed = (int)YSign;
 	  }
       //cout << LSpeed << " " << RSpeed << endl;
-      if(RSpeed >= 0) gpioWrite(GPIO_DIR_R, 1);
-      else gpioWrite(GPIO_DIR_R, 0);
-      if(LSpeed >= 0) gpioWrite(GPIO_DIR_L, 1);
-      else gpioWrite(GPIO_DIR_L, 0);
-      gpioHardwarePWM(GPIO_PWM_R, 100, (mode*DUTY_CYCLE*abs(RSpeed))/127);
-      gpioHardwarePWM(GPIO_PWM_L, 100, (mode*DUTY_CYCLE*abs(LSpeed))/127);
+      
       
       if((int)receiveBuf[2] != nextLowThreshold) {
         nextLowThreshold = receiveBuf[2];
         cout << "Next low threshold: " << nextLowThreshold << endl;
       }
-      int x_control = 8*((int)GimbleX);
-      int y_control = 8*((int)GimbleY);
-      /*gyro = sensor.getGyroData();
-      double gyro_X = ((abs(gyro.x) < GYRO_X_THRESHOLD) ? 0 : gyro.x * GYRO_X_GAIN);
-	  double gyro_Y = ((abs(gyro.y) < GYRO_Y_THRESHOLD) ? 0 : gyro.y * GYRO_Y_GAIN);
-	  if(gyro_X > 0) printf("Using X Gyro\n");
-	  double x_P = errorhorizontal * X_K;
-	  x_integral += errorhorizontal;
-	  double x_I = x_integral * X_I;
-	  double x_D = X_D * (x_derivative - errorhorizontal);
-	  x_derivative = errorhorizontal;
-	  double y_P = errorvertical * Y_K;
-	  y_integral += errorvertical;
-	  double y_I = y_integral * Y_I;
-	  double y_D = Y_D * (y_derivative - errorvertical);
-	  y_derivative = errorvertical;
-	  double x_control = x_P + x_I - x_D + gyro_X;
-	  double y_control = y_P + y_I - y_D + gyro_Y;*/
-	  int x_dir = (x_control < 0) ? 0 : 1;
-	  int y_dir = (y_control < 0) ? 0 : 1;
-      gpioWrite(GPIO_DIR_X, x_dir);
-      gpioWrite(GPIO_DIR_Y, y_dir);
-	  
-	  /*if(fabs(x_control) < X_DEADZONE) {
-		x_control = 0;
-	  }
-	  if(fabs(y_control) < Y_DEADZONE) {
-		y_control = 0;
-	  }*/
-
-
-	  if(y_axis_sum > Y_AXIS_TOP_LIM && y_control > 0) {
-	  	y_control = 0;
-		printf("Hit y axis top limit\n");
-	  } else if (y_axis_sum < -Y_AXIS_BOT_LIM && y_control < 0) {
-		y_control = 0;
-		printf("Hit y axis bottom limit\n");
-	  }
-	  y_axis_sum += y_control;
-	  //cout << y_axis_sum << endl;
-
-	  if(x_axis_sum > X_AXIS_ANTI_LIM && x_control > 0) {
-		x_control = 0;
-		printf("Hit x axis rotation limit\n");
-  	  } else if (x_axis_sum < -X_AXIS_CLOCK_LIM && x_control < 0) {
-		x_control = 0;
-		printf("Hit x axis rotation limit\n");
-	  }
-	  x_axis_sum += x_control;
-		
-	  //Convert control input to pwm input
-	  int x_axis_freq = abs((int)x_control);
-	  int y_axis_freq = abs((int)y_control);
-		
-	  if(x_axis_freq > MAX_X) {
-		x_axis_freq = 0;
-		printf("!!! X axis error too high!!!\n");
-	  }
-	  if(y_axis_freq > MAX_Y) {
-	  	y_axis_freq = 0;
-		printf("!!! Y axis error too high!!!\n");
-	  }
-
-	  serialPrintf(serial, "%06d%06d", x_axis_freq, y_axis_freq);
+      
     }
+    else {
+		RSpeed = 0;
+		LSpeed = 0;
+		GimbleX = 0;
+		GimbleY = 0;
+	}
+	if(RSpeed >= 0) gpioWrite(GPIO_DIR_R, 1);
+    else gpioWrite(GPIO_DIR_R, 0);
+    if(LSpeed >= 0) gpioWrite(GPIO_DIR_L, 1);
+    else gpioWrite(GPIO_DIR_L, 0);
+    gpioHardwarePWM(GPIO_PWM_R, 100, (mode*DUTY_CYCLE*abs(RSpeed))/127);
+    gpioHardwarePWM(GPIO_PWM_L, 100, (mode*DUTY_CYCLE*abs(LSpeed))/127);
+    
+	int x_control = 8*((int)GimbleX);
+    int y_control = 8*((int)GimbleY);
+    /*gyro = sensor.getGyroData();
+    double gyro_X = ((abs(gyro.x) < GYRO_X_THRESHOLD) ? 0 : gyro.x * GYRO_X_GAIN);
+	double gyro_Y = ((abs(gyro.y) < GYRO_Y_THRESHOLD) ? 0 : gyro.y * GYRO_Y_GAIN);
+	if(gyro_X > 0) printf("Using X Gyro\n");
+	double x_P = errorhorizontal * X_K;
+	x_integral += errorhorizontal;
+	double x_I = x_integral * X_I;
+	double x_D = X_D * (x_derivative - errorhorizontal);
+	x_derivative = errorhorizontal;
+	double y_P = errorvertical * Y_K;
+	y_integral += errorvertical;
+	double y_I = y_integral * Y_I;
+	double y_D = Y_D * (y_derivative - errorvertical);
+	y_derivative = errorvertical;
+	double x_control = x_P + x_I - x_D + gyro_X;
+	double y_control = y_P + y_I - y_D + gyro_Y;*/
+	int x_dir = (x_control < 0) ? 0 : 1;
+	int y_dir = (y_control < 0) ? 0 : 1;
+    gpioWrite(GPIO_DIR_X, x_dir);
+    gpioWrite(GPIO_DIR_Y, y_dir);
+
+	if(y_axis_sum > Y_AXIS_TOP_LIM && y_control > 0) {
+	  y_control = 0;
+	  printf("Hit y axis top limit\n");
+	} else if (y_axis_sum < -Y_AXIS_BOT_LIM && y_control < 0) {
+	  y_control = 0;
+	  printf("Hit y axis bottom limit\n");
+	}
+	y_axis_sum += y_control;
+	//cout << y_axis_sum << endl;
+
+	if(x_axis_sum > X_AXIS_ANTI_LIM && x_control > 0) {
+	  x_control = 0;
+	  printf("Hit x axis rotation limit\n");
+  	} else if (x_axis_sum < -X_AXIS_CLOCK_LIM && x_control < 0) {
+	  x_control = 0;
+	  printf("Hit x axis rotation limit\n");
+	}
+	x_axis_sum += x_control;
+		
+	//Convert control input to pwm input
+	int x_axis_freq = abs((int)x_control);
+	int y_axis_freq = abs((int)y_control);
+		
+	if(x_axis_freq > MAX_X) {
+	  x_axis_freq = 0;
+	  printf("!!! X axis error too high!!!\n");
+	}
+	if(y_axis_freq > MAX_Y) {
+	  y_axis_freq = 0;
+	  printf("!!! Y axis error too high!!!\n");
+	}
+	serialPrintf(serial, "%06d%06d", x_axis_freq, y_axis_freq);
   }
 }
 
@@ -367,26 +350,8 @@ void OutThread()
     //cout << bufSize << endl;
     bufLength = 0;
 
-    if (sendto(fd, buf, bufSize, 0, (struct sockaddr *)&remaddr, slen)==-1) {
+    if (sendto(fd, buf, bufSize, 0, (struct sockaddr *)&remaddr, slen)==-1)
       perror("sendto");
-      {
-        lock_guard<mutex> lk(controlm);
-        driving = 0;
-        cout << "control stopped\n";
-      }
-      gpioHardwarePWM(GPIO_PWM_R, 100, 0);
-      gpioHardwarePWM(GPIO_PWM_L, 100, 0);
-      serialPrintf(serial, "%06d%06d", 0, 0);
-    }
-    else if(!driving) {
-	  {
-        lock_guard<mutex> lk(controlm);
-        driving = 1;
-        cout << "control restarted\n";
-      }
-      controlVar.notify_one();
-	}
-    //cout << "sent\n";
   }
 }
 
@@ -469,6 +434,12 @@ int main( int argc, char** argv )
     fprintf(stderr, "inet_aton() failed\n");
     exit(1);
   }
+  
+  struct timeval tv;
+  tv.tv_sec = 0;
+  tv.tv_usec = 500000;
+  if(setsockopt(fd, SOL_SOCKET, SO_RCVTIMEO, &tv, sizeof(tv)) < 0)
+	perror("Receive timeout not set");
   
   if (gpioInitialise() < 0) {
 	cout << "gpioInitialise() failed\n";
