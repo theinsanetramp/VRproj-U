@@ -54,7 +54,7 @@
 \abstract{
 %\addtocontents{toc}{\vspace{1em}}  % Add a gap in the Contents, for aesthetics
 
-The application of Virtual Reality (VR) to telerobotics is a current area of study in industry due to a desire for the increased spacial awareness VR provides. However, attempts to implement such a system using standard teleoperation techniques result in sub-par performance and an uncomfortable experience for the user; the benefits of a VR based system are entirely eliminated. The system proposed by this project incorporates elements of data abstraction and inter-frame interpolation to produce lower latency abstractions of the environment, as opposed to the normal approach of aiming for the presentation of an exact replica. A major challenge in the creation of this system is in the real-time application of data abstraction to a video feed; the solution devised to meet this challenge is detailed in this report.
+The application of Virtual Reality (VR) to telerobotics is a current area of study in industry due to a desire for the increased spacial awareness VR provides. However, attempts to implement such a system using standard teleoperation techniques result in sub-par performance and an uncomfortable experience for the user; the benefits of a VR based system are entirely eliminated. The system proposed by this project incorporates elements of data abstraction and inter-frame interpolation to produce \textcolor{red}{lower latency} abstractions of the environment, as opposed to the normal approach of aiming for the presentation of an exact replica. \textcolor{red}{A major challenge in the creation of this system is in the real-time application of data abstraction to a video feed; the solution devised to meet this challenge is detailed in this report.}
 }
 
 \clearpage  % Abstract ended, start a new page
@@ -90,19 +90,19 @@ I would like to thank Klaus-Peter Zauner and all the people who have had to put 
 % Include the chapters of the thesis, as separate files
 % Just uncomment the lines as you write the chapters
 
-\input{Chapters/Chapter1} % Introduction
+\input{Chapters/Intro} % Introduction
 
-\input{Chapters/Chapter2} % Background Theory 
+\input{Chapters/Background} % Background 
 
-\input{Chapters/Chapter3} % Experimental Setup
+\input{Chapters/Abstraction} % Abstraction Algorithm Development
 
-\input{Chapters/Chapter4} % Experiment 1
+\input{Chapters/Rover} % Rover Implementation
 
-%\input{Chapters/Chapter5} % Experiment 2
+\input{Chapters/Server} % Server-Side Implementation
 
-%\input{Chapters/Chapter6} % Results and Discussion
+\input{Chapters/Testing} % System Testing
 
-%\input{Chapters/Chapter7} % Conclusion
+\input{Chapters/Evaluation} % Evaluation
 
 %% ----------------------------------------------------------------
 % Now begin the Appendices, including them as separate files
@@ -111,17 +111,17 @@ I would like to thank Klaus-Peter Zauner and all the people who have had to put 
 
 \appendix % Cue to tell LaTeX that the following 'chapters' are Appendices
 
-\input{Appendices/AppendixA}	% Appendix Title
+\input{Appendices/EDE}	% Appendix Title
 
-\input{Appendices/AppendixB} % Appendix Title
+\input{Appendices/Contours} % Appendix Title
 
-\input{Appendices/AppendixC} % Appendix Title
+\input{Appendices/AbstractionDemos} % Appendix Title
 
-\input{Appendices/AppendixD} % Appendix Title
+\input{Appendices/GanttChart} % Appendix Title
 
-\input{Appendices/AppendixE} % Appendix Title
+\input{Appendices/Costs} % Appendix Title
 
-\input{Appendices/AppendixF} % Appendix Title
+%\input{Appendices/AppendixF} % Appendix Title
 
 \addtocontents{toc}{\vspace{2em}}  % Add a gap in the Contents, for aesthetics
 \backmatter
@@ -131,6 +131,5 @@ I would like to thank Klaus-Peter Zauner and all the people who have had to put 
 \lhead{\emph{Bibliography}}  % Change the left side page header to "Bibliography"
 \bibliographystyle{ieeetr}  % Use the "unsrtnat" BibTeX style for formatting the Bibliography
 \bibliography{Bibliography}  % The references (bibliography) information are stored in the file named "Bibliography.bib"
-b
 \end{document}  % The End
 %% ----------------------------------------------------------------

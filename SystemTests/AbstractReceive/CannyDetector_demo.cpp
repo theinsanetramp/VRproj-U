@@ -37,7 +37,8 @@ thread control;
 int finished = 0;
 int addressReceived = 0;
 mutex showm;
-vector<Mat> showBuf;
+vector<int> msglenbuf;
+uchar messageBuf[BUFSIZE];
 
 struct SeedData
 {
@@ -65,7 +66,9 @@ struct sockaddr_in remaddr; /* remote address */
 socklen_t addrlen = sizeof(remaddr);    /* length of addresses */
 int recvlen;      /* # bytes received */
 int fd;       /* our socket */
-uchar buf[BUFSIZE]; /* receive buffer */
+uchar recvBuf[BUFSIZE];
+uchar buf[BUFSIZE];
+int msglen;
 uchar controlBuf[6];
 
 vector<uchar> imageBuf;
@@ -209,7 +212,7 @@ void ReceivePoints()
     image2Buf.push_back(buf[i]); 
     i++;
   } 
-  while(i != recvlen);
+  while(i != msglen);
   receivedImage = imdecode(imageBuf, IMREAD_COLOR);
   //cout << imageBuf.size() << endl;
   if(receivedImage.empty()) {
@@ -297,33 +300,32 @@ void ReceivePoints()
   seedList.clear();
   imageBuf.clear();
   image2Buf.clear();
-  showm.lock();
-  showBuf.push_back(colouredImage);
-  showBuf.push_back(receivedImage2);
-  showBuf.push_back(output_map);
-  showm.unlock();
+  imshow( "Edge Map", colouredImage ); 
+  imshow( "Edge Map 2", receivedImage2 ); 
+  imshow( "Depth", output_map );
 }
 
 void UDPReceive()
 {
   this_thread::sleep_for(chrono::milliseconds(500));
-  recvlen = recvfrom(fd, buf, BUFSIZE, 0, (struct sockaddr *)&remaddr, &addrlen);
+  recvlen = recvfrom(fd, recvBuf, BUFSIZE, 0, (struct sockaddr *)&remaddr, &addrlen);
   printf("received %d bytes\n", recvlen);
+  if (recvlen > 0) { 
+    showm.lock();
+    msglenbuf.push_back(recvlen);
+    for(int i=0;i<recvlen;i++) messageBuf[i] = recvBuf[i];
+    showm.unlock();
+  }
   addressReceived = 1;
-  if (recvlen > 0) ReceivePoints();
-  cvMoveWindow( "Edge Map 2", 2*receivedImage.cols + 70, 40 );
-  cvMoveWindow( "Depth", 0, 2*receivedImage.rows + 70 );
   while(!finished)
   {
-    //printf("waiting on port %d\n", SERVICE_PORT);
-    //if(finished) return;
-    recvlen = recvfrom(fd, buf, BUFSIZE, 0, (struct sockaddr *)&remaddr, &addrlen);
-
+    recvlen = recvfrom(fd, recvBuf, BUFSIZE, 0, (struct sockaddr *)&remaddr, &addrlen);
     printf("received %d bytes\n", recvlen);
     if (recvlen > 0) {
-      //buf[recvlen] = 0;
-      //for(int i=0;i<10;i++) printf("%i\n", buf[i]);
-      ReceivePoints();
+      showm.lock();
+      msglenbuf.push_back(recvlen);
+      for(int i=0;i<recvlen;i++) messageBuf[i] = recvBuf[i];
+      showm.unlock();
     }
   }
 }
@@ -375,6 +377,8 @@ int main( int argc, char** argv )
   cvMoveWindow( "Edge Map 2",  500, 40 );
   namedWindow("Depth", 1);
   cvMoveWindow( "Depth",  40, 500 );
+  cvMoveWindow( "Edge Map 2", 2*320 + 70, 40 );
+  cvMoveWindow( "Depth", 0, 2*240 + 70 );
   receivedImage.create(240,320,CV_8UC3);
   receivedImage2.create(240,320,CV_8UC3);
   weighted_map.create(240,320, CV_64FC1);
@@ -386,19 +390,14 @@ int main( int argc, char** argv )
   /// Wait until user exit program by pressing a key
   int k;
   do{
-    showm.lock();
-    if(showBuf.size() > 0) {
-      disp = showBuf.back();
-      showBuf.pop_back();
-      rightDisplay = showBuf.back();
-      showBuf.pop_back();
-      leftDisplay = showBuf.back();
-      showBuf.pop_back();
-      imshow( "Edge Map", leftDisplay ); 
-      imshow( "Edge Map 2", rightDisplay ); 
-      imshow( "Depth", disp );
+    if(msglenbuf.size() > 0) {
+      showm.lock();
+      msglen = msglenbuf.back();
+      msglenbuf.clear();
+      for(int i=0;i<msglen;i++) buf[i] = messageBuf[i];
+      showm.unlock();
+      ReceivePoints();
     }
-    showm.unlock();
   	/// Wait until user exit program by pressing a key
   	k = waitKey(1);
   }
