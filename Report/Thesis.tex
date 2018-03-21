@@ -54,8 +54,7 @@
 \abstract{
 %\addtocontents{toc}{\vspace{1em}}  % Add a gap in the Contents, for aesthetics
 
-The application of Virtual Reality (VR) to telerobotics is a current area of study in industry due to a desire for the increased spacial awareness VR provides. However, attempts to implement such a system using standard teleoperation techniques result in sub-par performance and an uncomfortable experience for the user; the benefits of a VR based system are entirely eliminated. The system proposed by this project incorporates elements of data abstraction and inter-frame interpolation to produce \textcolor{red}{lower latency} abstractions of the environment, as opposed to the normal approach of aiming for the presentation of an exact replica. \textcolor{red}{A major challenge in the creation of this system is in the real-time application of data abstraction to a video feed; the solution devised to meet this challenge is detailed in this report.}
-}
+The application of Virtual Reality (VR) to telerobotics is a current area of study in industry due to a desire for the increased spacial awareness VR provides. However, attempts to implement such a system using standard teleoperation techniques result in sub-par performance and an uncomfortable experience for the user; the benefits of a VR based system are entirely eliminated. The system proposed by this project incorporates elements of data abstraction and inter-frame interpolation to produce abstractions of the environment with lower performance requirements, as opposed to the standard approach of aiming for the presentation of an exact replica. 
 
 \clearpage  % Abstract ended, start a new page
 %% ----------------------------------------------------------------
@@ -100,9 +99,9 @@ I would like to thank Klaus-Peter Zauner and all the people who have had to put 
 
 \input{Chapters/Server} % Server-Side Implementation
 
-\input{Chapters/Testing} % System Testing
+\input{Chapters/Testing} % System Evaluation
 
-\input{Chapters/Evaluation} % Evaluation
+\input{Chapters/Evaluation} % Project Evaluation and Conclusion
 
 %% ----------------------------------------------------------------
 % Now begin the Appendices, including them as separate files
@@ -133,3 +132,5 @@ I would like to thank Klaus-Peter Zauner and all the people who have had to put 
 \bibliography{Bibliography}  % The references (bibliography) information are stored in the file named "Bibliography.bib"
 \end{document}  % The End
 %% ----------------------------------------------------------------
+
+%https://dl.acm.org/citation.cfm?id=3038369

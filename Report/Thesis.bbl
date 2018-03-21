@@ -9,6 +9,12 @@ J.~M. Loomis, ``Presence in virtual reality and everyday life: Immersion within
   a world of representation,'' {\em PRESENCE: Teleoperators and Virtual
   Environments}, vol.~25, no.~2, pp.~169--174, 2016.
 
+\bibitem{McGlynn}
+S.~A. McGlynn and W.~A. Rogers, ``Considerations for presence in
+  teleoperation,'' in {\em Proceedings of the Companion of the 2017 ACM/IEEE
+  International Conference on Human-Robot Interaction}, HRI '17, (New York, NY,
+  USA), pp.~203--204, ACM, 2017.
+
 \bibitem{bounds2016integrated}
 M.~Bounds, B.~Wilson, A.~Tavakkoli, and D.~Loffredo, ``An integrated
   cyber-physical immersive virtual reality framework with applications to
@@ -21,10 +27,70 @@ IrisVR, ``The importance of frame rates,'' 2017.
   \url{https://help.irisvr.com/hc/en-us/articles/215884547-The-Importance-of-Frame-Rates}.
   [Accessed: \today].
 
+\bibitem{Borg2013UsingAG}
+M.~Borg, S.~S. Johansen, K.~S. Krog, D.~L. Thomsen, and M.~Kraus, ``Using a
+  graphics turing test to evaluate the effect of frame rate and motion blur on
+  telepresence of animated objects,'' in {\em GRAPP/IVAPP}, 2013.
+
+\bibitem{DORA}
+E.~Ackerman, ``Oculus rift-based system brings true immersion to telepresence
+  robots,'' 2015.
+\newblock Available:
+  \url{http://spectrum.ieee.org/automaton/robotics/robotics-hardware/upenn-dor
+  a-platform}. [Accessed: \today].
+
 \bibitem{gimble}
 M.~Gupta, F.~Hennecker, T.~Isaacs, M.~Sharhan, and L.~Stauskis, ``Biologically
   inspired robots: A vision system inspired by the human eye,'' 2016.
 \newblock Electronics and Computer Science, University of Southampton.
+
+\bibitem{WhatVR}
+{Virtual Reality Society}, ``What is virtual reality?,'' 2017.
+\newblock Available:
+  \url{https://www.vrs.org.uk/virtual-reality/what-is-virtual-reality.html}.
+  [Accessed: \today].
+
+\bibitem{Oculus}
+{Oculus}, ``Oculus rift homepage,'' 2017.
+\newblock Available: \url{https://www.oculus.com/rift/}. [Accessed: \today].
+
+\bibitem{Vive}
+{HTC}, ``Htc vive homepage,'' 2017.
+\newblock Available: \url{https://www.vive.com/uk/}. [Accessed: \today].
+
+\bibitem{NAP4761}
+N.~R. Council, {\em Virtual Reality: Scientific and Technological Challenges}.
+\newblock Washington, DC: The National Academies Press, 1995.
+
+\bibitem{fong2017interactive}
+T.~Fong, ``Interactive exploration robots: Human-robotic collaboration and
+  interactions,'' 2017.
+
+\bibitem{Robonaut}
+{NASA}, ``Robonaut 2 homepage,'' 2016.
+\newblock Available: \url{https://robonaut.jsc.nasa.gov/R2/}. [Accessed:
+  \today].
+
+\bibitem{FPV}
+{RCExplorer}, ``Fpv starting guide,'' 2009.
+\newblock Available:
+  \url{https://rcexplorer.se/educational/2009/09/fpv-starting-guide/}.
+  [Accessed: \today].
+
+\bibitem{2FPV}
+N.~Smolyanskiy and M.~Gonzalez-Franco, ``Stereoscopic first person view system
+  for drone navigation,'' {\em Frontiers in Robotics and AI}, vol.~4, p.~11,
+  2017.
+
+\bibitem{lipton2018baxter}
+J.~I. Lipton, A.~J. Fay, and D.~Rus, ``Baxter's homunculus: Virtual reality
+  spaces for teleoperation in manufacturing,'' {\em IEEE Robotics and
+  Automation Letters}, vol.~3, no.~1, pp.~179--186, 2018.
+
+\bibitem{wang2017novel}
+P.~Wang, J.~Xiao, H.~Lu, H.~Zhang, R.~Yan, and S.~Hong, ``A novel human-robot
+  interaction system based on 3d mapping and virtual reality,'' in {\em Chinese
+  Automation Congress (CAC), 2017}, pp.~5888--5894, IEEE, 2017.
 
 \bibitem{compression}
 O.~MAHDI, M.~Alshujeary, and A.~Jasim~Mohamed, ``Implementing a novel approach
@@ -36,6 +102,18 @@ A.~Barrett-Sprot, ``Data abstraction for low-bandwidth communication,'' 2017.
   Southampton, Available:
   \url{https://secure.ecs.soton.ac.uk/notes/comp3200/e_archive/COMP3200/1617/abs1g14/pdfs/Report.pdf}.
   [Accessed: \today].
+
+\bibitem{ribas1993interframe}
+J.~Ribas-Corbera and J.~Sklansky, ``Interframe interpolation of cinematic
+  sequences,'' {\em Journal of Visual Communication and image representation},
+  vol.~4, no.~4, pp.~392--406, 1993.
+
+\bibitem{shi2016real}
+W.~Shi, J.~Caballero, F.~Husz{\'a}r, J.~Totz, A.~P. Aitken, R.~Bishop,
+  D.~Rueckert, and Z.~Wang, ``Real-time single image and video super-resolution
+  using an efficient sub-pixel convolutional neural network,'' in {\em
+  Proceedings of the IEEE Conference on Computer Vision and Pattern
+  Recognition}, pp.~1874--1883, 2016.
 
 \bibitem{joe2008constructing}
 S.~Joe and F.~Y. Kuo, ``Constructing sobol sequences with better

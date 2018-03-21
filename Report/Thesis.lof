@@ -1,26 +1,28 @@
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {2.1}{\ignorespaces Data Abstraction Example}}{4}{figure.caption.9}
-\contentsline {figure}{\numberline {2.2}{\ignorespaces Comparison of pseudo-random and quasi-random sequences}}{5}{figure.caption.13}
-\contentsline {figure}{\numberline {2.3}{\ignorespaces Canny Edge Detection Example}}{6}{figure.caption.20}
-\contentsline {figure}{\numberline {2.4}{\ignorespaces Example of Flood Fill}}{7}{figure.caption.22}
+\contentsline {figure}{\numberline {2.1}{\ignorespaces HTC Vive}}{3}{figure.caption.6}
+\contentsline {figure}{\numberline {2.2}{\ignorespaces Indirect VR teleoperations examples}}{5}{figure.caption.9}
+\contentsline {figure}{\numberline {2.3}{\ignorespaces Data Abstraction Example}}{6}{figure.caption.11}
+\contentsline {figure}{\numberline {2.4}{\ignorespaces Comparison of pseudo-random and quasi-random sequences}}{7}{figure.caption.14}
+\contentsline {figure}{\numberline {2.5}{\ignorespaces Canny Edge Detection Example}}{8}{figure.caption.17}
+\contentsline {figure}{\numberline {2.6}{\ignorespaces Example of Flood Fill}}{9}{figure.caption.19}
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {3.1}{\ignorespaces Process of Edge Detection}}{10}{figure.caption.32}
-\contentsline {figure}{\numberline {3.2}{\ignorespaces Comparison of brute force and Sobol seed point generation}}{12}{figure.caption.35}
-\contentsline {figure}{\numberline {3.3}{\ignorespaces Comparison of Colour Averaging Methods}}{14}{figure.caption.37}
-\addvspace {10\p@ }
-\addvspace {10\p@ }
-\addvspace {10\p@ }
-\addvspace {10\p@ }
-\addvspace {10\p@ }
-\contentsline {figure}{\numberline {A.1}{\ignorespaces The effect of blurring on edge detection}}{23}{figure.caption.43}
-\contentsline {figure}{\numberline {A.2}{\ignorespaces The effect of changing Canny threshold values}}{25}{figure.caption.44}
-\addvspace {10\p@ }
-\contentsline {figure}{\numberline {B.1}{\ignorespaces Demonstration of contour centre point location}}{28}{figure.caption.46}
-\addvspace {10\p@ }
-\contentsline {figure}{\numberline {C.1}{\ignorespaces Demonstration of full abstraction process}}{29}{figure.caption.48}
-\contentsline {figure}{\numberline {C.2}{\ignorespaces Additional examples of the full abstraction process}}{30}{figure.caption.49}
+\contentsline {figure}{\numberline {3.1}{\ignorespaces Process of Edge Detection}}{12}{figure.caption.27}
+\contentsline {figure}{\numberline {3.2}{\ignorespaces Comparison of brute force and Sobol seed point generation}}{14}{figure.caption.30}
+\contentsline {figure}{\numberline {3.3}{\ignorespaces Comparison of Colour Averaging Methods}}{16}{figure.caption.32}
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {E.1}{\ignorespaces Hardware Costs List}}{33}{figure.caption.53}
-\contentsline {figure}{\numberline {E.2}{\ignorespaces Risk Assessment}}{34}{figure.caption.54}
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {A.1}{\ignorespaces The effect of blurring on edge detection}}{25}{figure.caption.38}
+\contentsline {figure}{\numberline {A.2}{\ignorespaces The effect of changing Canny threshold values}}{27}{figure.caption.39}
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {B.1}{\ignorespaces Demonstration of contour centre point location}}{30}{figure.caption.41}
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {C.1}{\ignorespaces Demonstration of full abstraction process}}{31}{figure.caption.43}
+\contentsline {figure}{\numberline {C.2}{\ignorespaces Additional examples of the full abstraction process}}{32}{figure.caption.44}
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {E.1}{\ignorespaces Hardware Costs List}}{35}{figure.caption.48}
+\contentsline {figure}{\numberline {E.2}{\ignorespaces Risk Assessment}}{36}{figure.caption.49}

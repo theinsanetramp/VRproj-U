@@ -3,46 +3,48 @@ Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
 The top-level auxiliary file: Thesis.aux
 The style file: ieeetr.bst
 Database file #1: Bibliography.bib
+Warning--can't use both author and editor fields in NAP4761
+Warning--empty journal in fong2017interactive
 Warning--empty journal in compression
-You've used 22 entries,
+You've used 37 entries,
             1876 wiz_defined-function locations,
-            596 strings with 7072 characters,
-and the built_in function-call counts, 4370 in all, are:
-= -- 439
-> -- 145
+            679 strings with 9733 characters,
+and the built_in function-call counts, 7803 in all, are:
+= -- 771
+> -- 275
 < -- 0
-+ -- 60
-- -- 38
-* -- 244
-:= -- 622
-add.period$ -- 35
-call.type$ -- 22
-change.case$ -- 20
++ -- 111
+- -- 74
+* -- 455
+:= -- 1095
+add.period$ -- 57
+call.type$ -- 37
+change.case$ -- 34
 chr.to.int$ -- 0
-cite$ -- 23
-duplicate$ -- 197
-empty$ -- 484
-format.name$ -- 38
-if$ -- 1087
+cite$ -- 40
+duplicate$ -- 366
+empty$ -- 850
+format.name$ -- 74
+if$ -- 1936
 int.to.chr$ -- 0
-int.to.str$ -- 22
-missing$ -- 13
-newline$ -- 82
-num.names$ -- 22
-pop$ -- 115
+int.to.str$ -- 37
+missing$ -- 23
+newline$ -- 134
+num.names$ -- 37
+pop$ -- 197
 preamble$ -- 1
 purify$ -- 0
 quote$ -- 0
-skip$ -- 131
+skip$ -- 243
 stack$ -- 0
-substring$ -- 195
-swap$ -- 58
+substring$ -- 375
+swap$ -- 115
 text.length$ -- 0
 text.prefix$ -- 0
 top$ -- 0
 type$ -- 0
-warning$ -- 1
-while$ -- 43
-width$ -- 24
-write$ -- 209
-(There was 1 warning)
+warning$ -- 3
+while$ -- 74
+width$ -- 39
+write$ -- 350
+(There were 3 warnings)
