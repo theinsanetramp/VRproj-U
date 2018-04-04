@@ -64,6 +64,7 @@ Data compression is the storing of information using a more space efficient enco
 Inter-frame interpolation is the generation of intermediate frames in a video feed to increase its frame rate. This is typically done using estimations of optical flow to interpolate frames within a pre-recorded sequence \cite{ribas1993interframe}, though there are methods that can achieve real-time video processing when provided with powerful enough hardware \cite{shi2016real}. In this report, the term inter-frame interpolation refers to the increase in frame rate provided by the conversion of the video feed into a 3D map, as in effect we are interpolating the $<$30fps video feed up to 90fps in the VR headset.
 
 \section{Sobol Sequences}
+\label{Subsection:sobol}
 
 Sobol sequences are quasi-random sequences that were introduced to aid in approximating integrals. The aim is to form a sequence of points that are evenly spread across an S-dimensional unit cube \cite{joe2008constructing}. This provides a much more even spread of points across the chosen space than can be produced from a pseudo-random number source (Figure \ref{fig:Sobol}). The code used in this project to produce these sequences was created by Leonhard Gr\"unschlo\ss\space \cite{CodeSource}.
 
@@ -109,3 +110,14 @@ Flood fill algorithms determine the area connected to a given cell (the seed poi
 \end{figure}
 
 \subsection{Depth Mapping}
+\label{subsection:depth}
+
+The main component in the human brain's perception of 3D is the identification of disparity between the locations of objects in the 2D images being produced by our eyes \cite{qian1997binocular}. The greater the difference in the horizontal placement of an object between the images, the closer the object to the observer. This technique can be used in computer vision to produce depth/disparity maps. Depth maps display differences in depth as a gradient from white to black (Figure \ref{fig:depthmap}), and can be produced using a variety of difference algorithms. The most common are block matching algorithms, which use simple geometry and the matching of blocks of pixels horizontally in the 2 images to calculate depth \cite{linda2001stockman}. For these algorithms to locate the same object in different places in the 2 images, the cameras taking them must be calibrated to rectify any distortion due to the lenses \cite{distort} or discrepancies in the mounting that would cause them to be out of line \cite{stereocal}.
+
+\begin{figure}[H]
+    \begin{center}
+      \includegraphics[width=0.8\textwidth]{Figures/depthmap.png}
+      \caption[Depth Mapping Example]{Depth Mapping Example. A stereo pair of images, with their exact disparity map bottom left and a disparity map produced by a dense disparity map estimation algorithm bottom right- reproduced from \cite{deptheg}.}
+      \label{fig:depthmap}
+    \end{center}
+\end{figure}

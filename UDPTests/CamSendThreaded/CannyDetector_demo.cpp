@@ -226,6 +226,7 @@ void MainProcess(int, void*)
   compressor1.SetLowThreshold(nextLowThreshold);
   compressor1.CannyThreshold(dst);
   dst_out = dst.clone(); 
+  //cout << dst_out.size() << endl;
   imshow( "Edge Map", dst_out );
   imshow( "Camera", tmp_frame );
   {

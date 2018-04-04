@@ -173,6 +173,33 @@ E.-M. Nosal, ``Flood-fill algorithms used for passive acoustic detection and
   tracking,'' in {\em New Trends for Environmental Monitoring Using Passive
   Systems, 2008}, pp.~1--5, IEEE, 2008.
 
+\bibitem{qian1997binocular}
+N.~Qian, ``Binocular disparity and the perception of depth,'' {\em Neuron},
+  vol.~18, no.~3, pp.~359--368, 1997.
+
+\bibitem{linda2001stockman}
+G.~Linda and C.~G. Shapiro, {\em Stockman, Computer vision}.
+\newblock Prentice Hall, Upper Saddle River, NJ, 2001.
+
+\bibitem{distort}
+{opencv dev team}, ``Camera calibration,'' 2014.
+\newblock Available:
+  \url{https://docs.opencv.org/3.0-beta/doc/py_tutorials/py_calib3d/py_calibration/py_calibration.html#calibration}.
+  [Accessed: \today].
+
+\bibitem{stereocal}
+S.~Ghost, ``Stereo calibration using c++ and opencv,'' 2016.
+\newblock Available:
+  \url{http://sourishghosh.com/2016/stereo-calibration-cpp-opencv/}. [Accessed:
+  \today].
+
+\bibitem{deptheg}
+J.~J. L.Alvarez, R.Deriche, ``Dense disparity map estimation respecting image
+  discontinuities,'' 2000.
+\newblock Available:
+  \url{http://serdis.dis.ulpgc.es/~lalvarez/research/demos/StereoFlow/index.html}.
+  [Accessed: \today].
+
 \bibitem{opencvffilldemo}
 {OpenCV Documentation}, ``Opencv: ffilldemo.cpp,'' 2017.
 \newblock Available:
@@ -183,6 +210,11 @@ E.-M. Nosal, ``Flood-fill algorithms used for passive acoustic detection and
 G.~Bradski and A.~Kaehler, {\em Learning OpenCV: Computer vision with the
   OpenCV library}.
 \newblock " O'Reilly Media, Inc.", 2008.
+
+\bibitem{dodgson2004variation}
+N.~A. Dodgson, ``Variation and extrema of human interpupillary distance,'' in
+  {\em Stereoscopic Displays and Virtual Reality Systems XI}, vol.~5291,
+  pp.~36--47, International Society for Optics and Photonics, 2004.
 
 \bibitem{cannyedgedetector}
 {OpenCV Documentation}, ``Canny edge detector,'' 2017.

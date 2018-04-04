@@ -6,45 +6,47 @@ Database file #1: Bibliography.bib
 Warning--can't use both author and editor fields in NAP4761
 Warning--empty journal in fong2017interactive
 Warning--empty journal in compression
-You've used 37 entries,
+Too many commas in name 1 of "L.Alvarez, R.Deriche, J.Sánchez, J.Weickert" for entry deptheg
+while executing---line 969 of file ieeetr.bst
+You've used 43 entries,
             1876 wiz_defined-function locations,
-            679 strings with 9733 characters,
-and the built_in function-call counts, 7803 in all, are:
-= -- 771
-> -- 275
+            712 strings with 10706 characters,
+and the built_in function-call counts, 8976 in all, are:
+= -- 894
+> -- 303
 < -- 0
-+ -- 111
-- -- 74
-* -- 455
-:= -- 1095
-add.period$ -- 57
-call.type$ -- 37
-change.case$ -- 34
++ -- 124
+- -- 81
+* -- 514
+:= -- 1253
+add.period$ -- 67
+call.type$ -- 43
+change.case$ -- 39
 chr.to.int$ -- 0
-cite$ -- 40
-duplicate$ -- 366
-empty$ -- 850
-format.name$ -- 74
-if$ -- 1936
+cite$ -- 46
+duplicate$ -- 422
+empty$ -- 988
+format.name$ -- 81
+if$ -- 2235
 int.to.chr$ -- 0
-int.to.str$ -- 37
-missing$ -- 23
-newline$ -- 134
-num.names$ -- 37
-pop$ -- 197
+int.to.str$ -- 43
+missing$ -- 27
+newline$ -- 156
+num.names$ -- 43
+pop$ -- 230
 preamble$ -- 1
 purify$ -- 0
 quote$ -- 0
-skip$ -- 243
+skip$ -- 281
 stack$ -- 0
-substring$ -- 375
-swap$ -- 115
+substring$ -- 431
+swap$ -- 132
 text.length$ -- 0
 text.prefix$ -- 0
 top$ -- 0
 type$ -- 0
 warning$ -- 3
-while$ -- 74
-width$ -- 39
-write$ -- 350
-(There were 3 warnings)
+while$ -- 86
+width$ -- 45
+write$ -- 408
+(There was 1 error message)
