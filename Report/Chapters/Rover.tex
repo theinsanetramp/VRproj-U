@@ -7,7 +7,7 @@ The aim of this project is the development of a VR teleoperations system. This n
 \begin{figure}[H]
     \begin{center}
       \includegraphics[width=0.9\textwidth]{Figures/hardware.png}
-      \caption[Hardware Block Diagram]{Hardware Block Diagram. The red blocks are motors, green blocks are control system components, and the blue blocks are part of the image pipeline.\textcolor{red}{[MAKE IL MATTO GREEN]}}
+      \caption[Hardware Block Diagram]{Hardware Block Diagram. The red blocks are motors, green blocks are control system components, and the blue blocks are part of the image pipeline.\textcolor{red}{[MAKE IL MATTO GREEN AND RIGHT CHIP]}}
       \label{fig:hardware}
     \end{center}
 \end{figure}
@@ -22,7 +22,11 @@ Only one camera was found that fulfilled all these requirements while being chea
 
 The design of the gimble (Figure \textcolor{red}{[GIMBLE PICS]}) has considerable impact on the 3D environment the system produces. As mentioned in Section \ref{subsection:depth}, the closer the cameras are to parallel with each other, the less the images have to be rectified before the depth map is generated. Similarly, the stability of the gimble is very important, as any vibrations will cause inconsistency in the alignment of the cameras, leading to inaccurate depth maps. This led to the chosen design where the X-axis motor is located centrally, between the cameras, to balance the weight around the rotational axis of the y-axis motor. The 3D-printed part the cameras are attached to is also stabilised through mountings on both sides of the x-axis motor, using a ball bearing on the side not driven by the motor. Another important aspect of the gimble design is the distance between the camera lenses. The further apart the two cameras are, the closer distance objects will be in the depth map. Ideally we would want to match the interpupillary distance of human eyes (63mm on average \cite{dodgson2004variation}), so objects in the 3D environment appear as close as they would were the user standing in the place of the robot. However, with the X-axis motor located centrally, it is not possible to produce that distance between the camera lenses. The inter-lens distance in the final design is 120mm, as this is the closest distance possible without reducing the stability of the gimble. While not ideal, it simply results in objects appearing closer in the depth map than they actually are and a longer distance from the cameras where an object is too close for a distance to be calculated (the cameras are "cross-eyed" if you will).
 
-\section{Pipeline Structure}
+\section{Image Pipeline}
+
+As can be seen in Figure \ref{fig:system}, the rover takes a picture with both cameras, abstracts those images, then sends that data off as a single combined packet to the server. While Chapter \ref{chapter:abstract} discussed the abstraction process as a single step that produces a full abstraction with both edges and spaces filled with colour, this does not reflect the implementation utilized in the full system. As previously mentioned, the final step of filling the spaces in the edge detected image using the selected seed points and average colours is done on the server. Also, only one of the two images needs colour information at all, as the edges are the only part of the abstraction required to produce the server depth maps; the colours are to be used as a texture on the 3D environment this produces, and therefore only one set is required. Therefore, the data packets being sent to the server are made up of 2 bitmaps of the edge detected images and a set of seed points with their corresponding colours for one of the images.
+
+Attempts to implement this process on a single thread on the Pi, as tested successfully on a laptop, either crashed the Pi or would produce a frame rate of around 1fps; the Pi's resources are not even close to adequate. To combat this, both pipelining and parallelism were utilized to make better use of the Pi's quad core processor (Figure \ref{fig:threads}), and compromises were made in the quality of the abstractions to reduce the workload.
 
 \begin{figure}[H]
     \begin{center}
@@ -32,6 +36,7 @@ The design of the gimble (Figure \textcolor{red}{[GIMBLE PICS]}) has considerabl
     \end{center}
 \end{figure}
 
-\section{Control System}
-\section{Communications}
+\subsection{Communications}
 \label{Subsection:comms}
+
+\section{Control System}

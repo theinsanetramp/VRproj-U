@@ -18,17 +18,16 @@
 \contentsline {subsection}{\numberline {4.2.2}Fill Colour}{16}{subsection.34}
 \contentsline {chapter}{\numberline {5}Rover Implementation}{19}{chapter.36}
 \contentsline {section}{\numberline {5.1}Gimble Design}{20}{section.38}
-\contentsline {section}{\numberline {5.2}Pipeline Structure}{22}{section.39}
-\contentsline {section}{\numberline {5.3}Control System}{22}{section.41}
-\contentsline {section}{\numberline {5.4}Communications}{22}{section.42}
-\contentsline {chapter}{\numberline {6}Server-Side Implementation}{23}{chapter.43}
-\contentsline {chapter}{\numberline {7}Evaluation and Conclusion}{25}{chapter.44}
+\contentsline {section}{\numberline {5.2}Image Pipeline}{22}{section.39}
+\contentsline {subsection}{\numberline {5.2.1}Communications}{23}{subsection.41}
+\contentsline {section}{\numberline {5.3}Control System}{23}{section.42}
+\contentsline {chapter}{\numberline {6}Server-Side Implementation}{25}{chapter.43}
+\contentsline {chapter}{\numberline {7}Evaluation and Conclusion}{27}{chapter.44}
 \vspace {2em}
-\contentsline {chapter}{\numberline {A}Edge Detection Experimentation}{27}{appendix.45}
-\contentsline {chapter}{\numberline {B}Contour Based Seed Point Location}{31}{appendix.48}
-\contentsline {chapter}{\numberline {C}Demonstrations of Full Data Abstraction}{33}{appendix.50}
-\contentsline {chapter}{\numberline {D}Rover Hardware Breakdown}{35}{appendix.53}
-\contentsline {chapter}{\numberline {E}Gantt Chart}{37}{appendix.54}
-\contentsline {chapter}{\numberline {F}Costing and Risk Assessment}{39}{appendix.56}
+\contentsline {chapter}{\numberline {A}Contour Based Seed Point Location}{29}{appendix.45}
+\contentsline {chapter}{\numberline {B}Demonstrations of Full Data Abstraction}{31}{appendix.47}
+\contentsline {chapter}{\numberline {C}Rover Hardware Breakdown}{33}{appendix.50}
+\contentsline {chapter}{\numberline {D}Gantt Chart}{35}{appendix.51}
+\contentsline {chapter}{\numberline {E}Costing and Risk Assessment}{37}{appendix.53}
 \vspace {2em}
-\contentsline {chapter}{Bibliography}{41}{dummy.59}
+\contentsline {chapter}{Bibliography}{39}{dummy.56}

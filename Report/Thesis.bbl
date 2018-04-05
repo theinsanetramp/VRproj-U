@@ -216,10 +216,4 @@ N.~A. Dodgson, ``Variation and extrema of human interpupillary distance,'' in
   {\em Stereoscopic Displays and Virtual Reality Systems XI}, vol.~5291,
   pp.~36--47, International Society for Optics and Photonics, 2004.
 
-\bibitem{cannyedgedetector}
-{OpenCV Documentation}, ``Canny edge detector,'' 2017.
-\newblock Available:
-  \url{https://docs.opencv.org/2.4/doc/tutorials/imgproc/imgtrans/canny_detector/canny_detector.html}.
-  [Accessed: \today].
-
 \end{thebibliography}
