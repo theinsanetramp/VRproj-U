@@ -28,13 +28,19 @@ As can be seen in Figure \ref{fig:system}, the rover takes a picture with both c
 
 Attempts to implement this process on a single thread on the Pi, as tested successfully on a laptop, either crashed the Pi or would produce a frame rate of around 1fps; the Pi's resources are not even close to adequate. To combat this, both pipelining and parallelism were utilized to make better use of the Pi's quad core processor (Figure \ref{fig:threads}), and compromises were made in the quality of the abstractions to reduce the workload.
 
+The capture thread simply handles signalling the cameras to take a picture each. The capture and decoding of the images are done as separate operations to make the capture operation shorter and therefore the two cameras capturing as close to simultaneously as possible with a single thread. The first compromise in quality in favour of performance is made here, where the images are captured with a resolution of 320x240 rather than the cameras' standard resolution of 640x480. As will be discussed in greater depth later in this section, the highest workload task in the pipeline is flood filling. It can therefore be inferred that reducing the pixel count of every space by a factor of four would have provide a significant improvement in performance. The smaller images also have the benefit of lower detail in high detail areas, so sections that would become areas of dense lines when edge detected (examples of this effect in Appendix \ref{Appendix:demo}) will be significantly less dense, containing less extraneous data.
+
 \begin{figure}[H]
     \begin{center}
       \includegraphics[width=1\textwidth]{Figures/Threads.png}
-      \caption[Raspberry Pi Threading Block Diagram]{Raspberry Pi Threading Block Diagram.}
+      \caption[Raspberry Pi Threading Block Diagram]{Raspberry Pi Threading Block Diagram.\textcolor{red}{[MAKE CLEAR DILATION]}}
       \label{fig:threads}
     \end{center}
 \end{figure}
+
+The processing threads are concerned with the edge detection and compression of the images. The edge detection process is mostly as described in Chapter \ref{chapter:abstract}; the only difference is only the image being sent from processing thread 1 to the fill threads undergoes the final dilation step. The purpose of the dilation is to bridge gaps between the edges, creating defined shapes for the flood fill process. A side effect of dilation is a reduction in edge accuracy, which is very important when the images are to be used to produce depth maps later on. This leads to the logical conclusion that the images should be sent without dilation, and dilation only applied to find the colour data in the fill threads and then again on the server to create the complete coloured abstraction, allowing the depth maps to be constructed with non-dilated images. 
+
+While it can be induced from comparing the original images to their edge detected versions by eye that the latter contains less information than the former, this can only be reflected in real numbers if file format and compression are considered carefully. When the common image formats are compared, PNG would appear to be the effective for this use case \cite{aguilera2006comparison}, as it excels at efficiently storing large blocks of the same colour (most of each edge detected image is black space). When tested on the edge detected images (Figure \textcolor{red}{[COMPRESSION COMPARISON]}), it was confirmed that PNG provided the lowest file size, and compression level 5 provided the best ratio between file size and compression time (using the imencode function in OpenCV)
 
 \subsection{Communications}
 \label{Subsection:comms}

@@ -8,45 +8,45 @@ Warning--empty journal in fong2017interactive
 Warning--empty journal in compression
 Too many commas in name 1 of "L.Alvarez, R.Deriche, J.Sánchez, J.Weickert" for entry deptheg
 while executing---line 969 of file ieeetr.bst
-You've used 42 entries,
+You've used 43 entries,
             1876 wiz_defined-function locations,
-            709 strings with 10540 characters,
-and the built_in function-call counts, 8844 in all, are:
-= -- 881
-> -- 299
+            716 strings with 10668 characters,
+and the built_in function-call counts, 8980 in all, are:
+= -- 893
+> -- 303
 < -- 0
-+ -- 122
-- -- 80
-* -- 510
-:= -- 1234
-add.period$ -- 65
-call.type$ -- 42
-change.case$ -- 38
++ -- 124
+- -- 81
+* -- 519
+:= -- 1257
+add.period$ -- 66
+call.type$ -- 43
+change.case$ -- 39
 chr.to.int$ -- 0
-cite$ -- 45
-duplicate$ -- 418
-empty$ -- 970
-format.name$ -- 80
-if$ -- 2201
+cite$ -- 46
+duplicate$ -- 427
+empty$ -- 987
+format.name$ -- 81
+if$ -- 2233
 int.to.chr$ -- 0
-int.to.str$ -- 42
-missing$ -- 27
-newline$ -- 152
-num.names$ -- 42
-pop$ -- 223
+int.to.str$ -- 43
+missing$ -- 28
+newline$ -- 155
+num.names$ -- 43
+pop$ -- 226
 preamble$ -- 1
 purify$ -- 0
 quote$ -- 0
-skip$ -- 278
+skip$ -- 279
 stack$ -- 0
 substring$ -- 431
-swap$ -- 132
+swap$ -- 133
 text.length$ -- 0
 text.prefix$ -- 0
 top$ -- 0
 type$ -- 0
 warning$ -- 3
-while$ -- 85
-width$ -- 44
-write$ -- 399
+while$ -- 86
+width$ -- 45
+write$ -- 408
 (There was 1 error message)

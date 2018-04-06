@@ -19,8 +19,8 @@
 \contentsline {chapter}{\numberline {5}Rover Implementation}{19}{chapter.36}
 \contentsline {section}{\numberline {5.1}Gimble Design}{20}{section.38}
 \contentsline {section}{\numberline {5.2}Image Pipeline}{22}{section.39}
-\contentsline {subsection}{\numberline {5.2.1}Communications}{23}{subsection.41}
-\contentsline {section}{\numberline {5.3}Control System}{23}{section.42}
+\contentsline {subsection}{\numberline {5.2.1}Communications}{24}{subsection.41}
+\contentsline {section}{\numberline {5.3}Control System}{24}{section.42}
 \contentsline {chapter}{\numberline {6}Server-Side Implementation}{25}{chapter.43}
 \contentsline {chapter}{\numberline {7}Evaluation and Conclusion}{27}{chapter.44}
 \vspace {2em}
