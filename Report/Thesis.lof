@@ -8,23 +8,23 @@
 \contentsline {figure}{\numberline {2.6}{\ignorespaces Example of Flood Fill}}{9}{figure.caption.19}
 \contentsline {figure}{\numberline {2.7}{\ignorespaces Depth Mapping Example}}{10}{figure.caption.21}
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {3.1}{\ignorespaces System Overview Block Diagram}}{12}{figure.caption.23}
+\contentsline {figure}{\numberline {3.1}{\ignorespaces System Overview Block Diagram}}{14}{figure.caption.24}
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {4.1}{\ignorespaces Process of Edge Detection}}{14}{figure.caption.30}
-\contentsline {figure}{\numberline {4.2}{\ignorespaces Comparison of brute force and Sobol seed point generation}}{16}{figure.caption.33}
-\contentsline {figure}{\numberline {4.3}{\ignorespaces Comparison of Colour Averaging Methods}}{18}{figure.caption.35}
+\contentsline {figure}{\numberline {4.1}{\ignorespaces Process of Edge Detection}}{16}{figure.caption.31}
+\contentsline {figure}{\numberline {4.2}{\ignorespaces Comparison of brute force and Sobol seed point generation}}{18}{figure.caption.34}
+\contentsline {figure}{\numberline {4.3}{\ignorespaces Comparison of Colour Averaging Methods}}{20}{figure.caption.36}
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {5.1}{\ignorespaces Hardware Block Diagram}}{20}{figure.caption.37}
-\contentsline {figure}{\numberline {5.2}{\ignorespaces Raspberry Pi Threading Block Diagram}}{23}{figure.caption.40}
-\addvspace {10\p@ }
-\addvspace {10\p@ }
-\addvspace {10\p@ }
-\contentsline {figure}{\numberline {A.1}{\ignorespaces Demonstration of contour centre point location}}{30}{figure.caption.46}
-\addvspace {10\p@ }
-\contentsline {figure}{\numberline {B.1}{\ignorespaces Demonstration of full abstraction process}}{31}{figure.caption.48}
-\contentsline {figure}{\numberline {B.2}{\ignorespaces Additional examples of the full abstraction process}}{32}{figure.caption.49}
+\contentsline {figure}{\numberline {5.1}{\ignorespaces Hardware Block Diagram}}{22}{figure.caption.38}
+\contentsline {figure}{\numberline {5.2}{\ignorespaces Raspberry Pi Threading Block Diagram}}{25}{figure.caption.41}
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {E.1}{\ignorespaces Hardware Costs List}}{37}{figure.caption.54}
-\contentsline {figure}{\numberline {E.2}{\ignorespaces Risk Assessment}}{38}{figure.caption.55}
+\contentsline {figure}{\numberline {A.1}{\ignorespaces Demonstration of contour centre point location}}{34}{figure.caption.46}
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {B.1}{\ignorespaces Demonstration of full abstraction process}}{35}{figure.caption.48}
+\contentsline {figure}{\numberline {B.2}{\ignorespaces Additional examples of the full abstraction process}}{36}{figure.caption.49}
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {E.1}{\ignorespaces Hardware Costs List}}{41}{figure.caption.54}
+\contentsline {figure}{\numberline {E.2}{\ignorespaces Risk Assessment}}{42}{figure.caption.55}

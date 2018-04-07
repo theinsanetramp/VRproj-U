@@ -200,6 +200,14 @@ J.~J. L.Alvarez, R.Deriche, ``Dense disparity map estimation respecting image
   \url{http://serdis.dis.ulpgc.es/~lalvarez/research/demos/StereoFlow/index.html}.
   [Accessed: \today].
 
+\bibitem{fall2011tcp}
+K.~R. Fall and W.~R. Stevens, {\em TCP/IP illustrated, volume 1: The
+  protocols}.
+\newblock addison-Wesley, 2011.
+
+\bibitem{postel1980user}
+J.~Postel, ``User datagram protocol,'' tech. rep., 1980.
+
 \bibitem{opencvffilldemo}
 {OpenCV Documentation}, ``Opencv: ffilldemo.cpp,'' 2017.
 \newblock Available:
@@ -219,5 +227,9 @@ N.~A. Dodgson, ``Variation and extrema of human interpupillary distance,'' in
 \bibitem{aguilera2006comparison}
 P.~Aguilera, ``Comparison of different image compression formats,'' {\em ECE},
   vol.~533, 2006.
+
+\bibitem{libimagequant}
+K.~Lesiński, ``{libimagequant-Image Quantization Library},'' 2017.
+\newblock Available: \url{https://pngquant.org/lib/}. [Accessed: \today].
 
 \end{thebibliography}

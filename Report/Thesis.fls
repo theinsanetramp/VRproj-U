@@ -279,6 +279,8 @@ INPUT /home/adam/Documents/VRproj/VRproj-U/Report/Figures/hardware.png
 INPUT /home/adam/Documents/VRproj/VRproj-U/Report/Figures/Threads.png
 INPUT /home/adam/Documents/VRproj/VRproj-U/Report/Figures/Threads.png
 INPUT /home/adam/Documents/VRproj/VRproj-U/Report/Figures/Threads.png
+INPUT /usr/share/texlive/texmf-dist/tex/latex/base/omlcmr.fd
+INPUT /usr/share/texlive/texmf-dist/tex/latex/base/omlcmr.fd
 INPUT /home/adam/Documents/VRproj/VRproj-U/Report/Chapters/Server.tex
 INPUT /home/adam/Documents/VRproj/VRproj-U/Report/Chapters/Server.tex
 INPUT /home/adam/Documents/VRproj/VRproj-U/Report/Chapters/Evaluation.tex
