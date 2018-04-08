@@ -232,4 +232,10 @@ P.~Aguilera, ``Comparison of different image compression formats,'' {\em ECE},
 K.~Lesiński, ``{libimagequant-Image Quantization Library},'' 2017.
 \newblock Available: \url{https://pngquant.org/lib/}. [Accessed: \today].
 
+\bibitem{unreal}
+{Epic Games}, ``What is unreal engine 4?,'' 2018.
+\newblock Available:
+  \url{https://www.unrealengine.com/en-US/what-is-unreal-engine-4}. [Accessed:
+  \today].
+
 \end{thebibliography}

@@ -204,7 +204,7 @@
       {\large Project supervisor: Klaus-Peter Zauner \par}
       {\large Second examiner: Sheng Chen \par}
       \vfill
-      {\large A project progress report submitted for the award of \par}
+      {\large A project report submitted for the award of \par}
       {\large MEng Electronic Engineering \par}
       
       \bigskip

@@ -9,36 +9,36 @@ Warning--empty journal in compression
 Too many commas in name 1 of "L.Alvarez, R.Deriche, J.Sánchez, J.Weickert" for entry deptheg
 while executing---line 969 of file ieeetr.bst
 Warning--empty institution in postel1980user
-You've used 46 entries,
+You've used 47 entries,
             1876 wiz_defined-function locations,
-            729 strings with 10960 characters,
-and the built_in function-call counts, 9394 in all, are:
-= -- 932
-> -- 319
+            733 strings with 11097 characters,
+and the built_in function-call counts, 9526 in all, are:
+= -- 945
+> -- 323
 < -- 0
-+ -- 131
-- -- 85
-* -- 538
-:= -- 1322
-add.period$ -- 71
-call.type$ -- 46
-change.case$ -- 42
++ -- 133
+- -- 86
+* -- 542
+:= -- 1341
+add.period$ -- 73
+call.type$ -- 47
+change.case$ -- 43
 chr.to.int$ -- 0
-cite$ -- 50
-duplicate$ -- 446
-empty$ -- 1037
-format.name$ -- 85
-if$ -- 2334
+cite$ -- 51
+duplicate$ -- 450
+empty$ -- 1055
+format.name$ -- 86
+if$ -- 2368
 int.to.chr$ -- 0
-int.to.str$ -- 46
+int.to.str$ -- 47
 missing$ -- 30
-newline$ -- 166
-num.names$ -- 46
-pop$ -- 242
+newline$ -- 170
+num.names$ -- 47
+pop$ -- 249
 preamble$ -- 1
 purify$ -- 0
 quote$ -- 0
-skip$ -- 285
+skip$ -- 288
 stack$ -- 0
 substring$ -- 431
 swap$ -- 134
@@ -47,7 +47,7 @@ text.prefix$ -- 0
 top$ -- 0
 type$ -- 0
 warning$ -- 4
-while$ -- 89
-width$ -- 48
-write$ -- 434
+while$ -- 90
+width$ -- 49
+write$ -- 443
 (There was 1 error message)
