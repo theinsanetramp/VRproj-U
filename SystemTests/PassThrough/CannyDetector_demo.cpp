@@ -300,7 +300,7 @@ int main( int argc, char** argv )
   }
   
   compressionParams.push_back(CV_IMWRITE_JPEG_QUALITY);
-  compressionParams.push_back(60);
+  compressionParams.push_back(70);
 
   cap2.open(2);
   if( !cap2.isOpened() )

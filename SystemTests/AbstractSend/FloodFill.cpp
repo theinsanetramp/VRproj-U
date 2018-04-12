@@ -34,13 +34,13 @@ void FloodFill::FindColours(Mat dst, Mat tmp_frame)
       if(newVal == Scalar(0,0,0)) newVal = Scalar(1,1,1);
       //cout << "processed" << index << endl;
       bufm.lock();
-      buf[bufLength*7] = (x >> 8) & 0xFF;
-      buf[bufLength*7+1] = x & 0xFF;
-      buf[bufLength*7+2] = (y >> 8) & 0xFF;
-      buf[bufLength*7+3] = y & 0xFF;
-      buf[bufLength*7+4] = newVal[0];
-      buf[bufLength*7+5] = newVal[1];
-      buf[bufLength*7+6] = newVal[2];
+      buf[bufLength*7+1] = (x >> 8) & 0xFF;
+      buf[bufLength*7+2] = x & 0xFF;
+      buf[bufLength*7+3] = (y >> 8) & 0xFF;
+      buf[bufLength*7+4] = y & 0xFF;
+      buf[bufLength*7+5] = newVal[0];
+      buf[bufLength*7+6] = newVal[1];
+      buf[bufLength*7+7] = newVal[2];
       bufLength++;
       bufm.unlock();
     }

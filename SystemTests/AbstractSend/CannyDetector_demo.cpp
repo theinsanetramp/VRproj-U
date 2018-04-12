@@ -54,7 +54,7 @@ using namespace std;
 #define RECEIVEBUFLEN 16
 
 #define FRAMERATE 30
-#define POINTSPERTHREAD 30
+#define POINTSPERTHREAD 50
 
 Mat tmp_frame, dst_out;
 Mat tmp_frame2;
@@ -341,14 +341,14 @@ void OutThread()
     }
     proc2Var.notify_one();
     capVar.notify_all();
-    
-    for(int i=0;i<7;i++) buf[bufLength*7 + i] = i;
-    for(int i=0;i<dstBuf.size();i++) buf[bufLength*7 + 7 + i] = dstBuf[i];
-    for(int i=0;i<7;i++) buf[bufLength*7 + 7 + dstBuf.size() + i] = i;
-    for(int i=0;i<dst2Buf.size();i++) buf[bufLength*7 + 14 + dstBuf.size() + i] = dst2Buf[i];
+    buf[0] = bufLength;
+    buf[bufLength*7 + 1] = (dstBuf.size() >> 8) & 0xFF;
+    buf[bufLength*7 + 2] = dstBuf.size() & 0xFF;
+    for(int i=0;i<dstBuf.size();i++) buf[bufLength*7 + 3 + i] = dstBuf[i];
+    for(int i=0;i<dst2Buf.size();i++) buf[bufLength*7 + 3 + dstBuf.size() + i] = dst2Buf[i];
     //for(int i=0;i<14;i++) cout << (int)buf[bufLength*7 + 7 + dstBuf.size() + i] << endl;
-    bufSize = bufLength*7 + 14 + dstBuf.size() + dst2Buf.size();
-    //cout << bufSize << endl;
+    bufSize = bufLength*7 + 3 + dstBuf.size() + dst2Buf.size();
+    //cout << dst2Buf.size() << endl;
     bufLength = 0;
 
     if (sendto(fd, buf, bufSize, 0, (struct sockaddr *)&remaddr, slen)==-1)
