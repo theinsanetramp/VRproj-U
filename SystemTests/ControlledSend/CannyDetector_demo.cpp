@@ -37,7 +37,7 @@
 #define X_DEADZONE 300
 #define X_AXIS_CLOCK_LIM 28000
 #define X_AXIS_ANTI_LIM 28000
-#define MAX_X  50000 
+#define MAX_X  5000 
 #define Y_K 18
 #define Y_I 0.0000
 #define Y_D 23
@@ -50,6 +50,7 @@ using namespace cv;
 using namespace std;
 
 #define SERVICE_PORT  21234
+#define BNOPORT 1153
 #define BUFLEN 40960
 #define RECEIVEBUFLEN 16
 
@@ -65,6 +66,7 @@ thread capturet;
 thread process2t;
 thread out;
 thread control;
+thread sensor;
 int finished = 0;
 int threadProcessing[4] = {0,0,0,0};
 mutex waitm;
@@ -72,6 +74,7 @@ mutex bufm;
 mutex capwaitm;
 mutex proc2waitm;
 mutex outwaitm;
+mutex sensorm;
 condition_variable conVar;
 condition_variable conVar1;
 condition_variable capVar;
@@ -103,12 +106,37 @@ int bufLength;
 vector<unsigned char> dstBuf;
 uchar receiveBuf[RECEIVEBUFLEN];
 
+struct sockaddr_in myaddrBNO;
+struct sockaddr_in remaddrBNO;
+socklen_t addrlenBNO = sizeof(remaddrBNO);
+int recvlenBNO;
+int fdBNO;
+unsigned char bufBNO[RECEIVEBUFLEN];
+
 int nextLowThreshold = 30;
+float heading, roll;
 int serial;
+
+void ReceiveBNO()
+{
+	while(!finished)
+	{
+		recvlenBNO = recvfrom(fdBNO, bufBNO, RECEIVEBUFLEN, 0, (struct sockaddr *)&remaddrBNO, &addrlenBNO);
+		//printf("received %d bytes\n", recvlenBNO);
+		if (recvlenBNO > 0) {
+			sensorm.lock();  
+			heading = (float)((bufBNO[0] << 8) + bufBNO[1])/10;
+			roll = (float)((bufBNO[2] << 8) + bufBNO[3])/10;
+			sensorm.unlock();
+			//printf("received message: \"%d %d\"\n", heading, roll);
+		  }
+	}
+}
 
 void ReceiveUDP()
 {
-  signed char XSign, YSign, GimbleX, GimbleY;
+  signed char XSign, YSign;
+  uchar GimbleX, GimbleY;
   int RSpeed = 0;
   int LSpeed = 0;
   int mode = 1;
@@ -117,13 +145,10 @@ void ReceiveUDP()
       printf("Couldn't open serial port, exiting.\n");
       exit(-1);
   }
+  float lheading, lroll;
   
-  double x_integral = 0;
-  double y_integral = 0;
-  double x_derivative = 0;
-  double y_derivative = 0;
-  double x_axis_sum = 0;
-  double y_axis_sum = 0;
+  float x_derivative = 0;
+  float y_derivative = 0;
   
   while(!finished)
   {
@@ -150,7 +175,7 @@ void ReceiveUDP()
 		  RSpeed = (int)YSign;
 		  LSpeed = (int)YSign;
 	  }
-      //cout << LSpeed << " " << RSpeed << endl;
+      //cout << (int)GimbleX << " " << (int)GimbleY << endl;
       
       
       if((int)receiveBuf[2] != nextLowThreshold) {
@@ -162,8 +187,6 @@ void ReceiveUDP()
     else {
 		RSpeed = 0;
 		LSpeed = 0;
-		GimbleX = 0;
-		GimbleY = 0;
 	}
 	if(RSpeed >= 0) gpioWrite(GPIO_DIR_R, 1);
     else gpioWrite(GPIO_DIR_R, 0);
@@ -172,8 +195,20 @@ void ReceiveUDP()
     gpioHardwarePWM(GPIO_PWM_R, 100, (mode*DUTY_CYCLE*abs(RSpeed))/127);
     gpioHardwarePWM(GPIO_PWM_L, 100, (mode*DUTY_CYCLE*abs(LSpeed))/127);
     
-	int x_control = 8*((int)GimbleX);
-    int y_control = 8*((int)GimbleY);
+    sensorm.lock();
+    lroll = roll;
+    lheading = heading;
+    sensorm.unlock();
+	float x_error = (int)GimbleX - lheading;
+	if(abs(x_error) < 1.5) x_error = 0; 
+    float y_error = (int)GimbleY - lroll;
+    if(abs(y_error) < 1) y_error = 0; 
+    float x_control = 100*x_error - 10*(x_derivative - x_error);
+    float y_control = 100*y_error - 10*(y_derivative - y_error);
+    x_derivative = x_error;
+    y_derivative = y_error;
+    cout << (int)GimbleX << " " << lheading << "  " << (int)GimbleY << " " << lroll << endl;
+    //cout << x_control << " " << y_control << endl;
     /*gyro = sensor.getGyroData();
     double gyro_X = ((abs(gyro.x) < GYRO_X_THRESHOLD) ? 0 : gyro.x * GYRO_X_GAIN);
 	double gyro_Y = ((abs(gyro.y) < GYRO_Y_THRESHOLD) ? 0 : gyro.y * GYRO_Y_GAIN);
@@ -200,7 +235,7 @@ void ReceiveUDP()
 	  y_control = 0;
 	  printf("Hit y axis bottom limit\n");
 	}*/
-	y_axis_sum += y_control;
+	//y_axis_sum += y_control;
 	//cout << y_axis_sum << endl;
 
 	/*if(x_axis_sum > X_AXIS_ANTI_LIM && x_control > 0) {
@@ -210,7 +245,7 @@ void ReceiveUDP()
 	  x_control = 0;
 	  printf("Hit x axis rotation limit\n");
 	}*/
-	x_axis_sum += x_control;
+	//x_axis_sum += x_control;
 		
 	//Convert control input to pwm input
 	int x_axis_freq = abs((int)x_control);
@@ -436,6 +471,23 @@ int main( int argc, char** argv )
     exit(1);
   }
   
+    if ((fdBNO = socket(AF_INET, SOCK_DGRAM, 0)) < 0) {
+			perror("cannot create socket\n");
+			return 0;
+	}
+
+	/* bind the socket to any valid IP address and a specific port */
+
+	memset((char *)&myaddrBNO, 0, sizeof(myaddrBNO));
+	myaddrBNO.sin_family = AF_INET;
+	myaddrBNO.sin_addr.s_addr = htonl(INADDR_ANY);
+	myaddrBNO.sin_port = htons(BNOPORT);
+
+	if (bind(fdBNO, (struct sockaddr *)&myaddrBNO, sizeof(myaddrBNO)) < 0) {
+			perror("bind failed");
+			return 0;
+	}
+  
   struct timeval tv;
   tv.tv_sec = 0;
   tv.tv_usec = 500000;
@@ -499,6 +551,7 @@ int main( int argc, char** argv )
   process2t = thread(Process2Thread);
   out = thread(OutThread);
   control = thread(ReceiveUDP);
+  sensor = thread(ReceiveBNO);
   for(int i=0;i<4;i++) t[i] = thread(FindColoursThread, i, POINTSPERTHREAD);
 
   for(;;)
@@ -547,6 +600,10 @@ int main( int argc, char** argv )
   shutdown(fd, SHUT_RDWR);
   close(fd);
   control.join();
+  shutdown(fdBNO, SHUT_RDWR);
+  close(fdBNO);
+  sensor.join();
+  serialPrintf(serial, "%06d%06d", 0, 0);
   gpioTerminate();
   cout << "control thread joined\n";
   return 0;

@@ -1,0 +1,24 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/pi/VRproj-U/PiSideTests/BNOTests/Test.cpp
+stdlib.h
+-
+stdio.h
+-
+iostream
+-
+netdb.h
+-
+sys/types.h
+-
+sys/socket.h
+-
+string.h
+-
+

@@ -1,0 +1,28 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/pi/VRproj-U/PiSideTests/BNOTests/bno055.c
+bno055.h
+/home/pi/VRproj-U/PiSideTests/BNOTests/bno055.h
+
+/home/pi/VRproj-U/PiSideTests/BNOTests/bno055.h
+linux/types.h
+-
+stdint.h
+-
+stdint.h
+-
+limits.h
+-
+limits.h
+-
+
+/home/pi/VRproj-U/PiSideTests/BNOTests/bno055_support.c
+bno055.h
+/home/pi/VRproj-U/PiSideTests/BNOTests/bno055.h
+
