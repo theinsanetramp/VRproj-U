@@ -27,7 +27,7 @@ Mat receivedImage;
 Mat receivedImage2;
 Mat colouredImage;
 Mat left_for_matcher, right_for_matcher;
-Mat filtered_disp_vis;
+Mat filtered_disp_vis, last_vis, consist_vis;
 Mat left_disp,right_disp;
 Mat filtered_disp;
 Mat weighted_map, output_map;
@@ -86,6 +86,7 @@ double lambda = 1000;
 double sigma = 3.5;
 double vis_mult = 3;
 Ptr<DisparityWLSFilter> wls_filter;
+int first = 1;
 
 void SendControl()
 {
@@ -254,11 +255,11 @@ void ReceivePoints()
     }
     //circle(colouredImage, seedList[j].seed, 5, (0,0,255), -1);
   }
-  for(int i=0;i<colouredImage.rows;i++) {
-    for(int j=0;j<colouredImage.cols;j++) {
-      if(colouredImage.at<Vec3b>(i,j)[0] == 0) colouredImage.at<Vec3b>(i,j) = Vec3b(255,0,255);
-    }
-  }
+  // for(int i=0;i<colouredImage.rows;i++) {
+  //   for(int j=0;j<colouredImage.cols;j++) {
+  //     if(colouredImage.at<Vec3b>(i,j)[0] == 0) colouredImage.at<Vec3b>(i,j) = Vec3b(255,0,255);
+  //   }
+  // }
 
   //resize(receivedImage, receivedImage, Size(), 2, 2, CV_INTER_CUBIC);
   //resize(receivedImage2, receivedImage2, Size(), 2, 2, CV_INTER_CUBIC);
@@ -290,7 +291,24 @@ void ReceivePoints()
   wls_filter->filter(left_disp,left_for_matcher,filtered_disp,right_disp);
   getDisparityVis(filtered_disp,filtered_disp_vis,vis_mult);
 
-  accumulateWeighted(filtered_disp_vis, weighted_map, 0.5);
+  // consist_vis = filtered_disp_vis.clone();
+  // if(first) {
+  // 	last_vis = filtered_disp_vis.clone();
+  // 	first = 0;
+  // }
+  // for(int i=0;i<filtered_disp_vis.rows;i++) {
+  // 	uchar* filteredP = filtered_disp_vis.ptr<uchar>(i);
+  // 	uchar* lastP = last_vis.ptr<uchar>(i);
+  // 	//uchar* last2P = last2_vis.ptr<uchar>(i);
+  // 	uchar* consistP = consist_vis.ptr<uchar>(i);
+  //   for(int j=0;j<filtered_disp_vis.cols;j++) {
+  //     if(abs(filteredP[j]-lastP[j]) > 100) consistP[j] = lastP[j];
+  //     //cout << (int)filteredP[j] << " ";
+  //   }
+  // }
+  // last_vis = filtered_disp_vis.clone();
+
+  accumulateWeighted(filtered_disp_vis, weighted_map, 0.4);
   convertScaleAbs(weighted_map, output_map);
 
   //resize(receivedImage, receivedImage, Size(), 2, 2, CV_INTER_CUBIC);
