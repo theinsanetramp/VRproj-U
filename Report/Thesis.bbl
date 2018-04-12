@@ -238,4 +238,9 @@ K.~Lesiński, ``{libimagequant-Image Quantization Library},'' 2017.
   \url{https://www.unrealengine.com/en-US/what-is-unreal-engine-4}. [Accessed:
   \today].
 
+\bibitem{calibgit}
+{Sourish Ghost}, ``Stereo camera calibration using opencv and c++,'' 2016.
+\newblock Available: \url{https://github.com/sourishg/stereo-calibration}.
+  [Accessed: \today].
+
 \end{thebibliography}

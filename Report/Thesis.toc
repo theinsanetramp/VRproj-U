@@ -23,8 +23,8 @@
 \contentsline {section}{\numberline {5.3}Control System}{28}{section.47}
 \contentsline {chapter}{\numberline {6}Server-Side Implementation}{29}{chapter.48}
 \contentsline {section}{\numberline {6.1}Depth Mapping}{29}{section.49}
-\contentsline {section}{\numberline {6.2}Coloured Abstraction Construction}{29}{section.50}
-\contentsline {section}{\numberline {6.3}3D Environment Generation}{29}{section.51}
+\contentsline {section}{\numberline {6.2}Coloured Abstraction Construction}{30}{section.50}
+\contentsline {section}{\numberline {6.3}3D Environment Generation}{30}{section.51}
 \contentsline {chapter}{\numberline {7}Evaluation and Conclusion}{31}{chapter.52}
 \vspace {2em}
 \vspace {2em}

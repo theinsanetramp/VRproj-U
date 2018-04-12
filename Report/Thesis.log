@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2018.3.19)  8 APR 2018 12:23
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2018.3.19)  8 APR 2018 16:16
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -901,17 +901,17 @@ Chapter 6.
 ------------------------------------------------------------------------------
  6 Server-Side Implementation
 ------------------------------------------------------------------------------
-) (/home/adam/Documents/VRproj/VRproj-U/Report/Chapters/Evaluation.tex [29
+[29
 
-]
-[30
-
-]
+]) (/home/adam/Documents/VRproj/VRproj-U/Report/Chapters/Evaluation.tex
+[30]
 Chapter 7.
 ------------------------------------------------------------------------------
  7 Evaluation and Conclusion
 ------------------------------------------------------------------------------
-) (/home/adam/Documents/VRproj/VRproj-U/Report/Thesis.bbl [31] [32
+) (/home/adam/Documents/VRproj/VRproj-U/Report/Thesis.bbl [31
+
+] [32
 
 ]
 Underfull \hbox (badness 10000) in paragraph at lines 25--29
@@ -982,7 +982,7 @@ File: Figures/blox.jpg Graphic file (type jpg)
 Package pdftex.def Info: Figures/blox.jpg used on input line 11.
 (pdftex.def)             Requested size: 133.38475pt x 133.3847pt.
 
-<Figures/ContourCentres.jpg, id=659, 256.96pt x 256.96pt>
+<Figures/ContourCentres.jpg, id=663, 256.96pt x 256.96pt>
 File: Figures/ContourCentres.jpg Graphic file (type jpg)
 
 <use Figures/ContourCentres.jpg>
@@ -999,47 +999,47 @@ File: Figures/building.jpg Graphic file (type jpg)
 <use Figures/building.jpg>
 Package pdftex.def Info: Figures/building.jpg used on input line 8.
 (pdftex.def)             Requested size: 193.62325pt x 133.83937pt.
- <Figures/Final.jpg, id=669, 871.255pt x 602.25pt>
+ <Figures/Final.jpg, id=673, 871.255pt x 602.25pt>
 File: Figures/Final.jpg Graphic file (type jpg)
 
 <use Figures/Final.jpg>
 Package pdftex.def Info: Figures/Final.jpg used on input line 9.
 (pdftex.def)             Requested size: 193.62325pt x 133.83708pt.
- <Figures/lena.jpg, id=670, 506.88pt x 506.88pt>
+ <Figures/lena.jpg, id=674, 506.88pt x 506.88pt>
 File: Figures/lena.jpg Graphic file (type jpg)
 
 <use Figures/lena.jpg>
 Package pdftex.def Info: Figures/lena.jpg used on input line 19.
 (pdftex.def)             Requested size: 185.01587pt x 185.01353pt.
- <Figures/lenaDA.jpg, id=671, 513.92pt x 513.92pt>
+ <Figures/lenaDA.jpg, id=675, 513.92pt x 513.92pt>
 File: Figures/lenaDA.jpg Graphic file (type jpg)
 
 <use Figures/lenaDA.jpg>
 Package pdftex.def Info: Figures/lenaDA.jpg used on input line 20.
 (pdftex.def)             Requested size: 185.01587pt x 185.01889pt.
 
-<Figures/pufferfish6.jpg, id=672, 1927.2pt x 1084.05pt>
+<Figures/pufferfish6.jpg, id=676, 1927.2pt x 1084.05pt>
 File: Figures/pufferfish6.jpg Graphic file (type jpg)
 
 <use Figures/pufferfish6.jpg>
 Package pdftex.def Info: Figures/pufferfish6.jpg used on input line 21.
 (pdftex.def)             Requested size: 185.01587pt x 104.06099pt.
 
-<Figures/pufferfishDA.jpg, id=673, 1927.2pt x 1084.05pt>
+<Figures/pufferfishDA.jpg, id=677, 1927.2pt x 1084.05pt>
 File: Figures/pufferfishDA.jpg Graphic file (type jpg)
 
 <use Figures/pufferfishDA.jpg>
 Package pdftex.def Info: Figures/pufferfishDA.jpg used on input line 22.
 (pdftex.def)             Requested size: 185.01587pt x 104.06099pt.
 
-<Figures/starry_night.jpg, id=674, 181.1568pt x 144.54pt>
+<Figures/starry_night.jpg, id=678, 181.1568pt x 144.54pt>
 File: Figures/starry_night.jpg Graphic file (type jpg)
 
 <use Figures/starry_night.jpg>
 Package pdftex.def Info: Figures/starry_night.jpg used on input line 23.
 (pdftex.def)             Requested size: 185.01587pt x 147.6185pt.
 
-<Figures/starry_nightDA.jpg, id=675, 754.82pt x 602.25pt>
+<Figures/starry_nightDA.jpg, id=679, 754.82pt x 602.25pt>
 File: Figures/starry_nightDA.jpg Graphic file (type jpg)
 
 <use Figures/starry_nightDA.jpg>
@@ -1088,7 +1088,7 @@ Appendix F.
 ------------------------------------------------------------------------------
 [49
 
-] <Figures/ganttfinal.png, id=713, 1648.1575pt x 660.4675pt>
+] <Figures/ganttfinal.png, id=717, 1648.1575pt x 660.4675pt>
 File: Figures/ganttfinal.png Graphic file (type png)
 
 <use Figures/ganttfinal.png>
@@ -1102,14 +1102,14 @@ Appendix G.
 ------------------------------------------------------------------------------
  G Costing and Risk Assessment
 ------------------------------------------------------------------------------
-<Figures/Requisitions.png, id=719, 1297.84875pt x 404.51125pt>
+<Figures/Requisitions.png, id=723, 1297.84875pt x 404.51125pt>
 File: Figures/Requisitions.png Graphic file (type png)
 
 <use Figures/Requisitions.png>
 Package pdftex.def Info: Figures/Requisitions.png used on input line 6.
 (pdftex.def)             Requested size: 430.27681pt x 134.10635pt.
 
-<Figures/RiskAssessment.png, id=720, 743.77875pt x 600.2425pt>
+<Figures/RiskAssessment.png, id=724, 743.77875pt x 600.2425pt>
 File: Figures/RiskAssessment.png Graphic file (type png)
 
 <use Figures/RiskAssessment.png>
@@ -1135,10 +1135,10 @@ Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 139.
 ### simple group (level 1) entered at line 54 ({)
 ### bottom level 
 Here is how much of TeX's memory you used:
- 13571 strings out of 493029
- 196552 string characters out of 6136234
- 263518 words of memory out of 5000000
- 16665 multiletter control sequences out of 15000+600000
+ 13575 strings out of 493029
+ 196613 string characters out of 6136234
+ 263534 words of memory out of 5000000
+ 16668 multiletter control sequences out of 15000+600000
  12467 words of font info for 46 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  49i,12n,45p,1891b,674s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -1152,10 +1152,10 @@ xmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/share/texlive/texmf-di
 st/fonts/type1/public/amsfonts/cm/cmtt12.pfb></usr/share/texlive/texmf-dist/fon
 ts/type1/public/amsfonts/cm/cmu10.pfb>
 Output written on /home/adam/Documents/VRproj/VRproj-U/Report/Thesis.pdf (62 pa
-ges, 25553530 bytes).
+ges, 25554457 bytes).
 PDF statistics:
- 802 PDF objects out of 1000 (max. 8388607)
- 673 compressed objects within 7 object streams
- 176 named destinations out of 1000 (max. 500000)
+ 806 PDF objects out of 1000 (max. 8388607)
+ 677 compressed objects within 7 object streams
+ 177 named destinations out of 1000 (max. 500000)
  466 words of extra memory for PDF output out of 10000 (max. 10000000)
 

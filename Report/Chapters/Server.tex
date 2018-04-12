@@ -4,13 +4,17 @@
 
 %Relation to gimble position
 
-The purpose of the server is to receive image data from the rover, produce a 3D environment from it, and feed back control inputs from the user. This is all done within the framework of the 3D game engine Unreal Engine 4 \cite{unreal}. Unreal 4 was chosen because it provides easy interfacing with almost any VR headset on the market without large rewrites of the code, it is simple to integrate with OpenCV, and is free to use.
+The purpose of the server is to receive image data from the rover, produce a 3D environment from this data, and feed back control inputs from the user. This is all done within the framework of the 3D game engine Unreal Engine 4 \cite{unreal}. Unreal 4 was chosen because it provides easy interfacing with almost any VR headset on the market without large rewrites of the code, it is simple to integrate with OpenCV, and is free to use.
 
 \section{Depth Mapping}
 
+As established in Section \ref{subsection:depth}, for a depth mapping algorithm to function accurately, the 2 images it receives must be rectified. The rectification parameters for the cameras in our system have been calculated using a set of programs provided by Sourish Ghost \cite{calibgit}. The rectification is then applied using these parameters just before the depth maps are calculated (Figure \textcolor{red}{[RECTIFICATION PICS]}).
+
+Three different depth mapping algorithms were tested: StereoBM, StereoSGBM, and Libelas.
+
 \section{Coloured Abstraction Construction}
 
-As previously established, to produce the final texture that is applied to the 3D environment, a complete coloured abstraction must be produced from the dominant camera image and colour data.
+To generate the final texture that is applied to the 3D environment, a complete coloured abstraction must be produced from "edge detected img 1" and its colour data.
 
 \section{3D Environment Generation}
 
