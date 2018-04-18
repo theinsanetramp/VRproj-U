@@ -5,13 +5,15 @@
 % Set up the document
 \documentclass[a4paper, 12pt, twoside]{Thesis}  % Use the "Thesis" style, based on the ECS Thesis style by Steve Gunn
 \graphicspath{Figures/}  % Location of the graphics files (set up for graphics to be in PDF format)
-
+%\usepackage{url}
+%\PassOptionsToPackage{hyphens}{url}
+\usepackage{hyperref} 
 % Include any extra LaTeX packages required
 \usepackage[square, numbers, comma, sort&compress]{natbib}  % Use the "Natbib" style for the references in the Bibliography\cite{Reference2}
 \usepackage{verbatim}  % Needed for the "comment" environment to make LaTeX comments
 \usepackage{vector}  % Allows "\bvec{}" and "\buvec{}" for "blackboard" style bold vectors in maths
-\usepackage{url}
-\hypersetup{urlcolor=blue, colorlinks=true}  % Colours hyperlinks in blue, but this can be distracting if there are many links.
+
+\hypersetup{urlcolor=black, colorlinks=true}  % Colours hyperlinks in blue, but this can be distracting if there are many links.
 
 \usepackage{float}
 \usepackage{listings}
@@ -24,7 +26,8 @@
 \frontmatter      % Begin Roman style (i, ii, iii, iv...) page numbering
 
 % Set up the Title Page
-\title  {Using Data Abstraction and Inter-Frame Interpolation for Low Data Rate Communication Between a 3D Camera and VR Headset}
+\title  {Towards Presence in Telerobotics: Real-time Image Abstraction for Virtual Reality}
+
 \authors  {\texorpdfstring
             {Adam Melvin}
             {Author Name}
@@ -54,7 +57,7 @@
 \abstract{
 %\addtocontents{toc}{\vspace{1em}}  % Add a gap in the Contents, for aesthetics
 
-The application of Virtual Reality (VR) to telerobotics is a current area of study in industry due to a desire for the increased spacial awareness VR provides. However, attempts to implement such a system using standard teleoperation techniques result in sub-par performance and an uncomfortable experience for the user; the benefits of a VR based system are entirely eliminated. The system proposed by this project incorporates elements of data abstraction and inter-frame interpolation to produce abstractions of the environment with lower performance requirements, as opposed to the standard approach of aiming for the presentation of an exact replica. 
+The application of Virtual Reality (VR) to telerobotics is a current area of study due to a desire for the increased spacial awareness VR provides. However, attempts to implement such a system using standard teleoperation techniques result in sub-par performance and an uncomfortable experience for the user; the benefits of a VR based system are entirely eliminated. The system proposed by this project incorporates elements of data abstraction to produce abstractions of the environment. This process reduces the performance requirements of providing the user presence within the telerobot's space such that reasonable spacial awareness can be achieved.
 
 \clearpage  % Abstract ended, start a new page
 %% ----------------------------------------------------------------
@@ -76,7 +79,7 @@ The application of Virtual Reality (VR) to telerobotics is a current area of stu
 \acknowledgements{
 %\addtocontents{toc}{\vspace{1em}}  % Add a gap in the Contents, for aesthetics
 
-I would like to thank Klaus-Peter Zauner and all the people who have had to put up with being constantly on camera for their patience. I would also like to thank Tom Darlison for allowing me access to his photographs.
+I would like to thank Klaus-Peter Zauner for his incredible help and support. I would also like to thank Tom Darlison and Lawrence Gray for their help and for being expert "rubber ducks". Finally, I would like to thank the users of the Building 16 labs for treating my rover driving around with the utmost patience.
 
 }
 \clearpage  % End of the Acknowledgements
@@ -101,7 +104,11 @@ I would like to thank Klaus-Peter Zauner and all the people who have had to put 
 
 \input{Chapters/Server} % Server-Side Implementation
 
-\input{Chapters/Evaluation} % Project Evaluation and Conclusion
+\input{Chapters/Evaluation}
+
+\input{Chapters/Mang}
+
+\input{Chapters/Conclusion}
 
 \addtocontents{toc}{\vspace{2em}}  % Add a gap in the Contents, for aesthetics
 %\backmatter
@@ -110,6 +117,7 @@ I would like to thank Klaus-Peter Zauner and all the people who have had to put 
 \lhead{\emph{Bibliography}}  % Change the left side page header to "Bibliography"
 \bibliographystyle{ieeetr}  % Use the "unsrtnat" BibTeX style for formatting the Bibliography
 \bibliography{Bibliography}  % The references (bibliography) information are stored in the file named "Bibliography.bib"
+\addcontentsline{toc}{chapter}{Bibliography}
 
 %% ----------------------------------------------------------------
 % Now begin the Appendices, including them as separate files
@@ -132,7 +140,7 @@ I would like to thank Klaus-Peter Zauner and all the people who have had to put 
 
 \input{Appendices/Costs} % Appendix Title
 
-%\input{Appendices/AppendixF} % Appendix Title
+\input{Appendices/Archive} % Appendix Title
 
 
 

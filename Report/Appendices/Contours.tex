@@ -1,5 +1,6 @@
 \chapter{Contour Based Seed Point Location}
 \lhead{\emph{Contour Based Seed Point Location}}
+\label{appendix:contour}
 
 The ideal place to aim to flood fill a space from would be the centre point of the space. OpenCV provides the functionality to take the Canny output image (a matrix of colour values) and convert it into a set of contours. Contours are line objects stored in a hierarchical structure and have functions that can provide the centre point of each contour. Although the centre points of the contours will not map exactly to the centre points of the space, they are close enough approximations to flood fill from (Figure \ref{fig:ContourCentres}).
 

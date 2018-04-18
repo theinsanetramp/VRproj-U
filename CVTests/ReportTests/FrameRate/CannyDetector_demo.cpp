@@ -12,7 +12,7 @@
 using namespace cv;
 using namespace std;
 
-#define SOBOL
+//#define SOBOL
 
 Mat tmp_frame, src_gray;
 Mat dst, detected_edges;
@@ -20,7 +20,7 @@ Mat flood_mask;
 
 VideoCapture cap;
 //Canny variables
-int lowThreshold = 24;
+int lowThreshold = 20;
 int const max_lowThreshold = 100;
 int ratio = 3;
 int kernel_size = 3;
@@ -34,7 +34,7 @@ int flags = connectivity + (newMaskVal << 8) +
 int dilation_type = MORPH_RECT;
 int dilation_size = 1;
 //blur variables
-int blur_kernel = 3;
+int blur_kernel = 5;
 int max_blur_kernel = 10;
 //Final image saturation
 int alpha = 1.2;
@@ -128,14 +128,14 @@ int main( int argc, char** argv )
       return -1;
   }
 
-  int num_frames = 120;
+  int num_frames = 500;
   time_t start, end;
 
   namedWindow( "Edge Map", 1 );
   namedWindow("Camera", 1);
   cvMoveWindow( "Camera", tmp_frame.cols, 0 );
   createTrackbar( "Min Threshold:", "Edge Map", &lowThreshold, max_lowThreshold, CannyThreshold );
-  createTrackbar( "Blur Kernel Size:", "Edge Map", &blur_kernel, max_blur_kernel, 0 );
+  //createTrackbar( "Blur Kernel Size:", "Edge Map", &blur_kernel, max_blur_kernel, 0 );
 
   time(&start);
 

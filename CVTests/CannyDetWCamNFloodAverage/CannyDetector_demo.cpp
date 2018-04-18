@@ -13,7 +13,7 @@ using namespace std;
 
 #define SOBOL
 
-Mat tmp_frame;
+Mat tmp_frame, detected_edges;
 Mat dst, flood_mask;
 
 VideoCapture cap;
@@ -44,15 +44,12 @@ int alpha = 1.2;
 
 void CannyThreshold(int, void*)
 {
-  /// Reduce noise with kernel defined by blur_kernel
-  blur( dst, dst, Size(blur_kernel,blur_kernel) );
-
   /// Canny detector
-  Canny( dst, dst, lowThreshold, lowThreshold*ratio, kernel_size );
+  Canny( dst, detected_edges, lowThreshold, lowThreshold*ratio, kernel_size );
 
   /// Apply the dilation operation
-  dilate( dst, dst, element );
-  cvtColor(dst, dst, CV_GRAY2RGB); 
+  dilate( detected_edges, detected_edges, element );
+  cvtColor(detected_edges, detected_edges, CV_GRAY2RGB); 
 
   #ifdef SOBOL
   //Floodfill from quasi-random points
@@ -61,37 +58,37 @@ void CannyThreshold(int, void*)
       int x = tmp_frame.cols * sobol::sample(i, 0);
       int y = tmp_frame.rows * sobol::sample(i, 1);
       seed = Point(x,y);
-      if(dst.at<Vec3b>(seed)[0] == 0 && dst.at<Vec3b>(seed)[1] == 0 && dst.at<Vec3b>(seed)[2] == 0)
+      if(detected_edges.at<Vec3b>(seed)[0] == 0 && detected_edges.at<Vec3b>(seed)[1] == 0 && detected_edges.at<Vec3b>(seed)[2] == 0)
       {
         flood_mask = 0;
-        floodFill(dst, flood_mask, seed, (255,255,255), &ccomp, Scalar(loDiff, loDiff, loDiff),
+        floodFill(detected_edges, flood_mask, seed, (255,255,255), &ccomp, Scalar(loDiff, loDiff, loDiff),
                 Scalar(upDiff, upDiff, upDiff), 4 + (255 << 8) + FLOODFILL_MASK_ONLY);
         Scalar newVal = alpha*mean(tmp_frame,flood_mask);
-        floodFill(dst, /*circle_mask,*/ seed, newVal, &ccomp, Scalar(loDiff, loDiff, loDiff),
+        floodFill(detected_edges, /*circle_mask,*/ seed, newVal, &ccomp, Scalar(loDiff, loDiff, loDiff),
                 Scalar(upDiff, upDiff, upDiff), flags);
       }
   }
   #else
   //Floodfill every empty area
-  for(int i=0;i<dst.cols;i++)
+  for(int i=0;i<detected_edges.cols;i++)
   {
-    for(int j=0;j<dst.rows;j++)
+    for(int j=0;j<detected_edges.rows;j++)
     {
       Point seed = Point(i,j);
-      if(dst.at<Vec3b>(seed)[0] == 0 && dst.at<Vec3b>(seed)[1] == 0 && dst.at<Vec3b>(seed)[2] == 0)
+      if(detected_edges.at<Vec3b>(seed)[0] == 0 && detected_edges.at<Vec3b>(seed)[1] == 0 && detected_edges.at<Vec3b>(seed)[2] == 0)
       {
         flood_mask = 0;
-        floodFill(dst, flood_mask, seed, (255,255,255), &ccomp, Scalar(loDiff, loDiff, loDiff),
+        floodFill(detected_edges, flood_mask, seed, (255,255,255), &ccomp, Scalar(loDiff, loDiff, loDiff),
                 Scalar(upDiff, upDiff, upDiff), 4 + (255 << 8) + FLOODFILL_MASK_ONLY);
         Scalar newVal = alpha*mean(tmp_frame,flood_mask);
-        floodFill(dst, /*circle_mask,*/ seed, newVal, &ccomp, Scalar(loDiff, loDiff, loDiff),
+        floodFill(detected_edges, /*circle_mask,*/ seed, newVal, &ccomp, Scalar(loDiff, loDiff, loDiff),
                 Scalar(upDiff, upDiff, upDiff), flags);
       }
     }
   }
   #endif
 
-  imshow( "Edge Map", dst );
+  imshow( "Edge Map", detected_edges );
  }
 
 int main( int argc, char** argv )
@@ -123,7 +120,7 @@ int main( int argc, char** argv )
   namedWindow("Camera", 1);
   cvMoveWindow( "Camera", tmp_frame.cols, 0 );
   createTrackbar( "Min Threshold:", "Edge Map", &lowThreshold, max_lowThreshold, CannyThreshold );
-  createTrackbar( "Blur Kernel Size:", "Edge Map", &blur_kernel, max_blur_kernel, 0 );
+  //createTrackbar( "Blur Kernel Size:", "Edge Map", &blur_kernel, max_blur_kernel, 0 );
 
   for(;;)
   {
@@ -136,13 +133,15 @@ int main( int argc, char** argv )
 
     /// Convert the image to grayscale
     cvtColor( tmp_frame, dst, CV_BGR2GRAY );
+    // Reduce noise with kernel defined by blur_kernel
+    blur( dst, dst, Size(blur_kernel,blur_kernel) );
 
     /// Show the image
     CannyThreshold(0, 0);
     imshow("Camera", tmp_frame);
     char keycode = (char)waitKey(30);
       if( keycode == 27 ){
-          //imwrite("frame.jpg", dst);
+          //imwrite("frame.jpg", detected_edges);
           break;
         }
   }

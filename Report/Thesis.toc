@@ -1,37 +1,40 @@
 \contentsline {chapter}{\numberline {1}Introduction}{1}{chapter.3}
-\contentsline {chapter}{\numberline {2}Background}{3}{chapter.4}
-\contentsline {section}{\numberline {2.1}Virtual Reality}{3}{section.5}
-\contentsline {section}{\numberline {2.2}Telerobotics}{4}{section.7}
-\contentsline {subsection}{\numberline {2.2.1}VR in Telerobotics}{4}{subsection.8}
-\contentsline {section}{\numberline {2.3}Data Abstraction}{5}{section.10}
-\contentsline {section}{\numberline {2.4}Inter-Frame Interpolation}{6}{section.12}
-\contentsline {section}{\numberline {2.5}Sobol Sequences}{7}{section.13}
-\contentsline {section}{\numberline {2.6}Computer Vision}{7}{section.15}
-\contentsline {subsection}{\numberline {2.6.1}Edge Detection}{8}{subsection.16}
-\contentsline {subsection}{\numberline {2.6.2}Flood Fill}{8}{subsection.18}
-\contentsline {subsection}{\numberline {2.6.3}Depth Mapping}{9}{subsection.20}
-\contentsline {section}{\numberline {2.7}Wireless Communication}{10}{section.22}
-\contentsline {chapter}{\numberline {3}System Overview}{13}{chapter.23}
-\contentsline {chapter}{\numberline {4}Abstraction Algorithm Development}{15}{chapter.26}
-\contentsline {section}{\numberline {4.1}Edge Detection}{16}{section.31}
-\contentsline {section}{\numberline {4.2}Flood Filling}{17}{section.33}
-\contentsline {subsection}{\numberline {4.2.1}Seed Point}{17}{subsection.34}
-\contentsline {subsection}{\numberline {4.2.2}Fill Colour}{18}{subsection.36}
-\contentsline {chapter}{\numberline {5}Rover Implementation}{21}{chapter.38}
-\contentsline {section}{\numberline {5.1}Gimble Design}{22}{section.41}
-\contentsline {section}{\numberline {5.2}Image Pipeline}{24}{section.43}
-\contentsline {section}{\numberline {5.3}Control System}{28}{section.47}
-\contentsline {chapter}{\numberline {6}Server-Side Implementation}{29}{chapter.48}
-\contentsline {section}{\numberline {6.1}Depth Mapping}{29}{section.49}
-\contentsline {section}{\numberline {6.2}Coloured Abstraction Construction}{30}{section.50}
-\contentsline {section}{\numberline {6.3}3D Environment Generation}{30}{section.51}
-\contentsline {chapter}{\numberline {7}Evaluation and Conclusion}{31}{chapter.52}
+\contentsline {chapter}{\numberline {2}Background}{5}{chapter.6}
+\contentsline {section}{\numberline {2.1}Virtual Reality}{5}{section.7}
+\contentsline {section}{\numberline {2.2}Telerobotics}{6}{section.9}
+\contentsline {subsection}{\numberline {2.2.1}VR in Telerobotics}{6}{subsection.10}
+\contentsline {section}{\numberline {2.3}Data Abstraction}{8}{section.12}
+\contentsline {section}{\numberline {2.4}Sobol Sequences}{8}{section.14}
+\contentsline {section}{\numberline {2.5}Computer Vision}{9}{section.16}
+\contentsline {subsection}{\numberline {2.5.1}Edge Detection}{9}{subsection.17}
+\contentsline {subsection}{\numberline {2.5.2}Flood Fill}{10}{subsection.19}
+\contentsline {subsection}{\numberline {2.5.3}Depth Mapping}{11}{subsection.21}
+\contentsline {section}{\numberline {2.6}Wireless Communication}{12}{section.23}
+\contentsline {chapter}{\numberline {3}System Overview}{15}{chapter.24}
+\contentsline {chapter}{\numberline {4}Abstraction Algorithm Development}{17}{chapter.26}
+\contentsline {section}{\numberline {4.1}Edge Detection Process}{19}{section.28}
+\contentsline {section}{\numberline {4.2}Colour Averaging}{19}{section.29}
+\contentsline {subsection}{\numberline {4.2.1}Seed Point}{20}{subsection.30}
+\contentsline {subsection}{\numberline {4.2.2}Fill Colour}{21}{subsection.32}
+\contentsline {chapter}{\numberline {5}Rover Implementation}{23}{chapter.34}
+\contentsline {section}{\numberline {5.1}Gimbal Design}{24}{section.37}
+\contentsline {section}{\numberline {5.2}Image Pipeline}{26}{section.39}
+\contentsline {section}{\numberline {5.3}Control System}{30}{section.43}
+\contentsline {chapter}{\numberline {6}Server-Side Implementation}{33}{chapter.45}
+\contentsline {section}{\numberline {6.1}Depth Mapping}{33}{section.46}
+\contentsline {section}{\numberline {6.2}Coloured Abstraction Construction}{35}{section.47}
+\contentsline {section}{\numberline {6.3}3D Environment Generation}{35}{section.48}
+\contentsline {chapter}{\numberline {7}Testing and Evaluation}{37}{chapter.49}
+\contentsline {chapter}{\numberline {8}Project Management}{39}{chapter.50}
+\contentsline {chapter}{\numberline {9}Conclusion}{41}{chapter.51}
 \vspace {2em}
+\contentsline {chapter}{Bibliography}{47}{chapter*.52}
 \vspace {2em}
-\contentsline {chapter}{\numberline {A}Contour Based Seed Point Location}{39}{appendix.54}
-\contentsline {chapter}{\numberline {B}Demonstrations of Full Data Abstraction}{41}{appendix.56}
-\contentsline {chapter}{\numberline {C}Rover Hardware Breakdown}{43}{appendix.59}
-\contentsline {chapter}{\numberline {D}Vectorization}{45}{appendix.60}
-\contentsline {chapter}{\numberline {E}Project Brief}{47}{appendix.61}
-\contentsline {chapter}{\numberline {F}Gantt Charts}{49}{appendix.62}
-\contentsline {chapter}{\numberline {G}Costing and Risk Assessment}{51}{appendix.64}
+\contentsline {chapter}{\numberline {A}Contour Based Seed Point Location}{49}{appendix.53}
+\contentsline {chapter}{\numberline {B}Demonstrations of Full Data Abstraction}{51}{appendix.55}
+\contentsline {chapter}{\numberline {C}Rover Hardware Breakdown}{53}{appendix.58}
+\contentsline {chapter}{\numberline {D}Vectorization}{55}{appendix.59}
+\contentsline {chapter}{\numberline {E}Project Brief}{57}{appendix.60}
+\contentsline {chapter}{\numberline {F}Gantt Charts}{59}{appendix.61}
+\contentsline {chapter}{\numberline {G}Risk Assessment}{61}{appendix.63}
+\contentsline {chapter}{\numberline {H}Design Archive Contents}{63}{appendix.65}

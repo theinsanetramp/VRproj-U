@@ -2,20 +2,14 @@
 \lhead{\emph{System Overview}}
 \label{chapter:system}
 
-As can be seen in Figure \ref{fig:system}, the system consists of 2 platforms- A server that runs a VR environment and reads user input, and a rover platform that is controlled from said environment and supplies the abstracted images the environment is built from. The rover is a simple drivable platform with a stereo camera gimble mounted on it (Figure \ref{fig:marvin}), and is the subject of Chapter \ref{chapter:rover}. The server is a powerful PC running Windows 10 and a HTC Vive. The design of the program the server runs is the subject of Chapter \ref{chapter:server}. The data abstraction algorithm the system uses (in the "Data Abstraction" and "Coloured Abstraction Construction" blocks of Figure \ref{fig:system}) is novel, so its design and development is initially discussed in isolation in Chapter \ref{chapter:abstract} and then its application within the system addressed in Chapter \ref{chapter:rover}. Finally, the full system will be evaluated in Chapter \ref{chapter:eval}.
+The telerobotics system presented (Figure \ref{fig:system}) consists of a fairly complex image processing pipeline running alongside a simple control system, with very little interaction between the two. The pipeline starts with the 2 cameras on the rover taking a picture each as close to simultaneously as possible. These images then get abstracted down to edge detected sets of lines, with a set of colours also generated from Image 1 to combine with its edge detected version later on. These 3 pieces of data are then compressed into a single packet and transmitted via UDP to the server. The server splits them up again and then produces a depth map from the 2 edge detected images. This depth map is passed to the 3D Environment to be used to produce a 3D model of the space the cameras were looking at. The server also combines the Colour Data and Edge Detected Image 1 into a full coloured abstraction, which is overlaid onto the 3D model in the 3D environment. This environment is finally observed in the VR Headset.
 
-\begin{figure}[H]
-    \begin{center}
-      \includegraphics[width=0.6\textwidth]{Figures/marvin.jpg}
-      \caption[Rover Picture]{Rover Picture.}
-      \label{fig:marvin}
-    \end{center}
-\end{figure}
+The rover is controlled from an Xbox 360 controller that is connected to the server. Control inputs for driving the rover, gimble orientation, and parameters for the data abstraction (the only crossover between the control and image processing components) are transmitted to the rover at a fixed rate over UDP. It should be noted that in this system there is no connection between the orientation of the headset and gimble. The focus of this project was on providing the image processing foundations for future high presence systems, therefore the control system is the minimum required to prove the effectiveness of these foundations.
 
 \begin{figure}[H]
     \begin{center}
       \includegraphics[width=0.8\textwidth]{Figures/System.png}
-      \caption[System Overview Block Diagram]{System Overview Block Diagram.}
+      \caption[System Overview Block Diagram]{System Overview Block Diagram. The red blocks represent input/output, the blue blocks represent image processing steps, the yellow blocks represent communications, and the purple block represents the Unreal Engine 4 environment.}
       \label{fig:system}
     \end{center}
 \end{figure}

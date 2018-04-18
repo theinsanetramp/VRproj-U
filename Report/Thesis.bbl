@@ -15,11 +15,11 @@ S.~A. McGlynn and W.~A. Rogers, ``Considerations for presence in
   International Conference on Human-Robot Interaction}, HRI '17, (New York, NY,
   USA), pp.~203--204, ACM, 2017.
 
-\bibitem{bounds2016integrated}
-M.~Bounds, B.~Wilson, A.~Tavakkoli, and D.~Loffredo, ``An integrated
-  cyber-physical immersive virtual reality framework with applications to
-  telerobotics,'' in {\em International Symposium on Visual Computing},
-  pp.~235--245, Springer, 2016.
+\bibitem{han2017design}
+P.-H. Han, Y.-S. Chen, H.-L. Wang, Y.-J. Huang, J.-C. Hsiao, K.-W. Chen, and
+  Y.-P. Hung, ``The design of video see-through window for manipulating
+  physical object with head-mounted display,'' in {\em ACM SIGGRAPH 2017
+  Posters}, p.~31, ACM, 2017.
 
 \bibitem{FrameRate}
 IrisVR, ``The importance of frame rates,'' 2017.
@@ -44,6 +44,11 @@ M.~Gupta, F.~Hennecker, T.~Isaacs, M.~Sharhan, and L.~Stauskis, ``Biologically
   inspired robots: A vision system inspired by the human eye,'' 2016.
 \newblock Electronics and Computer Science, University of Southampton.
 
+\bibitem{windows}
+{Microsoft}, ``{Windows Official Site},'' 2018.
+\newblock Available: \url{https://www.microsoft.com/en-gb/windows/}. [Accessed:
+  \today].
+
 \bibitem{WhatVR}
 {Virtual Reality Society}, ``What is virtual reality?,'' 2017.
 \newblock Available:
@@ -65,6 +70,16 @@ N.~R. Council, {\em Virtual Reality: Scientific and Technological Challenges}.
 \bibitem{fong2017interactive}
 T.~Fong, ``Interactive exploration robots: Human-robotic collaboration and
   interactions,'' 2017.
+
+\bibitem{huvenne2018rovs}
+V.~A. Huvenne, K.~Robert, L.~Marsh, C.~L. Iacono, T.~Le~Bas, and R.~B. Wynn,
+  ``Rovs and auvs,'' in {\em Submarine Geomorphology}, pp.~93--108, Springer,
+  2018.
+
+\bibitem{smith2017radiation}
+C.~Smith and A.~Lightman, ``Radiation hardened telerobotic dismantling system
+  development final report crada no. tc-1340-96,'' tech. rep., Lawrence
+  Livermore National Lab.(LLNL), Livermore, CA (United States), 2017.
 
 \bibitem{Robonaut}
 {NASA}, ``Robonaut 2 homepage,'' 2016.
@@ -102,18 +117,6 @@ A.~Barrett-Sprot, ``Data abstraction for low-bandwidth communication,'' 2017.
   Southampton, Available:
   \url{https://secure.ecs.soton.ac.uk/notes/comp3200/e_archive/COMP3200/1617/abs1g14/pdfs/Report.pdf}.
   [Accessed: \today].
-
-\bibitem{ribas1993interframe}
-J.~Ribas-Corbera and J.~Sklansky, ``Interframe interpolation of cinematic
-  sequences,'' {\em Journal of Visual Communication and image representation},
-  vol.~4, no.~4, pp.~392--406, 1993.
-
-\bibitem{shi2016real}
-W.~Shi, J.~Caballero, F.~Husz{\'a}r, J.~Totz, A.~P. Aitken, R.~Bishop,
-  D.~Rueckert, and Z.~Wang, ``Real-time single image and video super-resolution
-  using an efficient sub-pixel convolutional neural network,'' in {\em
-  Proceedings of the IEEE Conference on Computer Vision and Pattern
-  Recognition}, pp.~1874--1883, 2016.
 
 \bibitem{joe2008constructing}
 S.~Joe and F.~Y. Kuo, ``Constructing sobol sequences with better
@@ -219,6 +222,10 @@ G.~Bradski and A.~Kaehler, {\em Learning OpenCV: Computer vision with the
   OpenCV library}.
 \newblock " O'Reilly Media, Inc.", 2008.
 
+\bibitem{pi}
+{Raspberry Pi Foundation}, ``{Raspberry Pi Homepage},'' 2018.
+\newblock Available: \url{https://www.raspberrypi.org/}. [Accessed: \today].
+
 \bibitem{dodgson2004variation}
 N.~A. Dodgson, ``Variation and extrema of human interpupillary distance,'' in
   {\em Stereoscopic Displays and Virtual Reality Systems XI}, vol.~5291,
@@ -242,5 +249,9 @@ K.~Lesiński, ``{libimagequant-Image Quantization Library},'' 2017.
 {Sourish Ghost}, ``Stereo camera calibration using opencv and c++,'' 2016.
 \newblock Available: \url{https://github.com/sourishg/stereo-calibration}.
   [Accessed: \today].
+
+\bibitem{geiger2010efficient}
+A.~Geiger, M.~Roser, and R.~Urtasun, ``Efficient large-scale stereo matching,''
+  in {\em Asian conference on computer vision}, pp.~25--38, Springer, 2010.
 
 \end{thebibliography}

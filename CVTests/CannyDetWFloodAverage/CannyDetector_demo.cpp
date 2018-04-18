@@ -11,8 +11,9 @@ using namespace cv;
 using namespace std;
 
 #define SOBOL
+//#define PICS
 
-Mat src;
+Mat src, detected_edges;
 Mat dst, flood_mask;
 
 //Canny variables
@@ -36,54 +37,61 @@ Mat element = getStructuringElement( dilation_type,
 
 void CannyThreshold(int, void*)
 {
-  /// Reduce noise with a kernel 5x5
-  blur( dst, dst, Size(5,5) );
-  //imwrite("buildBlur.jpg",detected_edges);
   /// Canny detector
-  Canny( dst, dst, lowThreshold, lowThreshold*ratio, kernel_size );
-  //imwrite("buildCanny.jpg",detected_edges);
+  Canny( dst, detected_edges, lowThreshold, lowThreshold*ratio, kernel_size );
+  #ifdef PICS
+  imwrite("buildCanny.jpg",detected_edges);
+  #endif
   /// Apply the dilation operation
-  dilate( dst, dst, element );
-  //imwrite("buildDilated.jpg",dst);
-  cvtColor(dst, dst, CV_GRAY2RGB); 
+  dilate( detected_edges, detected_edges, element );
+  #ifdef PICS
+  imwrite("buildDilated.jpg",detected_edges);
+  #endif
+  cvtColor(detected_edges, detected_edges, CV_GRAY2RGB); 
 
-  // #ifdef SOBOL
-  // //Floodfill from quasi-random points
-  // for (unsigned long long i = 0; i < 600; ++i)
-  //   {
-  //       int x = src.cols * sobol::sample(i, 0);
-  //       int y = src.rows * sobol::sample(i, 1);
-  //       Point seed = Point(x, y);
-  //       if(dst.at<Vec3b>(seed)[0] == 0 && dst.at<Vec3b>(seed)[1] == 0 && dst.at<Vec3b>(seed)[2] == 0)
-  //       {
-  //         flood_mask = 0;
-  //         floodFill(dst, flood_mask, seed, (255,255,255), &ccomp, Scalar(loDiff, loDiff, loDiff),
-  //                 Scalar(upDiff, upDiff, upDiff), 4 + (255 << 8) + FLOODFILL_MASK_ONLY);
-  //         Scalar newVal = mean(src,flood_mask);
-  //         floodFill(dst, seed, newVal, &ccomp, Scalar(loDiff, loDiff, loDiff),
-  //                 Scalar(upDiff, upDiff, upDiff), flags);
-  //       }
-  //   }
-  // #else
-  // //Floodfill every empty area
-  // for(int i=0;i<dst.cols;i++)
-  // {
-  //   for(int j=0;j<dst.rows;j++)
-  //   {
-  //     Point seed = Point(i,j);
-  //     if(dst.at<Vec3b>(seed)[0] == 0 && dst.at<Vec3b>(seed)[1] == 0 && dst.at<Vec3b>(seed)[2] == 0)
-  //     {
-  //       flood_mask = 0;
-  //       floodFill(dst, flood_mask, seed, (255,255,255), &ccomp, Scalar(loDiff, loDiff, loDiff),
-  //               Scalar(upDiff, upDiff, upDiff), 4 + (255 << 8) + FLOODFILL_MASK_ONLY);
-  //       Scalar newVal = mean(src,flood_mask);
-  //       floodFill(dst, seed, newVal, &ccomp, Scalar(loDiff, loDiff, loDiff),
-  //               Scalar(upDiff, upDiff, upDiff), flags);
-  //     }
-  //   }
-  // }
-  // #endif
-  imshow( "Edge Map", dst );
+  #ifdef SOBOL
+  //Floodfill from quasi-random points
+  for (unsigned long long i = 0; i < 600; ++i)
+    {
+        int x = src.cols * sobol::sample(i, 0);
+        int y = src.rows * sobol::sample(i, 1);
+        Point seed = Point(x, y);
+        if(detected_edges.at<Vec3b>(seed)[0] == 0 && detected_edges.at<Vec3b>(seed)[1] == 0 && detected_edges.at<Vec3b>(seed)[2] == 0)
+        {
+          flood_mask = 0;
+          floodFill(detected_edges, flood_mask, seed, (255,255,255), &ccomp, Scalar(loDiff, loDiff, loDiff),
+                  Scalar(upDiff, upDiff, upDiff), 4 + (255 << 8) + FLOODFILL_MASK_ONLY);
+          Scalar newVal = mean(src,flood_mask);
+          floodFill(detected_edges, seed, newVal, &ccomp, Scalar(loDiff, loDiff, loDiff),
+                  Scalar(upDiff, upDiff, upDiff), flags);
+          #ifdef PICS
+          if(i == 1) {
+            imwrite("buildmask.jpg",flood_mask);
+            imwrite("buildfirstfill.jpg",detected_edges);
+          }
+          #endif
+        }
+    }
+  #else
+  //Floodfill every empty area
+  for(int i=0;i<detected_edges.cols;i++)
+  {
+    for(int j=0;j<detected_edges.rows;j++)
+    {
+      Point seed = Point(i,j);
+      if(detected_edges.at<Vec3b>(seed)[0] == 0 && detected_edges.at<Vec3b>(seed)[1] == 0 && detected_edges.at<Vec3b>(seed)[2] == 0)
+      {
+        flood_mask = 0;
+        floodFill(detected_edges, flood_mask, seed, (255,255,255), &ccomp, Scalar(loDiff, loDiff, loDiff),
+                Scalar(upDiff, upDiff, upDiff), 4 + (255 << 8) + FLOODFILL_MASK_ONLY);
+        Scalar newVal = mean(src,flood_mask);
+        floodFill(detected_edges, seed, newVal, &ccomp, Scalar(loDiff, loDiff, loDiff),
+                Scalar(upDiff, upDiff, upDiff), flags);
+      }
+    }
+  }
+  #endif
+  imshow( "Edge Map", detected_edges );
  }
 
 
@@ -102,7 +110,14 @@ int main( int argc, char** argv )
 
   /// Convert the image to grayscale
   cvtColor( src, dst, CV_BGR2GRAY );
-  //imwrite("buildGray.jpg",src_gray);
+  #ifdef PICS
+  imwrite("buildGray.jpg",dst);
+  #endif
+  /// Reduce noise with a kernel 5x5
+  blur( dst, dst, Size(5,5) );
+  #ifdef PICS
+  imwrite("buildBlur.jpg",dst);
+  #endif
   namedWindow( "Edge Map", CV_WINDOW_AUTOSIZE );
 
   /// Create a Trackbar for user to enter threshold
@@ -118,6 +133,8 @@ int main( int argc, char** argv )
   	 k = waitKey(0);
   }
   while(k != 27);
-  imwrite("Final.jpg",dst);
+  #ifdef PICS
+  imwrite("Final.jpg",detected_edges);
+  #endif
   return 0;
   }

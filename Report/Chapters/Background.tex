@@ -18,20 +18,20 @@ The term Virtual Reality (VR) refers to the generation of a 3D environment that 
 
 HMD based systems display different images for each eye to provide the user with a sense of depth within the 3D environment, making the headset effectively operate like a pair of binoculars into the virtual world. The headset is also tracked in 3D space, and this movement translated into the 3D environment with very low latency. These features, among others, are all implemented with the aim of providing the user with presence within the virtual space that is comparable to observing the real world.
 
-Due to its availability at the University of Southampton and in my own home, the HTC Vive was used as the VR device in the implementation of the teleoperations system discussed in this report. 
+Due to its availability at the University of Southampton and in my own home, the HTC Vive was used as the VR device in the development and implementation of the teleoperations system discussed in this report. 
 
 \section{Telerobotics}
 
-As discussed in the introduction, a telerobot is a robot controlled from a distance by a human operator \cite{NAP4761}. Telerobots are typically developed to undertake activities within environments that are too dangerous or costly for humans to work in, an example being the extensive telerobotics research at NASA for tasks such as deep-space exploration \cite{fong2017interactive}.
+A telerobot is a robot controlled from a distance by a human operator \cite{NAP4761}. Telerobots are typically developed to undertake activities within environments that are too dangerous or costly for humans to work in, examples being the extensive telerobotics research for tasks such as deep-space exploration \cite{fong2017interactive}, deep-sea exploration \cite{huvenne2018rovs}, and handling radioactive materials \cite{smith2017radiation}.
 
 \subsection{VR in Telerobotics}
 \label{subsection:VRTele}
 
 The use of HMDs in teleoperations is not a new concept; NASA's Robonaut 2 was sent to the International Space Station in 2011 and can be controlled through a headset that displays the output of the robot's head cameras \cite{Robonaut}, and flying drones by First Person View (FPV), an analogue video feed transmitted over radio to a HMD, is very popular \cite{FPV}. However, these systems are either incredibly expensive (Robonaut 2 is worth millions of dollars) or very limited (FPV systems send one, low quality, video stream over a short distance), and all have the motion sickness issues discussed in the introduction. While stereo camera FPV systems have been developed, so the user has depth perception and better presence in the drone's view, the motion sickness problem remains the major drawback of HMD based teleoperations systems \cite{2FPV}.
 
-As previously established, motion sickness in VR is mitigated through high frame rates and low latency. However, most VR based teleoperations systems currently available are direct VR systems, so they display the video feeds produced from the device's cameras directly in the headset. This entirely ties the frame rate and latency of the headset to the capabilities of the video transmission system, and only the most expensive and complicated systems will meet the strict requirements for comfortable VR.
+As previously established, motion sickness in VR is mitigated through high frame rates and low latency. However, typically VR based teleoperations systems are direct VR systems, so they display the video feeds produced from the device's cameras directly in the headset. This entirely ties the frame rate and latency of the headset to the capabilities of the video transmission system, and only the most expensive and complicated systems will meet the strict requirements for comfortable VR and the spacial presence desired.
 
-An alternate option to a direct system is an indirect system. This is one in which the video feed is abstracted from the headset in some way in the hope of providing improved comfort and awareness. Indirect systems can come in a variety of forms, such as a virtual control room with the video feed on a virtual screen \cite{lipton2018baxter}, or a 3D map generated from a multi-line LiDAR and IMU \cite{wang2017novel} (Figure \ref{fig:VRTele}). These examples show the potential of indirect systems as a solution to VR based teleoperations, though the research into this field is currently minimal; this project aims to expand on this research with the development of its novel system.
+An alternate option to a direct system is an indirect system. This is one in which the video feed is abstracted from the headset in some way in the hope of providing improved comfort and awareness. Indirect systems can come in a variety of forms, such as placing the video feed on a virtual screen in the VR environment and controlling the robot using virtual controls laid out infront of the screen \cite{lipton2018baxter}, or a 3D map generated from a multi-line LiDAR and IMU \cite{wang2017novel} (Figure \ref{fig:VRTele}). These examples show the potential of indirect systems as a solution to VR based teleoperations, however neither of them provide true presence within their respective robots' spaces. The research into indirect systems is currently minimal; this project aims to expand on this research with the development of its novel system.
 
 \begin{figure}[H]
     \begin{center}
@@ -45,10 +45,11 @@ An alternate option to a direct system is an indirect system. This is one in whi
 \end{figure}
 
 \section{Data Abstraction}
+\label{Subsection:abstract}
 
-"Data abstraction" is the phrase that will be used in this report to describe the act of reducing an image down to only its most essential elements. It is similar in concept to an artist sketching a scene instead of attempting a full drawing, and is comparable to data compression as the aim is also to reduce the file size of the image, however data abstraction takes a very different approach to solving the problem than standard compression algorithms.
+\textit{Data abstraction} is the phrase that will be used in this report to describe the act of reducing an image down to only its most essential elements. It is similar in concept to an artist sketching a scene instead of attempting a full drawing. Comparing the concept to data compression is apt, as both aim to reduce the file size of the image, however data abstraction takes a very different approach to solving the problem than standard compression algorithms.
 
-Data compression is the storing of information using a more space efficient encoding \cite{compression}. While some information is lost during lossy compression, the aim regardless of the algorithm used is to retain as much of the original information as possible. In contrast, the aim when utilising data abstraction is to discard all the information that is unnecessary to fulfilling the image's purpose. For example, if all that is required of an image is that basic shapes can be identified, then only the information on the boundaries of the shapes is necessary; the rest of the image can be discarded. An implementation of data abstraction can be seen in Figure \ref{fig:abstraction3rdyear}.
+Data compression is the storing of information using a more space efficient encoding \cite{compression}. While some information is lost during lossy compression, the aim regardless of the algorithm used is to retain as much of the original information as possible. In contrast, the aim when utilising data abstraction is to discard all the information that is unneces'sary to fulfilling the image's purpose. For example, if all that is required of an image is that basic shapes can be identified, then only the information on the boundaries of the shapes is necessary; the rest of the image can be discarded. An implementation of data abstraction can be seen in Figure \ref{fig:abstraction3rdyear}.
 
 %\caption[My figure Title.]{My figure Title. Details how it was made. What is the point? Reproduced from}
 
@@ -59,10 +60,6 @@ Data compression is the storing of information using a more space efficient enco
       \label{fig:abstraction3rdyear}
     \end{center}
 \end{figure}
-
-\section{Inter-Frame Interpolation}
-
-Inter-frame interpolation is the generation of intermediate frames in a video feed to increase its frame rate. This is typically done using estimations of optical flow to interpolate frames within a pre-recorded sequence \cite{ribas1993interframe}, though there are methods that can achieve real-time video processing when provided with powerful enough hardware \cite{shi2016real}. In this report, the term inter-frame interpolation refers to the increase in frame rate provided by the conversion of the video feed into a 3D map, as in effect we are interpolating the $<$30fps video feed up to 90fps in the VR headset.
 
 \section{Sobol Sequences}
 \label{Subsection:sobol}
@@ -105,7 +102,7 @@ Flood fill algorithms determine the area connected to a given cell (the seed poi
         \includegraphics[width=0.35\textwidth]{Figures/blox.jpg} &
         \includegraphics[width=0.35\textwidth]{Figures/bloxFilled.jpg}
     \end{tabular}
-    \caption[Example of Flood Fill]{Example of Flood Fill. The original image (left) was provided by OpenCV. The right image is the result of flood filling from the top left corner.}
+    \caption[Example of Flood Fill]{Example of Flood Fill. The original image (left) was provided by OpenCV \cite{OpenCV}. The right image is the result of flood filling from the top left corner.}
     \label{fig:EgFloodFill}
     \end{center}
 \end{figure}

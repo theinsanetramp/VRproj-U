@@ -8,13 +8,19 @@ The purpose of the server is to receive image data from the rover, produce a 3D 
 
 \section{Depth Mapping}
 
-As established in Section \ref{subsection:depth}, for a depth mapping algorithm to function accurately, the 2 images it receives must be rectified. The rectification parameters for the cameras in our system have been calculated using a set of programs provided by Sourish Ghost \cite{calibgit}. The rectification is then applied using these parameters just before the depth maps are calculated (Figure \textcolor{red}{[RECTIFICATION PICS]}).
+For a depth mapping algorithm to function accurately, the 2 images it receives must be rectified (established in Section \ref{subsection:depth}). The rectification parameters for the cameras in our system have been calculated using a set of programs provided by Sourish Ghost \cite{calibgit}. The rectification is then applied using these parameters just before the depth maps are calculated (Figure \textcolor{red}{[RECTIFICATION PICS]}).
 
-Three different depth mapping algorithms were tested: StereoBM, StereoSGBM, and Libelas.
+When selecting a depth mapping algorithm, the major factors to consider were speed and performance with abstracted images. The use of abstractions makes demonstrations of the algorithms with full images of little help; there is no guarantee that the algorithms would be able to map depth for edge detected lines as well as if they were full images, if at all, since this is not what they are designed for. Three different depth mapping algorithms were tested: StereoBM, StereoSGBM, and Libelas. StereoBM and StereoSGBM are a block matching and semi block matching algorithm provided by OpenCV \cite{OpenCV}, and Libelas is a more complex algorithm provided by the Autonomous Vision Group \cite{geiger2010efficient}. Of the three algorithms presented, StereoBM is the fastest and Libelas the slowest (Figure \textcolor{red}{[SPEED GRAPH]}). 
+
+When tested on images received from the rover, StereoBM produced reasonable results (Figure \textcolor{red}{[DEPTH COMPARISON]}), producing approximations of depth along the edges in the image and producing noise otherwise. The noise is unsurprising and unconcerning, as the algorithm is attempting to find depth within the areas of the image that are simply black space, and will be discarded anyway. StereoSGBM is a slower algorithm then StereoBM, however it produces similar results, leading to it being quickly discarded as an option. Libelas, a significantly more complicated option, does not produce any reasonable results with edge detected images. The intelligence of Libelas may have led to it attempting to find indicators within the images that no longer exist after they have been edge detected. Whatever the case may be, the logical choice from this set of options is StereoBM.
+
+To produce a 3D model from one of the depth maps produced by StereoBM, the depth calculated on the edges of objects must be applied to the spaces between them. The method chosen for this task was to apply Weighted Least Squares filtering to the depth map (Figure \textcolor{red}{[FILTERING]}). This is effective in filling most spaces in the map with depth found in the edges adjacent to them. Unfortunately, regardless of the angle to the camera that an object sits at, the filtering will give it flat depth. This results in surfaces like the floor or the ceiling being inaccurately represented, however it does not significantly affect most objects.
+
+While the individual depth maps (post filtering) are reasonable approximations of the space being viewed, the depth of a single object with be inconsistent between frames, due to inconsistencies between edge detected frames. When viewed as a video feed, most objects will oscillate slightly, with greater oscillations in objects that are more ambiguous or less consistent in the edge detected frames. This issue is mitigated in the system by taking a running average of the frames, the weighting of the frames in the average reducing with the age of the frame. This increases consistency substantially at the expense of a minor reduction in responsiveness.
 
 \section{Coloured Abstraction Construction}
 
-To generate the final texture that is applied to the 3D environment, a complete coloured abstraction must be produced from "edge detected img 1" and its colour data.
+
 
 \section{3D Environment Generation}
 
