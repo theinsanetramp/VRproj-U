@@ -104,8 +104,8 @@ int main( int argc, char** argv )
         return -1;
       }
   }
-  //cap.set(CV_CAP_PROP_FRAME_WIDTH,494);
-  //cap.set(CV_CAP_PROP_FRAME_HEIGHT,768);
+  cap.set(CV_CAP_PROP_FRAME_WIDTH,320);
+  cap.set(CV_CAP_PROP_FRAME_HEIGHT,240);
   //cap.set(CV_CAP_PROP_FPS, 40);
   int FPS = cap.get(CV_CAP_PROP_FPS);
   cout << FPS << endl;
@@ -141,7 +141,7 @@ int main( int argc, char** argv )
     imshow("Camera", tmp_frame);
     char keycode = (char)waitKey(30);
       if( keycode == 27 ){
-          //imwrite("frame.jpg", detected_edges);
+          imwrite("TestScene3.jpg", tmp_frame);
           break;
         }
   }

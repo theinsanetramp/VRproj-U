@@ -1,6 +1,6 @@
 \addvspace {10\p@ }
 \contentsline {figure}{\numberline {1.1}{\ignorespaces System Outline}}{3}{figure.caption.4}
-\contentsline {figure}{\numberline {1.2}{\ignorespaces Rover Picture}}{3}{figure.caption.5}
+\contentsline {figure}{\numberline {1.2}{\ignorespaces Rover Pictures}}{4}{figure.caption.5}
 \addvspace {10\p@ }
 \contentsline {figure}{\numberline {2.1}{\ignorespaces HTC Vive}}{5}{figure.caption.8}
 \contentsline {figure}{\numberline {2.2}{\ignorespaces Indirect VR teleoperations examples}}{7}{figure.caption.11}
@@ -13,26 +13,31 @@
 \contentsline {figure}{\numberline {3.1}{\ignorespaces System Overview Block Diagram}}{16}{figure.caption.25}
 \addvspace {10\p@ }
 \contentsline {figure}{\numberline {4.1}{\ignorespaces Data Abstraction Algorithm Process}}{18}{figure.caption.27}
-\contentsline {figure}{\numberline {4.2}{\ignorespaces Comparison of brute force and Sobol seed point generation}}{21}{figure.caption.31}
-\contentsline {figure}{\numberline {4.3}{\ignorespaces Comparison of Colour Averaging Methods}}{22}{figure.caption.33}
+\contentsline {figure}{\numberline {4.2}{\ignorespaces Performance Comparison of Seed Point Methods}}{21}{figure.caption.31}
+\contentsline {figure}{\numberline {4.3}{\ignorespaces Comparison of brute force and Sobol seed point generation}}{21}{figure.caption.32}
+\contentsline {figure}{\numberline {4.4}{\ignorespaces Comparison of Colour Averaging Methods}}{23}{figure.caption.34}
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {5.1}{\ignorespaces Rover Internals}}{23}{figure.caption.35}
-\contentsline {figure}{\numberline {5.2}{\ignorespaces Hardware Block Diagram}}{24}{figure.caption.36}
-\contentsline {figure}{\numberline {5.3}{\ignorespaces Gimbal Picture}}{26}{figure.caption.38}
-\contentsline {figure}{\numberline {5.4}{\ignorespaces Raspberry Pi Image Pipeline Threading Block Diagram}}{27}{figure.caption.40}
+\contentsline {figure}{\numberline {5.1}{\ignorespaces Rover Internals}}{26}{figure.caption.36}
+\contentsline {figure}{\numberline {5.2}{\ignorespaces Hardware Block Diagram}}{27}{figure.caption.37}
+\contentsline {figure}{\numberline {5.3}{\ignorespaces Gimbal Picture}}{29}{figure.caption.39}
+\contentsline {figure}{\numberline {5.4}{\ignorespaces Raspberry Pi Image Pipeline Threading Block Diagram}}{30}{figure.caption.41}
 \addvspace {10\p@ }
-\addvspace {10\p@ }
-\addvspace {10\p@ }
-\addvspace {10\p@ }
-\addvspace {10\p@ }
-\contentsline {figure}{\numberline {A.1}{\ignorespaces Demonstration of contour centre point location}}{50}{figure.caption.54}
-\addvspace {10\p@ }
-\contentsline {figure}{\numberline {B.1}{\ignorespaces Demonstration of full abstraction process}}{51}{figure.caption.56}
-\contentsline {figure}{\numberline {B.2}{\ignorespaces Additional examples of the full abstraction process}}{52}{figure.caption.57}
+\contentsline {figure}{\numberline {6.1}{\ignorespaces Server Program Structure}}{38}{figure.caption.47}
+\contentsline {figure}{\numberline {6.2}{\ignorespaces Mesh Grid Segment}}{40}{figure.caption.50}
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
+\contentsline {figure}{\numberline {A.1}{\ignorespaces Demonstration of full abstraction process}}{55}{figure.caption.56}
+\contentsline {figure}{\numberline {A.2}{\ignorespaces Additional examples of the full abstraction process}}{56}{figure.caption.57}
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {G.1}{\ignorespaces Risk Assessment}}{61}{figure.caption.64}
+\contentsline {figure}{\numberline {B.1}{\ignorespaces Demonstration of contour centre point location}}{58}{figure.caption.59}
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {C.1}{\ignorespaces Images of Algorithm Performance Test Scenes}}{60}{figure.caption.61}
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {H.1}{\ignorespaces Risk Assessment}}{69}{figure.caption.68}
 \addvspace {10\p@ }

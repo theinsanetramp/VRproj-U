@@ -290,7 +290,6 @@ void ReceivePoints()
   wls_filter->setSigmaColor(sigma);
   wls_filter->filter(left_disp,left_for_matcher,filtered_disp,right_disp);
   getDisparityVis(filtered_disp,filtered_disp_vis,vis_mult);
-
   // consist_vis = filtered_disp_vis.clone();
   // if(first) {
   // 	last_vis = filtered_disp_vis.clone();
@@ -425,7 +424,5 @@ int main( int argc, char** argv )
   close(fd);
   t.join();
   control.join();
-  //imwrite("LGimble.jpg", receivedImage);
-  //imwrite("RGimble.jpg", receivedImage2);
   return 0;
 }

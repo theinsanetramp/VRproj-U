@@ -15,26 +15,26 @@
 \contentsline {section}{\numberline {4.1}Edge Detection Process}{19}{section.28}
 \contentsline {section}{\numberline {4.2}Colour Averaging}{19}{section.29}
 \contentsline {subsection}{\numberline {4.2.1}Seed Point}{20}{subsection.30}
-\contentsline {subsection}{\numberline {4.2.2}Fill Colour}{21}{subsection.32}
-\contentsline {chapter}{\numberline {5}Rover Implementation}{23}{chapter.34}
-\contentsline {section}{\numberline {5.1}Gimbal Design}{24}{section.37}
-\contentsline {section}{\numberline {5.2}Image Pipeline}{26}{section.39}
-\contentsline {section}{\numberline {5.3}Control System}{30}{section.43}
-\contentsline {chapter}{\numberline {6}Server-Side Implementation}{33}{chapter.45}
-\contentsline {section}{\numberline {6.1}Depth Mapping}{33}{section.46}
-\contentsline {section}{\numberline {6.2}Coloured Abstraction Construction}{35}{section.47}
-\contentsline {section}{\numberline {6.3}3D Environment Generation}{35}{section.48}
-\contentsline {chapter}{\numberline {7}Testing and Evaluation}{37}{chapter.49}
-\contentsline {chapter}{\numberline {8}Project Management}{39}{chapter.50}
-\contentsline {chapter}{\numberline {9}Conclusion}{41}{chapter.51}
+\contentsline {subsection}{\numberline {4.2.2}Fill Colour}{21}{subsection.33}
+\contentsline {chapter}{\numberline {5}Rover Implementation}{25}{chapter.35}
+\contentsline {section}{\numberline {5.1}Gimbal Design}{27}{section.38}
+\contentsline {section}{\numberline {5.2}Image Pipeline}{29}{section.40}
+\contentsline {section}{\numberline {5.3}Control System}{33}{section.44}
+\contentsline {chapter}{\numberline {6}Server-Side Implementation}{37}{chapter.46}
+\contentsline {section}{\numberline {6.1}Depth Map and Abstraction Construction}{38}{section.48}
+\contentsline {section}{\numberline {6.2}3D Model Generation}{40}{section.49}
+\contentsline {chapter}{\numberline {7}Testing and Evaluation}{43}{chapter.51}
+\contentsline {chapter}{\numberline {8}Project Management}{45}{chapter.52}
+\contentsline {chapter}{\numberline {9}Conclusion}{47}{chapter.53}
 \vspace {2em}
-\contentsline {chapter}{Bibliography}{47}{chapter*.52}
+\contentsline {chapter}{Bibliography}{53}{chapter*.54}
 \vspace {2em}
-\contentsline {chapter}{\numberline {A}Contour Based Seed Point Location}{49}{appendix.53}
-\contentsline {chapter}{\numberline {B}Demonstrations of Full Data Abstraction}{51}{appendix.55}
-\contentsline {chapter}{\numberline {C}Rover Hardware Breakdown}{53}{appendix.58}
-\contentsline {chapter}{\numberline {D}Vectorization}{55}{appendix.59}
-\contentsline {chapter}{\numberline {E}Project Brief}{57}{appendix.60}
-\contentsline {chapter}{\numberline {F}Gantt Charts}{59}{appendix.61}
-\contentsline {chapter}{\numberline {G}Risk Assessment}{61}{appendix.63}
-\contentsline {chapter}{\numberline {H}Design Archive Contents}{63}{appendix.65}
+\contentsline {chapter}{\numberline {A}Demonstrations of Full Data Abstraction}{55}{appendix.55}
+\contentsline {chapter}{\numberline {B}Contour Based Seed Point Location}{57}{appendix.58}
+\contentsline {chapter}{\numberline {C}Algorithm Performance Test Images}{59}{appendix.60}
+\contentsline {chapter}{\numberline {D}Rover Hardware Breakdown}{61}{appendix.62}
+\contentsline {chapter}{\numberline {E}Vectorization}{63}{appendix.63}
+\contentsline {chapter}{\numberline {F}Project Brief}{65}{appendix.64}
+\contentsline {chapter}{\numberline {G}Gantt Charts}{67}{appendix.65}
+\contentsline {chapter}{\numberline {H}Risk Assessment}{69}{appendix.67}
+\contentsline {chapter}{\numberline {I}Design Archive Contents}{71}{appendix.69}
