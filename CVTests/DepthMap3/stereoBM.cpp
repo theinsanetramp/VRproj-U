@@ -35,10 +35,10 @@ Mat generateDisparityMap(Mat& left, Mat& right) {
 int main(int argc, char** argv)
 {
     int wsize = 15;
-    int max_disp = 80;
-    double lambda = 8000;
-    double sigma = 1.5;
-    double vis_mult = 1;
+    int max_disp = 32;
+    double lambda = 1000;
+    double sigma = 3.5;
+    double vis_mult = 3;
 
     //! [load_views]
     Mat left  = imread(argv[1], IMREAD_COLOR);

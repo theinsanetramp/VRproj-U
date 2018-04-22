@@ -13,11 +13,11 @@ using namespace std;
 
 int main(int argc, char** argv)
 {
-    int wsize = 15;
-    int max_disp = 112;
-    double lambda = 8000;
-    double sigma = 1.5;
-    double vis_mult = 1;
+    int wsize = 3;
+    int max_disp = 32;
+    double lambda = 1000;
+    double sigma = 3.5;
+    double vis_mult = 3;
 
     //! [load_views]
     Mat left  = imread(argv[1], IMREAD_COLOR);
@@ -51,7 +51,15 @@ int main(int argc, char** argv)
     right.copyTo(right_for_matcher(Rect(2,2,right.cols,right.rows)));
 
     //! [matching]
-    Ptr<StereoBM> left_matcher = StereoBM::create(max_disp,wsize);
+    // Ptr<StereoBM> left_matcher = StereoBM::create(max_disp,wsize);
+    // wls_filter = createDisparityWLSFilter(left_matcher);
+    // Ptr<StereoMatcher> right_matcher = createRightMatcher(left_matcher);
+
+    Ptr<StereoSGBM> left_matcher  = StereoSGBM::create(0,max_disp,wsize);
+    left_matcher->setP1(24*wsize*wsize);
+    left_matcher->setP2(96*wsize*wsize);
+    left_matcher->setPreFilterCap(63);
+    left_matcher->setMode(StereoSGBM::MODE_SGBM_3WAY);
     wls_filter = createDisparityWLSFilter(left_matcher);
     Ptr<StereoMatcher> right_matcher = createRightMatcher(left_matcher);
 
@@ -92,8 +100,8 @@ int main(int argc, char** argv)
     getDisparityVis(left_disp,raw_disp_vis,vis_mult);
     raw_disp_vis.copyTo( out, left_for_matcher);
     namedWindow("raw disparity", WINDOW_AUTOSIZE);
-    imshow("raw disparity", out);
-    imwrite("result.jpg",out);
+    imshow("raw disparity", raw_disp_vis);
+    imwrite("result.jpg",filtered_disp_vis);
 
     namedWindow("filtered disparity", WINDOW_AUTOSIZE);
     imshow("filtered disparity", filtered_disp_vis);

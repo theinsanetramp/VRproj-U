@@ -4,6 +4,12 @@
 K.~M. Lee, ``Presence, explicated,'' {\em Communication Theory}, vol.~14,
   no.~1, pp.~27--50, 2004.
 
+\bibitem{alexander2005gaming}
+A.~L. Alexander, T.~Bruny{\'e}, J.~Sidman, and S.~A. Weil, ``From gaming to
+  training: A review of studies on fidelity, immersion, presence, and buy-in
+  and their effects on transfer in pc-based simulations and games,'' {\em
+  DARWARS Training Impact Group}, vol.~5, pp.~1--14, 2005.
+
 \bibitem{loomis2016presence}
 J.~M. Loomis, ``Presence in virtual reality and everyday life: Immersion within
   a world of representation,'' {\em PRESENCE: Teleoperators and Virtual
@@ -49,6 +55,10 @@ M.~Gupta, F.~Hennecker, T.~Isaacs, M.~Sharhan, and L.~Stauskis, ``Biologically
 \newblock Available: \url{https://www.microsoft.com/en-gb/windows/}. [Accessed:
   \today].
 
+\bibitem{Vive}
+{HTC}, ``Htc vive homepage,'' 2017.
+\newblock Available: \url{https://www.vive.com/uk/}. [Accessed: \today].
+
 \bibitem{WhatVR}
 {Virtual Reality Society}, ``What is virtual reality?,'' 2017.
 \newblock Available:
@@ -58,10 +68,6 @@ M.~Gupta, F.~Hennecker, T.~Isaacs, M.~Sharhan, and L.~Stauskis, ``Biologically
 \bibitem{Oculus}
 {Oculus}, ``Oculus rift homepage,'' 2017.
 \newblock Available: \url{https://www.oculus.com/rift/}. [Accessed: \today].
-
-\bibitem{Vive}
-{HTC}, ``Htc vive homepage,'' 2017.
-\newblock Available: \url{https://www.vive.com/uk/}. [Accessed: \today].
 
 \bibitem{NAP4761}
 N.~R. Council, {\em Virtual Reality: Scientific and Technological Challenges}.

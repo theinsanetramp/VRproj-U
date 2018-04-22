@@ -3,7 +3,7 @@
 
 \section{Virtual Reality}
 
-The term Virtual Reality (VR) refers to the generation of a 3D environment that can be interacted with by a user in a realistic fashion, with the aim of immersing the user in the environment as if it were the real world \cite{WhatVR}. While there are a large array of systems that can be considered VR, whenever the term is used in this report it is only referring to the head-mounted display (HMD) systems that have become popular in recent years with the release of the Oculus Rift \cite{Oculus} and the HTC Vive \cite{Vive} (Figure \ref{fig:Vive}); these are both consumer grade systems that are aimed at the immersive gaming market.
+The term Virtual Reality (VR) refers to the generation of a 3D environment that can be interacted with by a user in a realistic fashion, with the aim of immersing the user in the environment as if it were the real world \cite{WhatVR}. While there are a large array of systems that can be considered VR, whenever the term is used in this report it is only referring to the head-mounted display (HMD) systems that have become popular in recent years with the release of the Oculus Rift \cite{Oculus} and the HTC Vive \cite{Vive} (Figure \ref{fig:Vive}). These are both consumer grade systems that are aimed at the immersive gaming market.
 
 \begin{figure}[H]
     \begin{center}
@@ -22,16 +22,16 @@ Due to its availability at the University of Southampton and in my own home, the
 
 \section{Telerobotics}
 
-A telerobot is a robot controlled from a distance by a human operator \cite{NAP4761}. Telerobots are typically developed to undertake activities within environments that are too dangerous or costly for humans to work in, examples being the extensive telerobotics research for tasks such as deep-space exploration \cite{fong2017interactive}, deep-sea exploration \cite{huvenne2018rovs}, and handling radioactive materials \cite{smith2017radiation}.
+A telerobot is a robot controlled from a distance by a human operator \cite{NAP4761}. Telerobots are typically developed to undertake activities within environments that are too dangerous or costly for humans to work in. Typical fields of telerobotics research include deep-space exploration \cite{fong2017interactive}, deep-sea exploration \cite{huvenne2018rovs}, and handling radioactive materials \cite{smith2017radiation}.
 
 \subsection{VR in Telerobotics}
 \label{subsection:VRTele}
 
-The use of HMDs in teleoperations is not a new concept; NASA's Robonaut 2 was sent to the International Space Station in 2011 and can be controlled through a headset that displays the output of the robot's head cameras \cite{Robonaut}, and flying drones by First Person View (FPV), an analogue video feed transmitted over radio to a HMD, is very popular \cite{FPV}. However, these systems are either incredibly expensive (Robonaut 2 is worth millions of dollars) or very limited (FPV systems send one, low quality, video stream over a short distance), and all have the motion sickness issues discussed in the introduction. While stereo camera FPV systems have been developed, so the user has depth perception and better presence in the drone's view, the motion sickness problem remains the major drawback of HMD based teleoperations systems \cite{2FPV}.
+The use of HMDs in teleoperations is not a new concept; NASA's Robonaut 2 was sent to the International Space Station in 2011 and can be controlled through a headset that displays the output of the robot's head cameras \cite{Robonaut}, and flying drones by First Person View (FPV), an analogue video feed transmitted over radio to a HMD, has become very popular in recent years \cite{FPV}. However, these systems are either incredibly expensive (Robonaut 2 is worth millions of dollars) or very limited (FPV systems are only capable of sending one low quality video stream over a short distance), and all suffer from the motion sickness issues discussed in Chapter \ref{chapter:intro}. While stereo camera FPV systems have been developed, so the user has depth perception and better presence in the drone's view, the motion sickness problem remains the major drawback of HMD based teleoperations systems \cite{2FPV}.
 
-As previously established, motion sickness in VR is mitigated through high frame rates and low latency. However, typically VR based teleoperations systems are direct VR systems, so they display the video feeds produced from the device's cameras directly in the headset. This entirely ties the frame rate and latency of the headset to the capabilities of the video transmission system, and only the most expensive and complicated systems will meet the strict requirements for comfortable VR and the spacial presence desired.
+As previously established, motion sickness in VR is mitigated through high frame rates and low latency. However, typically VR based teleoperations systems are direct VR systems, so they display the video feeds provided by the telerobot's cameras directly in the headset. This entirely ties the frame rate and latency of the headset to the capabilities of the video transmission system, and only the most expensive and complicated systems will meet the strict requirements for comfortable VR and the spacial presence desired.
 
-An alternate option to a direct system is an indirect system. This is one in which the video feed is abstracted from the headset in some way in the hope of providing improved comfort and awareness. Indirect systems can come in a variety of forms, such as placing the video feed on a virtual screen in the VR environment and controlling the robot using virtual controls laid out infront of the screen \cite{lipton2018baxter}, or a 3D map generated from a multi-line LiDAR and IMU \cite{wang2017novel} (Figure \ref{fig:VRTele}). These examples show the potential of indirect systems as a solution to VR based teleoperations, however neither of them provide true presence within their respective robots' spaces. The research into indirect systems is currently minimal; this project aims to expand on this research with the development of its novel system.
+An alternate option to a direct system is an indirect system. This is one in which the video feed is abstracted from the headset in some way in the hope of providing improved comfort and awareness. Indirect systems can come in a variety of forms, such as placing the video feed on a virtual screen in the VR environment and controlling the robot using virtual controls laid out infront of the screen \cite{lipton2018baxter}, or a 3D map generated from a multi-line LiDAR and IMU \cite{wang2017novel} (Figure \ref{fig:VRTele}). These examples show the potential of indirect systems as a solution to VR based teleoperations, however neither of them provide true presence within their respective robots' environments. This project aims to contribute to this field of research by demonstrating an alternate approach to the problem that is capable of providing greater presence than these previous attempts.
 
 \begin{figure}[H]
     \begin{center}
@@ -49,14 +49,14 @@ An alternate option to a direct system is an indirect system. This is one in whi
 
 \textit{Data abstraction} is the phrase that will be used in this report to describe the act of reducing an image down to only its most essential elements. It is similar in concept to an artist sketching a scene instead of attempting a full drawing. Comparing the concept to data compression is apt, as both aim to reduce the file size of the image, however data abstraction takes a very different approach to solving the problem than standard compression algorithms.
 
-Data compression is the storing of information using a more space efficient encoding \cite{compression}. While some information is lost during lossy compression, the aim regardless of the algorithm used is to retain as much of the original information as possible. In contrast, the aim when utilising data abstraction is to discard all the information that is unnecessary to fulfilling the image's purpose. For example, if all that is required of an image is that basic shapes can be identified, then only the information on the boundaries of the shapes is necessary; the rest of the image can be discarded. An implementation of data abstraction can be seen in Figure \ref{fig:abstraction3rdyear}.
+Data compression is the storing of information using a more space efficient encoding \cite{compression}. While some information is lost during lossy compression, the aim regardless of the algorithm used is to retain as much of the original information as possible. In contrast, the aim when utilising data abstraction is to discard all the information that is unnecessary to fulfilling the image's specific purpose. For example, if all that is required of an image is that basic shapes can be identified, then only the information on the boundaries of the shapes is necessary; the rest of the image can be discarded. An implementation of data abstraction can be seen in Figure \ref{fig:abstraction3rdyear}.
 
 %\caption[My figure Title.]{My figure Title. Details how it was made. What is the point? Reproduced from}
 
 \begin{figure}[H]
     \begin{center}
       \includegraphics[width=0.6\textwidth]{Figures/abstraction3rdyear.png}
-      \caption[Data Abstraction Example]{Data Abstraction Example. This is the abstraction of an aerial photograph of London, reproduced from \cite{abstraction3rdyear}}
+      \caption[Data Abstraction Example]{Data Abstraction Example. This is an abstraction of an aerial photograph of London, reproduced from \cite{abstraction3rdyear}.}
       \label{fig:abstraction3rdyear}
     \end{center}
 \end{figure}
@@ -64,7 +64,7 @@ Data compression is the storing of information using a more space efficient enco
 \section{Sobol Sequences}
 \label{Subsection:sobol}
 
-Sobol sequences are quasi-random sequences that were introduced to aid in approximating integrals. The aim is to form a sequence of points that are evenly spread across an S-dimensional unit cube \cite{joe2008constructing}. This provides a much more even spread of points across the chosen space than can be produced from a pseudo-random number source (Figure \ref{fig:Sobol}). The code used in this project to produce these sequences was created by Leonhard Gr\"unschlo\ss\space \cite{CodeSource}.
+Sobol sequences are quasi-random sequences that were introduced to aid in approximating integrals. The aim is to form a sequence of points that are evenly spread across an S-dimensional unit cube \cite{joe2008constructing}, providing a much more even spread of points across the chosen space than can be produced from a pseudo-random number source (Figure \ref{fig:Sobol}). The code used in this project to produce these sequences was created by Leonhard Gr\"unschlo\ss\space \cite{CodeSource}.
 
 \begin{figure}[H]
     \begin{center}
@@ -87,14 +87,14 @@ When attempting to recognise the features of an image, knowing the locations of 
 \begin{figure}[H]
     \begin{center}
       \includegraphics[width=0.9\textwidth]{Figures/canny2.png}
-      \caption[Canny Edge Detection Example]{Canny Edge Detection Example. Simple edge detection program applied to a fairly detailed photo of Messi, to demonstrate its effectiveness even with more complex images. Figure taken from an OpenCV Canny tutorial \cite{Canny1Source}.}
+      \caption[Canny Edge Detection Example]{Canny Edge Detection Example. Simple edge detection program applied to a fairly detailed photo of Lionel Messi, to demonstrate its effectiveness with even complex images. Figure taken from an OpenCV Canny tutorial \cite{Canny1Source}.}
       \label{fig:canny1}
     \end{center}
 \end{figure}
 
-\subsection{Flood Fill}
+\subsection{Flood Filling}
 
-Flood fill algorithms determine the area connected to a given cell (the seed point) in a multi-dimensional array that have similar intensity values for the purpose of filling them with a chosen colour \cite{FloodFill}. This is a technique that is not only useful in image processing, but also for many other fields such as in passive acoustic monitoring where finding the area connected to a given node can be useful as part of tracking in 4D space (x,y,z,time) \cite{nosal2008flood}. A demonstration of flood fill has been presented in Figure \ref{fig:EgFloodFill}.
+Flood fill algorithms determine the area connected to a given cell (the seed point) in a multi-dimensional array that have similar intensity values for the purpose of filling them with a chosen colour \cite{FloodFill}. This is a technique that is not only useful in image processing, but also for many other fields such as in passive acoustic monitoring, where finding the area connected to a given node can be useful as part of tracking in 4D space (x,y,z,time) \cite{nosal2008flood}. A demonstration of flood fill has been presented in Figure \ref{fig:EgFloodFill}.
 
 \begin{figure}[H]
     \begin{center}
@@ -102,7 +102,7 @@ Flood fill algorithms determine the area connected to a given cell (the seed poi
         \includegraphics[width=0.35\textwidth]{Figures/blox.jpg} &
         \includegraphics[width=0.35\textwidth]{Figures/bloxFilled.jpg}
     \end{tabular}
-    \caption[Example of Flood Fill]{Example of Flood Fill. The original image (left) was provided by OpenCV \cite{OpenCV}. The right image is the result of flood filling from the top left corner.}
+    \caption[Flood Filling Example]{Flood Filling Example. The original image (left) was provided by OpenCV \cite{OpenCV}. The right image is the result of flood filling from the top left corner.}
     \label{fig:EgFloodFill}
     \end{center}
 \end{figure}
@@ -110,18 +110,18 @@ Flood fill algorithms determine the area connected to a given cell (the seed poi
 \subsection{Depth Mapping}
 \label{subsection:depth}
 
-The main component in the human brain's perception of 3D is the identification of disparity between the locations of objects in the 2D images being produced by our eyes \cite{qian1997binocular}. The greater the difference in the horizontal placement of an object between the images, the closer the object to the observer. This technique can be used in computer vision to produce depth/disparity maps. Depth maps display differences in depth as a gradient from white to black (Figure \ref{fig:depthmap}), and can be produced using a variety of difference algorithms. The most common are block matching algorithms, which use simple geometry and the matching of blocks of pixels horizontally in the 2 images to calculate depth \cite{linda2001stockman}. For these algorithms to locate the same object in different places in the 2 images, the cameras taking them must be calibrated to rectify any distortion due to the lenses \cite{distort} or discrepancies in the mounting that would cause them to be out of line \cite{stereocal}.
+The main component in the human brain's perception of 3D is the identification of disparity between the locations of objects in the 2D images being produced by our eyes \cite{qian1997binocular}. The greater the difference in the horizontal placement of an object between the images, the closer the object to the observer. This technique can be used in computer vision to produce depth/disparity maps. Depth maps display differences in depth as a gradient from white to black (Figure \ref{fig:depthmap}), and can be produced using a variety of different algorithms. The most common are block matching algorithms, which use simple geometry and the matching of blocks of pixels horizontally in the 2 images to calculate depth \cite{linda2001stockman}. For these algorithms to locate the same object in different places in the 2 images, the cameras taking them must be calibrated to rectify any distortion due to the lenses \cite{distort} or discrepancies in the mounting that would cause them to be out of line \cite{stereocal}. Without this image rectification, the similar blocks the algorithm is attempting to locate will not be on the same horizontal row or will be distorted, so the algorithm will produce a mostly black image.
 
 \begin{figure}[H]
     \begin{center}
       \includegraphics[width=0.8\textwidth]{Figures/depthmap.png}
-      \caption[Depth Mapping Example]{Depth Mapping Example. A stereo pair of images, with their exact disparity map bottom left and a disparity map produced by a dense disparity map estimation algorithm bottom right- reproduced from \cite{deptheg}.}
+      \caption[Depth Mapping Example]{Depth Mapping Example. A stereo pair of images, with their exact disparity map bottom left and a disparity map produced by a dense disparity estimation algorithm bottom right- reproduced from \cite{deptheg}.}
       \label{fig:depthmap}
     \end{center}
 \end{figure}
 
 \section{Wireless Communication}
 
-The different methods of wireless communication available for a telerobotics system have varying requirements and benefits. For instance, the analogue video transmission found in FPV drone flying (as mentioned in Section \ref{subsection:VRTele}) is low latency at the expensive of video quality, range, and communication outside of line of sight. This is fine for flying a drone from the ground just below it, but would not be adequate for controlling a telerobot from a VR headset in a completely different room as is the aim of this project. A better choice of communication method would be over Wi-Fi, as a Wi-Fi router can easily allow communication across a whole building (or in the case of university Wi-Fi - a whole campus). The trade off is an acceptable increase in latency.
+The different methods of wireless communication available for a telerobotics system have varying requirements and benefits. For instance, the analogue video transmission found in FPV drone flying (as mentioned in Section \ref{subsection:VRTele}) is low latency at the expensive of video quality, range, and communication outside of line of sight. This is acceptable for flying a drone in an open field, but would not be adequate for controlling a telerobot from a VR headset in a completely different room as is the aim of this project. A better choice of communication method would be over Wi-Fi, as it allows for communication across significantly longer distances and outside of line of sight. The trade off is an acceptable increase in latency.
 
-The two main protocols available for Wi-Fi communication are TCP (Transmission Control Protocol) and UDP (User Datagram Protocol). TCP is a connection-oriented protocol, so uses handshaking to guarantee reliable and ordered transfer of data \cite{fall2011tcp}. The trade off to this is that the handshaking slows down the process of communication. If the priority of a system is speed over packet reliability and ordering, UDP may be a better choice. There is no checking in UDP, so there is no guarantee that the packets will arrive but they can be sent with minimal overheads \cite{postel1980user}. The chosen protocol for this system is UDP, as images not arriving in the correct order and the ocassional loss of packets would not have a significant effect on the functionality of the system in comparison to the usability improvement a reduction in latency provides.
+The two most common Wi-Fi communication protocols are TCP (Transmission Control Protocol) and UDP (User Datagram Protocol). TCP is a connection-oriented protocol, so uses handshaking to guarantee reliable and ordered transfer of data \cite{fall2011tcp}. The trade off to this is that the handshaking slows down the process of communication. UDP does not include this handshaking, so there is no guarantee that the packets will arrive, however they are sent with minimal overheads \cite{postel1980user}. UDP is therefore the optimal choice for a system where throughput is of higher priority then packet reliability and ordering, such as the system presented by this report- images not arriving in the correct order and the ocassional loss of packets would not have a significant effect on the functionality of the system in comparison to the usability improvement a reduction in latency provides.

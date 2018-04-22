@@ -17,6 +17,7 @@
 \providecommand\HyField@AuxAddToFields[1]{}
 \providecommand\HyField@AuxAddToCoFields[2]{}
 \citation{presence}
+\citation{alexander2005gaming}
 \citation{loomis2016presence,McGlynn}
 \citation{han2017design}
 \citation{FrameRate}
@@ -24,9 +25,11 @@
 \@writefile{toc}{\contentsline {chapter}{\numberline {1}Introduction}{1}{chapter.3}}
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
+\newlabel{chapter:intro}{{1}{1}{Introduction}{chapter.3}{}}
 \citation{DORA}
 \citation{gimble}
 \citation{windows}
+\citation{Vive}
 \@writefile{lof}{\contentsline {figure}{\numberline {1.1}{\ignorespaces System Outline}}{3}{figure.caption.4}}
 \providecommand*\caption@xref[2]{\@setref\relax\@undefined{#1}}
 \newlabel{fig:outline}{{1.1}{3}{System Outline}{figure.caption.4}{}}
@@ -34,7 +37,6 @@
 \newlabel{fig:marvin}{{1.2}{4}{Rover Pictures}{figure.caption.5}{}}
 \citation{WhatVR}
 \citation{Oculus}
-\citation{Vive}
 \citation{Vive}
 \citation{Vive}
 \@writefile{toc}{\contentsline {chapter}{\numberline {2}Background}{5}{chapter.6}}
@@ -57,12 +59,9 @@
 \citation{wang2017novel}
 \citation{lipton2018baxter}
 \citation{wang2017novel}
-\citation{lipton2018baxter}
-\citation{wang2017novel}
 \@writefile{lof}{\contentsline {figure}{\numberline {2.2}{\ignorespaces Indirect VR teleoperations examples}}{7}{figure.caption.11}}
 \newlabel{fig:VRTele}{{2.2}{7}{Indirect VR teleoperations examples}{figure.caption.11}{}}
 \citation{compression}
-\citation{abstraction3rdyear}
 \citation{abstraction3rdyear}
 \citation{joe2008constructing}
 \citation{CodeSource}
@@ -72,7 +71,6 @@
 \newlabel{fig:abstraction3rdyear}{{2.3}{8}{Data Abstraction Example}{figure.caption.13}{}}
 \@writefile{toc}{\contentsline {section}{\numberline {2.4}Sobol Sequences}{8}{section.14}}
 \newlabel{Subsection:sobol}{{2.4}{8}{Sobol Sequences}{section.14}{}}
-\citation{SobolWiki}
 \citation{SobolWiki}
 \citation{CVDef}
 \citation{ballard1982computer}
@@ -85,22 +83,19 @@
 \@writefile{toc}{\contentsline {section}{\numberline {2.5}Computer Vision}{9}{section.16}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {2.5.1}Edge Detection}{9}{subsection.17}}
 \citation{Canny1Source}
-\citation{Canny1Source}
 \citation{FloodFill}
 \citation{nosal2008flood}
 \citation{OpenCV}
-\citation{OpenCV}
 \@writefile{lof}{\contentsline {figure}{\numberline {2.5}{\ignorespaces Canny Edge Detection Example}}{10}{figure.caption.18}}
 \newlabel{fig:canny1}{{2.5}{10}{Canny Edge Detection Example}{figure.caption.18}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.5.2}Flood Fill}{10}{subsection.19}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.5.2}Flood Filling}{10}{subsection.19}}
 \citation{qian1997binocular}
 \citation{linda2001stockman}
 \citation{distort}
 \citation{stereocal}
 \citation{deptheg}
-\citation{deptheg}
-\@writefile{lof}{\contentsline {figure}{\numberline {2.6}{\ignorespaces Example of Flood Fill}}{11}{figure.caption.20}}
-\newlabel{fig:EgFloodFill}{{2.6}{11}{Example of Flood Fill}{figure.caption.20}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {2.6}{\ignorespaces Flood Filling Example}}{11}{figure.caption.20}}
+\newlabel{fig:EgFloodFill}{{2.6}{11}{Flood Filling Example}{figure.caption.20}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {2.5.3}Depth Mapping}{11}{subsection.21}}
 \newlabel{subsection:depth}{{2.5.3}{11}{Depth Mapping}{subsection.21}{}}
 \@writefile{lof}{\contentsline {figure}{\numberline {2.7}{\ignorespaces Depth Mapping Example}}{12}{figure.caption.22}}
@@ -124,7 +119,7 @@
 \citation{opencvffilldemo}
 \@writefile{toc}{\contentsline {section}{\numberline {4.1}Edge Detection Process}{19}{section.28}}
 \@writefile{toc}{\contentsline {section}{\numberline {4.2}Colour Averaging}{19}{section.29}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.2.1}Seed Point}{20}{subsection.30}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.2.1}Seed Points}{20}{subsection.30}}
 \@writefile{lof}{\contentsline {figure}{\numberline {4.2}{\ignorespaces Performance Comparison of Seed Point Methods}}{21}{figure.caption.31}}
 \newlabel{fig:fpscomp}{{4.2}{21}{Performance Comparison of Seed Point Methods}{figure.caption.31}{}}
 \@writefile{lof}{\contentsline {figure}{\numberline {4.3}{\ignorespaces Comparison of brute force and Sobol seed point generation}}{21}{figure.caption.32}}
@@ -148,143 +143,158 @@
 \newlabel{fig:gimble}{{5.3}{29}{Gimbal Picture}{figure.caption.39}{}}
 \@writefile{toc}{\contentsline {section}{\numberline {5.2}Image Pipeline}{29}{section.40}}
 \newlabel{Subsection:comms}{{5.2}{29}{Image Pipeline}{section.40}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {5.4}{\ignorespaces Raspberry Pi Image Pipeline Threading Block Diagram}}{30}{figure.caption.41}}
-\newlabel{fig:threads}{{5.4}{30}{Raspberry Pi Image Pipeline Threading Block Diagram}{figure.caption.41}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5.4}{\ignorespaces Raspberry Pi Image Pipeline Threading Block Diagram}}{31}{figure.caption.41}}
+\newlabel{fig:threads}{{5.4}{31}{Raspberry Pi Image Pipeline Threading Block Diagram}{figure.caption.41}{}}
 \citation{aguilera2006comparison}
 \citation{libimagequant}
-\@writefile{lot}{\contentsline {table}{\numberline {5.1}{\ignorespaces Colour Data Sub-Packet Structure. The seed point components are given 2 bytes each due to their maximum values being larger than a single byte can store.\relax }}{33}{table.caption.42}}
-\newlabel{table:colour}{{5.1}{33}{Colour Data Sub-Packet Structure. The seed point components are given 2 bytes each due to their maximum values being larger than a single byte can store.\relax }{table.caption.42}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {5.2}{\ignorespaces Data Packet Format.\relax }}{33}{table.caption.43}}
-\newlabel{table:packet}{{5.2}{33}{Data Packet Format.\relax }{table.caption.43}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {5.3}Control System}{33}{section.44}}
-\@writefile{lot}{\contentsline {table}{\numberline {5.3}{\ignorespaces Control Data Packet Structure. The analogue stick axes are mapped to between 0 and 255 to fit them within a byte each, as greater accuracy than that was not required. The low threshold only being alocated a byte means it is also capped at 255, however through testing it has been determined that values even above 100 produce images with no edges anyway, so this limit is not a concern.\relax }}{35}{table.caption.45}}
-\newlabel{table:control}{{5.3}{35}{Control Data Packet Structure. The analogue stick axes are mapped to between 0 and 255 to fit them within a byte each, as greater accuracy than that was not required. The low threshold only being alocated a byte means it is also capped at 255, however through testing it has been determined that values even above 100 produce images with no edges anyway, so this limit is not a concern.\relax }{table.caption.45}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5.5}{\ignorespaces Comparison of Image File Formats}}{33}{figure.caption.42}}
+\newlabel{fig:compress}{{5.5}{33}{Comparison of Image File Formats}{figure.caption.42}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5.6}{\ignorespaces Comparison of Laptop and Rover Abstraction}}{34}{figure.caption.43}}
+\newlabel{fig:LvsR}{{5.6}{34}{Comparison of Laptop and Rover Abstraction}{figure.caption.43}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {5.1}{\ignorespaces Colour Data Sub-Packet Structure. The seed point components are given 2 bytes each due to their maximum values being larger than a single byte can store.\relax }}{35}{table.caption.44}}
+\newlabel{table:colour}{{5.1}{35}{Colour Data Sub-Packet Structure. The seed point components are given 2 bytes each due to their maximum values being larger than a single byte can store.\relax }{table.caption.44}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {5.2}{\ignorespaces Data Packet Format.\relax }}{35}{table.caption.45}}
+\newlabel{table:packet}{{5.2}{35}{Data Packet Format.\relax }{table.caption.45}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {5.3}Control System}{35}{section.46}}
+\@writefile{lot}{\contentsline {table}{\numberline {5.3}{\ignorespaces Control Data Packet Structure. The analogue stick axes are mapped to between 0 and 255 to fit them within a byte each, as greater accuracy than that was not required. The low threshold only being alocated a byte means it is also capped at 255, however through testing it has been determined that values even above 100 produce images with no edges anyway, so this limit is not a concern.\relax }}{37}{table.caption.47}}
+\newlabel{table:control}{{5.3}{37}{Control Data Packet Structure. The analogue stick axes are mapped to between 0 and 255 to fit them within a byte each, as greater accuracy than that was not required. The low threshold only being alocated a byte means it is also capped at 255, however through testing it has been determined that values even above 100 produce images with no edges anyway, so this limit is not a concern.\relax }{table.caption.47}{}}
 \citation{unreal}
-\@writefile{toc}{\contentsline {chapter}{\numberline {6}Server-Side Implementation}{37}{chapter.46}}
+\@writefile{toc}{\contentsline {chapter}{\numberline {6}Server-Side Implementation}{39}{chapter.48}}
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
-\newlabel{chapter:server}{{6}{37}{Server-Side Implementation}{chapter.46}{}}
+\newlabel{chapter:server}{{6}{39}{Server-Side Implementation}{chapter.48}{}}
 \citation{calibgit}
+\@writefile{lof}{\contentsline {figure}{\numberline {6.1}{\ignorespaces Server Program Structure}}{40}{figure.caption.49}}
+\newlabel{fig:unreal}{{6.1}{40}{Server Program Structure}{figure.caption.49}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {6.1}Depth Map and Abstraction Construction}{40}{section.50}}
 \citation{OpenCV}
 \citation{geiger2010efficient}
-\@writefile{lof}{\contentsline {figure}{\numberline {6.1}{\ignorespaces Server Program Structure}}{38}{figure.caption.47}}
-\newlabel{fig:unreal}{{6.1}{38}{Server Program Structure}{figure.caption.47}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {6.1}Depth Map and Abstraction Construction}{38}{section.48}}
-\@writefile{toc}{\contentsline {section}{\numberline {6.2}3D Model Generation}{40}{section.49}}
-\@writefile{lof}{\contentsline {figure}{\numberline {6.2}{\ignorespaces Mesh Grid Segment}}{40}{figure.caption.50}}
-\newlabel{fig:mesh}{{6.2}{40}{Mesh Grid Segment}{figure.caption.50}{}}
-\@writefile{toc}{\contentsline {chapter}{\numberline {7}Testing and Evaluation}{43}{chapter.51}}
+\@writefile{lof}{\contentsline {figure}{\numberline {6.2}{\ignorespaces Demonstration of Stereo Image Rectification}}{41}{figure.caption.51}}
+\newlabel{fig:rect}{{6.2}{41}{Demonstration of Stereo Image Rectification}{figure.caption.51}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {6.3}{\ignorespaces Comparison of Depth Mapping Algorithm Speed}}{42}{figure.caption.52}}
+\newlabel{fig:speed}{{6.3}{42}{Comparison of Depth Mapping Algorithm Speed}{figure.caption.52}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {6.4}{\ignorespaces Comparison of Raw Depth Mapping Algorithm Output}}{43}{figure.caption.53}}
+\newlabel{fig:MappingComp}{{6.4}{43}{Comparison of Raw Depth Mapping Algorithm Output}{figure.caption.53}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {6.5}{\ignorespaces Filtered StereoBM and StereoSGBM Outputs}}{44}{figure.caption.54}}
+\newlabel{fig:filtered}{{6.5}{44}{Filtered StereoBM and StereoSGBM Outputs}{figure.caption.54}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {6.2}3D Model Generation}{45}{section.55}}
+\@writefile{lof}{\contentsline {figure}{\numberline {6.6}{\ignorespaces Mesh Grid Segment}}{45}{figure.caption.56}}
+\newlabel{fig:mesh}{{6.6}{45}{Mesh Grid Segment}{figure.caption.56}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {6.7}{\ignorespaces Final Textured 3D Model}}{46}{figure.caption.57}}
+\newlabel{fig:3DModel}{{6.7}{46}{Final Textured 3D Model}{figure.caption.57}{}}
+\@writefile{toc}{\contentsline {chapter}{\numberline {7}Testing and Evaluation}{47}{chapter.58}}
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
-\newlabel{chapter:eval}{{7}{43}{Testing and Evaluation}{chapter.51}{}}
-\@writefile{toc}{\contentsline {chapter}{\numberline {8}Project Management}{45}{chapter.52}}
+\newlabel{chapter:eval}{{7}{47}{Testing and Evaluation}{chapter.58}{}}
+\@writefile{toc}{\contentsline {chapter}{\numberline {8}Project Management}{49}{chapter.59}}
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
-\newlabel{chapter:mang}{{8}{45}{Project Management}{chapter.52}{}}
+\newlabel{chapter:mang}{{8}{49}{Project Management}{chapter.59}{}}
 \bibstyle{ieeetr}
 \bibdata{Bibliography}
-\@writefile{toc}{\contentsline {chapter}{\numberline {9}Conclusion}{47}{chapter.53}}
+\@writefile{toc}{\contentsline {chapter}{\numberline {9}Conclusion}{51}{chapter.60}}
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
-\newlabel{chapter:conclusion}{{9}{47}{Conclusion}{chapter.53}{}}
+\newlabel{chapter:conclusion}{{9}{51}{Conclusion}{chapter.60}{}}
 \@writefile{toc}{\vspace  {2em}}
-\newlabel{Bibliography}{{9}{47}{Conclusion}{chapter.53}{}}
+\newlabel{Bibliography}{{9}{51}{Conclusion}{chapter.60}{}}
 \bibcite{presence}{{1}{}{{}}{{}}}
-\bibcite{loomis2016presence}{{2}{}{{}}{{}}}
-\bibcite{McGlynn}{{3}{}{{}}{{}}}
-\bibcite{han2017design}{{4}{}{{}}{{}}}
-\bibcite{FrameRate}{{5}{}{{}}{{}}}
-\bibcite{Borg2013UsingAG}{{6}{}{{}}{{}}}
-\bibcite{DORA}{{7}{}{{}}{{}}}
-\bibcite{gimble}{{8}{}{{}}{{}}}
-\bibcite{windows}{{9}{}{{}}{{}}}
-\bibcite{WhatVR}{{10}{}{{}}{{}}}
-\bibcite{Oculus}{{11}{}{{}}{{}}}
-\bibcite{Vive}{{12}{}{{}}{{}}}
-\bibcite{NAP4761}{{13}{}{{}}{{}}}
-\bibcite{fong2017interactive}{{14}{}{{}}{{}}}
-\bibcite{huvenne2018rovs}{{15}{}{{}}{{}}}
-\bibcite{smith2017radiation}{{16}{}{{}}{{}}}
-\bibcite{Robonaut}{{17}{}{{}}{{}}}
-\bibcite{FPV}{{18}{}{{}}{{}}}
-\bibcite{2FPV}{{19}{}{{}}{{}}}
-\bibcite{lipton2018baxter}{{20}{}{{}}{{}}}
-\bibcite{wang2017novel}{{21}{}{{}}{{}}}
-\bibcite{compression}{{22}{}{{}}{{}}}
-\bibcite{abstraction3rdyear}{{23}{}{{}}{{}}}
-\bibcite{joe2008constructing}{{24}{}{{}}{{}}}
-\bibcite{CodeSource}{{25}{}{{}}{{}}}
-\bibcite{SobolWiki}{{26}{}{{}}{{}}}
-\bibcite{CVDef}{{27}{}{{}}{{}}}
-\bibcite{ballard1982computer}{{28}{}{{}}{{}}}
-\bibcite{OpenCV}{{29}{}{{}}{{}}}
-\bibcite{jain1995machine}{{30}{}{{}}{{}}}
-\bibcite{maini2009study}{{31}{}{{}}{{}}}
-\bibcite{canny1986computational}{{32}{}{{}}{{}}}
-\bibcite{Canny1Source}{{33}{}{{}}{{}}}
-\bibcite{FloodFill}{{34}{}{{}}{{}}}
-\bibcite{nosal2008flood}{{35}{}{{}}{{}}}
-\bibcite{qian1997binocular}{{36}{}{{}}{{}}}
-\bibcite{linda2001stockman}{{37}{}{{}}{{}}}
-\bibcite{distort}{{38}{}{{}}{{}}}
-\bibcite{stereocal}{{39}{}{{}}{{}}}
-\bibcite{deptheg}{{40}{}{{}}{{}}}
-\bibcite{fall2011tcp}{{41}{}{{}}{{}}}
-\bibcite{postel1980user}{{42}{}{{}}{{}}}
-\bibcite{opencvffilldemo}{{43}{}{{}}{{}}}
-\bibcite{bradski2008learning}{{44}{}{{}}{{}}}
-\bibcite{pi}{{45}{}{{}}{{}}}
-\bibcite{dodgson2004variation}{{46}{}{{}}{{}}}
-\bibcite{aguilera2006comparison}{{47}{}{{}}{{}}}
-\bibcite{libimagequant}{{48}{}{{}}{{}}}
-\bibcite{unreal}{{49}{}{{}}{{}}}
-\bibcite{calibgit}{{50}{}{{}}{{}}}
-\bibcite{geiger2010efficient}{{51}{}{{}}{{}}}
-\@writefile{toc}{\contentsline {chapter}{Bibliography}{53}{chapter*.54}}
+\bibcite{alexander2005gaming}{{2}{}{{}}{{}}}
+\bibcite{loomis2016presence}{{3}{}{{}}{{}}}
+\bibcite{McGlynn}{{4}{}{{}}{{}}}
+\bibcite{han2017design}{{5}{}{{}}{{}}}
+\bibcite{FrameRate}{{6}{}{{}}{{}}}
+\bibcite{Borg2013UsingAG}{{7}{}{{}}{{}}}
+\bibcite{DORA}{{8}{}{{}}{{}}}
+\bibcite{gimble}{{9}{}{{}}{{}}}
+\bibcite{windows}{{10}{}{{}}{{}}}
+\bibcite{Vive}{{11}{}{{}}{{}}}
+\bibcite{WhatVR}{{12}{}{{}}{{}}}
+\bibcite{Oculus}{{13}{}{{}}{{}}}
+\bibcite{NAP4761}{{14}{}{{}}{{}}}
+\bibcite{fong2017interactive}{{15}{}{{}}{{}}}
+\bibcite{huvenne2018rovs}{{16}{}{{}}{{}}}
+\bibcite{smith2017radiation}{{17}{}{{}}{{}}}
+\bibcite{Robonaut}{{18}{}{{}}{{}}}
+\bibcite{FPV}{{19}{}{{}}{{}}}
+\bibcite{2FPV}{{20}{}{{}}{{}}}
+\bibcite{lipton2018baxter}{{21}{}{{}}{{}}}
+\bibcite{wang2017novel}{{22}{}{{}}{{}}}
+\bibcite{compression}{{23}{}{{}}{{}}}
+\bibcite{abstraction3rdyear}{{24}{}{{}}{{}}}
+\bibcite{joe2008constructing}{{25}{}{{}}{{}}}
+\bibcite{CodeSource}{{26}{}{{}}{{}}}
+\bibcite{SobolWiki}{{27}{}{{}}{{}}}
+\bibcite{CVDef}{{28}{}{{}}{{}}}
+\bibcite{ballard1982computer}{{29}{}{{}}{{}}}
+\bibcite{OpenCV}{{30}{}{{}}{{}}}
+\bibcite{jain1995machine}{{31}{}{{}}{{}}}
+\bibcite{maini2009study}{{32}{}{{}}{{}}}
+\bibcite{canny1986computational}{{33}{}{{}}{{}}}
+\bibcite{Canny1Source}{{34}{}{{}}{{}}}
+\bibcite{FloodFill}{{35}{}{{}}{{}}}
+\bibcite{nosal2008flood}{{36}{}{{}}{{}}}
+\bibcite{qian1997binocular}{{37}{}{{}}{{}}}
+\bibcite{linda2001stockman}{{38}{}{{}}{{}}}
+\bibcite{distort}{{39}{}{{}}{{}}}
+\bibcite{stereocal}{{40}{}{{}}{{}}}
+\bibcite{deptheg}{{41}{}{{}}{{}}}
+\bibcite{fall2011tcp}{{42}{}{{}}{{}}}
+\bibcite{postel1980user}{{43}{}{{}}{{}}}
+\bibcite{opencvffilldemo}{{44}{}{{}}{{}}}
+\bibcite{bradski2008learning}{{45}{}{{}}{{}}}
+\bibcite{pi}{{46}{}{{}}{{}}}
+\bibcite{dodgson2004variation}{{47}{}{{}}{{}}}
+\bibcite{aguilera2006comparison}{{48}{}{{}}{{}}}
+\bibcite{libimagequant}{{49}{}{{}}{{}}}
+\bibcite{unreal}{{50}{}{{}}{{}}}
+\bibcite{calibgit}{{51}{}{{}}{{}}}
+\bibcite{geiger2010efficient}{{52}{}{{}}{{}}}
+\@writefile{toc}{\contentsline {chapter}{Bibliography}{57}{chapter*.61}}
 \@writefile{toc}{\vspace  {2em}}
-\@writefile{toc}{\contentsline {chapter}{\numberline {A}Demonstrations of Full Data Abstraction}{55}{appendix.55}}
+\@writefile{toc}{\contentsline {chapter}{\numberline {A}Demonstrations of Full Data Abstraction}{59}{appendix.62}}
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
-\newlabel{Appendix:demo}{{A}{55}{Demonstrations of Full Data Abstraction}{appendix.55}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {A.1}{\ignorespaces Demonstration of full abstraction process}}{55}{figure.caption.56}}
-\newlabel{fig:Final}{{A.1}{55}{Demonstration of full abstraction process}{figure.caption.56}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {A.2}{\ignorespaces Additional examples of the full abstraction process}}{56}{figure.caption.57}}
-\newlabel{fig:FinalExtras}{{A.2}{56}{Additional examples of the full abstraction process}{figure.caption.57}{}}
-\@writefile{toc}{\contentsline {chapter}{\numberline {B}Contour Based Seed Point Location}{57}{appendix.58}}
+\newlabel{Appendix:demo}{{A}{59}{Demonstrations of Full Data Abstraction}{appendix.62}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {A.1}{\ignorespaces Demonstration of full abstraction process}}{59}{figure.caption.63}}
+\newlabel{fig:Final}{{A.1}{59}{Demonstration of full abstraction process}{figure.caption.63}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {A.2}{\ignorespaces Additional examples of the full abstraction process}}{60}{figure.caption.64}}
+\newlabel{fig:FinalExtras}{{A.2}{60}{Additional examples of the full abstraction process}{figure.caption.64}{}}
+\@writefile{toc}{\contentsline {chapter}{\numberline {B}Contour Based Seed Point Location}{61}{appendix.65}}
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
-\newlabel{appendix:contour}{{B}{57}{Contour Based Seed Point Location}{appendix.58}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {B.1}{\ignorespaces Demonstration of contour centre point location}}{58}{figure.caption.59}}
-\newlabel{fig:ContourCentres}{{B.1}{58}{Demonstration of contour centre point location}{figure.caption.59}{}}
-\@writefile{toc}{\contentsline {chapter}{\numberline {C}Algorithm Performance Test Images}{59}{appendix.60}}
+\newlabel{appendix:contour}{{B}{61}{Contour Based Seed Point Location}{appendix.65}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {B.1}{\ignorespaces Demonstration of contour centre point location}}{62}{figure.caption.66}}
+\newlabel{fig:ContourCentres}{{B.1}{62}{Demonstration of contour centre point location}{figure.caption.66}{}}
+\@writefile{toc}{\contentsline {chapter}{\numberline {C}Images of Algorithm Performance Test Scenes}{63}{appendix.67}}
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
-\newlabel{Appendix:scenes}{{C}{59}{Algorithm Performance Test Images}{appendix.60}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {C.1}{\ignorespaces Images of Algorithm Performance Test Scenes}}{60}{figure.caption.61}}
-\newlabel{fig:scenes}{{C.1}{60}{Images of Algorithm Performance Test Scenes}{figure.caption.61}{}}
-\@writefile{toc}{\contentsline {chapter}{\numberline {D}Rover Hardware Breakdown}{61}{appendix.62}}
+\newlabel{Appendix:scenes}{{C}{63}{Images of Algorithm Performance Test Scenes}{appendix.67}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {C.1}{\ignorespaces Images of Algorithm Performance Test Scenes}}{64}{figure.caption.68}}
+\newlabel{fig:scenes}{{C.1}{64}{Images of Algorithm Performance Test Scenes}{figure.caption.68}{}}
+\@writefile{toc}{\contentsline {chapter}{\numberline {D}Rover Hardware Breakdown}{65}{appendix.69}}
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
-\newlabel{appendix:hardware}{{D}{61}{Rover Hardware Breakdown}{appendix.62}{}}
-\@writefile{toc}{\contentsline {chapter}{\numberline {E}Vectorization}{63}{appendix.63}}
+\newlabel{appendix:hardware}{{D}{65}{Rover Hardware Breakdown}{appendix.69}{}}
+\@writefile{toc}{\contentsline {chapter}{\numberline {E}Vectorization}{67}{appendix.70}}
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
-\newlabel{appendix:vectorization}{{E}{63}{Vectorization}{appendix.63}{}}
-\@writefile{toc}{\contentsline {chapter}{\numberline {F}Project Brief}{65}{appendix.64}}
+\newlabel{appendix:vectorization}{{E}{67}{Vectorization}{appendix.70}{}}
+\@writefile{toc}{\contentsline {chapter}{\numberline {F}Project Brief}{69}{appendix.71}}
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
-\newlabel{appendix:brief}{{F}{65}{Project Brief}{appendix.64}{}}
-\@writefile{toc}{\contentsline {chapter}{\numberline {G}Gantt Charts}{67}{appendix.65}}
+\newlabel{appendix:brief}{{F}{69}{Project Brief}{appendix.71}{}}
+\@writefile{toc}{\contentsline {chapter}{\numberline {G}Gantt Charts}{71}{appendix.72}}
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
-\newlabel{fig:GanttChart}{{\caption@xref {fig:GanttChart}{ on input line 7}}{68}{Gantt Charts}{figure.caption.66}{}}
-\@writefile{toc}{\contentsline {chapter}{\numberline {H}Risk Assessment}{69}{appendix.67}}
+\newlabel{fig:GanttChart}{{\caption@xref {fig:GanttChart}{ on input line 7}}{72}{Gantt Charts}{figure.caption.73}{}}
+\@writefile{toc}{\contentsline {chapter}{\numberline {H}Risk Assessment}{73}{appendix.74}}
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
-\@writefile{lof}{\contentsline {figure}{\numberline {H.1}{\ignorespaces Risk Assessment}}{69}{figure.caption.68}}
-\newlabel{fig:Risk}{{H.1}{69}{Risk Assessment}{figure.caption.68}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {H.1}{\ignorespaces Risk Assessment}}{73}{figure.caption.75}}
+\newlabel{fig:Risk}{{H.1}{73}{Risk Assessment}{figure.caption.75}{}}
 \providecommand\NAT@force@numbers{}\NAT@force@numbers
-\@writefile{toc}{\contentsline {chapter}{\numberline {I}Design Archive Contents}{71}{appendix.69}}
+\@writefile{toc}{\contentsline {chapter}{\numberline {I}Design Archive Contents}{75}{appendix.76}}
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
-\newlabel{appendix:archive}{{I}{71}{Design Archive Contents}{appendix.69}{}}
+\newlabel{appendix:archive}{{I}{75}{Design Archive Contents}{appendix.76}{}}

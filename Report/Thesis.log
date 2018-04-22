@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2018.3.19)  20 APR 2018 11:10
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2018.3.19)  22 APR 2018 17:04
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -515,25 +515,302 @@ Package: lscape 2000/10/22 v3.01 Landscape Pages (DPC)
 (/usr/share/texlive/texmf-dist/tex/latex/multirow/multirow.sty
 \bigstrutjot=\dimen152
 )
+(/usr/share/texlive/texmf-dist/tex/latex/pgf/frontendlayer/tikz.sty
+(/usr/share/texlive/texmf-dist/tex/latex/pgf/basiclayer/pgf.sty
+(/usr/share/texlive/texmf-dist/tex/latex/pgf/utilities/pgfrcs.sty
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/utilities/pgfutil-common.tex
+\pgfutil@everybye=\toks34
+\pgfutil@tempdima=\dimen153
+\pgfutil@tempdimb=\dimen154
+
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/utilities/pgfutil-common-lists.t
+ex)) (/usr/share/texlive/texmf-dist/tex/generic/pgf/utilities/pgfutil-latex.def
+\pgfutil@abb=\box37
+(/usr/share/texlive/texmf-dist/tex/latex/ms/everyshi.sty
+Package: everyshi 2001/05/15 v3.00 EveryShipout Package (MS)
+))
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/utilities/pgfrcs.code.tex
+Package: pgfrcs 2015/08/07 v3.0.1a (rcs-revision 1.31)
+))
+Package: pgf 2015/08/07 v3.0.1a (rcs-revision 1.15)
+
+(/usr/share/texlive/texmf-dist/tex/latex/pgf/basiclayer/pgfcore.sty
+(/usr/share/texlive/texmf-dist/tex/latex/pgf/systemlayer/pgfsys.sty
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/systemlayer/pgfsys.code.tex
+Package: pgfsys 2014/07/09 v3.0.1a (rcs-revision 1.48)
+
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/utilities/pgfkeys.code.tex
+\pgfkeys@pathtoks=\toks35
+\pgfkeys@temptoks=\toks36
+
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/utilities/pgfkeysfiltered.code.t
+ex
+\pgfkeys@tmptoks=\toks37
+))
+\pgf@x=\dimen155
+\pgf@y=\dimen156
+\pgf@xa=\dimen157
+\pgf@ya=\dimen158
+\pgf@xb=\dimen159
+\pgf@yb=\dimen160
+\pgf@xc=\dimen161
+\pgf@yc=\dimen162
+\w@pgf@writea=\write3
+\r@pgf@reada=\read2
+\c@pgf@counta=\count143
+\c@pgf@countb=\count144
+\c@pgf@countc=\count145
+\c@pgf@countd=\count146
+\t@pgf@toka=\toks38
+\t@pgf@tokb=\toks39
+\t@pgf@tokc=\toks40
+ (/usr/share/texlive/texmf-dist/tex/generic/pgf/systemlayer/pgf.cfg
+File: pgf.cfg 2008/05/14  (rcs-revision 1.7)
+)
+Driver file for pgf: pgfsys-pdftex.def
+
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/systemlayer/pgfsys-pdftex.def
+File: pgfsys-pdftex.def 2014/10/11  (rcs-revision 1.35)
+
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/systemlayer/pgfsys-common-pdf.de
+f
+File: pgfsys-common-pdf.def 2013/10/10  (rcs-revision 1.13)
+)))
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/systemlayer/pgfsyssoftpath.code.
+tex
+File: pgfsyssoftpath.code.tex 2013/09/09  (rcs-revision 1.9)
+\pgfsyssoftpath@smallbuffer@items=\count147
+\pgfsyssoftpath@bigbuffer@items=\count148
+)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/systemlayer/pgfsysprotocol.code.
+tex
+File: pgfsysprotocol.code.tex 2006/10/16  (rcs-revision 1.4)
+)) (/usr/share/texlive/texmf-dist/tex/latex/xcolor/xcolor.sty
+Package: xcolor 2007/01/21 v2.11 LaTeX color extensions (UK)
+
+(/usr/share/texlive/texmf-dist/tex/latex/latexconfig/color.cfg
+File: color.cfg 2007/01/18 v1.5 color configuration of teTeX/TeXLive
+)
+Package xcolor Info: Driver file: pdftex.def on input line 225.
+Package xcolor Info: Model `cmy' substituted by `cmy0' on input line 1337.
+Package xcolor Info: Model `hsb' substituted by `rgb' on input line 1341.
+Package xcolor Info: Model `RGB' extended on input line 1353.
+Package xcolor Info: Model `HTML' substituted by `rgb' on input line 1355.
+Package xcolor Info: Model `Hsb' substituted by `hsb' on input line 1356.
+Package xcolor Info: Model `tHsb' substituted by `hsb' on input line 1357.
+Package xcolor Info: Model `HSB' substituted by `hsb' on input line 1358.
+Package xcolor Info: Model `Gray' substituted by `gray' on input line 1359.
+Package xcolor Info: Model `wave' substituted by `hsb' on input line 1360.
+)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcore.code.tex
+Package: pgfcore 2010/04/11 v3.0.1a (rcs-revision 1.7)
+
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmath.code.tex
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmathcalc.code.tex
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmathutil.code.tex)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmathparser.code.tex
+\pgfmath@dimen=\dimen163
+\pgfmath@count=\count149
+\pgfmath@box=\box38
+\pgfmath@toks=\toks41
+\pgfmath@stack@operand=\toks42
+\pgfmath@stack@operation=\toks43
+)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.code.tex
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.basic.code
+.tex)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.trigonomet
+ric.code.tex)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.random.cod
+e.tex)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.comparison
+.code.tex)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.base.code.
+tex)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.round.code
+.tex)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.misc.code.
+tex)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.integerari
+thmetics.code.tex)))
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmathfloat.code.tex
+\c@pgfmathroundto@lastzeros=\count150
+))
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcorepoints.code.te
+x
+File: pgfcorepoints.code.tex 2013/10/07  (rcs-revision 1.27)
+\pgf@picminx=\dimen164
+\pgf@picmaxx=\dimen165
+\pgf@picminy=\dimen166
+\pgf@picmaxy=\dimen167
+\pgf@pathminx=\dimen168
+\pgf@pathmaxx=\dimen169
+\pgf@pathminy=\dimen170
+\pgf@pathmaxy=\dimen171
+\pgf@xx=\dimen172
+\pgf@xy=\dimen173
+\pgf@yx=\dimen174
+\pgf@yy=\dimen175
+\pgf@zx=\dimen176
+\pgf@zy=\dimen177
+)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcorepathconstruct.
+code.tex
+File: pgfcorepathconstruct.code.tex 2013/10/07  (rcs-revision 1.29)
+\pgf@path@lastx=\dimen178
+\pgf@path@lasty=\dimen179
+)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcorepathusage.code
+.tex
+File: pgfcorepathusage.code.tex 2014/11/02  (rcs-revision 1.24)
+\pgf@shorten@end@additional=\dimen180
+\pgf@shorten@start@additional=\dimen181
+)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcorescopes.code.te
+x
+File: pgfcorescopes.code.tex 2015/05/08  (rcs-revision 1.46)
+\pgfpic=\box39
+\pgf@hbox=\box40
+\pgf@layerbox@main=\box41
+\pgf@picture@serial@count=\count151
+)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcoregraphicstate.c
+ode.tex
+File: pgfcoregraphicstate.code.tex 2014/11/02  (rcs-revision 1.12)
+\pgflinewidth=\dimen182
+)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcoretransformation
+s.code.tex
+File: pgfcoretransformations.code.tex 2015/08/07  (rcs-revision 1.20)
+\pgf@pt@x=\dimen183
+\pgf@pt@y=\dimen184
+\pgf@pt@temp=\dimen185
+)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcorequick.code.tex
+File: pgfcorequick.code.tex 2008/10/09  (rcs-revision 1.3)
+)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcoreobjects.code.t
+ex
+File: pgfcoreobjects.code.tex 2006/10/11  (rcs-revision 1.2)
+)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcorepathprocessing
+.code.tex
+File: pgfcorepathprocessing.code.tex 2013/09/09  (rcs-revision 1.9)
+)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcorearrows.code.te
+x
+File: pgfcorearrows.code.tex 2015/05/14  (rcs-revision 1.43)
+\pgfarrowsep=\dimen186
+)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcoreshade.code.tex
+File: pgfcoreshade.code.tex 2013/07/15  (rcs-revision 1.15)
+\pgf@max=\dimen187
+\pgf@sys@shading@range@num=\count152
+)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcoreimage.code.tex
+File: pgfcoreimage.code.tex 2013/07/15  (rcs-revision 1.18)
+
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcoreexternal.code.
+tex
+File: pgfcoreexternal.code.tex 2014/07/09  (rcs-revision 1.21)
+\pgfexternal@startupbox=\box42
+))
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcorelayers.code.te
+x
+File: pgfcorelayers.code.tex 2013/07/18  (rcs-revision 1.7)
+)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcoretransparency.c
+ode.tex
+File: pgfcoretransparency.code.tex 2013/09/30  (rcs-revision 1.5)
+)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcorepatterns.code.
+tex
+File: pgfcorepatterns.code.tex 2013/11/07  (rcs-revision 1.5)
+)))
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/modules/pgfmoduleshapes.code.tex
+File: pgfmoduleshapes.code.tex 2014/03/21  (rcs-revision 1.35)
+\pgfnodeparttextbox=\box43
+) (/usr/share/texlive/texmf-dist/tex/generic/pgf/modules/pgfmoduleplot.code.tex
+File: pgfmoduleplot.code.tex 2015/08/03  (rcs-revision 1.13)
+)
+(/usr/share/texlive/texmf-dist/tex/latex/pgf/compatibility/pgfcomp-version-0-65
+.sty
+Package: pgfcomp-version-0-65 2007/07/03 v3.0.1a (rcs-revision 1.7)
+\pgf@nodesepstart=\dimen188
+\pgf@nodesepend=\dimen189
+)
+(/usr/share/texlive/texmf-dist/tex/latex/pgf/compatibility/pgfcomp-version-1-18
+.sty
+Package: pgfcomp-version-1-18 2007/07/23 v3.0.1a (rcs-revision 1.1)
+)) (/usr/share/texlive/texmf-dist/tex/latex/pgf/utilities/pgffor.sty
+(/usr/share/texlive/texmf-dist/tex/latex/pgf/utilities/pgfkeys.sty
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/utilities/pgfkeys.code.tex))
+(/usr/share/texlive/texmf-dist/tex/latex/pgf/math/pgfmath.sty
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmath.code.tex))
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/utilities/pgffor.code.tex
+Package: pgffor 2013/12/13 v3.0.1a (rcs-revision 1.25)
+
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmath.code.tex)
+\pgffor@iter=\dimen190
+\pgffor@skip=\dimen191
+\pgffor@stack=\toks44
+\pgffor@toks=\toks45
+))
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/frontendlayer/tikz/tikz.code.tex
+Package: tikz 2015/08/07 v3.0.1a (rcs-revision 1.151)
+
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/libraries/pgflibraryplothandlers
+.code.tex
+File: pgflibraryplothandlers.code.tex 2013/08/31 v3.0.1a (rcs-revision 1.20)
+\pgf@plot@mark@count=\count153
+\pgfplotmarksize=\dimen192
+)
+\tikz@lastx=\dimen193
+\tikz@lasty=\dimen194
+\tikz@lastxsaved=\dimen195
+\tikz@lastysaved=\dimen196
+\tikzleveldistance=\dimen197
+\tikzsiblingdistance=\dimen198
+\tikz@figbox=\box44
+\tikz@figbox@bg=\box45
+\tikz@tempbox=\box46
+\tikz@tempbox@bg=\box47
+\tikztreelevel=\count154
+\tikznumberofchildren=\count155
+\tikznumberofcurrentchild=\count156
+\tikz@fig@count=\count157
+
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/modules/pgfmodulematrix.code.tex
+File: pgfmodulematrix.code.tex 2013/09/17  (rcs-revision 1.8)
+\pgfmatrixcurrentrow=\count158
+\pgfmatrixcurrentcolumn=\count159
+\pgf@matrix@numberofcolumns=\count160
+)
+\tikz@expandcount=\count161
+
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tik
+zlibrarytopaths.code.tex
+File: tikzlibrarytopaths.code.tex 2008/06/17 v3.0.1a (rcs-revision 1.2)
+)))
 (/home/adam/Documents/VRproj/VRproj-U/Report/Thesis.aux)
 \openout1 = `Thesis.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 25.
-LaTeX Font Info:    ... okay on input line 25.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 25.
-LaTeX Font Info:    ... okay on input line 25.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 25.
-LaTeX Font Info:    ... okay on input line 25.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 25.
-LaTeX Font Info:    ... okay on input line 25.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 25.
-LaTeX Font Info:    ... okay on input line 25.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 25.
-LaTeX Font Info:    ... okay on input line 25.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 25.
-LaTeX Font Info:    ... okay on input line 25.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 25.
-LaTeX Font Info:    ... okay on input line 25.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 27.
+LaTeX Font Info:    ... okay on input line 27.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 27.
+LaTeX Font Info:    ... okay on input line 27.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 27.
+LaTeX Font Info:    ... okay on input line 27.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 27.
+LaTeX Font Info:    ... okay on input line 27.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 27.
+LaTeX Font Info:    ... okay on input line 27.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 27.
+LaTeX Font Info:    ... okay on input line 27.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 27.
+LaTeX Font Info:    ... okay on input line 27.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 27.
+LaTeX Font Info:    ... okay on input line 27.
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: float package is loaded.
 Package caption Info: hyperref package is loaded.
@@ -549,48 +826,40 @@ Package caption Info: End \AtBeginDocument code.
 
 (/usr/share/texlive/texmf-dist/tex/context/base/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count143
-\scratchdimen=\dimen153
-\scratchbox=\box37
-\nofMPsegments=\count144
-\nofMParguments=\count145
-\everyMPshowfont=\toks34
-\MPscratchCnt=\count146
-\MPscratchDim=\dimen154
-\MPnumerator=\count147
-\makeMPintoPDFobject=\count148
-\everyMPtoPDFconversion=\toks35
+\scratchcounter=\count162
+\scratchdimen=\dimen199
+\scratchbox=\box48
+\nofMPsegments=\count163
+\nofMParguments=\count164
+\everyMPshowfont=\toks46
+\MPscratchCnt=\count165
+\MPscratchDim=\dimen256
+\MPnumerator=\count166
+\makeMPintoPDFobject=\count167
+\everyMPtoPDFconversion=\toks47
 )
-\c@lstlisting=\count149
-\AtBeginShipoutBox=\box38
- (/usr/share/texlive/texmf-dist/tex/latex/graphics/color.sty
-Package: color 2016/01/03 v1.1b Standard LaTeX Color (DPC)
-
-(/usr/share/texlive/texmf-dist/tex/latex/latexconfig/color.cfg
-File: color.cfg 2007/01/18 v1.5 color configuration of teTeX/TeXLive
-)
-Package color Info: Driver file: pdftex.def on input line 143.
-)
-Package hyperref Info: Link coloring ON on input line 25.
-
-(/usr/share/texlive/texmf-dist/tex/latex/hyperref/nameref.sty
+\c@lstlisting=\count168
+\AtBeginShipoutBox=\box49
+Package hyperref Info: Link coloring ON on input line 27.
+ (/usr/share/texlive/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2012/10/27 v2.43 Cross-referencing by name of section
 
 (/usr/share/texlive/texmf-dist/tex/generic/oberdiek/gettitlestring.sty
 Package: gettitlestring 2010/12/03 v1.4 Cleanup title references (HO)
 )
-\c@section@level=\count150
+\c@section@level=\count169
 )
-LaTeX Info: Redefining \ref on input line 25.
-LaTeX Info: Redefining \pageref on input line 25.
-LaTeX Info: Redefining \nameref on input line 25.
+LaTeX Info: Redefining \ref on input line 27.
+LaTeX Info: Redefining \pageref on input line 27.
+LaTeX Info: Redefining \nameref on input line 27.
 
 (/home/adam/Documents/VRproj/VRproj-U/Report/Thesis.out)
 (/home/adam/Documents/VRproj/VRproj-U/Report/Thesis.out)
-\@outlinefile=\write3
-\openout3 = `Thesis.out'.
+\@outlinefile=\write4
+\openout4 = `Thesis.out'.
 
 
+ABD: EveryShipout initializing macros
 ------------------------------------------------------------------------------
  Title Page
 ------------------------------------------------------------------------------
@@ -622,27 +891,27 @@ LaTeX Font Info:    Try loading font information for U+msb on input line 3.
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 ) [5])
-\tf@toc=\write4
-\openout4 = `Thesis.toc'.
+\tf@toc=\write5
+\openout5 = `Thesis.toc'.
 
  [6]
 ------------------------------------------------------------------------------
  List of Figures
 ------------------------------------------------------------------------------
-(/home/adam/Documents/VRproj/VRproj-U/Report/Thesis.lof)
-\tf@lof=\write5
-\openout5 = `Thesis.lof'.
-
- [7
+(/home/adam/Documents/VRproj/VRproj-U/Report/Thesis.lof [7
 
 
-] [8
+])
+\tf@lof=\write6
+\openout6 = `Thesis.lof'.
 
-]
+ [8]
 ------------------------------------------------------------------------------
  Acknowledgements
 ------------------------------------------------------------------------------
-[9] [10
+[9
+
+] [10
 
 
 ] (/home/adam/Documents/VRproj/VRproj-U/Report/Chapters/Intro.tex
@@ -652,40 +921,40 @@ Chapter 1.
 ------------------------------------------------------------------------------
 [1
 
-] <Figures/Outline.png, id=325, 1694.33pt x 1389.19pt>
-File: Figures/Outline.png Graphic file (type png)
+] <Figures/Outline.jpg, id=345, 847.165pt x 696.6025pt>
+File: Figures/Outline.jpg Graphic file (type jpg)
 
-<use Figures/Outline.png>
-Package pdftex.def Info: Figures/Outline.png used on input line 16.
-(pdftex.def)             Requested size: 387.24649pt x 317.49324pt.
+<use Figures/Outline.jpg>
+Package pdftex.def Info: Figures/Outline.jpg used on input line 17.
+(pdftex.def)             Requested size: 430.27681pt x 353.80637pt.
  [2]
-<Figures/marvin.jpg, id=335, 5331.92pt x 2999.205pt>
+<Figures/marvin.jpg, id=355, 5331.92pt x 2999.205pt>
 File: Figures/marvin.jpg Graphic file (type jpg)
  <use Figures/marvin.jpg>
-Package pdftex.def Info: Figures/marvin.jpg used on input line 25.
+Package pdftex.def Info: Figures/marvin.jpg used on input line 26.
 (pdftex.def)             Requested size: 279.67729pt x 157.29129pt.
 
-<Figures/marvinF.jpg, id=336, 5331.92pt x 2999.205pt>
+<Figures/marvinF.jpg, id=356, 5331.92pt x 2999.205pt>
 File: Figures/marvinF.jpg Graphic file (type jpg)
 
 <use Figures/marvinF.jpg>
-Package pdftex.def Info: Figures/marvinF.jpg used on input line 26.
+Package pdftex.def Info: Figures/marvinF.jpg used on input line 27.
 (pdftex.def)             Requested size: 279.67729pt x 157.29129pt.
 
-<Figures/marvinS.jpg, id=337, 5331.92pt x 2999.205pt>
+<Figures/marvinS.jpg, id=357, 5331.92pt x 2999.205pt>
 File: Figures/marvinS.jpg Graphic file (type jpg)
 
 <use Figures/marvinS.jpg>
-Package pdftex.def Info: Figures/marvinS.jpg used on input line 27.
+Package pdftex.def Info: Figures/marvinS.jpg used on input line 28.
 (pdftex.def)             Requested size: 279.67729pt x 157.29129pt.
 
-<Figures/marvinT.jpg, id=338, 5331.92pt x 2999.205pt>
+<Figures/marvinT.jpg, id=358, 5331.92pt x 2999.205pt>
 File: Figures/marvinT.jpg Graphic file (type jpg)
 
 <use Figures/marvinT.jpg>
-Package pdftex.def Info: Figures/marvinT.jpg used on input line 28.
+Package pdftex.def Info: Figures/marvinT.jpg used on input line 29.
 (pdftex.def)             Requested size: 279.67729pt x 157.29129pt.
-) [3 </home/adam/Documents/VRproj/VRproj-U/Report/Figures/Outline.png>]
+) [3 </home/adam/Documents/VRproj/VRproj-U/Report/Figures/Outline.jpg>]
 Overfull \vbox (38.80688pt too high) has occurred while \output is active []
 
 
@@ -698,13 +967,13 @@ Chapter 2.
 ------------------------------------------------------------------------------
  2 Background
 ------------------------------------------------------------------------------
-<Figures/vive.png, id=355, 953.5625pt x 652.4375pt>
+<Figures/vive.png, id=374, 953.5625pt x 652.4375pt>
 File: Figures/vive.png Graphic file (type png)
  <use Figures/vive.png>
 Package pdftex.def Info: Figures/vive.png used on input line 11.
 (pdftex.def)             Requested size: 172.1081pt x 117.75224pt.
 
-<Figures/vive2.png, id=356, 953.5625pt x 652.4375pt>
+<Figures/vive2.png, id=375, 953.5625pt x 652.4375pt>
 File: Figures/vive2.png Graphic file (type png)
  <use Figures/vive2.png>
 Package pdftex.def Info: Figures/vive2.png used on input line 12.
@@ -714,13 +983,13 @@ Package pdftex.def Info: Figures/vive2.png used on input line 12.
 
  </home/adam/Documents/VRproj/VRproj-U/Report/Figures/vive.png> </home/adam/Doc
 uments/VRproj/VRproj-U/Report/Figures/vive2.png>] [6]
-<Figures/homun.png, id=389, 625.33624pt x 466.74374pt>
+<Figures/homun.png, id=407, 625.33624pt x 466.74374pt>
 File: Figures/homun.png Graphic file (type png)
  <use Figures/homun.png>
 Package pdftex.def Info: Figures/homun.png used on input line 39.
 (pdftex.def)             Requested size: 193.62325pt x 144.51813pt.
 
-<Figures/lidar.png, id=390, 1103.12125pt x 718.685pt>
+<Figures/lidar.png, id=408, 1103.12125pt x 718.685pt>
 File: Figures/lidar.png Graphic file (type png)
  <use Figures/lidar.png>
 Package pdftex.def Info: Figures/lidar.png used on input line 40.
@@ -732,7 +1001,7 @@ Overfull \hbox (2.48483pt too wide) in paragraph at lines 38--42
 
 [7 </home/adam/Documents/VRproj/VRproj-U/Report/Figures/homun.png> </home/adam/
 Documents/VRproj/VRproj-U/Report/Figures/lidar.png>]
-<Figures/abstraction3rdyear.png, id=403, 363.3575pt x 162.6075pt>
+<Figures/abstraction3rdyear.png, id=419, 363.3575pt x 162.6075pt>
 File: Figures/abstraction3rdyear.png Graphic file (type png)
 
 <use Figures/abstraction3rdyear.png>
@@ -740,7 +1009,7 @@ Package pdftex.def Info: Figures/abstraction3rdyear.png used on input line 58.
 (pdftex.def)             Requested size: 258.1687pt x 115.53648pt.
  [8 </home/adam/Documents/VRproj/VRproj-U/Report/Figures/abstraction3rdyear.png
 >]
-<Figures/Pseudorandom_sequence_2D.png, id=416, 290.08376pt x 290.08376pt>
+<Figures/Pseudorandom_sequence_2D.png, id=431, 290.08376pt x 290.08376pt>
 File: Figures/Pseudorandom_sequence_2D.png Graphic file (type png)
 
 <use Figures/Pseudorandom_sequence_2D.png>
@@ -748,7 +1017,7 @@ Package pdftex.def Info: Figures/Pseudorandom_sequence_2D.png used on input lin
 e 72.
 (pdftex.def)             Requested size: 141.99213pt x 141.99178pt.
 
-<Figures/Sobol_sequence_2D.png, id=417, 290.08376pt x 290.08376pt>
+<Figures/Sobol_sequence_2D.png, id=432, 290.08376pt x 290.08376pt>
 File: Figures/Sobol_sequence_2D.png Graphic file (type png)
 
 <use Figures/Sobol_sequence_2D.png>
@@ -757,26 +1026,26 @@ Package pdftex.def Info: Figures/Sobol_sequence_2D.png used on input line 73.
  [9 </home/adam/Documents/VRproj/VRproj-U/Report/Figures/Pseudorandom_sequence_
 2D.png> </home/adam/Documents/VRproj/VRproj-U/Report/Figures/Sobol_sequence_2D.
 png>]
-<Figures/canny2.png, id=438, 446.66875pt x 136.51pt>
+<Figures/canny2.png, id=452, 446.66875pt x 136.51pt>
 File: Figures/canny2.png Graphic file (type png)
  <use Figures/canny2.png>
 Package pdftex.def Info: Figures/canny2.png used on input line 89.
 (pdftex.def)             Requested size: 387.24649pt x 118.35239pt.
 
-<Figures/blox.jpg, id=444, 256.96pt x 256.96pt>
+<Figures/blox.jpg, id=457, 256.96pt x 256.96pt>
 File: Figures/blox.jpg Graphic file (type jpg)
  <use Figures/blox.jpg>
 Package pdftex.def Info: Figures/blox.jpg used on input line 102.
 (pdftex.def)             Requested size: 150.5995pt x 150.60133pt.
 
-<Figures/bloxFilled.jpg, id=445, 256.96pt x 256.96pt>
+<Figures/bloxFilled.jpg, id=458, 256.96pt x 256.96pt>
 File: Figures/bloxFilled.jpg Graphic file (type jpg)
 
 <use Figures/bloxFilled.jpg>
 Package pdftex.def Info: Figures/bloxFilled.jpg used on input line 103.
 (pdftex.def)             Requested size: 150.5995pt x 150.60133pt.
  [10 </home/adam/Documents/VRproj/VRproj-U/Report/Figures/canny2.png>] <Figures
-/depthmap.png, id=462, 513.92pt x 513.92pt>
+/depthmap.png, id=474, 513.92pt x 513.92pt>
 File: Figures/depthmap.png Graphic file (type png)
 
 <use Figures/depthmap.png>
@@ -793,19 +1062,19 @@ Chapter 3.
 ------------------------------------------------------------------------------
  3 System Overview
 ------------------------------------------------------------------------------
-<Figures/System.png, id=493, 634.37pt x 666.49pt>
-File: Figures/System.png Graphic file (type png)
- <use Figures/System.png>
-Package pdftex.def Info: Figures/System.png used on input line 11.
+<Figures/System.jpg, id=504, 634.37pt x 666.49pt>
+File: Figures/System.jpg Graphic file (type jpg)
+ <use Figures/System.jpg>
+Package pdftex.def Info: Figures/System.jpg used on input line 11.
 (pdftex.def)             Requested size: 344.22275pt x 361.65862pt.
 )
 [15] (/home/adam/Documents/VRproj/VRproj-U/Report/Chapters/Abstraction.tex
-[16 </home/adam/Documents/VRproj/VRproj-U/Report/Figures/System.png>]
+[16 </home/adam/Documents/VRproj/VRproj-U/Report/Figures/System.jpg>]
 Chapter 4.
 ------------------------------------------------------------------------------
  4 Abstraction Algorithm Development
 ------------------------------------------------------------------------------
-<Figures/Abstraction.jpg, id=507, 1529.715pt x 3075.49pt>
+<Figures/Abstraction.jpg, id=517, 1529.715pt x 3075.49pt>
 File: Figures/Abstraction.jpg Graphic file (type jpg)
 
 <use Figures/Abstraction.jpg>
@@ -823,19 +1092,19 @@ Overfull \hbox (6.22699pt too wide) in paragraph at lines 19--20
 tion pro-vided by OpenCV
  []
 
-[19] <Figures/FPSComp.png, id=529, 650.43pt x 405.515pt>
+[19] <Figures/FPSComp.png, id=539, 650.43pt x 405.515pt>
 File: Figures/FPSComp.png Graphic file (type png)
 
 <use Figures/FPSComp.png>
 Package pdftex.def Info: Figures/FPSComp.png used on input line 35.
 (pdftex.def)             Requested size: 387.24649pt x 241.436pt.
- [20] <Figures/Brute.jpg, id=536, 851.18pt x 481.8pt>
+ [20] <Figures/Brute.jpg, id=545, 851.18pt x 481.8pt>
 File: Figures/Brute.jpg Graphic file (type jpg)
 
 <use Figures/Brute.jpg>
 Package pdftex.def Info: Figures/Brute.jpg used on input line 44.
 (pdftex.def)             Requested size: 193.62325pt x 109.59863pt.
- <Figures/Sobol.jpg, id=537, 851.18pt x 481.8pt>
+ <Figures/Sobol.jpg, id=546, 851.18pt x 481.8pt>
 File: Figures/Sobol.jpg Graphic file (type jpg)
 
 <use Figures/Sobol.jpg>
@@ -844,7 +1113,7 @@ Package pdftex.def Info: Figures/Sobol.jpg used on input line 45.
  [21 </home/adam/Documents/VRproj/VRproj-U/Report/Figures/FPSComp.png> </home/a
 dam/Documents/VRproj/VRproj-U/Report/Figures/Brute.jpg> </home/adam/Documents/V
 Rproj/VRproj-U/Report/Figures/Sobol.jpg>] [22]
-<Figures/ColourConsistency.png, id=550, 1067.99pt x 318.18875pt>
+<Figures/ColourConsistency.png, id=559, 1067.99pt x 318.18875pt>
 File: Figures/ColourConsistency.png Graphic file (type png)
 
 <use Figures/ColourConsistency.png>
@@ -859,218 +1128,319 @@ Chapter 5.
 ------------------------------------------------------------------------------
  5 Rover Implementation
 ------------------------------------------------------------------------------
-<Figures/rovertop.jpg, id=563, 2531.4575pt x 2014.52625pt>
-File: Figures/rovertop.jpg Graphic file (type jpg)
+<Figures/RoverAbove.jpg, id=572, 1118.1775pt x 758.835pt>
+File: Figures/RoverAbove.jpg Graphic file (type jpg)
 
-<use Figures/rovertop.jpg>
-Package pdftex.def Info: Figures/rovertop.jpg used on input line 10.
-(pdftex.def)             Requested size: 322.7076pt x 256.7949pt.
+<use Figures/RoverAbove.jpg>
+Package pdftex.def Info: Figures/RoverAbove.jpg used on input line 10.
+(pdftex.def)             Requested size: 387.24649pt x 262.79414pt.
 
-<Figures/roverinside.jpg, id=564, 2684.0275pt x 2144.01pt>
-File: Figures/roverinside.jpg Graphic file (type jpg)
+<Figures/RoverInternals.jpg, id=573, 1144.275pt x 766.865pt>
+File: Figures/RoverInternals.jpg Graphic file (type jpg)
 
-<use Figures/roverinside.jpg>
-Package pdftex.def Info: Figures/roverinside.jpg used on input line 11.
-(pdftex.def)             Requested size: 322.7076pt x 257.76082pt.
+<use Figures/RoverInternals.jpg>
+Package pdftex.def Info: Figures/RoverInternals.jpg used on input line 11.
+(pdftex.def)             Requested size: 387.24649pt x 259.5254pt.
  [25]
-<Figures/hardware.png, id=570, 583.17876pt x 482.80376pt>
+<Figures/hardware.png, id=579, 583.17876pt x 482.80376pt>
 File: Figures/hardware.png Graphic file (type png)
 
 <use Figures/hardware.png>
 Package pdftex.def Info: Figures/hardware.png used on input line 20.
 (pdftex.def)             Requested size: 387.24649pt x 320.60371pt.
- [26 </home/adam/Documents/VRproj/VRproj-U/Report/Figures/rovertop.jpg> </home/
-adam/Documents/VRproj/VRproj-U/Report/Figures/roverinside.jpg>] [27 </home/adam
-/Documents/VRproj/VRproj-U/Report/Figures/hardware.png>] <Figures/gimble.jpg, i
-d=583, 5331.92pt x 2999.205pt>
-File: Figures/gimble.jpg Graphic file (type jpg)
+ [26 </home/adam/Documents/VRproj/VRproj-U/Report/Figures/RoverAbove.jpg> </hom
+e/adam/Documents/VRproj/VRproj-U/Report/Figures/RoverInternals.jpg>] [27 </home
+/adam/Documents/VRproj/VRproj-U/Report/Figures/hardware.png>] <Figures/GimbleLa
+bel.jpg, id=593, 1328.965pt x 714.67pt>
+File: Figures/GimbleLabel.jpg Graphic file (type jpg)
 
-<use Figures/gimble.jpg>
-Package pdftex.def Info: Figures/gimble.jpg used on input line 36.
-(pdftex.def)             Requested size: 322.7076pt x 181.50052pt.
- [28] [29 </home/adam/Documents/VRproj/VRproj-U/Report/Figures/gimble.jpg>] <Fi
-gures/Threads.png, id=597, 586.19pt x 468.75125pt>
+<use Figures/GimbleLabel.jpg>
+Package pdftex.def Info: Figures/GimbleLabel.jpg used on input line 36.
+(pdftex.def)             Requested size: 387.24649pt x 208.24133pt.
+ [28] [29 </home/adam/Documents/VRproj/VRproj-U/Report/Figures/GimbleLabel.jpg>
+]
+<Figures/Threads.png, id=607, 586.19pt x 468.75125pt>
 File: Figures/Threads.png Graphic file (type png)
 
 <use Figures/Threads.png>
 Package pdftex.def Info: Figures/Threads.png used on input line 53.
 (pdftex.def)             Requested size: 387.24649pt x 309.66287pt.
- [30 </home/adam/Documents/VRproj/VRproj-U/Report/Figures/Threads.png>]
+ [30] [31 </home/adam/Documents/VRproj/VRproj-U/Report/Figures/Threads.png>]
 LaTeX Font Info:    Try loading font information for OML+cmr on input line 63.
  (/usr/share/texlive/texmf-dist/tex/latex/base/omlcmr.fd
 File: omlcmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OML/cmr/m/n' in size <12> not available
 (Font)              Font shape `OML/cmm/m/it' tried instead on input line 63.
+<Figures/compression.png, id=624, 708.6475pt x 459.7175pt>
+File: Figures/compression.png Graphic file (type png)
 
-[31] [32] [33]) [34]
-(/home/adam/Documents/VRproj/VRproj-U/Report/Chapters/Server.tex [35] [36
+<use Figures/compression.png>
+Package pdftex.def Info: Figures/compression.png used on input line 67.
+(pdftex.def)             Requested size: 387.24649pt x 251.21799pt.
+ [32]
+<Figures/abstractcompL.jpg, id=634, 642.4pt x 481.8pt>
+File: Figures/abstractcompL.jpg Graphic file (type jpg)
+
+<use Figures/abstractcompL.jpg>
+Package pdftex.def Info: Figures/abstractcompL.jpg used on input line 78.
+(pdftex.def)             Requested size: 193.62325pt x 145.21745pt.
+
+<Figures/abstractcompR.jpg, id=635, 321.2pt x 240.9pt>
+File: Figures/abstractcompR.jpg Graphic file (type jpg)
+
+<use Figures/abstractcompR.jpg>
+Package pdftex.def Info: Figures/abstractcompR.jpg used on input line 79.
+(pdftex.def)             Requested size: 193.62325pt x 145.22113pt.
+ [33 </home/adam/Documents/VRproj/VRproj-U/Report/Figures/compression.png>] [34
+ </home/adam/Documents/VRproj/VRproj-U/Report/Figures/abstractcompL.jpg> </home
+/adam/Documents/VRproj/VRproj-U/Report/Figures/abstractcompR.jpg>] [35] [36])
+(/home/adam/Documents/VRproj/VRproj-U/Report/Chapters/Server.tex [37] [38
 
 ]
 Chapter 6.
 ------------------------------------------------------------------------------
  6 Server-Side Implementation
 ------------------------------------------------------------------------------
-<Figures/Unreal.png, id=648, 447.6725pt x 422.57875pt>
+<Figures/Unreal.png, id=671, 447.6725pt x 422.57875pt>
 File: Figures/Unreal.png Graphic file (type png)
 
 <use Figures/Unreal.png>
 Package pdftex.def Info: Figures/Unreal.png used on input line 9.
 (pdftex.def)             Requested size: 322.7076pt x 304.624pt.
- [37] [38 </home/adam/Documents/VRproj/VRproj-U/Report/Figures/Unreal.png>] [39
-] <Figures/mesh.png, id=673, 206.7725pt x 207.77625pt>
+ [39]
+<Figures/prerectL.jpg, id=681, 321.2pt x 240.9pt>
+File: Figures/prerectL.jpg Graphic file (type jpg)
+ <use Figures/prerectL.jpg>
+Package pdftex.def Info: Figures/prerectL.jpg used on input line 22.
+(pdftex.def)             Requested size: 193.62325pt x 145.22113pt.
+
+<Figures/prerectR.jpg, id=682, 321.2pt x 240.9pt>
+File: Figures/prerectR.jpg Graphic file (type jpg)
+ <use Figures/prerectR.jpg>
+Package pdftex.def Info: Figures/prerectR.jpg used on input line 23.
+(pdftex.def)             Requested size: 193.62325pt x 145.22113pt.
+
+<Figures/postrectL.jpg, id=683, 321.2pt x 240.9pt>
+File: Figures/postrectL.jpg Graphic file (type jpg)
+ <use Figures/postrectL.jpg>
+Package pdftex.def Info: Figures/postrectL.jpg used on input line 24.
+(pdftex.def)             Requested size: 193.62325pt x 145.22113pt.
+
+<Figures/postrectR.jpg, id=684, 321.2pt x 240.9pt>
+File: Figures/postrectR.jpg Graphic file (type jpg)
+ <use Figures/postrectR.jpg>
+Package pdftex.def Info: Figures/postrectR.jpg used on input line 25.
+(pdftex.def)             Requested size: 193.62325pt x 145.22113pt.
+
+[40 </home/adam/Documents/VRproj/VRproj-U/Report/Figures/Unreal.png>]
+<Figures/depthspeed.png, id=694, 594.22pt x 366.36874pt>
+File: Figures/depthspeed.png Graphic file (type png)
+
+<use Figures/depthspeed.png>
+Package pdftex.def Info: Figures/depthspeed.png used on input line 36.
+(pdftex.def)             Requested size: 344.22275pt x 212.24245pt.
+ [41 </home/adam/Documents/VRproj/VRproj-U/Report/Figures/prerectL.jpg> </home/
+adam/Documents/VRproj/VRproj-U/Report/Figures/prerectR.jpg> </home/adam/Documen
+ts/VRproj/VRproj-U/Report/Figures/postrectL.jpg> </home/adam/Documents/VRproj/V
+Rproj-U/Report/Figures/postrectR.jpg>]
+<Figures/BMout.jpg, id=702, 321.2pt x 240.9pt>
+File: Figures/BMout.jpg Graphic file (type jpg)
+ <use Figures/BMout.jpg>
+Package pdftex.def Info: Figures/BMout.jpg used on input line 47.
+(pdftex.def)             Requested size: 193.62325pt x 145.22113pt.
+
+<Figures/sgbmout.jpg, id=703, 325.215pt x 244.915pt>
+File: Figures/sgbmout.jpg Graphic file (type jpg)
+ <use Figures/sgbmout.jpg>
+Package pdftex.def Info: Figures/sgbmout.jpg used on input line 48.
+(pdftex.def)             Requested size: 193.62325pt x 145.81778pt.
+
+<Figures/libelasout.jpg, id=704, 321.2pt x 240.9pt>
+File: Figures/libelasout.jpg Graphic file (type jpg)
+
+<use Figures/libelasout.jpg>
+Package pdftex.def Info: Figures/libelasout.jpg used on input line 49.
+(pdftex.def)             Requested size: 193.62325pt x 145.22113pt.
+ [42 </home/adam/Documents/VRproj/VRproj-U/Report/Figures/depthspeed.png>] <Fig
+ures/BMfiltered.jpg, id=711, 321.2pt x 240.9pt>
+File: Figures/BMfiltered.jpg Graphic file (type jpg)
+
+<use Figures/BMfiltered.jpg>
+Package pdftex.def Info: Figures/BMfiltered.jpg used on input line 62.
+(pdftex.def)             Requested size: 193.62325pt x 145.22113pt.
+
+<Figures/sgbmfilt.jpg, id=712, 325.215pt x 244.915pt>
+File: Figures/sgbmfilt.jpg Graphic file (type jpg)
+
+<use Figures/sgbmfilt.jpg>
+Package pdftex.def Info: Figures/sgbmfilt.jpg used on input line 63.
+(pdftex.def)             Requested size: 193.62325pt x 145.81778pt.
+ [43 </home/adam/Documents/VRproj/VRproj-U/Report/Figures/BMout.jpg> </home/ada
+m/Documents/VRproj/VRproj-U/Report/Figures/sgbmout.jpg> </home/adam/Documents/V
+Rproj/VRproj-U/Report/Figures/libelasout.jpg>]
+[44 </home/adam/Documents/VRproj/VRproj-U/Report/Figures/BMfiltered.jpg> </home
+/adam/Documents/VRproj/VRproj-U/Report/Figures/sgbmfilt.jpg>]
+<Figures/mesh.png, id=724, 206.7725pt x 207.77625pt>
 File: Figures/mesh.png Graphic file (type png)
-
-<use Figures/mesh.png>
-Package pdftex.def Info: Figures/mesh.png used on input line 35.
+ <use Figures/mesh.png>
+Package pdftex.def Info: Figures/mesh.png used on input line 82.
 (pdftex.def)             Requested size: 258.1687pt x 259.44699pt.
-) [40 </home/adam/Documents/VRproj/VRproj-U/Report/Figures/mesh.png>]
-(/home/adam/Documents/VRproj/VRproj-U/Report/Chapters/Evaluation.tex [41]
-[42
 
-]
+[45 </home/adam/Documents/VRproj/VRproj-U/Report/Figures/mesh.png>]
+<Figures/OutlinePic2.png, id=732, 1927.2pt x 1084.05pt>
+File: Figures/OutlinePic2.png Graphic file (type png)
+
+<use Figures/OutlinePic2.png>
+Package pdftex.def Info: Figures/OutlinePic2.png used on input line 92.
+(pdftex.def)             Requested size: 387.24649pt x 217.81517pt.
+)
+(/home/adam/Documents/VRproj/VRproj-U/Report/Chapters/Evaluation.tex [46 </home
+/adam/Documents/VRproj/VRproj-U/Report/Figures/OutlinePic2.png>]
 Chapter 7.
 ------------------------------------------------------------------------------
  7 Testing and Evaluation
 ------------------------------------------------------------------------------
-) (/home/adam/Documents/VRproj/VRproj-U/Report/Chapters/Mang.tex [43] [44
+) (/home/adam/Documents/VRproj/VRproj-U/Report/Chapters/Mang.tex [47
+
+] [48
 
 ]
 Chapter 8.
 ------------------------------------------------------------------------------
  8 Project Management
 ------------------------------------------------------------------------------
-) (/home/adam/Documents/VRproj/VRproj-U/Report/Chapters/Conclusion.tex [45]
-[46
+) (/home/adam/Documents/VRproj/VRproj-U/Report/Chapters/Conclusion.tex [49]
+[50
 
 ]
 Chapter 9.
 ------------------------------------------------------------------------------
  9 Conclusion
 ------------------------------------------------------------------------------
-) (/home/adam/Documents/VRproj/VRproj-U/Report/Thesis.bbl [47] [48
+) (/home/adam/Documents/VRproj/VRproj-U/Report/Thesis.bbl [51] [52
 
 ]
-Underfull \hbox (badness 10000) in paragraph at lines 25--29
+Underfull \hbox (badness 10000) in paragraph at lines 31--35
 []\OT1/cmr/m/n/12 IrisVR, ``The im-por-tance of frame rates,'' 2017.  Avail-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 25--29
+Underfull \hbox (badness 10000) in paragraph at lines 31--35
 \OT1/cmr/m/n/12 able: [][]$\OT1/cmtt/m/n/12 https : / / help . irisvr . com / h
 c / en-[]us / articles /
  []
 
-[49] [50]
-Underfull \hbox (badness 1735) in paragraph at lines 115--120
+[53] [54]
+Underfull \hbox (badness 1735) in paragraph at lines 121--126
 []\OT1/cmr/m/n/12 A. Barrett-Sprot, ``Data ab-strac-tion for low-bandwidth com-
 mu-ni-ca-tion,''
  []
 
-[51]
-Underfull \hbox (badness 1365) in paragraph at lines 163--167
+[55]
+Underfull \hbox (badness 1365) in paragraph at lines 169--173
 \OT1/cmr/m/n/12 Avail-able: [][]$\OT1/cmtt/m/n/12 http : / / opencv-[]python-[]
 tutroals . readthedocs . io / en / latest /
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 169--173
+Underfull \hbox (badness 10000) in paragraph at lines 175--179
 []\OT1/cmr/m/n/12 V. Jai-mini, ``Hack-erearth.com flood fill tu-to-rial,'' 2017
 .  Avail-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 169--173
+Underfull \hbox (badness 10000) in paragraph at lines 175--179
 \OT1/cmr/m/n/12 able: [][]$\OT1/cmtt/m/n/12 https : / / www . hackerearth . com
  / practice / algorithms / graphs /
  []
 
 
-Underfull \hbox (badness 3815) in paragraph at lines 188--192
+Underfull \hbox (badness 3815) in paragraph at lines 194--198
 []\OT1/cmr/m/n/12 opencv dev team, ``Cam-era cal-i-bra-tion,'' 2014.  Avail-abl
 e: [][]$\OT1/cmtt/m/n/12 https :
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 188--192
+Underfull \hbox (badness 10000) in paragraph at lines 194--198
 \OT1/cmtt/m/n/12 / / docs . opencv . org / 3 . 0-[]beta / doc / py _ tutorials 
 / py _ calib3d / py _
  []
 
 
-Underfull \hbox (badness 2020) in paragraph at lines 194--198
+Underfull \hbox (badness 2020) in paragraph at lines 200--204
 []\OT1/cmr/m/n/12 S. Ghost, ``Stereo cal-i-bra-tion us-ing c++ and opencv,'' 20
 16.  Avail-
  []
 
-[52]
+[56]
 Missing character: There is no Å in font cmr12!
 Missing character: There is no „ in font cmr12!
 )
 (/home/adam/Documents/VRproj/VRproj-U/Report/Appendices/AbstractionDemos.tex
-[53] [54
+[57] [58
 
 ]
 Appendix A.
 ------------------------------------------------------------------------------
  A Demonstrations of Full Data Abstraction
 ------------------------------------------------------------------------------
-<Figures/building.jpg, id=781, 653.44125pt x 451.6875pt>
+<Figures/building.jpg, id=833, 653.44125pt x 451.6875pt>
 File: Figures/building.jpg Graphic file (type jpg)
 
 <use Figures/building.jpg>
 Package pdftex.def Info: Figures/building.jpg used on input line 8.
 (pdftex.def)             Requested size: 193.62325pt x 133.83937pt.
- <Figures/Final.jpg, id=782, 871.255pt x 602.25pt>
+ <Figures/Final.jpg, id=834, 871.255pt x 602.25pt>
 File: Figures/Final.jpg Graphic file (type jpg)
 
 <use Figures/Final.jpg>
 Package pdftex.def Info: Figures/Final.jpg used on input line 9.
 (pdftex.def)             Requested size: 193.62325pt x 133.83708pt.
- <Figures/lena.jpg, id=783, 506.88pt x 506.88pt>
+ <Figures/lena.jpg, id=835, 506.88pt x 506.88pt>
 File: Figures/lena.jpg Graphic file (type jpg)
 
 <use Figures/lena.jpg>
 Package pdftex.def Info: Figures/lena.jpg used on input line 19.
 (pdftex.def)             Requested size: 185.01587pt x 185.01353pt.
- <Figures/lenaDA.jpg, id=784, 513.92pt x 513.92pt>
+ <Figures/lenaDA.jpg, id=836, 513.92pt x 513.92pt>
 File: Figures/lenaDA.jpg Graphic file (type jpg)
 
 <use Figures/lenaDA.jpg>
 Package pdftex.def Info: Figures/lenaDA.jpg used on input line 20.
 (pdftex.def)             Requested size: 185.01587pt x 185.01889pt.
 
-<Figures/pufferfish6.jpg, id=785, 1927.2pt x 1084.05pt>
+<Figures/pufferfish6.jpg, id=837, 1927.2pt x 1084.05pt>
 File: Figures/pufferfish6.jpg Graphic file (type jpg)
 
 <use Figures/pufferfish6.jpg>
 Package pdftex.def Info: Figures/pufferfish6.jpg used on input line 21.
 (pdftex.def)             Requested size: 185.01587pt x 104.06099pt.
 
-<Figures/pufferfishDA.jpg, id=786, 1927.2pt x 1084.05pt>
+<Figures/pufferfishDA.jpg, id=838, 1927.2pt x 1084.05pt>
 File: Figures/pufferfishDA.jpg Graphic file (type jpg)
 
 <use Figures/pufferfishDA.jpg>
 Package pdftex.def Info: Figures/pufferfishDA.jpg used on input line 22.
 (pdftex.def)             Requested size: 185.01587pt x 104.06099pt.
 
-<Figures/starry_night.jpg, id=787, 181.1568pt x 144.54pt>
+<Figures/starry_night.jpg, id=839, 181.1568pt x 144.54pt>
 File: Figures/starry_night.jpg Graphic file (type jpg)
 
 <use Figures/starry_night.jpg>
 Package pdftex.def Info: Figures/starry_night.jpg used on input line 23.
 (pdftex.def)             Requested size: 185.01587pt x 147.6185pt.
 
-<Figures/starry_nightDA.jpg, id=788, 754.82pt x 602.25pt>
+<Figures/starry_nightDA.jpg, id=840, 754.82pt x 602.25pt>
 File: Figures/starry_nightDA.jpg Graphic file (type jpg)
 
 <use Figures/starry_nightDA.jpg>
 Package pdftex.def Info: Figures/starry_nightDA.jpg used on input line 24.
 (pdftex.def)             Requested size: 185.01587pt x 147.61226pt.
 )
-(/home/adam/Documents/VRproj/VRproj-U/Report/Appendices/Contours.tex [55 </home
+(/home/adam/Documents/VRproj/VRproj-U/Report/Appendices/Contours.tex [59 </home
 /adam/Documents/VRproj/VRproj-U/Report/Figures/building.jpg> </home/adam/Docume
-nts/VRproj/VRproj-U/Report/Figures/Final.jpg>] [56 </home/adam/Documents/VRproj
+nts/VRproj/VRproj-U/Report/Figures/Final.jpg>] [60 </home/adam/Documents/VRproj
 /VRproj-U/Report/Figures/lena.jpg> </home/adam/Documents/VRproj/VRproj-U/Report
 /Figures/lenaDA.jpg> </home/adam/Documents/VRproj/VRproj-U/Report/Figures/puffe
 rfish6.jpg> </home/adam/Documents/VRproj/VRproj-U/Report/Figures/pufferfishDA.j
@@ -1085,61 +1455,61 @@ File: Figures/blox.jpg Graphic file (type jpg)
 Package pdftex.def Info: Figures/blox.jpg used on input line 12.
 (pdftex.def)             Requested size: 133.38475pt x 133.3847pt.
 
-<Figures/ContourCentres.jpg, id=799, 256.96pt x 256.96pt>
+<Figures/ContourCentres.jpg, id=850, 256.96pt x 256.96pt>
 File: Figures/ContourCentres.jpg Graphic file (type jpg)
 
 <use Figures/ContourCentres.jpg>
 Package pdftex.def Info: Figures/ContourCentres.jpg used on input line 13.
 (pdftex.def)             Requested size: 133.38475pt x 133.3847pt.
-) [57
+) [61
 
 ]
-(/home/adam/Documents/VRproj/VRproj-U/Report/Appendices/Scenes.tex [58 </home/a
+(/home/adam/Documents/VRproj/VRproj-U/Report/Appendices/Scenes.tex [62 </home/a
 dam/Documents/VRproj/VRproj-U/Report/Figures/ContourCentres.jpg>]
 Appendix C.
 ------------------------------------------------------------------------------
- C Algorithm Performance Test Images
+ C Images of Algorithm Performance Test Scenes
 ------------------------------------------------------------------------------
-<Figures/simple.jpg, id=809, 642.4pt x 481.8pt>
+<Figures/simple.jpg, id=859, 642.4pt x 481.8pt>
 File: Figures/simple.jpg Graphic file (type jpg)
  <use Figures/simple.jpg>
 Package pdftex.def Info: Figures/simple.jpg used on input line 8.
 (pdftex.def)             Requested size: 258.1687pt x 193.62819pt.
 
-<Figures/medium.jpg, id=810, 642.4pt x 481.8pt>
+<Figures/medium.jpg, id=860, 642.4pt x 481.8pt>
 File: Figures/medium.jpg Graphic file (type jpg)
  <use Figures/medium.jpg>
 Package pdftex.def Info: Figures/medium.jpg used on input line 9.
 (pdftex.def)             Requested size: 258.1687pt x 193.62819pt.
 
-<Figures/complex.jpg, id=811, 642.4pt x 481.8pt>
+<Figures/complex.jpg, id=861, 642.4pt x 481.8pt>
 File: Figures/complex.jpg Graphic file (type jpg)
  <use Figures/complex.jpg>
 Package pdftex.def Info: Figures/complex.jpg used on input line 10.
 (pdftex.def)             Requested size: 258.1687pt x 193.62819pt.
 )
-(/home/adam/Documents/VRproj/VRproj-U/Report/Appendices/Hardware.tex [59
+(/home/adam/Documents/VRproj/VRproj-U/Report/Appendices/Hardware.tex [63
 
 ]
-[60 </home/adam/Documents/VRproj/VRproj-U/Report/Figures/simple.jpg> </home/ada
+[64 </home/adam/Documents/VRproj/VRproj-U/Report/Figures/simple.jpg> </home/ada
 m/Documents/VRproj/VRproj-U/Report/Figures/medium.jpg> </home/adam/Documents/VR
 proj/VRproj-U/Report/Figures/complex.jpg>]
 Appendix D.
 ------------------------------------------------------------------------------
  D Rover Hardware Breakdown
 ------------------------------------------------------------------------------
-) (/home/adam/Documents/VRproj/VRproj-U/Report/Appendices/vector.tex [61
+) (/home/adam/Documents/VRproj/VRproj-U/Report/Appendices/vector.tex [65
 
 ]
-[62
+[66
 
 ]
 Appendix E.
 ------------------------------------------------------------------------------
  E Vectorization
 ------------------------------------------------------------------------------
-) (/home/adam/Documents/VRproj/VRproj-U/Report/Appendices/brief.tex [63]
-[64
+) (/home/adam/Documents/VRproj/VRproj-U/Report/Appendices/brief.tex [67]
+[68
 
 ]
 Appendix F.
@@ -1149,21 +1519,21 @@ Appendix F.
 Missing character: There is no â in font cmr12!
 Missing character: There is no € in font cmr12!
 Missing character: There is no ™ in font cmr12!
-[65]) (/home/adam/Documents/VRproj/VRproj-U/Report/Appendices/GanttChart.tex
-[66]
+[69]) (/home/adam/Documents/VRproj/VRproj-U/Report/Appendices/GanttChart.tex
+[70]
 Appendix G.
 ------------------------------------------------------------------------------
  G Gantt Charts
 ------------------------------------------------------------------------------
-[67
+[71
 
-] <Figures/ganttfinal.png, id=849, 1648.1575pt x 660.4675pt>
+] <Figures/ganttfinal.png, id=900, 1648.1575pt x 660.4675pt>
 File: Figures/ganttfinal.png Graphic file (type png)
 
 <use Figures/ganttfinal.png>
 Package pdftex.def Info: Figures/ganttfinal.png used on input line 6.
 (pdftex.def)             Requested size: 645.4152pt x 258.63947pt.
- [68
+ [72
 
  </home/adam/Documents/VRproj/VRproj-U/Report/Figures/ganttfinal.png>])
 (/home/adam/Documents/VRproj/VRproj-U/Report/Appendices/Costs.tex
@@ -1171,46 +1541,45 @@ Appendix H.
 ------------------------------------------------------------------------------
  H Risk Assessment
 ------------------------------------------------------------------------------
-<Figures/RiskAssessment.png, id=855, 743.77875pt x 600.2425pt>
+<Figures/RiskAssessment.png, id=906, 743.77875pt x 600.2425pt>
 File: Figures/RiskAssessment.png Graphic file (type png)
 
 <use Figures/RiskAssessment.png>
 Package pdftex.def Info: Figures/RiskAssessment.png used on input line 6.
 (pdftex.def)             Requested size: 430.27681pt x 347.25247pt.
 )
-(/home/adam/Documents/VRproj/VRproj-U/Report/Appendices/Archive.tex [69
+(/home/adam/Documents/VRproj/VRproj-U/Report/Appendices/Archive.tex [73
 
 
- </home/adam/Documents/VRproj/VRproj-U/Report/Figures/RiskAssessment.png>] [70
+ </home/adam/Documents/VRproj/VRproj-U/Report/Figures/RiskAssessment.png>] [74
 
 ]
 Appendix I.
 ------------------------------------------------------------------------------
  I Design Archive Contents
 ------------------------------------------------------------------------------
-)
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 149.
- [71]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 149.
+) [75]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 150.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 150.
  (/home/adam/Documents/VRproj/VRproj-U/Report/Thesis.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 149.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 149.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 150.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 150.
 Package rerunfilecheck Info: File `Thesis.out' has not changed.
-(rerunfilecheck)             Checksum: EFF3C720DED6F0A13E51D7AB918B5852;6239.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 149.
+(rerunfilecheck)             Checksum: DF86716D293AB00052EA081E8D827D77;6315.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 150.
  )
 (\end occurred inside a group at level 1)
 
-### simple group (level 1) entered at line 57 ({)
+### simple group (level 1) entered at line 59 ({)
 ### bottom level 
 Here is how much of TeX's memory you used:
- 13660 strings out of 493029
- 198255 string characters out of 6136234
- 264558 words of memory out of 5000000
- 16713 multiletter control sequences out of 15000+600000
+ 23514 strings out of 493029
+ 409344 string characters out of 6136234
+ 448723 words of memory out of 5000000
+ 26337 multiletter control sequences out of 15000+600000
  12172 words of font info for 45 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 49i,15n,45p,1865b,678s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 55i,15n,54p,1924b,676s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/c
 mbx12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmcsc10
 .pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb><
@@ -1219,11 +1588,11 @@ are/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/tex
 live/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/share/texlive/te
 xmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/share/texlive/texmf-di
 st/fonts/type1/public/amsfonts/cm/cmtt12.pfb>
-Output written on /home/adam/Documents/VRproj/VRproj-U/Report/Thesis.pdf (81 pa
-ges, 37006352 bytes).
+Output written on /home/adam/Documents/VRproj/VRproj-U/Report/Thesis.pdf (85 pa
+ges, 26486212 bytes).
 PDF statistics:
- 943 PDF objects out of 1000 (max. 8388607)
- 784 compressed objects within 8 object streams
- 202 named destinations out of 1000 (max. 500000)
- 520 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 997 PDF objects out of 1000 (max. 8388607)
+ 829 compressed objects within 9 object streams
+ 214 named destinations out of 1000 (max. 500000)
+ 602 words of extra memory for PDF output out of 10000 (max. 10000000)
 
