@@ -20,21 +20,24 @@
 \contentsline {section}{\numberline {5.1}Gimbal Design}{27}{section.38}
 \contentsline {section}{\numberline {5.2}Image Pipeline}{29}{section.40}
 \contentsline {section}{\numberline {5.3}Control System}{35}{section.46}
-\contentsline {chapter}{\numberline {6}Server-Side Implementation}{39}{chapter.48}
-\contentsline {section}{\numberline {6.1}Depth Map and Abstraction Construction}{40}{section.50}
-\contentsline {section}{\numberline {6.2}3D Model Generation}{45}{section.55}
-\contentsline {chapter}{\numberline {7}Testing and Evaluation}{47}{chapter.58}
-\contentsline {chapter}{\numberline {8}Project Management}{49}{chapter.59}
-\contentsline {chapter}{\numberline {9}Conclusion}{51}{chapter.60}
+\contentsline {chapter}{\numberline {6}Server-Side Implementation}{37}{chapter.48}
+\contentsline {section}{\numberline {6.1}Depth Map and Abstraction Construction}{38}{section.50}
+\contentsline {section}{\numberline {6.2}3D Model Generation}{43}{section.55}
+\contentsline {chapter}{\numberline {7}Testing and Evaluation}{45}{chapter.58}
+\contentsline {section}{\numberline {7.1}3D Model Accuracy}{45}{section.59}
+\contentsline {section}{\numberline {7.2}Run-Time Performance}{48}{section.62}
+\contentsline {section}{\numberline {7.3}Comparison to a Non-Abstraction System}{48}{section.63}
+\contentsline {chapter}{\numberline {8}Project Management}{51}{chapter.66}
+\contentsline {chapter}{\numberline {9}Conclusion}{53}{chapter.67}
 \vspace {2em}
-\contentsline {chapter}{Bibliography}{57}{chapter*.61}
+\contentsline {chapter}{Bibliography}{59}{chapter*.68}
 \vspace {2em}
-\contentsline {chapter}{\numberline {A}Demonstrations of Full Data Abstraction}{59}{appendix.62}
-\contentsline {chapter}{\numberline {B}Contour Based Seed Point Location}{61}{appendix.65}
-\contentsline {chapter}{\numberline {C}Images of Algorithm Performance Test Scenes}{63}{appendix.67}
-\contentsline {chapter}{\numberline {D}Rover Hardware Breakdown}{65}{appendix.69}
-\contentsline {chapter}{\numberline {E}Vectorization}{67}{appendix.70}
-\contentsline {chapter}{\numberline {F}Project Brief}{69}{appendix.71}
-\contentsline {chapter}{\numberline {G}Gantt Charts}{71}{appendix.72}
-\contentsline {chapter}{\numberline {H}Risk Assessment}{73}{appendix.74}
-\contentsline {chapter}{\numberline {I}Design Archive Contents}{75}{appendix.76}
+\contentsline {chapter}{\numberline {A}Demonstrations of Full Data Abstraction}{61}{appendix.69}
+\contentsline {chapter}{\numberline {B}Contour Based Seed Point Location}{63}{appendix.72}
+\contentsline {chapter}{\numberline {C}Images of Algorithm Performance Test Scenes}{65}{appendix.74}
+\contentsline {chapter}{\numberline {D}Rover Hardware Breakdown}{67}{appendix.76}
+\contentsline {chapter}{\numberline {E}Vectorization}{69}{appendix.77}
+\contentsline {chapter}{\numberline {F}Project Brief}{71}{appendix.78}
+\contentsline {chapter}{\numberline {G}Gantt Chart}{73}{appendix.79}
+\contentsline {chapter}{\numberline {H}Risk Assessment}{75}{appendix.81}
+\contentsline {chapter}{\numberline {I}Design Archive Contents}{77}{appendix.83}

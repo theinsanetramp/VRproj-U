@@ -309,7 +309,7 @@ int main( int argc, char** argv )
   close(fd);
   t.join();
   control.join();
-  //imwrite("LGimble.jpg", receivedImage);
+  //imwrite("jpgtest.jpg", disp);
   //imwrite("RGimble.jpg", receivedImage2);
   return 0;
 }

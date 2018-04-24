@@ -424,5 +424,6 @@ int main( int argc, char** argv )
   close(fd);
   t.join();
   control.join();
+  //imwrite("abstest.jpg", output_map);
   return 0;
 }

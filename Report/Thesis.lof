@@ -24,27 +24,32 @@
 \contentsline {figure}{\numberline {5.5}{\ignorespaces Comparison of Image File Formats}}{33}{figure.caption.42}
 \contentsline {figure}{\numberline {5.6}{\ignorespaces Comparison of Laptop and Rover Abstraction}}{34}{figure.caption.43}
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {6.1}{\ignorespaces Server Program Structure}}{40}{figure.caption.49}
-\contentsline {figure}{\numberline {6.2}{\ignorespaces Demonstration of Stereo Image Rectification}}{41}{figure.caption.51}
-\contentsline {figure}{\numberline {6.3}{\ignorespaces Comparison of Depth Mapping Algorithm Speed}}{42}{figure.caption.52}
-\contentsline {figure}{\numberline {6.4}{\ignorespaces Comparison of Raw Depth Mapping Algorithm Output}}{43}{figure.caption.53}
-\contentsline {figure}{\numberline {6.5}{\ignorespaces Filtered StereoBM and StereoSGBM Outputs}}{44}{figure.caption.54}
-\contentsline {figure}{\numberline {6.6}{\ignorespaces Mesh Grid Segment}}{45}{figure.caption.56}
-\contentsline {figure}{\numberline {6.7}{\ignorespaces Final Textured 3D Model}}{46}{figure.caption.57}
+\contentsline {figure}{\numberline {6.1}{\ignorespaces Server Program Structure}}{38}{figure.caption.49}
+\contentsline {figure}{\numberline {6.2}{\ignorespaces Demonstration of Stereo Image Rectification}}{39}{figure.caption.51}
+\contentsline {figure}{\numberline {6.3}{\ignorespaces Comparison of Depth Mapping Algorithm Speed}}{40}{figure.caption.52}
+\contentsline {figure}{\numberline {6.4}{\ignorespaces Comparison of Raw Depth Mapping Algorithm Output}}{41}{figure.caption.53}
+\contentsline {figure}{\numberline {6.5}{\ignorespaces Filtered StereoBM and StereoSGBM Outputs}}{42}{figure.caption.54}
+\contentsline {figure}{\numberline {6.6}{\ignorespaces Mesh Grid Segment}}{43}{figure.caption.56}
+\contentsline {figure}{\numberline {6.7}{\ignorespaces Final Textured 3D Model}}{44}{figure.caption.57}
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {7.1}{\ignorespaces Full System Demonstrations}}{46}{figure.caption.60}
+\contentsline {figure}{\numberline {7.2}{\ignorespaces Demonstration of System Errors}}{47}{figure.caption.61}
+\contentsline {figure}{\numberline {7.3}{\ignorespaces Comparison of Packet Size for Reliable Depth Maps}}{49}{figure.caption.64}
+\contentsline {figure}{\numberline {7.4}{\ignorespaces Non-Abstraction Depth Map Comparison at Equal Packet Size}}{50}{figure.caption.65}
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {A.1}{\ignorespaces Demonstration of full abstraction process}}{61}{figure.caption.70}
+\contentsline {figure}{\numberline {A.2}{\ignorespaces Additional examples of the full abstraction process}}{62}{figure.caption.71}
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {B.1}{\ignorespaces Demonstration of contour centre point location}}{64}{figure.caption.73}
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {C.1}{\ignorespaces Images of Algorithm Performance Test Scenes}}{66}{figure.caption.75}
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {A.1}{\ignorespaces Demonstration of full abstraction process}}{59}{figure.caption.63}
-\contentsline {figure}{\numberline {A.2}{\ignorespaces Additional examples of the full abstraction process}}{60}{figure.caption.64}
+\contentsline {figure}{\numberline {G.1}{\ignorespaces Gantt Chart}}{74}{figure.caption.80}
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {B.1}{\ignorespaces Demonstration of contour centre point location}}{62}{figure.caption.66}
-\addvspace {10\p@ }
-\contentsline {figure}{\numberline {C.1}{\ignorespaces Images of Algorithm Performance Test Scenes}}{64}{figure.caption.68}
-\addvspace {10\p@ }
-\addvspace {10\p@ }
-\addvspace {10\p@ }
-\addvspace {10\p@ }
-\addvspace {10\p@ }
-\contentsline {figure}{\numberline {H.1}{\ignorespaces Risk Assessment}}{73}{figure.caption.75}
+\contentsline {figure}{\numberline {H.1}{\ignorespaces Risk Assessment}}{76}{figure.caption.82}
 \addvspace {10\p@ }

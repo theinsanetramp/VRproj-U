@@ -13,6 +13,7 @@ The purpose of the server is to receive image data from the rover, produce a 3D 
 \end{figure}
 
 \section{Depth Map and Abstraction Construction}
+\label{section:depth}
 
 For a depth mapping algorithm to function accurately, the 2 images it receives must be rectified (established in Section \ref{subsection:depth}). The rectification parameters for the cameras in our system have been calculated using a set of programs provided by Sourish Ghost \cite{calibgit}. The rectification is applied using these parameters just before the depth maps are calculated (Figure \ref{fig:rect}).
 

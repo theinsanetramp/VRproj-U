@@ -1,3 +1,7 @@
 \chapter{Conclusion}
 \lhead{\emph{Conclusion}}
 \label{chapter:conclusion}
+
+The aim of this project was to design and implement a VR based teleoperation system that utilises data abstraction to minimise the outlined technical issues, providing the foundations for future high presence systems. This has been successfully achieved with the creation of a system that provides users with a 3D model that represents the space a rover is situated in with reasonable accuracy. The rover is comfortable and intuitive to control from the 3D model due to the user being provided with good spacial awareness and reasonably responsive controls. This is all achieved with very low bandwidth requirements.
+
+This research could be taken forward both through broad redesigns, such as testing alternate abstraction methods, or through optimisation of the current system. The flaws in the system are mostly attributed to it being bottlenecked by the Pi, therefore it could be improved substantially through replacing the Pi with a more powerful alternative. There is also much room to refine the abstraction process, improve depth mapping performance, and reduce the data packet size through improved compression. The logical next step in research would then be to incorporate the system into a more intelligent mapping system, such as a SLAM (Simultaneous Location and Mapping Algorithm) based system, to demonstrate its full potential as a high presence VR telerobotics solution.
