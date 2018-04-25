@@ -145,17 +145,17 @@ bool ACombinedTest::StartUDPReceiver(
 
 void ACombinedTest::Recv(const FArrayReaderPtr& ArrayReaderPtr, const FIPv4Endpoint& EndPt)
 {
-	//ScreenMsg("Received bytes", ArrayReaderPtr->Num());
+	ScreenMsg("Received bytes", ArrayReaderPtr->Num());
 	int i = 0;
-	do
+	int seedLength = ArrayReaderPtr->GetData()[0];
+	for (i = 0; i<seedLength; i++)
 	{
-		int x = (ArrayReaderPtr->GetData()[i * 7] << 8) + ArrayReaderPtr->GetData()[i * 7 + 1];
-		int y = (ArrayReaderPtr->GetData()[i * 7 + 2] << 8) + ArrayReaderPtr->GetData()[i * 7 + 3];
+		int x = (ArrayReaderPtr->GetData()[i * 7 + 1] << 8) + ArrayReaderPtr->GetData()[i * 7 + 2];
+		int y = (ArrayReaderPtr->GetData()[i * 7 + 3] << 8) + ArrayReaderPtr->GetData()[i * 7 + 4];
 		Point seed = Point(x, y);
-		Scalar newVal = Scalar(ArrayReaderPtr->GetData()[i * 7 + 4], ArrayReaderPtr->GetData()[i * 7 + 5], ArrayReaderPtr->GetData()[i * 7 + 6]);
+		Scalar newVal = Scalar(ArrayReaderPtr->GetData()[i * 7 + 5], ArrayReaderPtr->GetData()[i * 7 + 6], ArrayReaderPtr->GetData()[i * 7 + 7]);
 		//ScreenMsg("SeedPoint: ",MakeSeedData(seed, newVal) );
 		seedList.push_back(MakeSeedData(seed, newVal));
-		i++;
 		if (i > 200) {
 			ScreenMsg("Colours-Image1 splitter not found\n");
 			seedList.clear();
@@ -163,37 +163,30 @@ void ACombinedTest::Recv(const FArrayReaderPtr& ArrayReaderPtr, const FIPv4Endpo
 			image2Buf.clear();
 			return;
 		}
-	} while (!(ArrayReaderPtr->GetData()[i * 7 + 0] == 0 && ArrayReaderPtr->GetData()[i * 7 + 1] == 1
-		&& ArrayReaderPtr->GetData()[i * 7 + 2] == 2 && ArrayReaderPtr->GetData()[i * 7 + 3] == 3
-		&& ArrayReaderPtr->GetData()[i * 7 + 4] == 4 && ArrayReaderPtr->GetData()[i * 7 + 5] == 5
-		&& ArrayReaderPtr->GetData()[i * 7 + 6] == 6)); // CHANGE BACK TO INCREMENTING FOR SYSTEM TEST
-	i++;
-	i = i * 7;
-	do
+	}
+	int img1Length = (ArrayReaderPtr->GetData()[i * 7 + 1] << 8) + ArrayReaderPtr->GetData()[i * 7 + 2];
+	i = i * 7 + 3;
+	int i2 = i;
+	if (i2 + img1Length > ArrayReaderPtr->Num()) {
+		ScreenMsg("Images not received\n");
+		seedList.clear();
+		imageBuf.clear();
+		image2Buf.clear();
+		return;
+	}
+	for (i; i<i2 + img1Length; i++)
 	{
 		imageBuf.push_back(ArrayReaderPtr->GetData()[i]);
-		i++;
-		if (i > 10000) {
-			ScreenMsg("Image1-Image2 splitter not found\n");
-			seedList.clear();
-			imageBuf.clear();
-			image2Buf.clear();
-			return;
-		}
-	} while (!(ArrayReaderPtr->GetData()[i] == 0 && ArrayReaderPtr->GetData()[i + 1] == 1
-		&& ArrayReaderPtr->GetData()[i + 2] == 2 && ArrayReaderPtr->GetData()[i + 3] == 3
-		&& ArrayReaderPtr->GetData()[i + 4] == 4 && ArrayReaderPtr->GetData()[i + 5] == 5
-		&& ArrayReaderPtr->GetData()[i + 6] == 6));
-	i += 7;
+	}
 	do
 	{
 		image2Buf.push_back(ArrayReaderPtr->GetData()[i]);
 		i++;
-	} while (i != ArrayReaderPtr->Num());
+	} while (i < ArrayReaderPtr->Num());
 
 	receivedImage = imdecode(imageBuf, IMREAD_COLOR);
 	if (receivedImage.empty()) {
-		ScreenMsg("Images not received\n");
+		ScreenMsg("Images not loaded\n");
 		seedList.clear();
 		imageBuf.clear();
 		image2Buf.clear();
@@ -201,7 +194,7 @@ void ACombinedTest::Recv(const FArrayReaderPtr& ArrayReaderPtr, const FIPv4Endpo
 	}
 	receivedImage2 = imdecode(image2Buf, IMREAD_COLOR);
 	if (receivedImage2.empty()) {
-		ScreenMsg("Only one image received\n");
+		ScreenMsg("Only one image loaded\n");
 		seedList.clear();
 		imageBuf.clear();
 		image2Buf.clear();
