@@ -165,16 +165,16 @@ SeedData MakeSeedData(Point seed, Scalar colour)
 void ReceivePoints()
 {
   //Floodfill from quasi-random points
-  int i = 0;
-  do
+  int i;
+  int seedLength = buf[0];
+  for(i=0;i<seedLength;i++)
   {
-    int x = (buf[i*7] << 8) + buf[i*7+1];
-    int y = (buf[i*7+2] << 8) + buf[i*7+3];
+    int x = (buf[i*7+1] << 8) + buf[i*7+2];
+    int y = (buf[i*7+3] << 8) + buf[i*7+4];
     Point seed = Point(x, y);
-    Scalar newVal = Scalar(buf[i*7+4], buf[i*7+5], buf[i*7+6]);
+    Scalar newVal = Scalar(buf[i*7+5], buf[i*7+6], buf[i*7+7]);
     //cout << seed << "  " << newVal << endl;
     seedList.push_back(MakeSeedData(seed, newVal));
-    i++;
     if(i>200) {
       cout << "Colours-Image1 splitter not found\n";
       seedList.clear();
@@ -183,39 +183,29 @@ void ReceivePoints()
       return;
     }
   } 
-  while(!(buf[i*7+0] == 0 && buf[i*7+1] == 1 
-    && buf[i*7+2] == 2 && buf[i*7+3] == 3 
-    && buf[i*7+4] == 4 && buf[i*7+5] == 5
-    && buf[i*7+6] == 6));
-  i++;
   //for(int j=i*7;j<recvlen;j++) imageBuf.push_back(buf[j]); 
-  i = i*7;
-  do
+  int img1Length = (buf[i*7+1] << 8) + buf[i*7+2];
+  i = i*7 + 3;
+  int i2 = i;
+  if(i2 + img1Length > msglen) {
+    cout << "Images not received\n";
+    seedList.clear();
+    imageBuf.clear();
+    image2Buf.clear();
+    return;
+  }
+  for(i;i<i2+img1Length;i++)
   {
     imageBuf.push_back(buf[i]); 
-    i++;
-    if(i>10000) {
-      cout << "Image1-Image2 splitter not found\n";
-      seedList.clear();
-      imageBuf.clear();
-      image2Buf.clear();
-      return;
-    }
   } 
-  while(!(buf[i] == 0 && buf[i+1] == 1 
-    && buf[i+2] == 2 && buf[i+3] == 3 
-    && buf[i+4] == 4 && buf[i+5] == 5
-    && buf[i+6] == 6));
   //for(int j=i-7;j<i+14;j++) cout << (int)buf[j] << endl;
-  i += 7;
   do
   {
     image2Buf.push_back(buf[i]); 
     i++;
   } 
-  while(i != msglen);
+  while(i < msglen);
   receivedImage = imdecode(imageBuf, IMREAD_COLOR);
-  //cout << imageBuf.size() << endl;
   if(receivedImage.empty()) {
     cout << "Images not received\n";
     seedList.clear();

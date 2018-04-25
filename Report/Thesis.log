@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2018.3.19)  24 APR 2018 22:50
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2018.3.19)  25 APR 2018 11:08
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1262,7 +1262,7 @@ File: Figures/blox.jpg Graphic file (type jpg)
 Package pdftex.def Info: Figures/blox.jpg used on input line 12.
 (pdftex.def)             Requested size: 133.38475pt x 133.3847pt.
 
-<Figures/ContourCentres.jpg, id=906, 256.96pt x 256.96pt>
+<Figures/ContourCentres.jpg, id=907, 256.96pt x 256.96pt>
 File: Figures/ContourCentres.jpg Graphic file (type jpg)
 
 <use Figures/ContourCentres.jpg>
@@ -1277,19 +1277,19 @@ Appendix C.
 ------------------------------------------------------------------------------
  C Images of Algorithm Performance Test Scenes
 ------------------------------------------------------------------------------
-<Figures/simple.jpg, id=916, 642.4pt x 481.8pt>
+<Figures/simple.jpg, id=918, 642.4pt x 481.8pt>
 File: Figures/simple.jpg Graphic file (type jpg)
  <use Figures/simple.jpg>
 Package pdftex.def Info: Figures/simple.jpg used on input line 8.
 (pdftex.def)             Requested size: 258.1687pt x 193.62819pt.
 
-<Figures/medium.jpg, id=917, 642.4pt x 481.8pt>
+<Figures/medium.jpg, id=919, 642.4pt x 481.8pt>
 File: Figures/medium.jpg Graphic file (type jpg)
  <use Figures/medium.jpg>
 Package pdftex.def Info: Figures/medium.jpg used on input line 9.
 (pdftex.def)             Requested size: 258.1687pt x 193.62819pt.
 
-<Figures/complex.jpg, id=918, 642.4pt x 481.8pt>
+<Figures/complex.jpg, id=920, 642.4pt x 481.8pt>
 File: Figures/complex.jpg Graphic file (type jpg)
  <use Figures/complex.jpg>
 Package pdftex.def Info: Figures/complex.jpg used on input line 10.
@@ -1334,7 +1334,7 @@ Appendix G.
 ------------------------------------------------------------------------------
 [73
 
-] <Figures/ganttfull.png, id=957, 1530.71875pt x 758.835pt>
+] <Figures/ganttfull.png, id=959, 1530.71875pt x 758.835pt>
 File: Figures/ganttfull.png Graphic file (type png)
 
 <use Figures/ganttfull.png>
@@ -1351,7 +1351,7 @@ Appendix H.
 [75
 
 
-] <Figures/risk.png, id=967, 1472.50125pt x 832.10875pt>
+] <Figures/risk.png, id=969, 1472.50125pt x 832.10875pt>
 File: Figures/risk.png Graphic file (type png)
 
 <use Figures/risk.png>
@@ -1385,7 +1385,7 @@ Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 150.
 Here is how much of TeX's memory you used:
  13823 strings out of 493029
  201717 string characters out of 6136234
- 265994 words of memory out of 5000000
+ 266826 words of memory out of 5000000
  16831 multiletter control sequences out of 15000+600000
  12172 words of font info for 45 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
@@ -1399,10 +1399,10 @@ live/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/share/texlive/te
 xmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/share/texlive/texmf-di
 st/fonts/type1/public/amsfonts/cm/cmtt12.pfb>
 Output written on /home/adam/Documents/VRproj/VRproj-U/Report/Thesis.pdf (87 pa
-ges, 16183093 bytes).
+ges, 16183449 bytes).
 PDF statistics:
- 1057 PDF objects out of 1200 (max. 8388607)
- 874 compressed objects within 9 object streams
+ 1059 PDF objects out of 1200 (max. 8388607)
+ 876 compressed objects within 9 object streams
  223 named destinations out of 1000 (max. 500000)
  682 words of extra memory for PDF output out of 10000 (max. 10000000)
 

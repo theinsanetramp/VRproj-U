@@ -3,9 +3,9 @@
 \contentsline {figure}{\numberline {1.2}{\ignorespaces Rover Pictures}}{4}{figure.caption.5}
 \addvspace {10\p@ }
 \contentsline {figure}{\numberline {2.1}{\ignorespaces HTC Vive}}{5}{figure.caption.8}
-\contentsline {figure}{\numberline {2.2}{\ignorespaces Indirect VR teleoperations examples}}{7}{figure.caption.11}
+\contentsline {figure}{\numberline {2.2}{\ignorespaces Indirect VR Teleoperations Examples}}{7}{figure.caption.11}
 \contentsline {figure}{\numberline {2.3}{\ignorespaces Data Abstraction Example}}{8}{figure.caption.13}
-\contentsline {figure}{\numberline {2.4}{\ignorespaces Comparison of pseudo-random and quasi-random sequences}}{9}{figure.caption.15}
+\contentsline {figure}{\numberline {2.4}{\ignorespaces Comparison of Pseudo-Random and Quasi-Random Sequences}}{9}{figure.caption.15}
 \contentsline {figure}{\numberline {2.5}{\ignorespaces Canny Edge Detection Example}}{10}{figure.caption.18}
 \contentsline {figure}{\numberline {2.6}{\ignorespaces Flood Filling Example}}{11}{figure.caption.20}
 \contentsline {figure}{\numberline {2.7}{\ignorespaces Depth Mapping Example}}{12}{figure.caption.22}
@@ -14,7 +14,7 @@
 \addvspace {10\p@ }
 \contentsline {figure}{\numberline {4.1}{\ignorespaces Data Abstraction Algorithm Process}}{18}{figure.caption.27}
 \contentsline {figure}{\numberline {4.2}{\ignorespaces Performance Comparison of Seed Point Methods}}{21}{figure.caption.31}
-\contentsline {figure}{\numberline {4.3}{\ignorespaces Comparison of brute force and Sobol seed point generation}}{21}{figure.caption.32}
+\contentsline {figure}{\numberline {4.3}{\ignorespaces Comparison of Brute Force and Sobol Seed Point Generation}}{21}{figure.caption.32}
 \contentsline {figure}{\numberline {4.4}{\ignorespaces Comparison of Colour Averaging Methods}}{23}{figure.caption.34}
 \addvspace {10\p@ }
 \contentsline {figure}{\numberline {5.1}{\ignorespaces Rover Internals}}{26}{figure.caption.36}
@@ -39,10 +39,10 @@
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {A.1}{\ignorespaces Demonstration of full abstraction process}}{61}{figure.caption.70}
-\contentsline {figure}{\numberline {A.2}{\ignorespaces Additional examples of the full abstraction process}}{62}{figure.caption.71}
+\contentsline {figure}{\numberline {A.1}{\ignorespaces Demonstration of Full Abstraction Process}}{61}{figure.caption.70}
+\contentsline {figure}{\numberline {A.2}{\ignorespaces Additional Examples of the Full Abstraction Process}}{62}{figure.caption.71}
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {B.1}{\ignorespaces Demonstration of contour centre point location}}{64}{figure.caption.73}
+\contentsline {figure}{\numberline {B.1}{\ignorespaces Demonstration of Contour Centre Point Location}}{64}{figure.caption.73}
 \addvspace {10\p@ }
 \contentsline {figure}{\numberline {C.1}{\ignorespaces Images of Algorithm Performance Test Scenes}}{66}{figure.caption.75}
 \addvspace {10\p@ }
