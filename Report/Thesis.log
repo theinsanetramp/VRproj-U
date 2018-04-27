@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2018.3.19)  25 APR 2018 11:08
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2018.3.19)  27 APR 2018 12:52
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -6,6 +6,10 @@ entering extended mode
 (/home/adam/Documents/VRproj/VRproj-U/Report/Thesis.tex
 LaTeX2e <2016/02/01>
 Babel <3.9q> and hyphenation patterns for 81 language(s) loaded.
+(/usr/share/texlive/texmf-dist/tex/latex/url/url.sty
+\Urlmuskip=\muskip10
+Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
+)
 (/home/adam/Documents/VRproj/VRproj-U/Report/Thesis.cls
 Document Class: Thesis 2007/22/02 v1.0 LaTeX document class
 (/usr/share/texlive/texmf-dist/tex/latex/base/book.cls
@@ -83,7 +87,7 @@ LaTeX Font Info:    Redeclaring font encoding OML on input line 630.
 LaTeX Font Info:    Redeclaring font encoding OMS on input line 631.
 \macc@depth=\count93
 \c@MaxMatrixCols=\count94
-\dotsspace@=\muskip10
+\dotsspace@=\muskip11
 \c@parentequation=\count95
 \dspbrk@lvl=\count96
 \tag@help=\toks15
@@ -410,11 +414,6 @@ Package hyperref Info: Backreferencing OFF on input line 4463.
 Package hyperref Info: Implicit mode ON; LaTeX internals redefined.
 Package hyperref Info: Bookmarks ON on input line 4688.
 \c@Hy@tempcnt=\count124
-
-(/usr/share/texlive/texmf-dist/tex/latex/url/url.sty
-\Urlmuskip=\muskip11
-Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
-)
 LaTeX Info: Redefining \url on input line 5041.
 \XeTeXLinkMargin=\dimen146
 \Fld@menulength=\count125
@@ -499,7 +498,7 @@ LaTeX Info: Redefining \addtolength on input line 81.
 )
 \c@vec@elem=\count141
 )
-Package hyperref Info: Option `colorlinks' set `true' on input line 16.
+Package hyperref Info: Option `colorlinks' set `true' on input line 15.
 
 (/usr/share/texlive/texmf-dist/tex/latex/float/float.sty
 Package: float 2001/11/08 v1.3d Float enhancements (AL)
@@ -518,22 +517,22 @@ Package: lscape 2000/10/22 v3.01 Landscape Pages (DPC)
 (/home/adam/Documents/VRproj/VRproj-U/Report/Thesis.aux)
 \openout1 = `Thesis.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 27.
-LaTeX Font Info:    ... okay on input line 27.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 27.
-LaTeX Font Info:    ... okay on input line 27.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 27.
-LaTeX Font Info:    ... okay on input line 27.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 27.
-LaTeX Font Info:    ... okay on input line 27.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 27.
-LaTeX Font Info:    ... okay on input line 27.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 27.
-LaTeX Font Info:    ... okay on input line 27.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 27.
-LaTeX Font Info:    ... okay on input line 27.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 27.
-LaTeX Font Info:    ... okay on input line 27.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 26.
+LaTeX Font Info:    ... okay on input line 26.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 26.
+LaTeX Font Info:    ... okay on input line 26.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 26.
+LaTeX Font Info:    ... okay on input line 26.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 26.
+LaTeX Font Info:    ... okay on input line 26.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 26.
+LaTeX Font Info:    ... okay on input line 26.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 26.
+LaTeX Font Info:    ... okay on input line 26.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 26.
+LaTeX Font Info:    ... okay on input line 26.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 26.
+LaTeX Font Info:    ... okay on input line 26.
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: float package is loaded.
 Package caption Info: hyperref package is loaded.
@@ -571,7 +570,7 @@ File: color.cfg 2007/01/18 v1.5 color configuration of teTeX/TeXLive
 )
 Package color Info: Driver file: pdftex.def on input line 143.
 )
-Package hyperref Info: Link coloring ON on input line 27.
+Package hyperref Info: Link coloring ON on input line 26.
 
 (/usr/share/texlive/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2012/10/27 v2.43 Cross-referencing by name of section
@@ -581,9 +580,9 @@ Package: gettitlestring 2010/12/03 v1.4 Cleanup title references (HO)
 )
 \c@section@level=\count150
 )
-LaTeX Info: Redefining \ref on input line 27.
-LaTeX Info: Redefining \pageref on input line 27.
-LaTeX Info: Redefining \nameref on input line 27.
+LaTeX Info: Redefining \ref on input line 26.
+LaTeX Info: Redefining \pageref on input line 26.
+LaTeX Info: Redefining \nameref on input line 26.
 
 (/home/adam/Documents/VRproj/VRproj-U/Report/Thesis.out)
 (/home/adam/Documents/VRproj/VRproj-U/Report/Thesis.out)
@@ -652,34 +651,34 @@ Chapter 1.
 ------------------------------------------------------------------------------
 [1
 
-] <Figures/Outline.jpg, id=368, 847.165pt x 696.6025pt>
+] <Figures/Outline.jpg, id=357, 847.165pt x 696.6025pt>
 File: Figures/Outline.jpg Graphic file (type jpg)
 
 <use Figures/Outline.jpg>
-Package pdftex.def Info: Figures/Outline.jpg used on input line 17.
-(pdftex.def)             Requested size: 430.27681pt x 353.80637pt.
+Package pdftex.def Info: Figures/Outline.jpg used on input line 15.
+(pdftex.def)             Requested size: 301.19244pt x 247.66232pt.
  [2]
-<Figures/marvin.jpg, id=377, 5331.92pt x 2999.205pt>
+<Figures/marvin.jpg, id=372, 5331.92pt x 2999.205pt>
 File: Figures/marvin.jpg Graphic file (type jpg)
  <use Figures/marvin.jpg>
 Package pdftex.def Info: Figures/marvin.jpg used on input line 26.
 (pdftex.def)             Requested size: 279.67729pt x 157.29129pt.
 
-<Figures/marvinF.jpg, id=378, 5331.92pt x 2999.205pt>
+<Figures/marvinF.jpg, id=373, 5331.92pt x 2999.205pt>
 File: Figures/marvinF.jpg Graphic file (type jpg)
 
 <use Figures/marvinF.jpg>
 Package pdftex.def Info: Figures/marvinF.jpg used on input line 27.
 (pdftex.def)             Requested size: 279.67729pt x 157.29129pt.
 
-<Figures/marvinS.jpg, id=379, 5331.92pt x 2999.205pt>
+<Figures/marvinS.jpg, id=374, 5331.92pt x 2999.205pt>
 File: Figures/marvinS.jpg Graphic file (type jpg)
 
 <use Figures/marvinS.jpg>
 Package pdftex.def Info: Figures/marvinS.jpg used on input line 28.
 (pdftex.def)             Requested size: 279.67729pt x 157.29129pt.
 
-<Figures/marvinT.jpg, id=380, 5331.92pt x 2999.205pt>
+<Figures/marvinT.jpg, id=375, 5331.92pt x 2999.205pt>
 File: Figures/marvinT.jpg Graphic file (type jpg)
 
 <use Figures/marvinT.jpg>
@@ -698,13 +697,13 @@ Chapter 2.
 ------------------------------------------------------------------------------
  2 Background
 ------------------------------------------------------------------------------
-<Figures/vive.png, id=396, 953.5625pt x 652.4375pt>
+<Figures/vive.png, id=394, 953.5625pt x 652.4375pt>
 File: Figures/vive.png Graphic file (type png)
  <use Figures/vive.png>
 Package pdftex.def Info: Figures/vive.png used on input line 11.
 (pdftex.def)             Requested size: 172.1081pt x 117.75224pt.
 
-<Figures/vive2.png, id=397, 953.5625pt x 652.4375pt>
+<Figures/vive2.png, id=395, 953.5625pt x 652.4375pt>
 File: Figures/vive2.png Graphic file (type png)
  <use Figures/vive2.png>
 Package pdftex.def Info: Figures/vive2.png used on input line 12.
@@ -714,13 +713,13 @@ Package pdftex.def Info: Figures/vive2.png used on input line 12.
 
  </home/adam/Documents/VRproj/VRproj-U/Report/Figures/vive.png> </home/adam/Doc
 uments/VRproj/VRproj-U/Report/Figures/vive2.png>] [6]
-<Figures/homun.png, id=429, 625.33624pt x 466.74374pt>
+<Figures/homun.png, id=427, 625.33624pt x 466.74374pt>
 File: Figures/homun.png Graphic file (type png)
  <use Figures/homun.png>
 Package pdftex.def Info: Figures/homun.png used on input line 39.
 (pdftex.def)             Requested size: 193.62325pt x 144.51813pt.
 
-<Figures/lidar.png, id=430, 1103.12125pt x 718.685pt>
+<Figures/lidar.png, id=428, 1103.12125pt x 718.685pt>
 File: Figures/lidar.png Graphic file (type png)
  <use Figures/lidar.png>
 Package pdftex.def Info: Figures/lidar.png used on input line 40.
@@ -732,7 +731,7 @@ Overfull \hbox (2.48483pt too wide) in paragraph at lines 38--42
 
 [7 </home/adam/Documents/VRproj/VRproj-U/Report/Figures/homun.png> </home/adam/
 Documents/VRproj/VRproj-U/Report/Figures/lidar.png>]
-<Figures/abstraction3rdyear.png, id=441, 363.3575pt x 162.6075pt>
+<Figures/abstraction3rdyear.png, id=439, 363.3575pt x 162.6075pt>
 File: Figures/abstraction3rdyear.png Graphic file (type png)
 
 <use Figures/abstraction3rdyear.png>
@@ -740,7 +739,7 @@ Package pdftex.def Info: Figures/abstraction3rdyear.png used on input line 58.
 (pdftex.def)             Requested size: 258.1687pt x 115.53648pt.
  [8 </home/adam/Documents/VRproj/VRproj-U/Report/Figures/abstraction3rdyear.png
 >]
-<Figures/Pseudorandom_sequence_2D.png, id=453, 290.08376pt x 290.08376pt>
+<Figures/Pseudorandom_sequence_2D.png, id=451, 290.08376pt x 290.08376pt>
 File: Figures/Pseudorandom_sequence_2D.png Graphic file (type png)
 
 <use Figures/Pseudorandom_sequence_2D.png>
@@ -748,7 +747,7 @@ Package pdftex.def Info: Figures/Pseudorandom_sequence_2D.png used on input lin
 e 72.
 (pdftex.def)             Requested size: 141.99213pt x 141.99178pt.
 
-<Figures/Sobol_sequence_2D.png, id=454, 290.08376pt x 290.08376pt>
+<Figures/Sobol_sequence_2D.png, id=452, 290.08376pt x 290.08376pt>
 File: Figures/Sobol_sequence_2D.png Graphic file (type png)
 
 <use Figures/Sobol_sequence_2D.png>
@@ -757,314 +756,326 @@ Package pdftex.def Info: Figures/Sobol_sequence_2D.png used on input line 73.
  [9 </home/adam/Documents/VRproj/VRproj-U/Report/Figures/Pseudorandom_sequence_
 2D.png> </home/adam/Documents/VRproj/VRproj-U/Report/Figures/Sobol_sequence_2D.
 png>]
-<Figures/canny2.png, id=474, 446.66875pt x 136.51pt>
+<Figures/canny2.png, id=472, 446.66875pt x 136.51pt>
 File: Figures/canny2.png Graphic file (type png)
  <use Figures/canny2.png>
 Package pdftex.def Info: Figures/canny2.png used on input line 89.
 (pdftex.def)             Requested size: 387.24649pt x 118.35239pt.
 
-<Figures/blox.jpg, id=479, 256.96pt x 256.96pt>
+<Figures/blox.jpg, id=477, 256.96pt x 256.96pt>
 File: Figures/blox.jpg Graphic file (type jpg)
  <use Figures/blox.jpg>
 Package pdftex.def Info: Figures/blox.jpg used on input line 102.
 (pdftex.def)             Requested size: 150.5995pt x 150.60133pt.
 
-<Figures/bloxFilled.jpg, id=480, 256.96pt x 256.96pt>
+<Figures/bloxFilled.jpg, id=478, 256.96pt x 256.96pt>
 File: Figures/bloxFilled.jpg Graphic file (type jpg)
 
 <use Figures/bloxFilled.jpg>
 Package pdftex.def Info: Figures/bloxFilled.jpg used on input line 103.
 (pdftex.def)             Requested size: 150.5995pt x 150.60133pt.
  [10 </home/adam/Documents/VRproj/VRproj-U/Report/Figures/canny2.png>] <Figures
-/depthmap.png, id=497, 513.92pt x 513.92pt>
+/depthmap.png, id=494, 513.92pt x 513.92pt>
 File: Figures/depthmap.png Graphic file (type png)
 
 <use Figures/depthmap.png>
 Package pdftex.def Info: Figures/depthmap.png used on input line 117.
 (pdftex.def)             Requested size: 344.22275pt x 344.2305pt.
- [11 </home/adam/Documents/VRproj/VRproj-U/Report/Figures/blox.jpg> </home/adam
-/Documents/VRproj/VRproj-U/Report/Figures/bloxFilled.jpg>] [12 </home/adam/Docu
-ments/VRproj/VRproj-U/Report/Figures/depthmap.png>])
-(/home/adam/Documents/VRproj/VRproj-U/Report/Chapters/Overview.tex [13]
-[14
-
-]
+) [11 </home/adam/Documents/VRproj/VRproj-U/Report/Figures/blox.jpg> </home/ada
+m/Documents/VRproj/VRproj-U/Report/Figures/bloxFilled.jpg>] (/home/adam/Documen
+ts/VRproj/VRproj-U/Report/Chapters/Overview.tex
+[12 </home/adam/Documents/VRproj/VRproj-U/Report/Figures/depthmap.png>]
 Chapter 3.
 ------------------------------------------------------------------------------
  3 System Overview
 ------------------------------------------------------------------------------
-<Figures/System.jpg, id=526, 634.37pt x 666.49pt>
+<Figures/System.jpg, id=513, 634.37pt x 666.49pt>
 File: Figures/System.jpg Graphic file (type jpg)
  <use Figures/System.jpg>
 Package pdftex.def Info: Figures/System.jpg used on input line 11.
 (pdftex.def)             Requested size: 344.22275pt x 361.65862pt.
 )
-[15] (/home/adam/Documents/VRproj/VRproj-U/Report/Chapters/Abstraction.tex
-[16 </home/adam/Documents/VRproj/VRproj-U/Report/Figures/System.jpg>]
+[13
+
+] (/home/adam/Documents/VRproj/VRproj-U/Report/Chapters/Abstraction.tex
+[14 </home/adam/Documents/VRproj/VRproj-U/Report/Figures/System.jpg>]
 Chapter 4.
 ------------------------------------------------------------------------------
  4 Abstraction Algorithm Development
 ------------------------------------------------------------------------------
-<Figures/Abstraction.jpg, id=539, 1529.715pt x 3075.49pt>
+<Figures/Abstraction.jpg, id=527, 1529.715pt x 3075.49pt>
 File: Figures/Abstraction.jpg Graphic file (type jpg)
 
 <use Figures/Abstraction.jpg>
 Package pdftex.def Info: Figures/Abstraction.jpg used on input line 9.
 (pdftex.def)             Requested size: 322.7076pt x 648.78151pt.
- [17
+ [15
 
 ]
 Overfull \vbox (63.003pt too high) has occurred while \output is active []
 
 
-[18 </home/adam/Documents/VRproj/VRproj-U/Report/Figures/Abstraction.jpg>]
+[16 </home/adam/Documents/VRproj/VRproj-U/Report/Figures/Abstraction.jpg>]
 Overfull \hbox (6.22699pt too wide) in paragraph at lines 19--20
 \OT1/cmr/m/n/12 Canny edge de-tec-tion was im-ple-mented us-ing the Canny func-
 tion pro-vided by OpenCV
  []
 
-[19] <Figures/FPSComp.png, id=561, 650.43pt x 405.515pt>
+[17] <Figures/FPSComp.png, id=551, 511.9125pt x 316.18124pt>
 File: Figures/FPSComp.png Graphic file (type png)
 
 <use Figures/FPSComp.png>
 Package pdftex.def Info: Figures/FPSComp.png used on input line 35.
-(pdftex.def)             Requested size: 387.24649pt x 241.436pt.
- [20] <Figures/Brute.jpg, id=567, 851.18pt x 481.8pt>
+(pdftex.def)             Requested size: 301.19244pt x 186.02908pt.
+ [18] <Figures/Brute.jpg, id=557, 851.18pt x 481.8pt>
 File: Figures/Brute.jpg Graphic file (type jpg)
 
 <use Figures/Brute.jpg>
 Package pdftex.def Info: Figures/Brute.jpg used on input line 44.
 (pdftex.def)             Requested size: 193.62325pt x 109.59863pt.
- <Figures/Sobol.jpg, id=568, 851.18pt x 481.8pt>
+ <Figures/Sobol.jpg, id=558, 851.18pt x 481.8pt>
 File: Figures/Sobol.jpg Graphic file (type jpg)
 
 <use Figures/Sobol.jpg>
 Package pdftex.def Info: Figures/Sobol.jpg used on input line 45.
 (pdftex.def)             Requested size: 193.62325pt x 109.59863pt.
- [21 </home/adam/Documents/VRproj/VRproj-U/Report/Figures/FPSComp.png> </home/a
-dam/Documents/VRproj/VRproj-U/Report/Figures/Brute.jpg> </home/adam/Documents/V
-Rproj/VRproj-U/Report/Figures/Sobol.jpg>] [22]
-<Figures/ColourConsistency.png, id=581, 1067.99pt x 318.18875pt>
+ [19 </home/adam/Documents/VRproj/VRproj-U/Report/Figures/FPSComp.png (PNG copy
+)> </home/adam/Documents/VRproj/VRproj-U/Report/Figures/Brute.jpg> </home/adam/
+Documents/VRproj/VRproj-U/Report/Figures/Sobol.jpg>]
+<Figures/ColourConsistency.png, id=565, 1067.99pt x 318.18875pt>
 File: Figures/ColourConsistency.png Graphic file (type png)
 
 <use Figures/ColourConsistency.png>
 Package pdftex.def Info: Figures/ColourConsistency.png used on input line 64.
 (pdftex.def)             Requested size: 430.27681pt x 128.19086pt.
-)
-(/home/adam/Documents/VRproj/VRproj-U/Report/Chapters/Rover.tex [23 </home/adam
-/Documents/VRproj/VRproj-U/Report/Figures/ColourConsistency.png>] [24
+) [20]
+(/home/adam/Documents/VRproj/VRproj-U/Report/Chapters/Rover.tex [21 </home/adam
+/Documents/VRproj/VRproj-U/Report/Figures/ColourConsistency.png>] [22
 
 ]
 Chapter 5.
 ------------------------------------------------------------------------------
  5 Rover Implementation
 ------------------------------------------------------------------------------
-<Figures/RoverAbove.jpg, id=594, 1118.1775pt x 758.835pt>
+<Figures/RoverAbove.jpg, id=584, 1118.1775pt x 758.835pt>
 File: Figures/RoverAbove.jpg Graphic file (type jpg)
 
 <use Figures/RoverAbove.jpg>
 Package pdftex.def Info: Figures/RoverAbove.jpg used on input line 10.
 (pdftex.def)             Requested size: 387.24649pt x 262.79414pt.
 
-<Figures/RoverInternals.jpg, id=595, 1144.275pt x 766.865pt>
+<Figures/RoverInternals.jpg, id=585, 1144.275pt x 766.865pt>
 File: Figures/RoverInternals.jpg Graphic file (type jpg)
 
 <use Figures/RoverInternals.jpg>
 Package pdftex.def Info: Figures/RoverInternals.jpg used on input line 11.
 (pdftex.def)             Requested size: 387.24649pt x 259.5254pt.
- [25]
-<Figures/hardware.png, id=601, 583.17876pt x 482.80376pt>
+ [23]
+<Figures/hardware.png, id=591, 583.17876pt x 482.80376pt>
 File: Figures/hardware.png Graphic file (type png)
 
 <use Figures/hardware.png>
 Package pdftex.def Info: Figures/hardware.png used on input line 20.
 (pdftex.def)             Requested size: 387.24649pt x 320.60371pt.
- [26 </home/adam/Documents/VRproj/VRproj-U/Report/Figures/RoverAbove.jpg> </hom
-e/adam/Documents/VRproj/VRproj-U/Report/Figures/RoverInternals.jpg>] [27 </home
+ [24 </home/adam/Documents/VRproj/VRproj-U/Report/Figures/RoverAbove.jpg> </hom
+e/adam/Documents/VRproj/VRproj-U/Report/Figures/RoverInternals.jpg>] [25 </home
 /adam/Documents/VRproj/VRproj-U/Report/Figures/hardware.png>] <Figures/GimbleLa
-bel.jpg, id=616, 1328.965pt x 714.67pt>
+bel.jpg, id=604, 1328.965pt x 714.67pt>
 File: Figures/GimbleLabel.jpg Graphic file (type jpg)
 
 <use Figures/GimbleLabel.jpg>
 Package pdftex.def Info: Figures/GimbleLabel.jpg used on input line 36.
 (pdftex.def)             Requested size: 387.24649pt x 208.24133pt.
- [28] [29 </home/adam/Documents/VRproj/VRproj-U/Report/Figures/GimbleLabel.jpg>
+ [26] [27 </home/adam/Documents/VRproj/VRproj-U/Report/Figures/GimbleLabel.jpg>
 ]
-<Figures/Threads.png, id=630, 586.19pt x 468.75125pt>
+<Figures/Threads.png, id=620, 586.19pt x 468.75125pt>
 File: Figures/Threads.png Graphic file (type png)
 
 <use Figures/Threads.png>
 Package pdftex.def Info: Figures/Threads.png used on input line 53.
 (pdftex.def)             Requested size: 387.24649pt x 309.66287pt.
- [30] [31 </home/adam/Documents/VRproj/VRproj-U/Report/Figures/Threads.png>]
+ [28] [29 </home/adam/Documents/VRproj/VRproj-U/Report/Figures/Threads.png>]
 LaTeX Font Info:    Try loading font information for OML+cmr on input line 63.
  (/usr/share/texlive/texmf-dist/tex/latex/base/omlcmr.fd
 File: omlcmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OML/cmr/m/n' in size <12> not available
 (Font)              Font shape `OML/cmm/m/it' tried instead on input line 63.
-<Figures/compression.png, id=646, 708.6475pt x 459.7175pt>
+<Figures/compression.png, id=636, 560.0925pt x 366.36874pt>
 File: Figures/compression.png Graphic file (type png)
 
 <use Figures/compression.png>
 Package pdftex.def Info: Figures/compression.png used on input line 67.
-(pdftex.def)             Requested size: 387.24649pt x 251.21799pt.
- [32]
-<Figures/abstractcompL.jpg, id=656, 642.4pt x 481.8pt>
+(pdftex.def)             Requested size: 301.19244pt x 197.02557pt.
+ [30]
+<Figures/abstractcompL.jpg, id=646, 642.4pt x 481.8pt>
 File: Figures/abstractcompL.jpg Graphic file (type jpg)
 
 <use Figures/abstractcompL.jpg>
 Package pdftex.def Info: Figures/abstractcompL.jpg used on input line 78.
 (pdftex.def)             Requested size: 193.62325pt x 145.21745pt.
 
-<Figures/abstractcompR.jpg, id=657, 321.2pt x 240.9pt>
+<Figures/abstractcompR.jpg, id=647, 321.2pt x 240.9pt>
 File: Figures/abstractcompR.jpg Graphic file (type jpg)
 
 <use Figures/abstractcompR.jpg>
 Package pdftex.def Info: Figures/abstractcompR.jpg used on input line 79.
 (pdftex.def)             Requested size: 193.62325pt x 145.22113pt.
- [33 </home/adam/Documents/VRproj/VRproj-U/Report/Figures/compression.png>] [34
- </home/adam/Documents/VRproj/VRproj-U/Report/Figures/abstractcompL.jpg> </home
-/adam/Documents/VRproj/VRproj-U/Report/Figures/abstractcompR.jpg>] [35])
-(/home/adam/Documents/VRproj/VRproj-U/Report/Chapters/Server.tex [36]
+ [31 </home/adam/Documents/VRproj/VRproj-U/Report/Figures/compression.png (PNG 
+copy)>] [32 </home/adam/Documents/VRproj/VRproj-U/Report/Figures/abstractcompL.
+jpg> </home/adam/Documents/VRproj/VRproj-U/Report/Figures/abstractcompR.jpg>] [
+33])
+(/home/adam/Documents/VRproj/VRproj-U/Report/Chapters/Server.tex [34]
 Chapter 6.
 ------------------------------------------------------------------------------
  6 Server-Side Implementation
 ------------------------------------------------------------------------------
-<Figures/Unreal.png, id=685, 447.6725pt x 422.57875pt>
+<Figures/Unreal.png, id=676, 447.6725pt x 422.57875pt>
 File: Figures/Unreal.png Graphic file (type png)
 
 <use Figures/Unreal.png>
 Package pdftex.def Info: Figures/Unreal.png used on input line 9.
-(pdftex.def)             Requested size: 322.7076pt x 304.624pt.
- [37
+(pdftex.def)             Requested size: 301.19244pt x 284.31273pt.
+ [35
 
 ]
-<Figures/prerectL.jpg, id=694, 321.2pt x 240.9pt>
+<Figures/prerectL.jpg, id=685, 321.2pt x 240.9pt>
 File: Figures/prerectL.jpg Graphic file (type jpg)
  <use Figures/prerectL.jpg>
 Package pdftex.def Info: Figures/prerectL.jpg used on input line 23.
 (pdftex.def)             Requested size: 193.62325pt x 145.22113pt.
 
-<Figures/prerectR.jpg, id=695, 321.2pt x 240.9pt>
+<Figures/prerectR.jpg, id=686, 321.2pt x 240.9pt>
 File: Figures/prerectR.jpg Graphic file (type jpg)
  <use Figures/prerectR.jpg>
 Package pdftex.def Info: Figures/prerectR.jpg used on input line 24.
 (pdftex.def)             Requested size: 193.62325pt x 145.22113pt.
 
-<Figures/postrectL.jpg, id=696, 321.2pt x 240.9pt>
+<Figures/postrectL.jpg, id=687, 321.2pt x 240.9pt>
 File: Figures/postrectL.jpg Graphic file (type jpg)
  <use Figures/postrectL.jpg>
 Package pdftex.def Info: Figures/postrectL.jpg used on input line 25.
 (pdftex.def)             Requested size: 193.62325pt x 145.22113pt.
 
-<Figures/postrectR.jpg, id=697, 321.2pt x 240.9pt>
+<Figures/postrectR.jpg, id=688, 321.2pt x 240.9pt>
 File: Figures/postrectR.jpg Graphic file (type jpg)
  <use Figures/postrectR.jpg>
 Package pdftex.def Info: Figures/postrectR.jpg used on input line 26.
 (pdftex.def)             Requested size: 193.62325pt x 145.22113pt.
 
-[38 </home/adam/Documents/VRproj/VRproj-U/Report/Figures/Unreal.png>]
-<Figures/depthspeed.png, id=707, 594.22pt x 366.36874pt>
+[36 </home/adam/Documents/VRproj/VRproj-U/Report/Figures/Unreal.png>]
+<Figures/depthspeed.png, id=698, 467.7475pt x 289.08pt>
 File: Figures/depthspeed.png Graphic file (type png)
 
 <use Figures/depthspeed.png>
 Package pdftex.def Info: Figures/depthspeed.png used on input line 37.
-(pdftex.def)             Requested size: 344.22275pt x 212.24245pt.
- [39 </home/adam/Documents/VRproj/VRproj-U/Report/Figures/prerectL.jpg> </home/
+(pdftex.def)             Requested size: 301.19244pt x 186.153pt.
+ [37 </home/adam/Documents/VRproj/VRproj-U/Report/Figures/prerectL.jpg> </home/
 adam/Documents/VRproj/VRproj-U/Report/Figures/prerectR.jpg> </home/adam/Documen
 ts/VRproj/VRproj-U/Report/Figures/postrectL.jpg> </home/adam/Documents/VRproj/V
 Rproj-U/Report/Figures/postrectR.jpg>]
-<Figures/BMout.jpg, id=716, 321.2pt x 240.9pt>
+<Figures/BMout.jpg, id=706, 321.2pt x 240.9pt>
 File: Figures/BMout.jpg Graphic file (type jpg)
  <use Figures/BMout.jpg>
 Package pdftex.def Info: Figures/BMout.jpg used on input line 48.
 (pdftex.def)             Requested size: 193.62325pt x 145.22113pt.
 
-<Figures/sgbmout.jpg, id=717, 325.215pt x 244.915pt>
+<Figures/sgbmout.jpg, id=707, 325.215pt x 244.915pt>
 File: Figures/sgbmout.jpg Graphic file (type jpg)
  <use Figures/sgbmout.jpg>
 Package pdftex.def Info: Figures/sgbmout.jpg used on input line 49.
 (pdftex.def)             Requested size: 193.62325pt x 145.81778pt.
 
-<Figures/libelasout.jpg, id=718, 321.2pt x 240.9pt>
+<Figures/libelasout.jpg, id=708, 321.2pt x 240.9pt>
 File: Figures/libelasout.jpg Graphic file (type jpg)
 
 <use Figures/libelasout.jpg>
 Package pdftex.def Info: Figures/libelasout.jpg used on input line 50.
 (pdftex.def)             Requested size: 193.62325pt x 145.22113pt.
- [40 </home/adam/Documents/VRproj/VRproj-U/Report/Figures/depthspeed.png>] <Fig
-ures/BMfiltered.jpg, id=725, 321.2pt x 240.9pt>
+ [38 </home/adam/Documents/VRproj/VRproj-U/Report/Figures/depthspeed.png (PNG c
+opy)>]
+<Figures/BMfiltered.jpg, id=715, 321.2pt x 240.9pt>
 File: Figures/BMfiltered.jpg Graphic file (type jpg)
 
 <use Figures/BMfiltered.jpg>
 Package pdftex.def Info: Figures/BMfiltered.jpg used on input line 63.
 (pdftex.def)             Requested size: 193.62325pt x 145.22113pt.
 
-<Figures/sgbmfilt.jpg, id=726, 325.215pt x 244.915pt>
+<Figures/sgbmfilt.jpg, id=716, 325.215pt x 244.915pt>
 File: Figures/sgbmfilt.jpg Graphic file (type jpg)
 
 <use Figures/sgbmfilt.jpg>
 Package pdftex.def Info: Figures/sgbmfilt.jpg used on input line 64.
 (pdftex.def)             Requested size: 193.62325pt x 145.81778pt.
- [41 </home/adam/Documents/VRproj/VRproj-U/Report/Figures/BMout.jpg> </home/ada
+ [39 </home/adam/Documents/VRproj/VRproj-U/Report/Figures/BMout.jpg> </home/ada
 m/Documents/VRproj/VRproj-U/Report/Figures/sgbmout.jpg> </home/adam/Documents/V
 Rproj/VRproj-U/Report/Figures/libelasout.jpg>]
-[42 </home/adam/Documents/VRproj/VRproj-U/Report/Figures/BMfiltered.jpg> </home
+[40 </home/adam/Documents/VRproj/VRproj-U/Report/Figures/BMfiltered.jpg> </home
 /adam/Documents/VRproj/VRproj-U/Report/Figures/sgbmfilt.jpg>]
-<Figures/mesh.png, id=738, 206.7725pt x 207.77625pt>
-File: Figures/mesh.png Graphic file (type png)
- <use Figures/mesh.png>
-Package pdftex.def Info: Figures/mesh.png used on input line 83.
-(pdftex.def)             Requested size: 258.1687pt x 259.44699pt.
+<Figures/mesh.pdf, id=729, 158.5925pt x 159.59625pt>
+File: Figures/mesh.pdf Graphic file (type pdf)
+ <use Figures/mesh.pdf>
+Package pdftex.def Info: Figures/mesh.pdf used on input line 83.
+(pdftex.def)             Requested size: 172.1081pt x 173.21126pt.
 
-[43 </home/adam/Documents/VRproj/VRproj-U/Report/Figures/mesh.png>]
-<Figures/OutlinePic2.png, id=746, 1927.2pt x 1084.05pt>
+<Figures/outlinePic1.jpg, id=731, 642.4pt x 481.8pt>
+File: Figures/outlinePic1.jpg Graphic file (type jpg)
+
+<use Figures/outlinePic1.jpg>
+Package pdftex.def Info: Figures/outlinePic1.jpg used on input line 93.
+(pdftex.def)             Requested size: 215.1384pt x 161.35437pt.
+
+<Figures/OutlinePic2.png, id=732, 1927.2pt x 1084.05pt>
 File: Figures/OutlinePic2.png Graphic file (type png)
 
 <use Figures/OutlinePic2.png>
-Package pdftex.def Info: Figures/OutlinePic2.png used on input line 93.
+Package pdftex.def Info: Figures/OutlinePic2.png used on input line 94.
 (pdftex.def)             Requested size: 387.24649pt x 217.81517pt.
-)
-(/home/adam/Documents/VRproj/VRproj-U/Report/Chapters/Evaluation.tex [44 </home
-/adam/Documents/VRproj/VRproj-U/Report/Figures/OutlinePic2.png>]
+ [41 </home/adam/Documents/VRproj/VRproj-U/Report/Figures/mesh.pdf
+
+pdfTeX warning: pdflatex (file /home/adam/Documents/VRproj/VRproj-U/Report/Figu
+res/mesh.pdf): PDF inclusion: invalid other resource which is no dict (key 'Pro
+cSets', type <array>); ignored.
+>]) (/home/adam/Documents/VRproj/VRproj-U/Report/Chapters/Evaluation.tex
+[42 </home/adam/Documents/VRproj/VRproj-U/Report/Figures/outlinePic1.jpg> </hom
+e/adam/Documents/VRproj/VRproj-U/Report/Figures/OutlinePic2.png>]
 Chapter 7.
 ------------------------------------------------------------------------------
  7 Testing and Evaluation
 ------------------------------------------------------------------------------
-<Figures/TestScene1.jpg, id=753, 321.2pt x 240.9pt>
+<Figures/TestScene1.jpg, id=748, 321.2pt x 240.9pt>
 File: Figures/TestScene1.jpg Graphic file (type jpg)
 
 <use Figures/TestScene1.jpg>
 Package pdftex.def Info: Figures/TestScene1.jpg used on input line 14.
 (pdftex.def)             Requested size: 185.01587pt x 160.02739pt.
 
-<Figures/TestUnreal1.jpg, id=755, 786.94pt x 669.50125pt>
+<Figures/TestUnreal1.jpg, id=750, 786.94pt x 669.50125pt>
 File: Figures/TestUnreal1.jpg Graphic file (type jpg)
 
 <use Figures/TestUnreal1.jpg>
 Package pdftex.def Info: Figures/TestUnreal1.jpg used on input line 15.
 (pdftex.def)             Requested size: 185.01587pt x 157.40433pt.
 
-<Figures/TestScene2.jpg, id=756, 321.2pt x 240.9pt>
+<Figures/TestScene2.jpg, id=751, 321.2pt x 240.9pt>
 File: Figures/TestScene2.jpg Graphic file (type jpg)
 
 <use Figures/TestScene2.jpg>
 Package pdftex.def Info: Figures/TestScene2.jpg used on input line 16.
 (pdftex.def)             Requested size: 185.01587pt x 168.64354pt.
 
-<Figures/TestUnreal2.jpg, id=758, 737.75626pt x 677.53125pt>
+<Figures/TestUnreal2.jpg, id=753, 737.75626pt x 677.53125pt>
 File: Figures/TestUnreal2.jpg Graphic file (type jpg)
 
 <use Figures/TestUnreal2.jpg>
 Package pdftex.def Info: Figures/TestUnreal2.jpg used on input line 17.
 (pdftex.def)             Requested size: 185.01587pt x 169.90964pt.
- [45
+ [43
 
-] [46 </home/adam/Documents/VRproj/VRproj-U/Report/Figures/TestScene1.jpg> </ho
+] [44 </home/adam/Documents/VRproj/VRproj-U/Report/Figures/TestScene1.jpg> </ho
 me/adam/Documents/VRproj/VRproj-U/Report/Figures/TestScene2.jpg> </home/adam/Do
 cuments/VRproj/VRproj-U/Report/Figures/TestUnreal1.jpg> </home/adam/Documents/V
-Rproj/VRproj-U/Report/Figures/TestUnreal2.jpg>] <Figures/TestScene3.jpg, id=774
+Rproj/VRproj-U/Report/Figures/TestUnreal2.jpg>] <Figures/TestScene3.jpg, id=768
 , 321.2pt x 240.9pt>
 File: Figures/TestScene3.jpg Graphic file (type jpg)
 
@@ -1072,94 +1083,94 @@ File: Figures/TestScene3.jpg Graphic file (type jpg)
 Package pdftex.def Info: Figures/TestScene3.jpg used on input line 33.
 (pdftex.def)             Requested size: 185.01587pt x 152.253pt.
 
-<Figures/TestUnreal3.jpg, id=776, 747.79375pt x 612.2875pt>
+<Figures/TestUnreal3.jpg, id=770, 747.79375pt x 612.2875pt>
 File: Figures/TestUnreal3.jpg Graphic file (type jpg)
 
 <use Figures/TestUnreal3.jpg>
 Package pdftex.def Info: Figures/TestUnreal3.jpg used on input line 34.
 (pdftex.def)             Requested size: 185.01587pt x 151.48323pt.
 
-<Figures/TestUnreal3S.jpg, id=777, 909.3975pt x 671.50874pt>
+<Figures/TestUnreal3S.jpg, id=771, 909.3975pt x 671.50874pt>
 File: Figures/TestUnreal3S.jpg Graphic file (type jpg)
 
 <use Figures/TestUnreal3S.jpg>
 Package pdftex.def Info: Figures/TestUnreal3S.jpg used on input line 35.
 (pdftex.def)             Requested size: 215.1384pt x 158.85995pt.
- [47 </home/adam/Documents/VRproj/VRproj-U/Report/Figures/TestScene3.jpg> </hom
-e/adam/Documents/VRproj/VRproj-U/Report/Figures/TestUnreal3.jpg> </home/adam/Do
-cuments/VRproj/VRproj-U/Report/Figures/TestUnreal3S.jpg>] <Figures/packetcomp.p
-ng, id=784, 624.3325pt x 417.56pt>
+ [45] [46 </home/adam/Documents/VRproj/VRproj-U/Report/Figures/TestScene3.jpg> 
+</home/adam/Documents/VRproj/VRproj-U/Report/Figures/TestUnreal3.jpg> </home/ad
+am/Documents/VRproj/VRproj-U/Report/Figures/TestUnreal3S.jpg>] <Figures/packetc
+omp.png, id=783, 481.8pt x 326.21875pt>
 File: Figures/packetcomp.png Graphic file (type png)
 
 <use Figures/packetcomp.png>
 Package pdftex.def Info: Figures/packetcomp.png used on input line 56.
-(pdftex.def)             Requested size: 344.22275pt x 230.22575pt.
- [48]
-<Figures/abstest.jpg, id=790, 642.4pt x 481.8pt>
+(pdftex.def)             Requested size: 301.19244pt x 203.93599pt.
+ [47]
+<Figures/abstest.jpg, id=789, 642.4pt x 481.8pt>
 File: Figures/abstest.jpg Graphic file (type jpg)
  <use Figures/abstest.jpg>
 Package pdftex.def Info: Figures/abstest.jpg used on input line 67.
 (pdftex.def)             Requested size: 202.23062pt x 151.67223pt.
 
-<Figures/jpgtest.jpg, id=791, 642.4pt x 481.8pt>
+<Figures/jpgtest.jpg, id=790, 642.4pt x 481.8pt>
 File: Figures/jpgtest.jpg Graphic file (type jpg)
  <use Figures/jpgtest.jpg>
 Package pdftex.def Info: Figures/jpgtest.jpg used on input line 68.
 (pdftex.def)             Requested size: 202.23062pt x 151.67223pt.
 )
-[49 </home/adam/Documents/VRproj/VRproj-U/Report/Figures/packetcomp.png>]
-(/home/adam/Documents/VRproj/VRproj-U/Report/Chapters/Mang.tex [50 </home/adam/
-Documents/VRproj/VRproj-U/Report/Figures/abstest.jpg> </home/adam/Documents/VRp
-roj/VRproj-U/Report/Figures/jpgtest.jpg>]
+(/home/adam/Documents/VRproj/VRproj-U/Report/Chapters/Conclusion.tex [48 </home
+/adam/Documents/VRproj/VRproj-U/Report/Figures/packetcomp.png (PNG copy)> </hom
+e/adam/Documents/VRproj/VRproj-U/Report/Figures/abstest.jpg> </home/adam/Docume
+nts/VRproj/VRproj-U/Report/Figures/jpgtest.jpg>]
 Chapter 8.
 ------------------------------------------------------------------------------
- 8 Project Management
+ 8 Conclusion
 ------------------------------------------------------------------------------
-) (/home/adam/Documents/VRproj/VRproj-U/Report/Chapters/Conclusion.tex [51
+) (/home/adam/Documents/VRproj/VRproj-U/Report/Chapters/Mang.tex [49
 
-]
-[52
+] [50
 
 ]
 Chapter 9.
 ------------------------------------------------------------------------------
- 9 Conclusion
+ 9 Project Management
 ------------------------------------------------------------------------------
-) (/home/adam/Documents/VRproj/VRproj-U/Report/Thesis.bbl [53] [54
+) (/home/adam/Documents/VRproj/VRproj-U/Report/Thesis.bbl [51] [52
 
 ]
-Underfull \hbox (badness 10000) in paragraph at lines 31--35
-[]\OT1/cmr/m/n/12 IrisVR, ``The im-por-tance of frame rates,'' 2017.  Avail-
+Underfull \hbox (badness 2418) in paragraph at lines 31--35
+[]\OT1/cmr/m/n/12 IrisVR, ``The im-por-tance of frame rates,'' 2017.  Avail-abl
+e: [][]$\OT1/cmtt/m/n/12 https :
  []
 
 
 Underfull \hbox (badness 10000) in paragraph at lines 31--35
-\OT1/cmr/m/n/12 able: [][]$\OT1/cmtt/m/n/12 https : / / help . irisvr . com / h
-c / en-[]us / articles /
+\OT1/cmtt/m/n/12 / / help . irisvr . com / hc / en -[] us / articles / 21588454
+7 -[] The -[] Importance -[]
  []
 
-[55] [56]
+[53] [54]
 Underfull \hbox (badness 1735) in paragraph at lines 121--126
 []\OT1/cmr/m/n/12 A. Barrett-Sprot, ``Data ab-strac-tion for low-bandwidth com-
 mu-ni-ca-tion,''
  []
 
-[57]
+[55]
 Underfull \hbox (badness 1365) in paragraph at lines 169--173
-\OT1/cmr/m/n/12 Avail-able: [][]$\OT1/cmtt/m/n/12 http : / / opencv-[]python-[]
-tutroals . readthedocs . io / en / latest /
+\OT1/cmr/m/n/12 Avail-able: [][]$\OT1/cmtt/m/n/12 http : / / opencv -[] python 
+-[] tutroals . readthedocs . io / en / latest /
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 175--179
+Underfull \hbox (badness 4940) in paragraph at lines 175--179
 []\OT1/cmr/m/n/12 V. Jai-mini, ``Hack-erearth.com flood fill tu-to-rial,'' 2017
-.  Avail-
+.  Avail-able:
  []
 
 
 Underfull \hbox (badness 10000) in paragraph at lines 175--179
-\OT1/cmr/m/n/12 able: [][]$\OT1/cmtt/m/n/12 https : / / www . hackerearth . com
- / practice / algorithms / graphs /
+[][]$\OT1/cmtt/m/n/12 https : / / www . hackerearth . com / practice / algorith
+ms / graphs / flood -[]
  []
 
 
@@ -1170,8 +1181,8 @@ e: [][]$\OT1/cmtt/m/n/12 https :
 
 
 Underfull \hbox (badness 10000) in paragraph at lines 194--198
-\OT1/cmtt/m/n/12 / / docs . opencv . org / 3 . 0-[]beta / doc / py _ tutorials 
-/ py _ calib3d / py _
+\OT1/cmtt/m/n/12 / / docs . opencv . org / 3 . 0 -[] beta / doc / py _ tutorial
+s / py _ calib3d / py _
  []
 
 
@@ -1180,12 +1191,24 @@ Underfull \hbox (badness 2020) in paragraph at lines 200--204
 16.  Avail-
  []
 
-[58]
+
+Underfull \hbox (badness 6592) in paragraph at lines 216--220
+[]\OT1/cmr/m/n/12 Microsoft, ``Xbox 360 Con-troller for Win-dows,'' 2018.  Avai
+l-able:
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 216--220
+[][]$\OT1/cmtt/m/n/12 https : / / www . microsoft . com / accessories / en -[] 
+gb / products / gaming / xbox -[]
+ []
+
+[56]
 Missing character: There is no Å in font cmr12!
 Missing character: There is no „ in font cmr12!
 )
 (/home/adam/Documents/VRproj/VRproj-U/Report/Appendices/AbstractionDemos.tex
-[59] [60
+[57] [58
 
 ]
 Appendix A.
@@ -1245,9 +1268,9 @@ File: Figures/starry_nightDA.jpg Graphic file (type jpg)
 Package pdftex.def Info: Figures/starry_nightDA.jpg used on input line 24.
 (pdftex.def)             Requested size: 185.01587pt x 147.61226pt.
 )
-(/home/adam/Documents/VRproj/VRproj-U/Report/Appendices/Contours.tex [61 </home
+(/home/adam/Documents/VRproj/VRproj-U/Report/Appendices/Contours.tex [59 </home
 /adam/Documents/VRproj/VRproj-U/Report/Figures/building.jpg> </home/adam/Docume
-nts/VRproj/VRproj-U/Report/Figures/Final.jpg>] [62 </home/adam/Documents/VRproj
+nts/VRproj/VRproj-U/Report/Figures/Final.jpg>] [60 </home/adam/Documents/VRproj
 /VRproj-U/Report/Figures/lena.jpg> </home/adam/Documents/VRproj/VRproj-U/Report
 /Figures/lenaDA.jpg> </home/adam/Documents/VRproj/VRproj-U/Report/Figures/puffe
 rfish6.jpg> </home/adam/Documents/VRproj/VRproj-U/Report/Figures/pufferfishDA.j
@@ -1268,57 +1291,104 @@ File: Figures/ContourCentres.jpg Graphic file (type jpg)
 <use Figures/ContourCentres.jpg>
 Package pdftex.def Info: Figures/ContourCentres.jpg used on input line 13.
 (pdftex.def)             Requested size: 133.38475pt x 133.3847pt.
-) [63
+) [61
 
 ]
-(/home/adam/Documents/VRproj/VRproj-U/Report/Appendices/Scenes.tex [64 </home/a
+(/home/adam/Documents/VRproj/VRproj-U/Report/Appendices/Scenes.tex [62 </home/a
 dam/Documents/VRproj/VRproj-U/Report/Figures/ContourCentres.jpg>]
 Appendix C.
 ------------------------------------------------------------------------------
  C Images of Algorithm Performance Test Scenes
 ------------------------------------------------------------------------------
-<Figures/simple.jpg, id=918, 642.4pt x 481.8pt>
+<Figures/simple.jpg, id=917, 642.4pt x 481.8pt>
 File: Figures/simple.jpg Graphic file (type jpg)
  <use Figures/simple.jpg>
 Package pdftex.def Info: Figures/simple.jpg used on input line 8.
 (pdftex.def)             Requested size: 258.1687pt x 193.62819pt.
 
-<Figures/medium.jpg, id=919, 642.4pt x 481.8pt>
+<Figures/medium.jpg, id=918, 642.4pt x 481.8pt>
 File: Figures/medium.jpg Graphic file (type jpg)
  <use Figures/medium.jpg>
 Package pdftex.def Info: Figures/medium.jpg used on input line 9.
 (pdftex.def)             Requested size: 258.1687pt x 193.62819pt.
 
-<Figures/complex.jpg, id=920, 642.4pt x 481.8pt>
+<Figures/complex.jpg, id=919, 642.4pt x 481.8pt>
 File: Figures/complex.jpg Graphic file (type jpg)
  <use Figures/complex.jpg>
 Package pdftex.def Info: Figures/complex.jpg used on input line 10.
 (pdftex.def)             Requested size: 258.1687pt x 193.62819pt.
 )
-(/home/adam/Documents/VRproj/VRproj-U/Report/Appendices/Hardware.tex [65
+(/home/adam/Documents/VRproj/VRproj-U/Report/Appendices/Hardware.tex [63
 
 ]
-[66 </home/adam/Documents/VRproj/VRproj-U/Report/Figures/simple.jpg> </home/ada
+[64 </home/adam/Documents/VRproj/VRproj-U/Report/Figures/simple.jpg> </home/ada
 m/Documents/VRproj/VRproj-U/Report/Figures/medium.jpg> </home/adam/Documents/VR
 proj/VRproj-U/Report/Figures/complex.jpg>]
 Appendix D.
 ------------------------------------------------------------------------------
  D Rover Hardware Breakdown
 ------------------------------------------------------------------------------
-) (/home/adam/Documents/VRproj/VRproj-U/Report/Appendices/vector.tex [67
+) (/home/adam/Documents/VRproj/VRproj-U/Report/Appendices/vector.tex [65
 
 ]
-[68
+[66
 
 ]
 Appendix E.
 ------------------------------------------------------------------------------
  E Vectorization
 ------------------------------------------------------------------------------
-) (/home/adam/Documents/VRproj/VRproj-U/Report/Appendices/brief.tex [69]
-[70
+<Figures/butterfly.jpg, id=943, 494.84875pt x 357.335pt>
+File: Figures/butterfly.jpg Graphic file (type jpg)
 
-]
+<use Figures/butterfly.jpg>
+Package pdftex.def Info: Figures/butterfly.jpg used on input line 10.
+(pdftex.def)             Requested size: 172.1081pt x 124.2785pt.
+
+<Figures/butteredge.jpg, id=944, 494.84875pt x 357.335pt>
+File: Figures/butteredge.jpg Graphic file (type jpg)
+
+<use Figures/butteredge.jpg>
+Package pdftex.def Info: Figures/butteredge.jpg used on input line 11.
+(pdftex.def)             Requested size: 172.1081pt x 124.2785pt.
+Package epstopdf Info: Source file: <Figures/butter.eps>
+(epstopdf)                    date: 2018-03-04 17:10:34
+(epstopdf)                    size: 28244 bytes
+(epstopdf)             Output file: <Figures/butter-eps-converted-to.pdf>
+(epstopdf)                    date: 2018-04-27 12:29:36
+(epstopdf)                    size: 10154 bytes
+(epstopdf)             Command: <repstopdf --outfile=Figures/butter-eps-convert
+ed-to.pdf Figures/butter.eps>
+(epstopdf)             \includegraphics on input line 12.
+Package epstopdf Info: Output file is already uptodate.
+
+<Figures/butter-eps-converted-to.pdf, id=945, 164.615pt x 118.4425pt>
+File: Figures/butter-eps-converted-to.pdf Graphic file (type pdf)
+
+<use Figures/butter-eps-converted-to.pdf>
+Package pdftex.def Info: Figures/butter-eps-converted-to.pdf used on input line
+ 12.
+(pdftex.def)             Requested size: 172.1081pt x 123.83693pt.
+ [67 </home/adam/Documents/VRproj/VRproj-U/Report/Figures/butterfly.jpg> </home
+/adam/Documents/VRproj/VRproj-U/Report/Figures/butteredge.jpg> </home/adam/Docu
+ments/VRproj/VRproj-U/Report/Figures/butter-eps-converted-to.pdf>]
+<Figures/buttercan.jpg, id=953, 494.84875pt x 357.335pt>
+File: Figures/buttercan.jpg Graphic file (type jpg)
+
+<use Figures/buttercan.jpg>
+Package pdftex.def Info: Figures/buttercan.jpg used on input line 24.
+(pdftex.def)             Requested size: 172.1081pt x 124.2785pt.
+
+<Figures/butterred.jpg, id=954, 989.6975pt x 714.67pt>
+File: Figures/butterred.jpg Graphic file (type jpg)
+
+<use Figures/butterred.jpg>
+Package pdftex.def Info: Figures/butterred.jpg used on input line 25.
+(pdftex.def)             Requested size: 172.1081pt x 124.27306pt.
+)
+(/home/adam/Documents/VRproj/VRproj-U/Report/Appendices/brief.tex [68 </home/ad
+am/Documents/VRproj/VRproj-U/Report/Figures/buttercan.jpg> </home/adam/Document
+s/VRproj/VRproj-U/Report/Figures/butterred.jpg>]
 Appendix F.
 ------------------------------------------------------------------------------
  F Project Brief
@@ -1326,21 +1396,23 @@ Appendix F.
 Missing character: There is no â in font cmr12!
 Missing character: There is no € in font cmr12!
 Missing character: There is no ™ in font cmr12!
-[71]) (/home/adam/Documents/VRproj/VRproj-U/Report/Appendices/GanttChart.tex
-[72]
+[69
+
+]) (/home/adam/Documents/VRproj/VRproj-U/Report/Appendices/GanttChart.tex
+[70]
 Appendix G.
 ------------------------------------------------------------------------------
  G Gantt Chart
 ------------------------------------------------------------------------------
-[73
+[71
 
-] <Figures/ganttfull.png, id=959, 1530.71875pt x 758.835pt>
+] <Figures/ganttfull.png, id=972, 1530.71875pt x 758.835pt>
 File: Figures/ganttfull.png Graphic file (type png)
 
 <use Figures/ganttfull.png>
 Package pdftex.def Info: Figures/ganttfull.png used on input line 8.
 (pdftex.def)             Requested size: 645.4152pt x 319.95905pt.
- [74
+ [72
 
  </home/adam/Documents/VRproj/VRproj-U/Report/Figures/ganttfull.png>])
 (/home/adam/Documents/VRproj/VRproj-U/Report/Appendices/Costs.tex
@@ -1348,61 +1420,62 @@ Appendix H.
 ------------------------------------------------------------------------------
  H Risk Assessment
 ------------------------------------------------------------------------------
-[75
+[73
 
 
-] <Figures/risk.png, id=969, 1472.50125pt x 832.10875pt>
+] <Figures/risk.png, id=981, 1472.50125pt x 832.10875pt>
 File: Figures/risk.png Graphic file (type png)
 
 <use Figures/risk.png>
 Package pdftex.def Info: Figures/risk.png used on input line 8.
 (pdftex.def)             Requested size: 645.4152pt x 364.73232pt.
- [76 </home/adam/Documents/VRproj/VRproj-U/Report/Figures/risk.png>])
+ [74 </home/adam/Documents/VRproj/VRproj-U/Report/Figures/risk.png>])
 (/home/adam/Documents/VRproj/VRproj-U/Report/Appendices/Archive.tex
 Appendix I.
 ------------------------------------------------------------------------------
  I Design Archive Contents
 ------------------------------------------------------------------------------
 )
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 150.
- [77
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 149.
+ [75
 
 
 
 ]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 150.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 149.
  (/home/adam/Documents/VRproj/VRproj-U/Report/Thesis.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 150.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 150.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 149.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 149.
 Package rerunfilecheck Info: File `Thesis.out' has not changed.
-(rerunfilecheck)             Checksum: C4772B8A5121215DEDC3B813DB74D58D;6940.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 150.
+(rerunfilecheck)             Checksum: 9066DF2E729558D9DED15DC21DF2E3E4;6745.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 149.
  )
 (\end occurred inside a group at level 1)
 
-### simple group (level 1) entered at line 59 ({)
+### simple group (level 1) entered at line 58 ({)
 ### bottom level 
 Here is how much of TeX's memory you used:
- 13823 strings out of 493029
- 201717 string characters out of 6136234
- 266826 words of memory out of 5000000
- 16831 multiletter control sequences out of 15000+600000
- 12172 words of font info for 45 fonts, out of 8000000 for 9000
+ 13862 strings out of 493029
+ 202606 string characters out of 6136234
+ 269197 words of memory out of 5000000
+ 16861 multiletter control sequences out of 15000+600000
+ 12518 words of font info for 46 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 49i,15n,45p,1924b,674s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 49i,15n,45p,1924b,678s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/c
 mbx12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmcsc10
 .pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb><
 /usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/sh
 are/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/tex
 live/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/share/texlive/te
-xmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/share/texlive/texmf-di
-st/fonts/type1/public/amsfonts/cm/cmtt12.pfb>
-Output written on /home/adam/Documents/VRproj/VRproj-U/Report/Thesis.pdf (87 pa
-ges, 16183449 bytes).
+xmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/share/texlive/texmf-di
+st/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/share/texlive/texmf-dist/fon
+ts/type1/public/amsfonts/cm/cmtt12.pfb>
+Output written on /home/adam/Documents/VRproj/VRproj-U/Report/Thesis.pdf (85 pa
+ges, 16917960 bytes).
 PDF statistics:
- 1059 PDF objects out of 1200 (max. 8388607)
- 876 compressed objects within 9 object streams
- 223 named destinations out of 1000 (max. 500000)
- 682 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 1075 PDF objects out of 1200 (max. 8388607)
+ 888 compressed objects within 9 object streams
+ 224 named destinations out of 1000 (max. 500000)
+ 704 words of extra memory for PDF output out of 10000 (max. 10000000)
 

@@ -2,3 +2,24 @@
 \lhead{\emph{Rover Hardware Breakdown}}
 \label{appendix:hardware}
 
+\begin{table}[H]
+\centering
+\caption{List of all the components that make up the rover. Items listed as UoS were supplied by the University of Southampton.}
+\label{table:hardware}
+\resizebox{\textwidth}{!}{
+\begin{tabular}{|l|l|l|l|}
+\hline
+Component              & Description                       & Quantity & Source           \\ \hline
+Raspberry Pi 3         & Main computer                     & 1        & UoS              \\
+ATmega644P             & Generates PWM for stepper drivers & 1        & UoS				 \\
+Pololu DRV8825         & Stepper motor drivers             & 2        & HobbyTronics     \\
+RS 535-0372            & Y-axis stepper motor              & 1        & Previous Project \cite{gimble} \\
+SY35ST26-0284A         & X-axis stepper motor              & 1        & Previous Project \cite{gimble} \\
+PlayStation 3 Eye      & Cameras                           & 2        & Amazon           \\
+MAX14870               & DC motor drivers                  & 2        & HobbyTronics     \\
+Lynxmotion GHM-04      & Drive motors                      & 4        & UoS				 \\
+GEP-XT60-PDB           & Power distribution board          & 1        & Hobby King       \\
+Turnigy 2650mAh 4S 20C & Lipo Batteries                    & 2        & Hobby King       \\
+IC 108TTA050M 		   & Decoupling capacitors             & 2        & UoS				 \\ \hline
+\end{tabular}}
+\end{table}

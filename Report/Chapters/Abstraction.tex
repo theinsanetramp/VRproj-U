@@ -2,17 +2,17 @@
 \lhead{\emph{Abstraction Algorithm Development}}
 \label{chapter:abstract}
 
-In Section \ref{Subsection:abstract} we defined data abstraction as the reduction of an image down to only its most essential elements. What these essential elements are depends on the application, leading to a large range of possible methods and results. In this implementation of data abstraction the aim is to be able to navigate a telerobot from the resultant images, therefore the most important elements of each image are the size and shape of the objects in it. It is possible to convey the rough shape of an object by presenting its outline, therefore leading to edge detection being chosen as the first step of the algorithm. Identification of objects, while possible using edges alone, is significantly easier when colour is also provided. Most of the colours in an image, however, do not aid in object identification; one colour (preferably the average colour) for each object in the scene is sufficient. This leads to the algorithm presented in Figure \ref{fig:process}, with examples of the abstractions it produces presented in Appendix \ref{Appendix:demo}.
+We defined data abstraction as the reduction of an image down to only its most essential elements (Section \ref{Subsection:abstract}). What these essential elements are depends on the application, leading to a large range of possible methods and results. In this implementation of data abstraction the aim is to be able to navigate a telerobot from the resultant images, therefore the most important elements of each image are the size and shape of the objects in it. It is possible to convey the rough shape of an object by presenting its outline, therefore leading to edge detection being chosen as the first step of the algorithm. Identification of objects, while possible using edges alone, is significantly easier when colour is also provided. Most of the colours in an image, however, do not aid in object identification; one colour (preferably the average colour) for each object in the scene is sufficient. This leads to the algorithm presented in Figure \ref{fig:process}, with examples of the abstractions it produces presented in Appendix \ref{Appendix:demo}.
 
 \begin{figure}[H]
     \begin{center}
       \includegraphics[width=0.75\textwidth]{Figures/Abstraction.jpg}
-      \caption[Data Abstraction Algorithm Process]{Data Abstraction Algorithm Process. The left half is explained in the "Edge Detection Process" section and the right half in the "Colour Averaging" section, both located below.}
+      \caption[Data Abstraction Algorithm Process]{Data Abstraction Algorithm Process. The left half is explained in the \emph{Edge Detection Process} section and the right half in the \emph{Colour Averaging} section, both located below.}
       \label{fig:process}
     \end{center}
 \end{figure}
 
-This chapter is presented in the context of the entire process occurring on a single computer; when incorporated into the final system, the whole process is undertaken on the rover apart from the "Fill dilated image with average colour" block, which is implemented on the server in its own loop through every sobol point ("Coloured Abstraction Construction" on Figure \ref{fig:system}). It is also worth noting that this chapter is concerned with the algorithm's ability to produce recognisable abstractions under reasonable resource constraints, and not the file sizes of said abstractions. The file sizes it is capable of producing will be covered as part of the system testing and evaluation in Chapter \ref{chapter:eval}.
+This chapter is presented in the context of the entire process occurring on a single computer; when incorporated into the final system, the whole process is undertaken on the rover apart from the \emph{Fill dilated image with average colour} block, which is implemented on the server in its own loop through every sobol point (\emph{Coloured Abstraction Construction} on Figure \ref{fig:system}). It is also worth noting that this chapter is concerned with the algorithm's ability to produce recognisable abstractions under reasonable resource constraints, and not the file sizes of said abstractions. The file sizes it is capable of producing will be covered as part of the system testing and evaluation in Chapter \ref{chapter:eval}.
 
 \section{Edge Detection Process}
 
@@ -32,7 +32,7 @@ A simple solution to the performance issues caused by complex images would be to
 
 \begin{figure}[H]
     \begin{center}
-      \includegraphics[width=0.9\textwidth]{Figures/FPSComp.png}
+      \includegraphics[width=0.7\textwidth]{Figures/FPSComp.png}
       \caption[Performance Comparison of Seed Point Methods]{Performance Comparison of Seed Point Methods. It can be clearly seen that as the complexity of the scene increases, the brute force method results in unacceptable drops in frame rate, whereas the sobol method maintains a much higher degree of consistency. Images of the scenes used in this test can be found in Appendix \ref{Appendix:scenes}.}
       \label{fig:fpscomp}
     \end{center}

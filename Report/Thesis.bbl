@@ -1,14 +1,14 @@
 \begin{thebibliography}{10}
 
-\bibitem{presence}
-K.~M. Lee, ``Presence, explicated,'' {\em Communication Theory}, vol.~14,
-  no.~1, pp.~27--50, 2004.
-
 \bibitem{alexander2005gaming}
 A.~L. Alexander, T.~Bruny{\'e}, J.~Sidman, and S.~A. Weil, ``From gaming to
   training: A review of studies on fidelity, immersion, presence, and buy-in
   and their effects on transfer in pc-based simulations and games,'' {\em
   DARWARS Training Impact Group}, vol.~5, pp.~1--14, 2005.
+
+\bibitem{presence}
+K.~M. Lee, ``Presence, explicated,'' {\em Communication Theory}, vol.~14,
+  no.~1, pp.~27--50, 2004.
 
 \bibitem{loomis2016presence}
 J.~M. Loomis, ``Presence in virtual reality and everyday life: Immersion within
@@ -209,13 +209,14 @@ J.~J. L.Alvarez, R.Deriche, ``Dense disparity map estimation respecting image
   \url{http://serdis.dis.ulpgc.es/~lalvarez/research/demos/StereoFlow/index.html}.
   [Accessed: \today].
 
-\bibitem{fall2011tcp}
-K.~R. Fall and W.~R. Stevens, {\em TCP/IP illustrated, volume 1: The
-  protocols}.
-\newblock addison-Wesley, 2011.
-
 \bibitem{postel1980user}
 J.~Postel, ``User datagram protocol,'' tech. rep., 1980.
+
+\bibitem{360pad}
+{Microsoft}, ``{Xbox 360 Controller for Windows},'' 2018.
+\newblock Available:
+  \url{https://www.microsoft.com/accessories/en-gb/products/gaming/xbox-360-controller-for-windows/52a-00004}.
+  [Accessed: \today].
 
 \bibitem{opencvffilldemo}
 {OpenCV Documentation}, ``Opencv: ffilldemo.cpp,'' 2017.
@@ -259,5 +260,9 @@ K.~Lesiński, ``{libimagequant-Image Quantization Library},'' 2017.
 \bibitem{geiger2010efficient}
 A.~Geiger, M.~Roser, and R.~Urtasun, ``Efficient large-scale stereo matching,''
   in {\em Asian conference on computer vision}, pp.~25--38, Springer, 2010.
+
+\bibitem{potrace}
+P.~Selinger, ``{Potrace},'' 2017.
+\newblock Available: \url{http://potrace.sourceforge.net/}. [Accessed: \today].
 
 \end{thebibliography}

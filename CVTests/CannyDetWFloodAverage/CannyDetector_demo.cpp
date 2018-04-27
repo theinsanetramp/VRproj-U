@@ -11,7 +11,7 @@ using namespace cv;
 using namespace std;
 
 #define SOBOL
-//#define PICS
+#define PICS
 
 Mat src, detected_edges;
 Mat dst, flood_mask;

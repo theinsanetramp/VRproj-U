@@ -16,7 +16,7 @@ The term Virtual Reality (VR) refers to the generation of a 3D environment that 
     \end{center}
 \end{figure}
 
-HMD based systems display different images for each eye to provide the user with a sense of depth within the 3D environment, making the headset effectively operate like a pair of binoculars into the virtual world. The headset is also tracked in 3D space, and this movement translated into the 3D environment with very low latency. These features, among others, are all implemented with the aim of providing the user with presence within the virtual space that is comparable to observing the real world.
+HMD based systems display different images for each eye to provide the user with a sense of depth within the 3D environment, making the headset effectively operate like a pair of binoculars into the virtual world. The headset is also tracked in 3D space, and this movement translated into the 3D environment with low latency. These features, among others, are all implemented with the aim of providing the user with presence within the virtual space that is comparable to observing the real world.
 
 Due to its availability at the University of Southampton and in my own home, the HTC Vive was used as the VR device in the development and implementation of the teleoperations system discussed in this report. 
 
@@ -27,7 +27,7 @@ A telerobot is a robot controlled from a distance by a human operator \cite{NAP4
 \subsection{VR in Telerobotics}
 \label{subsection:VRTele}
 
-The use of HMDs in teleoperations is not a new concept; NASA's Robonaut 2 was sent to the International Space Station in 2011 and can be controlled through a headset that displays the output of the robot's head cameras \cite{Robonaut}, and flying drones by First Person View (FPV), an analogue video feed transmitted over radio to a HMD, has become very popular in recent years \cite{FPV}. However, these systems are either incredibly expensive (Robonaut 2 is worth millions of dollars) or very limited (FPV systems are only capable of sending one low quality video stream over a short distance), and all suffer from the motion sickness issues discussed in Chapter \ref{chapter:intro}. While stereo camera FPV systems have been developed, so the user has depth perception and better presence in the drone's view, the motion sickness problem remains the major drawback of HMD based teleoperations systems \cite{2FPV}.
+The use of HMDs in teleoperations is not a new concept; NASA's Robonaut 2 was sent to the International Space Station in 2011 and can be controlled through a headset that displays the output of the robot's head cameras \cite{Robonaut}, and flying drones by First Person View (FPV), an analogue video feed transmitted over radio to a HMD, has become popular in recent years \cite{FPV}. However, these systems are either incredibly expensive (Robonaut 2 is worth millions of dollars) or very limited (FPV systems are only capable of sending one low quality video stream over a short distance), and all suffer from the motion sickness issues discussed in Chapter \ref{chapter:intro}. While stereo camera FPV systems have been developed, so the user has depth perception and better presence in the drone's view, the motion sickness problem remains the major drawback of HMD based teleoperations systems \cite{2FPV}.
 
 As previously established, motion sickness in VR is mitigated through high frame rates and low latency. However, typically VR based teleoperations systems are direct VR systems, so they display the video feeds provided by the telerobot's cameras directly in the headset. This entirely ties the frame rate and latency of the headset to the capabilities of the video transmission system, and only the most expensive and complicated systems will meet the strict requirements for comfortable VR and the spacial presence desired.
 
@@ -115,13 +115,7 @@ The main component in the human brain's perception of 3D is the identification o
 \begin{figure}[H]
     \begin{center}
       \includegraphics[width=0.8\textwidth]{Figures/depthmap.png}
-      \caption[Depth Mapping Example]{Depth Mapping Example. A stereo pair of images, with their exact disparity map bottom left and a disparity map produced by a dense disparity estimation algorithm bottom right- reproduced from \cite{deptheg}.}
+      \caption[Depth Mapping Example]{Depth Mapping Example. A stereo pair of images, with their exact disparity map bottom left and a disparity map produced by a dense disparity estimation algorithm bottom right, reproduced from \cite{deptheg}.}
       \label{fig:depthmap}
     \end{center}
 \end{figure}
-
-\section{Wireless Communication}
-
-The different methods of wireless communication available for a telerobotics system have varying requirements and benefits. For instance, the analogue video transmission found in FPV drone flying (as mentioned in Section \ref{subsection:VRTele}) is low latency at the expensive of video quality, range, and communication outside of line of sight. This is acceptable for flying a drone in an open field, but would not be adequate for controlling a telerobot from a VR headset in a completely different room as is the aim of this project. A better choice of communication method would be over Wi-Fi, as it allows for communication across significantly longer distances and outside of line of sight. The trade off is an acceptable increase in latency.
-
-The two most common Wi-Fi communication protocols are TCP (Transmission Control Protocol) and UDP (User Datagram Protocol). TCP is a connection-oriented protocol, so uses handshaking to guarantee reliable and ordered transfer of data \cite{fall2011tcp}. The trade off to this is that the handshaking slows down the process of communication. UDP does not include this handshaking, so there is no guarantee that the packets will arrive, however they are sent with minimal overheads \cite{postel1980user}. UDP is therefore the optimal choice for a system where throughput is of higher priority then packet reliability and ordering, such as the system presented by this report- images not arriving in the correct order and the ocassional loss of packets would not have a significant effect on the functionality of the system in comparison to the usability improvement a reduction in latency provides.

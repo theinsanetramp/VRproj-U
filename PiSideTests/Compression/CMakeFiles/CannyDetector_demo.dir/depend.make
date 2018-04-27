@@ -39,6 +39,12 @@ CMakeFiles/CannyDetector_demo.dir/CannyDetector_demo.cpp.o: /usr/local/include/o
 CMakeFiles/CannyDetector_demo.dir/CannyDetector_demo.cpp.o: /usr/local/include/opencv2/core/types_c.h
 CMakeFiles/CannyDetector_demo.dir/CannyDetector_demo.cpp.o: /usr/local/include/opencv2/core/utility.hpp
 CMakeFiles/CannyDetector_demo.dir/CannyDetector_demo.cpp.o: /usr/local/include/opencv2/core/version.hpp
+CMakeFiles/CannyDetector_demo.dir/CannyDetector_demo.cpp.o: /usr/local/include/opencv2/core/vsx_utils.hpp
+CMakeFiles/CannyDetector_demo.dir/CannyDetector_demo.cpp.o: /usr/local/include/opencv2/dnn.hpp
+CMakeFiles/CannyDetector_demo.dir/CannyDetector_demo.cpp.o: /usr/local/include/opencv2/dnn/dict.hpp
+CMakeFiles/CannyDetector_demo.dir/CannyDetector_demo.cpp.o: /usr/local/include/opencv2/dnn/dnn.hpp
+CMakeFiles/CannyDetector_demo.dir/CannyDetector_demo.cpp.o: /usr/local/include/opencv2/dnn/dnn.inl.hpp
+CMakeFiles/CannyDetector_demo.dir/CannyDetector_demo.cpp.o: /usr/local/include/opencv2/dnn/layer.hpp
 CMakeFiles/CannyDetector_demo.dir/CannyDetector_demo.cpp.o: /usr/local/include/opencv2/features2d.hpp
 CMakeFiles/CannyDetector_demo.dir/CannyDetector_demo.cpp.o: /usr/local/include/opencv2/flann.hpp
 CMakeFiles/CannyDetector_demo.dir/CannyDetector_demo.cpp.o: /usr/local/include/opencv2/flann/all_indices.h
@@ -82,6 +88,7 @@ CMakeFiles/CannyDetector_demo.dir/CannyDetector_demo.cpp.o: /usr/local/include/o
 CMakeFiles/CannyDetector_demo.dir/CannyDetector_demo.cpp.o: /usr/local/include/opencv2/imgproc/imgproc_c.h
 CMakeFiles/CannyDetector_demo.dir/CannyDetector_demo.cpp.o: /usr/local/include/opencv2/imgproc/types_c.h
 CMakeFiles/CannyDetector_demo.dir/CannyDetector_demo.cpp.o: /usr/local/include/opencv2/ml.hpp
+CMakeFiles/CannyDetector_demo.dir/CannyDetector_demo.cpp.o: /usr/local/include/opencv2/ml/ml.inl.hpp
 CMakeFiles/CannyDetector_demo.dir/CannyDetector_demo.cpp.o: /usr/local/include/opencv2/objdetect.hpp
 CMakeFiles/CannyDetector_demo.dir/CannyDetector_demo.cpp.o: /usr/local/include/opencv2/objdetect/detection_based_tracker.hpp
 CMakeFiles/CannyDetector_demo.dir/CannyDetector_demo.cpp.o: /usr/local/include/opencv2/objdetect/objdetect_c.h
@@ -134,6 +141,7 @@ CMakeFiles/CannyDetector_demo.dir/CannyDetector_demo.cpp.o: /usr/local/include/o
 CMakeFiles/CannyDetector_demo.dir/CannyDetector_demo.cpp.o: /usr/local/include/opencv2/viz/viz3d.hpp
 CMakeFiles/CannyDetector_demo.dir/CannyDetector_demo.cpp.o: /usr/local/include/opencv2/viz/vizcore.hpp
 CMakeFiles/CannyDetector_demo.dir/CannyDetector_demo.cpp.o: /usr/local/include/opencv2/viz/widgets.hpp
+CMakeFiles/CannyDetector_demo.dir/CannyDetector_demo.cpp.o: /usr/local/include/opencv2/xfeatures2d/cuda.hpp
 
 CMakeFiles/CannyDetector_demo.dir/sobol.cpp.o: sobol.cpp
 CMakeFiles/CannyDetector_demo.dir/sobol.cpp.o: sobol.h

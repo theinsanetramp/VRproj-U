@@ -40,6 +40,12 @@ CMakeFiles/CannyDetector_demo.dir/CannyDetector_demo.cpp.o
  /usr/local/include/opencv2/core/types_c.h
  /usr/local/include/opencv2/core/utility.hpp
  /usr/local/include/opencv2/core/version.hpp
+ /usr/local/include/opencv2/core/vsx_utils.hpp
+ /usr/local/include/opencv2/dnn.hpp
+ /usr/local/include/opencv2/dnn/dict.hpp
+ /usr/local/include/opencv2/dnn/dnn.hpp
+ /usr/local/include/opencv2/dnn/dnn.inl.hpp
+ /usr/local/include/opencv2/dnn/layer.hpp
  /usr/local/include/opencv2/features2d.hpp
  /usr/local/include/opencv2/flann.hpp
  /usr/local/include/opencv2/flann/all_indices.h
@@ -83,6 +89,7 @@ CMakeFiles/CannyDetector_demo.dir/CannyDetector_demo.cpp.o
  /usr/local/include/opencv2/imgproc/imgproc_c.h
  /usr/local/include/opencv2/imgproc/types_c.h
  /usr/local/include/opencv2/ml.hpp
+ /usr/local/include/opencv2/ml/ml.inl.hpp
  /usr/local/include/opencv2/objdetect.hpp
  /usr/local/include/opencv2/objdetect/detection_based_tracker.hpp
  /usr/local/include/opencv2/objdetect/objdetect_c.h
@@ -135,6 +142,7 @@ CMakeFiles/CannyDetector_demo.dir/CannyDetector_demo.cpp.o
  /usr/local/include/opencv2/viz/viz3d.hpp
  /usr/local/include/opencv2/viz/vizcore.hpp
  /usr/local/include/opencv2/viz/widgets.hpp
+ /usr/local/include/opencv2/xfeatures2d/cuda.hpp
 CMakeFiles/CannyDetector_demo.dir/sobol.cpp.o
  /home/adam/Documents/VRproj/VRproj-U/PiSideTests/Compression/sobol.cpp
  /home/adam/Documents/VRproj/VRproj-U/PiSideTests/Compression/sobol.h

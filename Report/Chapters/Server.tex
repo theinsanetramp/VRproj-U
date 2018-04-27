@@ -2,12 +2,12 @@
 \lhead{\emph{Server-Side Implementation}}
 \label{chapter:server}
 
-The purpose of the server is to receive image data from the rover, produce a 3D environment from this data, and feed back control inputs from the user. This is all done within the framework of the 3D game engine Unreal Engine 4 \cite{unreal}. Unreal 4 was chosen because it supports almost any VR headset on the market, is simple to integrate with OpenCV, and is free to use. The structure of any Unreal program is very complicated, as the engine does a lot in the background across many threads. The implementation of this project within the Unreal environment (Figure \ref{fig:unreal}) consists of a receive thread that receives images, processes them, then updates the 3D model, and a portion of the game thread (the Unreal thread that handles game logic) that handles and sends user input 20 times a second. The fact that the 3D model is updated on a thread separate to the rendering of the images that are sent to the headset is what allows the headset to run at an unrelated and significantly faster frame rate than the model is being updated at.
+The purpose of the server is to receive image data from the rover, produce a 3D environment from this data, and feed control inputs from the user back to the rover. This is all done within the framework of the 3D game engine Unreal Engine 4 \cite{unreal}. Unreal 4 was chosen because it supports almost any VR headset on the market, is simple to integrate with OpenCV, and is free to use. The structure of any Unreal program is complex, as the engine utilises multithreading heavily to implement complicated lighting and rendering pipelines. The implementation of this project within the Unreal environment (cf. Figure \ref{fig:unreal}) consists of a receive thread that receives images, processes them, then updates the 3D model, and a modification to the game thread (the Unreal thread that handles game logic, such as physics and collisions) that handles and sends user input to the rover 20 times a second. The fact that the 3D model is updated on a thread separate to the rendering of the images that are sent to the headset is what allows the headset to run at an unrelated and significantly faster frame rate than the model is being updated at.
 
 \begin{figure}[H]
     \begin{center}
-      \includegraphics[width=0.75\textwidth]{Figures/Unreal.png}
-      \caption[Server Program Structure]{Server Program Structure. Red blocks are standard Unreal functionality, yellow blocks are communications related, blue blocks are OpenCV based, and the purple block is custom integration with the Unreal environment. The blocks within the game thread run 20 times a second. When these blocks are not running, the game thread is handling other game logic within the environment.}
+      \includegraphics[width=0.7\textwidth]{Figures/Unreal.png}
+      \caption[Server Program Structure]{Server Program Structure. Red blocks are standard Unreal functionality, yellow blocks are communications related, blue blocks are OpenCV based, and the purple block is custom integration with the Unreal environment. The blocks within the game thread run 20 times a second.}
       \label{fig:unreal}
     \end{center}
 \end{figure}
@@ -25,7 +25,7 @@ For a depth mapping algorithm to function accurately, the 2 images it receives m
         \includegraphics[width=0.45\textwidth]{Figures/postrectL.jpg} &
         \includegraphics[width=0.45\textwidth]{Figures/postrectR.jpg}
     \end{tabular}
-    \caption[Demonstration of Stereo Image Rectification]{Demonstration of Stereo Image Rectification. The original left and right images are shown top left and top right, with their rectified counterparts bottom left and bottom right. It can be seen that the features of the bottom images are better matched vertically than in the original images.}
+    \caption[Demonstration of Stereo Image Rectification]{Demonstration of Stereo Image Rectification. The original left and right images are shown top left and top right, with their rectified counterparts bottom left and bottom right. It can be seen that the features of the bottom images are better matched in the Y-axis than in the original images.}
     \label{fig:rect}
     \end{center}
 \end{figure}
@@ -34,7 +34,7 @@ When selecting a depth mapping algorithm, the major factors to consider were spe
 
 \begin{figure}[H]
     \begin{center}
-      \includegraphics[width=0.8\textwidth]{Figures/depthspeed.png}
+      \includegraphics[width=0.7\textwidth]{Figures/depthspeed.png}
       \caption[Comparison of Depth Mapping Algorithm Speed]{Comparison of Depth Mapping Algorithm Speed. The test images used to produce this data were the rectified images presented in Figure \ref{fig:rect}. These same images were used in the production of all further figures in this section.}
       \label{fig:speed}
     \end{center}
@@ -49,12 +49,12 @@ When tested on images received from the rover, StereoBM and StereoSGBM produced 
         \includegraphics[width=0.45\textwidth]{Figures/sgbmout.jpg} \\
         \multicolumn{2}{c}{\includegraphics[width=0.45\textwidth]{Figures/libelasout.jpg}}
     \end{tabular}
-    \caption[Comparison of Raw Depth Mapping Algorithm Output]{Comparison of Raw Depth Mapping Algorithm Output. The StereoBM output (top left) is very noisy, however correct depth can be seen on the box in the bottom right and on the table in the top left (when compared to the input images in Figure \ref{fig:rect}). The StereoSGBM output (top right) shows similar results, though with a significant reduction in noise. The Libelas output (bottom) shows very little- it does not seem to work with edge detected images whatsoever.}
+    \caption[Comparison of Raw Depth Mapping Algorithm Output]{Comparison of Raw Depth Mapping Algorithm Output. The StereoBM output (top left) is very noisy, however correct depth can be seen on the box in the bottom right and on the table in the top left (when compared to the input images in Figure \ref{fig:rect}). The StereoSGBM output (top right) shows similar results, though with a significant reduction in noise. The Libelas output (bottom) shows very little---it does not seem to work with edge detected images.}
     \label{fig:MappingComp}
     \end{center}
 \end{figure}
 
-To be able to compare StereoBM and StereoSGBM further, the noise their outputs contain must be filtered out. This can be achieved by applying Weighted Least Squares filtering to the depth map (Figure \ref{fig:filtered}). This is effective in producing consistent depth across the objects in the map. Unfortunately, regardless of the angle to the camera that an object sits at, the filtering will often assign it a single depth across the whole surface. This results in surfaces like the floor or the ceiling being inaccurately represented as a vertical plane very close to the camera, however most other objects are not significantly affected.
+To be able to compare StereoBM and StereoSGBM further, the noise their outputs contain must be filtered out. This can be achieved by applying Weighted Least Squares filtering to the depth map (Figure \ref{fig:filtered}). This is effective in producing consistent depth across the objects in the map. Unfortunately, regardless of the angle to the camera that an object sits at, the filtering will often assign it a single depth across the whole surface. This results in surfaces like the floor or the ceiling being inaccurately represented as a vertical plane close to the camera, however most other objects are not significantly affected.
 
 
 \begin{figure}[H]
@@ -63,24 +63,24 @@ To be able to compare StereoBM and StereoSGBM further, the noise their outputs c
         \includegraphics[width=0.45\textwidth]{Figures/BMfiltered.jpg} &
         \includegraphics[width=0.45\textwidth]{Figures/sgbmfilt.jpg}
       \end{tabular}
-      \caption[Filtered StereoBM and StereoSGBM Outputs]{Filtered StereoBM and StereoSGBM Outputs. The StereoBM output (left) has been improved significantly by the filtering, with mostly consistent and correct depth across all objects other than the floor. StereoSGBM (right) has been similarly cleaned up, however has not provided depth for the floor or right wall whatsoever. The single section of floor it attempted (under the table in the bottom left) is the same incorrect depth as produced by StereoBM.}
+      \caption[Filtered StereoBM and StereoSGBM Outputs]{Filtered StereoBM and StereoSGBM Outputs. The StereoBM output (left) has been improved significantly by the filtering, with mostly consistent and correct depth across all objects other than the floor. StereoSGBM (right) has been similarly cleaned up, however has not provided depth for the floor or right wall. The single section of floor it attempted (under the table in the bottom left) is the same incorrect depth as produced by StereoBM.}
       \label{fig:filtered}
     \end{center}
 \end{figure}
 
-When comparing the filtered maps, there are very few differences. Both are reasonable representations of the original scene, and when one makes a mistake in the depth of an object, the other will probably make the exact same mistake. The only major difference is that StereoBM will consider the floor incorrectly as a vertical plane close to the camera, whereas StereoSGBM will incorrectly not record a depth for it at all. This lack of a significant gain in quality when using the noticeably slower StereoSGBM led to StereoBM being chosen as the algorithm used in the final system.
+When comparing the filtered maps, there are few differences. Both are reasonable representations of the original scene, and when one makes a mistake in the depth of an object, the other will probably make the exact same mistake. The only major difference is that StereoBM will consider the floor incorrectly as a vertical plane close to the camera, whereas StereoSGBM will incorrectly not record a depth for it at all. This lack of a significant gain in quality when using the noticeably slower StereoSGBM led to StereoBM being chosen as the algorithm used in the final system.
 
 While the individual depth maps (post filtering) are reasonable approximations of the space being viewed, the depth of a single object with be inconsistent between frames, due to inconsistencies between the edge detected frames they were produced from. When viewed as a video feed, most objects will oscillate slightly, with greater oscillations in objects that are more ambiguous or less consistent in the edge detected frames. This issue is mitigated in the system by taking a running average, the weighting of the frames in the average reducing with the age of the frame. This increases consistency substantially at the expense of a minor reduction in responsiveness.
 
-The construction of the coloured abstraction is as addressed in Chapter \ref{chapter:abstract}. The seed point/average colour pairs are each used to flood fill "Edge Detected Img 1" from Figure \ref{fig:system}, producing the full abstraction that is to be applied as a texture to the 3D model generated from the depth maps.
+The construction of the coloured abstraction is as addressed in Chapter \ref{chapter:abstract}. The seed point/average colour pairs are each used to flood fill \emph{Edge Detected Img 1} from Figure \ref{fig:system}, producing the full abstraction that is to be applied as a texture to the 3D model generated from the depth maps.
 
 \section{3D Model Generation}
 
-To generate a 3D model dynamically based on image data, an Unreal Engine 4 class that allows for mesh generation at run-time is required. Although more intelligent options are available as add-ons, the core Unreal 4 class "procedural mesh" was selected due to its simplicity and compatibility with OpenCV. The class is used as a basis for the generation of a grid based mesh (Figure \ref{fig:mesh}).
+To generate a 3D model dynamically based on image data, an Unreal Engine 4 class that allows for mesh generation at run-time is required. Although more intelligent options are available as add-ons, the core Unreal 4 class \emph{Procedural Mesh} was selected due to its simplicity and compatibility with OpenCV. The class is used as a basis for the generation of a grid based mesh (Figure \ref{fig:mesh}).
 
 \begin{figure}[H]
     \begin{center}
-      \includegraphics[width=0.6\textwidth]{Figures/mesh.png}
+      \includegraphics[width=0.4\textwidth]{Figures/mesh.pdf}
       \caption[Mesh Grid Segment]{Mesh Grid Segment. Each corner of the grid is a vertex, with triangles formed from the vertices. The grid is built in the X-Y plane, leaving the Z component of each vertex available to be easily assigned depth.}
       \label{fig:mesh}
     \end{center}
@@ -90,8 +90,9 @@ Each pixel in the depth map is mapped to a vertex in the mesh, resulting in a gr
 
 \begin{figure}[H]
     \begin{center}
+      \includegraphics[width=0.5\textwidth]{Figures/outlinePic1.jpg}
       \includegraphics[width=0.9\textwidth]{Figures/OutlinePic2.png}
-      \caption[Final Textured 3D Model]{Final Textured 3D Model.}
+      \caption[Final Textured 3D Model]{Final Textured 3D Model. The blue ellipse is a UI element that indicates a location that the user can jump to within the environment---not part of the 3D model.}
       \label{fig:3DModel}
     \end{center}
 \end{figure}

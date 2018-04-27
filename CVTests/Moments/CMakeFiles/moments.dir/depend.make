@@ -35,6 +35,12 @@ CMakeFiles/moments.dir/moments.cpp.o: /usr/local/include/opencv2/core/types.hpp
 CMakeFiles/moments.dir/moments.cpp.o: /usr/local/include/opencv2/core/types_c.h
 CMakeFiles/moments.dir/moments.cpp.o: /usr/local/include/opencv2/core/utility.hpp
 CMakeFiles/moments.dir/moments.cpp.o: /usr/local/include/opencv2/core/version.hpp
+CMakeFiles/moments.dir/moments.cpp.o: /usr/local/include/opencv2/core/vsx_utils.hpp
+CMakeFiles/moments.dir/moments.cpp.o: /usr/local/include/opencv2/dnn.hpp
+CMakeFiles/moments.dir/moments.cpp.o: /usr/local/include/opencv2/dnn/dict.hpp
+CMakeFiles/moments.dir/moments.cpp.o: /usr/local/include/opencv2/dnn/dnn.hpp
+CMakeFiles/moments.dir/moments.cpp.o: /usr/local/include/opencv2/dnn/dnn.inl.hpp
+CMakeFiles/moments.dir/moments.cpp.o: /usr/local/include/opencv2/dnn/layer.hpp
 CMakeFiles/moments.dir/moments.cpp.o: /usr/local/include/opencv2/features2d.hpp
 CMakeFiles/moments.dir/moments.cpp.o: /usr/local/include/opencv2/flann.hpp
 CMakeFiles/moments.dir/moments.cpp.o: /usr/local/include/opencv2/flann/all_indices.h
@@ -78,6 +84,7 @@ CMakeFiles/moments.dir/moments.cpp.o: /usr/local/include/opencv2/imgproc/imgproc
 CMakeFiles/moments.dir/moments.cpp.o: /usr/local/include/opencv2/imgproc/imgproc_c.h
 CMakeFiles/moments.dir/moments.cpp.o: /usr/local/include/opencv2/imgproc/types_c.h
 CMakeFiles/moments.dir/moments.cpp.o: /usr/local/include/opencv2/ml.hpp
+CMakeFiles/moments.dir/moments.cpp.o: /usr/local/include/opencv2/ml/ml.inl.hpp
 CMakeFiles/moments.dir/moments.cpp.o: /usr/local/include/opencv2/objdetect.hpp
 CMakeFiles/moments.dir/moments.cpp.o: /usr/local/include/opencv2/objdetect/detection_based_tracker.hpp
 CMakeFiles/moments.dir/moments.cpp.o: /usr/local/include/opencv2/objdetect/objdetect_c.h
@@ -130,4 +137,5 @@ CMakeFiles/moments.dir/moments.cpp.o: /usr/local/include/opencv2/viz/types.hpp
 CMakeFiles/moments.dir/moments.cpp.o: /usr/local/include/opencv2/viz/viz3d.hpp
 CMakeFiles/moments.dir/moments.cpp.o: /usr/local/include/opencv2/viz/vizcore.hpp
 CMakeFiles/moments.dir/moments.cpp.o: /usr/local/include/opencv2/viz/widgets.hpp
+CMakeFiles/moments.dir/moments.cpp.o: /usr/local/include/opencv2/xfeatures2d/cuda.hpp
 

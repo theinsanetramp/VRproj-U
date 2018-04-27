@@ -1,13 +1,12 @@
 %% ----------------------------------------------------------------
 %% Thesis.tex -- MAIN FILE (the one that you compile with LaTeX) MAIN REPORT
 %% ---------------------------------------------------------------- 
-
+\RequirePackage[hyphens]{url}
 % Set up the document
 \documentclass[a4paper, 12pt, twoside]{Thesis}  % Use the "Thesis" style, based on the ECS Thesis style by Steve Gunn
 \graphicspath{Figures/}  % Location of the graphics files (set up for graphics to be in PDF format)
 %\usepackage{url}
-%\PassOptionsToPackage{hyphens}{url}
-\usepackage{hyperref} 
+\usepackage{hyperref}
 % Include any extra LaTeX packages required
 \usepackage[square, numbers, comma, sort&compress]{natbib}  % Use the "Natbib" style for the references in the Bibliography\cite{Reference2}
 \usepackage{verbatim}  % Needed for the "comment" environment to make LaTeX comments
@@ -81,7 +80,7 @@ The application of Virtual Reality (VR) to telerobotics is a current area of stu
 \acknowledgements{
 %\addtocontents{toc}{\vspace{1em}}  % Add a gap in the Contents, for aesthetics
 
-I would like to thank Klaus-Peter Zauner for his incredible help and support. I would also like to thank Tom Darlison and Lawrence Gray for their help and for being expert "rubber ducks". Finally, I would like to thank the users of the Building 16 labs for treating my rover driving around with the utmost patience.
+I would like to thank Klaus-Peter Zauner for his incredible help and support. I would also like to thank Tom Darlison and Lawrence Gray for their help and for being expert ``rubber ducks''. Finally, I would like to thank the users of the Building 16 labs for treating my rover driving around with the utmost patience.
 
 }
 \clearpage  % End of the Acknowledgements
@@ -108,9 +107,9 @@ I would like to thank Klaus-Peter Zauner for his incredible help and support. I 
 
 \input{Chapters/Evaluation}
 
-\input{Chapters/Mang}
-
 \input{Chapters/Conclusion}
+
+\input{Chapters/Mang}
 
 \addtocontents{toc}{\vspace{2em}}  % Add a gap in the Contents, for aesthetics
 %\backmatter
