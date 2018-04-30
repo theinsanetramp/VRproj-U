@@ -2,7 +2,7 @@
 \lhead{\emph{Vectorization}}
 \label{appendix:vectorization}
 
-As edge detected images consist of white lines on a black background, it would be logical to consider vector graphics as a storage method for wireless transmission. Vector graphics is the storage of images as line drawing and space filling instructions, allowing scaling to any size. Potrace \cite{potrace} was used to convert the edge detected image bitmaps into encapsulated postscript documents (Figure \ref{fig:potrace}). 
+As edge detected images consist of white lines on a black background, it would be logical to consider vector graphics as a storage method for wireless transmission. Vector graphics is the storage of images as line drawing and space filling instructions, allowing scaling to any size. When testing this, Potrace \cite{potrace} was used to convert the edge detected image bitmaps into encapsulated postscript documents (Figure \ref{fig:potrace}). 
 
 \begin{figure}[H]
     \begin{center}
@@ -16,7 +16,7 @@ As edge detected images consist of white lines on a black background, it would b
     \end{center}
 \end{figure}
 
-When the documents are received by the server, they are converted back to OpenCV bitmaps using a custom interpreter built for the project. Both due to the approximation applied by Potrace and the custom interpreter not including all the necessary functions to accurately convert the vector files back to bitmaps, the final result loses much of its accuracy to the original image (Figure \ref{fig:potracecomp}). Due to the high edge accuracy requirements of producing a depth map from edge detected images, this method was discarded in favour of standard image compression. 
+When the documents were received by the server, they were converted back to OpenCV bitmaps using a custom interpreter built for the project. Both due to the approximation applied by Potrace and the custom interpreter not including all the necessary functions to accurately convert the vector files back to bitmaps, the final result loses much of its accuracy to the original image (Figure \ref{fig:potracecomp}). Due to the high edge accuracy requirements of producing a depth map from edge detected images, this method was discarded in favour of standard image compression. 
 
 \begin{figure}[H]
     \begin{center}

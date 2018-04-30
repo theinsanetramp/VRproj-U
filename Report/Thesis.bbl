@@ -39,16 +39,14 @@ M.~Borg, S.~S. Johansen, K.~S. Krog, D.~L. Thomsen, and M.~Kraus, ``Using a
   telepresence of animated objects,'' in {\em GRAPP/IVAPP}, 2013.
 
 \bibitem{DORA}
-E.~Ackerman, ``Oculus rift-based system brings true immersion to telepresence
-  robots,'' 2015.
-\newblock Available:
-  \url{http://spectrum.ieee.org/automaton/robotics/robotics-hardware/upenn-dor
-  a-platform}. [Accessed: \today].
+P.~Zachares, E.~Tanirgan, D.~Sibanda, and J.~Nappo, ``{DORA},'' 2015.
+\newblock Available: \url{http://doraplatform.com/}. [Accessed: \today].
 
 \bibitem{gimble}
 M.~Gupta, F.~Hennecker, T.~Isaacs, M.~Sharhan, and L.~Stauskis, ``Biologically
   inspired robots: A vision system inspired by the human eye,'' 2016.
-\newblock Electronics and Computer Science, University of Southampton.
+\newblock ELEC6212 Report, Electronics and Computer Science, University of
+  Southampton.
 
 \bibitem{windows}
 {Microsoft}, ``{Windows Official Site},'' 2018.
@@ -56,7 +54,7 @@ M.~Gupta, F.~Hennecker, T.~Isaacs, M.~Sharhan, and L.~Stauskis, ``Biologically
   \today].
 
 \bibitem{Vive}
-{HTC}, ``Htc vive homepage,'' 2017.
+{HTC}, ``{HTC Vive Homepage},'' 2017.
 \newblock Available: \url{https://www.vive.com/uk/}. [Accessed: \today].
 
 \bibitem{WhatVR}
@@ -66,12 +64,12 @@ M.~Gupta, F.~Hennecker, T.~Isaacs, M.~Sharhan, and L.~Stauskis, ``Biologically
   [Accessed: \today].
 
 \bibitem{Oculus}
-{Oculus}, ``Oculus rift homepage,'' 2017.
+{Oculus}, ``{Oculus Rift Homepage},'' 2017.
 \newblock Available: \url{https://www.oculus.com/rift/}. [Accessed: \today].
 
-\bibitem{NAP4761}
-N.~R. Council, {\em Virtual Reality: Scientific and Technological Challenges}.
-\newblock Washington, DC: The National Academies Press, 1995.
+\bibitem{sheridan1989telerobotics}
+T.~B. Sheridan, ``Telerobotics,'' {\em Automatica}, vol.~25, no.~4,
+  pp.~487--507, 1989.
 
 \bibitem{fong2017interactive}
 T.~Fong, ``Interactive exploration robots: Human-robotic collaboration and
@@ -93,7 +91,7 @@ C.~Smith and A.~Lightman, ``Radiation hardened telerobotic dismantling system
   \today].
 
 \bibitem{FPV}
-{RCExplorer}, ``Fpv starting guide,'' 2009.
+{RCExplorer}, ``{FPV Starting Guide},'' 2009.
 \newblock Available:
   \url{https://rcexplorer.se/educational/2009/09/fpv-starting-guide/}.
   [Accessed: \today].
@@ -113,9 +111,9 @@ P.~Wang, J.~Xiao, H.~Lu, H.~Zhang, R.~Yan, and S.~Hong, ``A novel human-robot
   interaction system based on 3d mapping and virtual reality,'' in {\em Chinese
   Automation Congress (CAC), 2017}, pp.~5888--5894, IEEE, 2017.
 
-\bibitem{compression}
-O.~MAHDI, M.~Alshujeary, and A.~Jasim~Mohamed, ``Implementing a novel approach
-  an convert audio compression to text coding via hybrid technique,'' 11 2013.
+\bibitem{sayood2005introduction}
+K.~Sayood, {\em Introduction to data compression}.
+\newblock Elsevier, 2005.
 
 \bibitem{abstraction3rdyear}
 A.~Barrett-Sprot, ``Data abstraction for low-bandwidth communication,'' 2017.
@@ -135,7 +133,7 @@ L.~Gr\"unschlo\ss, ``gruenscholoss.org,'' 2017.
 
 \bibitem{SobolWiki}
 Wikipedia, ``Sobol sequence,'' 2017.
-\newblock Available: \url{https://en.wikipedia.org/wiki/Sobol_sequence/}.
+\newblock Available: \url{https://en.wikipedia.org/wiki/Sobol_sequence}.
   [Accessed: \today].
 
 \bibitem{CVDef}
@@ -148,7 +146,7 @@ D.~H. Ballard and C.~M. Brown, ``Computer vision,'' {\em Prenice-Hall,
   Englewood Cliffs, NJ}, 1982.
 
 \bibitem{OpenCV}
-{OpenCV team}, ``Opencv,'' 2017.
+{OpenCV team}, ``{OpenCV},'' 2017.
 \newblock Available: \url{https://opencv.org/}. [Accessed: \today].
 
 \bibitem{jain1995machine}
@@ -166,7 +164,7 @@ J.~Canny, ``A computational approach to edge detection,'' {\em IEEE
   pp.~679--698, 1986.
 
 \bibitem{Canny1Source}
-A.~Mordvintsev and K.~Abid, ``Opencv canny edge detection tutorial,'' 2013.
+A.~Mordvintsev and K.~Abid, ``{OpenCV Canny Edge Detection Tutorial},'' 2013.
 \newblock Available:
   \url{http://opencv-python-tutroals.readthedocs.io/en/latest/py_tutorials/py_imgproc/py_canny/py_canny.html}.
   [Accessed: \today].
@@ -187,24 +185,24 @@ N.~Qian, ``Binocular disparity and the perception of depth,'' {\em Neuron},
   vol.~18, no.~3, pp.~359--368, 1997.
 
 \bibitem{linda2001stockman}
-G.~Linda and C.~G. Shapiro, {\em Stockman, Computer vision}.
+L.~Shapiro and G.~Stockman, {\em Computer vision}.
 \newblock Prentice Hall, Upper Saddle River, NJ, 2001.
 
 \bibitem{distort}
-{opencv dev team}, ``Camera calibration,'' 2014.
+{OpenCV Dev Team}, ``Camera calibration,'' 2014.
 \newblock Available:
   \url{https://docs.opencv.org/3.0-beta/doc/py_tutorials/py_calib3d/py_calibration/py_calibration.html#calibration}.
   [Accessed: \today].
 
 \bibitem{stereocal}
-S.~Ghost, ``Stereo calibration using c++ and opencv,'' 2016.
+S.~Ghost, ``{Stereo calibration using C++ and OpenCV},'' 2016.
 \newblock Available:
   \url{http://sourishghosh.com/2016/stereo-calibration-cpp-opencv/}. [Accessed:
   \today].
 
 \bibitem{deptheg}
-J.~J. L.Alvarez, R.Deriche, ``Dense disparity map estimation respecting image
-  discontinuities,'' 2000.
+L.~Alvarez, R.~Deriche, J.~Sánchez, and J.~Weickert, ``{Dense Disparity Map
+  Estimation Respecting Image Discontinuities},'' 2000.
 \newblock Available:
   \url{http://serdis.dis.ulpgc.es/~lalvarez/research/demos/StereoFlow/index.html}.
   [Accessed: \today].
@@ -219,7 +217,7 @@ J.~Postel, ``User datagram protocol,'' tech. rep., 1980.
   [Accessed: \today].
 
 \bibitem{opencvffilldemo}
-{OpenCV Documentation}, ``Opencv: ffilldemo.cpp,'' 2017.
+{OpenCV Documentation}, ``{OpenCV: ffilldemo.cpp},'' 2017.
 \newblock Available:
   \url{https://docs.opencv.org/3.3.0/d5/d26/ffilldemo_8cpp-example.html}.
   [Accessed: \today].
@@ -243,17 +241,17 @@ P.~Aguilera, ``Comparison of different image compression formats,'' {\em ECE},
   vol.~533, 2006.
 
 \bibitem{libimagequant}
-K.~Lesiński, ``{libimagequant-Image Quantization Library},'' 2017.
+K.~Lesiński, ``{libimagequant---Image Quantization Library},'' 2017.
 \newblock Available: \url{https://pngquant.org/lib/}. [Accessed: \today].
 
 \bibitem{unreal}
-{Epic Games}, ``What is unreal engine 4?,'' 2018.
+{Epic Games}, ``{What is Unreal Engine 4?},'' 2018.
 \newblock Available:
   \url{https://www.unrealengine.com/en-US/what-is-unreal-engine-4}. [Accessed:
   \today].
 
 \bibitem{calibgit}
-{Sourish Ghost}, ``Stereo camera calibration using opencv and c++,'' 2016.
+{Sourish Ghost}, ``{OpenCV C++ Stereo Camera Calibration},'' 2016.
 \newblock Available: \url{https://github.com/sourishg/stereo-calibration}.
   [Accessed: \today].
 

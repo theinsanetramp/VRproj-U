@@ -18,7 +18,7 @@
 \contentsline {chapter}{\numberline {5}Rover Implementation}{23}{chapter.34}
 \contentsline {section}{\numberline {5.1}Gimbal Design}{25}{section.37}
 \contentsline {section}{\numberline {5.2}Image Pipeline}{27}{section.39}
-\contentsline {section}{\numberline {5.3}Control System}{33}{section.45}
+\contentsline {section}{\numberline {5.3}Control System}{32}{section.45}
 \contentsline {chapter}{\numberline {6}Server-Side Implementation}{35}{chapter.47}
 \contentsline {section}{\numberline {6.1}Depth Map and Abstraction Construction}{36}{section.49}
 \contentsline {section}{\numberline {6.2}3D Model Generation}{41}{section.54}

@@ -2,9 +2,9 @@
 \lhead{\emph{Contour Based Seed Point Location}}
 \label{appendix:contour}
 
-The ideal place to aim to flood fill a space from would be the centre point of the space. Aiming for the centre provides robustness against errors, as the seed point is far from the edges and is unlikely to be incorrectly placed outside the space. OpenCV provides the functionality to take an edge detected image (a matrix of colour values) and convert it into a set of contours. Contours are line objects stored in a hierarchical structure, similar to how vector images are stored, and have functions that can provide the centre point of each contour. Although the centre points of the contours do not map exactly to the centre points of the spaces in the image, they are close approximations (Figure \ref{fig:ContourCentres}).
+The ideal place to aim to flood fill a space from would be the centre point of the space. Aiming for the centre provides robustness against errors, as the seed point is far from the edges and is unlikely to be incorrectly placed outside the boundaries of space. OpenCV provides the functionality to take an edge detected image (a matrix of colour values) and convert it into a set of contours. Contours are line objects stored in a hierarchical structure, similar to how vector images are stored, and have functions that can provide the centre point of each contour. Although the centre points of the contours do not map exactly to the centre points of the spaces in the image, they are close approximations (Figure \ref{fig:ContourCentres}).
 
-Unfortunately, due to a combination of the processing time required to convert the lines into contours and the number of very small extraneous contours produced, this method has resource requirements too high to produce a frame rate above even 5fps on a laptop, therefore would be completely unusable on a Raspberry Pi.
+Unfortunately, due to a combination of the processing time required to convert lines into contours and the number of very small extraneous contours produced, this method has resource requirements too high to produce a frame rate above even 5 fps on a laptop, therefore making it completely unusable on a Raspberry Pi.
 
 \begin{figure}[H]
     \begin{center}
