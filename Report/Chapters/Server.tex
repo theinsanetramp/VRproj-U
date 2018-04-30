@@ -15,7 +15,7 @@ The purpose of the server is to receive image data from the rover, produce a 3D 
 \section{Depth Map and Abstraction Construction}
 \label{section:depth}
 
-For a depth mapping algorithm to function accurately, the 2 images it receives must be rectified (established in Section \ref{subsection:depth}). The rectification parameters for the cameras in our system have been calculated using a set of programs provided by Sourish Ghost \cite{calibgit}. The rectification is applied using these parameters just before the depth maps are calculated (Figure \ref{fig:rect}).
+For a depth mapping algorithm to function accurately, the 2 images it receives must be rectified (established in Section \ref{subsection:depth}). The rectification parameters for the cameras in this system have been calculated using a set of programs provided by Sourish Ghost \cite{calibgit}. The rectification is applied using these parameters just before the depth maps are calculated (Figure \ref{fig:rect}).
 
 \begin{figure}[H]
     \begin{center}
@@ -54,7 +54,7 @@ When tested on images received from the rover, StereoBM and StereoSGBM produced 
     \end{center}
 \end{figure}
 
-To be able to compare StereoBM and StereoSGBM further, the noise their outputs contain must be filtered out. This can be achieved by applying Weighted Least Squares filtering to the depth map (Figure \ref{fig:filtered}). This is effective in producing consistent depth across the objects in the map. Unfortunately, regardless of the angle to the camera that an object sits at, the filtering will often assign it a single depth across the whole surface. This results in surfaces like the floor or the ceiling being inaccurately represented as a vertical plane close to the camera, however most other objects are not significantly affected.
+To be able to compare StereoBM and StereoSGBM further, the noise their outputs contain must be filtered out. This can be achieved by applying Weighted Least Squares filtering to the depth map (Figure \ref{fig:filtered}). This is effective in producing consistent depth across the objects in the map. Unfortunately, regardless of the angle to the camera that an object sits at, the filtering will often assign it a single depth across the whole surface. This results in surfaces like the floor or the ceiling being inaccurately represented as a vertical plane close to the camera, though most other objects are not significantly affected.
 
 
 \begin{figure}[H]
@@ -70,9 +70,9 @@ To be able to compare StereoBM and StereoSGBM further, the noise their outputs c
 
 When comparing the filtered maps, there are few differences. Both are reasonable representations of the original scene, and when one makes a mistake in the depth of an object, the other will probably make the exact same mistake. The only major difference is that StereoBM will consider the floor incorrectly as a vertical plane close to the camera, whereas StereoSGBM will incorrectly not record a depth for it at all. This lack of a significant gain in quality when using the noticeably slower StereoSGBM led to StereoBM being chosen as the algorithm used in the final system.
 
-While the individual depth maps (post filtering) are reasonable approximations of the space being viewed, the depth of a single object with be inconsistent between frames, due to inconsistencies between the edge detected frames they were produced from. When viewed as a video feed, most objects will oscillate slightly, with greater oscillations in objects that are more ambiguous or less consistent in the edge detected frames. This issue is mitigated in the system by taking a running average, the weighting of the frames in the average reducing with the age of the frame. This increases consistency substantially at the expense of a minor reduction in responsiveness.
+While the individual depth maps (post filtering) are reasonable approximations of the space being viewed, the depth of a single object will be inconsistent between frames due to inconsistencies between the edge detected frames they were produced from. When viewed as a video feed, most objects will oscillate slightly, with greater oscillations in objects that are more ambiguous or less consistent in the edge detected frames. This issue is mitigated in the system by taking a running average, the weighting of each frame in the average reducing as its age increases. This increases consistency substantially at the expense of a minor reduction in responsiveness.
 
-The construction of the coloured abstraction is as addressed in Chapter \ref{chapter:abstract}. The seed point/average colour pairs are each used to flood fill \emph{Edge Detected Img 1} from Figure \ref{fig:system}, producing the full abstraction that is to be applied as a texture to the 3D model generated from the depth maps.
+The construction of the coloured abstraction is as addressed in Chapter \ref{chapter:abstract}. The seed point/average colour pairs are each used to flood fill the image (\emph{Edge Detected Img 1} from Figure \ref{fig:system}), producing the full abstraction that is to be applied as a texture to the 3D model generated from the depth maps.
 
 \section{3D Model Generation}
 
